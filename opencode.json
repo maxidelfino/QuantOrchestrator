@@ -310,7 +310,8 @@
         "read": true,
         "write": true
       }
-    },
+    }
+  },
   "autoupdate": true,
   "mcp": {
     "chrome-devtools": {
