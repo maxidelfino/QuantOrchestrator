@@ -1,5 +1,7 @@
 # QuantOrchestrator
 
+> Si querés una guía paso a paso para instalar todo desde cero, mirá [`SETUP.md`](./SETUP.md).
+
 ## Qué es
 
 **QuantOrchestrator** es un agente principal orientado a **trading algorítmico** y **creación de bots de trading**.
@@ -35,56 +37,105 @@ La idea es simple: si no hay hipótesis operable, riesgo entendible y validació
 
 ---
 
-## Cómo está organizado
+## Arquitectura del proyecto
 
-### Agente principal
+Este repo está pensado como un **overlay local de dominio** sobre tu stack global de OpenCode + gentle-ai.
 
-- `QuantOrchestrator` → orquestador puro
+### Global
 
-### Subagentes visibles
+Se instala una vez por máquina:
 
+- OpenCode
+- gentle-ai
+
+Eso te da el stack reutilizable para cualquier proyecto:
+
+- Engram
+- SDD
+- Context7
+- judgment-day
+- tooling general de desarrollo
+
+### Local a este repo
+
+`QuantOrchestrator` aporta sólo lo específico del dominio trading:
+
+- agente `QuantOrchestrator` → orquestador puro
 - `strategy-architect` → diseño de estrategias e hipótesis
 - `backtesting-engineer` → validación histórica y backtests
 - `execution-engineer` → execution engines, venues y adapters
 - `risk-engineer` → sizing, límites y protección de capital
 - `market-structure-researcher` → DEX, MEV, sniping, arbitrage, microstructure
 - `prediction-market-quant` → estrategias para prediction markets
-- `judgment-day` → review adversarial
+- Integración local con TradingView MCP
 
-### Subagentes ocultos
-
-Incluye jueces y agentes SDD para flujos más avanzados de implementación, validación y archivo.
-
----
-
-## Comandos principales
-
-- `/strategy <idea>`
-- `/backtest <strategy>`
-- `/bot-new <name>`
-- `/execution <venue>`
-- `/arb <pair/venue>`
-- `/mev <idea>`
-- `/prediction <market>`
-- `/risk <strategy>`
-- `/judge <scope>`
-
-También soporta **triggers en lenguaje natural**. Ejemplo:
-
-- "quiero crear un bot que haga market making en SOL" → puede rutear internamente como `/bot-new`
-- "probemos esta estrategia en datos históricos" → puede rutear como `/backtest`
+Si abrís OpenCode fuera de este repo, **no** vas a tener el agente `QuantOrchestrator`.
+Si lo abrís dentro de este repo, **sí**.
 
 ---
 
-## Modelo de ejecución
+## Dependencias globales esperadas
 
-En la configuración actual:
+Este repo **no redefine** localmente:
 
-- el agente principal `QuantOrchestrator` define el modelo base
-- los subagentes **no llevan `model` explícito**
-- por lo tanto, **heredan el modelo default del agente principal**
+- SDD
+- Engram
+- Context7
+- judgment-day
 
-Hoy eso se usa para que todo el ecosistema de QuantOrchestrator quede alineado al mismo modelo principal.
+Se asume que eso ya viene de tu instalación global de **gentle-ai**.
+
+---
+
+## Instalación recomendada
+
+### Paso 1: instalar OpenCode globalmente
+
+Instalá OpenCode normalmente en tu sistema operativo.
+
+### Paso 2: instalar gentle-ai globalmente
+
+Instalá y configurá `gentle-ai` en tu entorno global de OpenCode.
+
+La idea es que `gentle-ai` resuelva una vez por máquina:
+
+- Engram
+- SDD
+- Context7
+- judgment-day
+- perfiles generales de desarrollo
+
+### Paso 3: clonar este repo
+
+```bash
+git clone <repo-url> QuantOrchestrator
+cd QuantOrchestrator
+```
+
+### Paso 4: instalar TradingView MCP localmente
+
+La configuración local apunta a:
+
+- `./tradingview-mcp/src/server.js`
+
+La opción más simple es clonar `tradingview-mcp` dentro de este repo:
+
+```bash
+git clone https://github.com/tradesdontlie/tradingview-mcp.git tradingview-mcp
+cd tradingview-mcp
+npm install
+cd ..
+```
+
+Si querés tener `tradingview-mcp` en otra ruta, podés hacerlo, pero vas a tener que editar `opencode.json`.
+
+### Paso 5: abrir OpenCode dentro de este repo
+
+Abrí OpenCode parado en la carpeta `QuantOrchestrator`.
+
+Ahí vas a tener disponible el agente:
+
+- `QuantOrchestrator`
 
 ---
 
@@ -119,72 +170,35 @@ Solo está habilitado para:
 - `market-structure-researcher`
 - `risk-engineer`
 
-No está habilitado, por ahora, para `execution-engineer`, `prediction-market-quant`, `judgment-day`, jueces ni agentes SDD.
-
 ---
 
-## Cómo instalar TradingView MCP
+## Cómo levantar TradingView Desktop con debug port
 
-Para que esta integración funcione, tenés que clonar localmente el repo de TradingView MCP:
+TradingView Desktop debe correr localmente con CDP habilitado.
 
-Repo:
-
-- `https://github.com/tradesdontlie/tradingview-mcp`
-
-### Paso 1: clonar el repo
-
-Clonalo localmente en una ubicación que respete el path esperado por `QuantOrchestrator`.
-
-La configuración actual apunta a:
-
-- `./tradingview-mcp/src/server.js`
-
-Eso significa que, si dejás la config como está, el repo debería existir relativo al directorio donde corre esta configuración.
-
-### Paso 2: instalar dependencias
-
-Dentro del repo clonado de `tradingview-mcp`, instalá sus dependencias con Node.js.
-
-### Paso 3: levantar TradingView Desktop con debug port
-
-TradingView Desktop debe correr localmente con CDP habilitado. No alcanza con ejecutar solo `--remote-debugging-port=9222`: ese flag tiene que pasarse al ejecutable de TradingView Desktop.
-
-#### macOS
-
-Ejemplo típico:
+### macOS
 
 ```bash
 /Applications/TradingView.app/Contents/MacOS/TradingView --remote-debugging-port=9222
 ```
 
-Si tenés TradingView instalado en otra ruta, usá la ruta real del ejecutable.
-
-#### Windows
-
-Ejemplo típico en PowerShell:
+### Windows
 
 ```powershell
 & "$env:LOCALAPPDATA\Programs\TradingView\TradingView.exe" --remote-debugging-port=9222
 ```
 
-O, si lo tenés instalado en otra ubicación, ajustá la ruta manualmente. En algunos entornos también puede estar bajo rutas como:
+Si lo tenés instalado en otra ubicación, ajustá la ruta manualmente.
 
-- `%LOCALAPPDATA%\TradingView\TradingView.exe`
-- `%PROGRAMFILES%\WindowsApps\TradingView*\TradingView.exe`
+### Check rápido
 
-La clave conceptual es siempre la misma: **abrir TradingView Desktop pasándole el flag `--remote-debugging-port=9222`**.
-
-### Paso 4: validar la conexión
-
-Una vez instalado y con TradingView Desktop corriendo en modo debug, podés validar la conexión con el health check que exponga el MCP.
-
-Si querés hacer una validación rápida desde el repo clonado de `tradingview-mcp`, un ejemplo útil es:
+Desde el repo `tradingview-mcp`:
 
 ```bash
 node src/cli/index.js status
 ```
 
-Si todo está bien, deberías ver una respuesta JSON con señales como estas:
+Si todo está bien, deberías ver algo equivalente a:
 
 ```json
 {
@@ -193,26 +207,6 @@ Si todo está bien, deberías ver una respuesta JSON con señales como estas:
   "api_available": true
 }
 ```
-
-Eso significa que:
-
-- el server puede hablar con TradingView Desktop
-- el puerto de debug está accesible
-- la API interna necesaria para operar el chart está disponible
-
-### Primer check después del setup
-
-Si levantaste TradingView Desktop correctamente, deberías ver una línea parecida a esta en la terminal:
-
-```text
-DevTools listening on ws://127.0.0.1:9222/devtools/browser/...
-```
-
-Eso indica que el puerto de debug quedó expuesto correctamente.
-
-Después de eso, el siguiente check lógico es validar desde el MCP con un health check o comando equivalente del server, por ejemplo `tv_health_check` si tu cliente MCP lo expone con ese nombre.
-
-Si **no** aparece la línea `DevTools listening on ws://127.0.0.1:9222/...`, entonces TradingView Desktop no quedó levantado con CDP/debug activo y el MCP no va a poder conectarse.
 
 ---
 
@@ -228,21 +222,17 @@ Dicho más simple: si el repo no está donde la config lo espera, el MCP no va a
 
 ---
 
-## Integración futura con SDD
+## Cómo se integra con SDD
 
-Si más adelante querés usar QuantOrchestrator con un flujo SDD más completo, además del setup actual vas a necesitar instalar el repo de:
+`QuantOrchestrator` usa el stack global de `gentle-ai`.
 
-- `https://github.com/Gentleman-Programming/gentle-ai`
+Eso significa que:
 
-### Qué implica eso
+- el repo **no** redefine agentes `sdd-*`
+- el repo **no** levanta un MCP local de Engram
+- el repo **no** duplica Context7 ni judgment-day
 
-Si instalás `gentle-ai`, probablemente tengas que:
-
-- ajustar los paths de prompts o referencias SDD
-- modificar rutas dentro de archivos JSON de configuración
-- revisar que los agentes SDD apunten a los archivos correctos en tu máquina
-
-En otras palabras: **no alcanza con clonar el repo**. También hay que revisar la configuración local para que los paths del ecosistema SDD coincidan con tu instalación real.
+Si tu instalación global de `gentle-ai` está sana, podés usar SDD desde este repo sin copiar prompts ni tocar rutas absolutas.
 
 ---
 
@@ -256,21 +246,12 @@ En otras palabras: **no alcanza con clonar el repo**. También hay que revisar l
 
 ---
 
-## Estado actual
-
-Al momento de esta documentación:
-
-- QuantOrchestrator ya está configurado para que los subagentes hereden el modelo del agente principal.
-- TradingView MCP ya está referenciado en `opencode.json`.
-- El repo `tradingview-mcp` debe estar clonado localmente para que esa integración funcione.
-- Si en el futuro querés endurecer el flujo con SDD, también vas a necesitar instalar `gentle-ai` y revisar paths.
-
----
-
 ## Próximo paso recomendado
 
-1. Clonar `tradingview-mcp`
-2. Verificar/ajustar el path en `opencode.json`
-3. Levantar TradingView Desktop con debug port
-4. Hacer un health check del MCP
-5. Recién ahí correr una prueba real de QuantOrchestrator con contexto de chart
+1. Instalar OpenCode globalmente
+2. Instalar y configurar gentle-ai globalmente
+3. Clonar `QuantOrchestrator`
+4. Clonar `tradingview-mcp` dentro del repo
+5. Levantar TradingView Desktop con debug port
+6. Hacer un health check del MCP
+7. Recién ahí usar `QuantOrchestrator`

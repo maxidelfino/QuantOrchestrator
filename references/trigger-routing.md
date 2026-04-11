@@ -29,8 +29,8 @@ Example:
 
 When delegating, include a short reminder when relevant:
 
-- "Este pedido equivale a `/strategy`"
-- "Este pedido equivale a `/backtest`"
-- "Priorizá estas skills: ..."
+- "This request maps to `/strategy`"
+- "This request maps to `/backtest`"
+- "Prioritize these skills: ..."
 
 This keeps routing explicit without forcing the user to memorize commands.

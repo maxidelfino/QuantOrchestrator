@@ -15,7 +15,7 @@ Suggested flow:
 
 ## Save Memory
 
-Save decisions, discoveries, bugs, conventions and summaries.
+Save decisions, discoveries, bugs, conventions, and summaries.
 
 Important topics:
 - strategy rationale
