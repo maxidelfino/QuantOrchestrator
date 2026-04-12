@@ -262,7 +262,7 @@ TradingView Desktop tiene que correr en otra terminal con el puerto de debug hab
 ### Windows
 
 ```powershell
-& "$env:LOCALAPPDATA\Programs\TradingView\TradingView.exe" --remote-debugging-port=9222
+& "C:\Program Files\WindowsApps\31178TradingViewInc.TradingView_3.0.0.0_x64__q4jpyh43s5mv6\TradingView.exe" --remote-debugging-port=9222
 ```
 
 Si TradingView está instalado en otra ruta, ajustala manualmente.
