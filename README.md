@@ -68,6 +68,7 @@ Eso te da el stack reutilizable para cualquier proyecto:
 - `market-structure-researcher` → DEX, MEV, sniping, arbitrage, microstructure
 - `prediction-market-quant` → estrategias para prediction markets
 - Integración local con TradingView MCP
+- Scripts de setup para Windows (`scripts/`)
 
 Si abrís OpenCode fuera de este repo, **no** vas a tener el agente `QuantOrchestrator`.
 Si lo abrís dentro de este repo, **sí**.
@@ -108,34 +109,81 @@ La idea es que `gentle-ai` resuelva una vez por máquina:
 ### Paso 3: clonar este repo
 
 ```bash
-git clone <repo-url> QuantOrchestrator
+git clone https://github.com/maxidelfino/QuantOrchestrator.git
 cd QuantOrchestrator
 ```
 
-### Paso 4: instalar TradingView MCP localmente
+### Paso 4: instalar TradingView MCP
 
 La configuración local apunta a:
 
 - `./tradingview-mcp/src/server.js`
 
-La opción más simple es clonar `tradingview-mcp` dentro de este repo:
+#### Windows (recomendado: setup automático)
+
+Doble clic en `scripts\setup.bat` o corré:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\setup-tradingview.ps1
+```
+
+Eso instala Chrome, Node.js y Git si faltan, clona el MCP, instala dependencias, y crea el launcher.
+
+#### Manual (cualquier plataforma)
 
 ```bash
-git clone https://github.com/tradesdontlie/tradingview-mcp.git tradingview-mcp
+git clone https://github.com/LewisWJackson/tradingview-mcp-jackson.git tradingview-mcp
 cd tradingview-mcp
 npm install
+cp rules.example.json rules.json   # o copy en Windows
 cd ..
 ```
 
 Si querés tener `tradingview-mcp` en otra ruta, podés hacerlo, pero vas a tener que editar `opencode.json`.
 
-### Paso 5: abrir OpenCode dentro de este repo
+### Paso 5: levantar TradingView Desktop con debug port
 
-Abrí OpenCode parado en la carpeta `QuantOrchestrator`.
+TradingView Desktop o Chrome debe correr con CDP habilitado.
+
+#### Windows (Chrome — recomendado)
+
+Doble clic en `scripts\launch-tv.bat` o en el acceso directo que creó el setup en tu Escritorio.
+
+Eso abre Chrome con TradingView web y el puerto 9222. Logueate (solo la primera vez) y abrí cualquier chart.
+
+> **¿Por qué Chrome y no la app de TradingView?**
+> La app de Windows viene por Microsoft Store (MSIX) y no acepta los flags de debugging que el MCP necesita. Chrome + TradingView web funciona igual y sí los acepta.
+
+#### macOS / Linux (TradingView Desktop)
+
+```bash
+# macOS
+/Applications/TradingView.app/Contents/MacOS/TradingView --remote-debugging-port=9222
+
+# Linux
+./scripts/launch_tv_debug_linux.sh
+```
+
+### Paso 6: abrir OpenCode dentro de este repo
+
+```bash
+cd QuantOrchestrator
+opencode
+```
 
 Ahí vas a tener disponible el agente:
 
 - `QuantOrchestrator`
+
+### Paso 7: verificar conexión
+
+En OpenCode, escribí:
+
+```
+Usá tv_health_check
+```
+
+Deberías ver `cdp_connected: true`.
 
 ---
 
@@ -148,6 +196,7 @@ QuantOrchestrator puede usar **TradingView MCP** como apoyo para:
 - lectura de contexto de símbolo/timeframe
 - lectura de indicadores y estado de chart
 - screenshots y soporte de análisis
+- morning brief con reglas personalizables (`rules.json`)
 
 ### Importante
 
@@ -172,53 +221,32 @@ Solo está habilitado para:
 
 ---
 
-## Cómo levantar TradingView Desktop con debug port
+## Fundamentos del setup en Windows
 
-TradingView Desktop debe correr localmente con CDP habilitado.
+El setup de TradingView MCP en Windows tiene un detalle importante:
 
-### macOS
+- **La app de TradingView para Windows** viene por Microsoft Store (MSIX/UWP).
+- Las apps MSIX **descartan** los flags de debugging al arrancar.
+- Sin `--remote-debugging-port=9222`, el MCP no puede conectarse.
+- **Solución**: Chrome normal + TradingView web con CDP habilitado. Funciona idéntico.
 
-```bash
-/Applications/TradingView.app/Contents/MacOS/TradingView --remote-debugging-port=9222
-```
+El launcher `scripts\launch-tv.bat` se encarga de:
 
-### Windows
-
-```powershell
-& "$env:LOCALAPPDATA\Programs\TradingView\TradingView.exe" --remote-debugging-port=9222
-```
-
-Si lo tenés instalado en otra ubicación, ajustá la ruta manualmente.
-
-### Check rápido
-
-Desde el repo `tradingview-mcp`:
-
-```bash
-node src/cli/index.js status
-```
-
-Si todo está bien, deberías ver algo equivalente a:
-
-```json
-{
-  "success": true,
-  "cdp_connected": true,
-  "api_available": true
-}
-```
+1. Detectar Chrome automáticamente (Program Files, Program Files x86, o LocalAppData).
+2. Crear un perfil dedicado (`tv-cdp-profile`) para no interferir con tu Chrome personal.
+3. Lanzar Chrome con TradingView y el puerto 9222.
 
 ---
 
 ## Nota importante sobre paths
 
-Hoy `QuantOrchestrator/opencode.json` apunta a:
+`opencode.json` apunta a:
 
 - `./tradingview-mcp/src/server.js`
 
 Si clonás `tradingview-mcp` en otra ubicación, **vas a tener que editar ese path** en `opencode.json`.
 
-Dicho más simple: si el repo no está donde la config lo espera, el MCP no va a levantar.
+El directorio `tradingview-mcp/` está en `.gitignore` — no se pushea al repo. Cada persona que clone QuantOrchestrator tiene que clonar el MCP por su cuenta.
 
 ---
 
@@ -236,6 +264,18 @@ Si tu instalación global de `gentle-ai` está sana, podés usar SDD desde este 
 
 ---
 
+## Scripts incluidos
+
+| Script | Plataforma | Qué hace |
+|--------|-----------|----------|
+| `scripts\launch-tv.bat` | Windows | Lanza Chrome con CDP para TradingView web |
+| `scripts\setup.bat` | Windows | Wrapper para ejecutar `setup-tradingview.ps1` con un doble clic |
+| `scripts\setup-tradingview.ps1` | Windows | Setup automático: instala deps, clona MCP, configura launcher |
+| `tradingview-mcp\scripts\launch_tv_debug_linux.sh` | Linux | Launcher nativo para TradingView Desktop en Linux |
+| `tradingview-mcp\scripts\launch_tv_debug_mac.sh` | macOS | Launcher nativo para TradingView Desktop en macOS |
+
+---
+
 ## Guardrails
 
 - No diseñar bots solo por intuición.
@@ -246,12 +286,19 @@ Si tu instalación global de `gentle-ai` está sana, podés usar SDD desde este 
 
 ---
 
+## Créditos
+
+- **TradingView MCP**: [LewisWJackson/tradingview-mcp-jackson](https://github.com/LewisWJackson/tradingview-mcp-jackson) — fork con mejoras del original de [@tradesdontlie](https://github.com/tradesdontlie/tradingview-mcp).
+- **Setup Windows**: Adaptado de [kmanus88/tradingview-claude-code-windows](https://github.com/kmanus88/tradingview-claude-code-windows).
+
+---
+
 ## Próximo paso recomendado
 
 1. Instalar OpenCode globalmente
 2. Instalar y configurar gentle-ai globalmente
 3. Clonar `QuantOrchestrator`
-4. Clonar `tradingview-mcp` dentro del repo
-5. Levantar TradingView Desktop con debug port
+4. Correr `scripts\setup.bat` (Windows) o clonar el MCP manualmente
+5. Levantar TradingView Desktop / Chrome con debug port
 6. Hacer un health check del MCP
 7. Recién ahí usar `QuantOrchestrator`
