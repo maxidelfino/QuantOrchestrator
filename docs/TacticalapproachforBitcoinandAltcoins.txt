@@ -1,0 +1,1934 @@
+ 
+ 
+Concretum Research 
+ 
+Università degli studi di Parma 
+ 
+University of St.Gallen and Swiss Finance Institute 
+ 
+ 
+ 
+
+Catching Crypto Trends
+A Tactical Approach for Bitcoin and Altcoins
+Carlo Zarattini1, Alberto Pagani2, Andrea Barbon3
+1Concretum Research, Piazza Molino Nuovo 8, 6900 Lugano, Switzerland
+2Universit`a degli Studi di Parma, Str. dell’Universit`a, 12, 43121 Parma PR, Italy
+3University of St.Gallen, Dufourstrasse 50, 9000 St. Gallen, Switzerland
+Q1carlo@concretumgroup.com, 2alberto.pagani@studenti.unipr.it, 3andrea.barbon@unisg.ch,
+X 1@ConcretumR,3@Andrea Barbon
+°1Carlo Zarattini, 2Alberto Pagani, 3Andrea Barbon
+First Version: April 4, 2025
+This Version: April 9, 2025
+Abstract
+In recent years, cryptocurrencies have attracted significant attention from both re-
+tail traders and large institutional investors. As their involvement in digital assets
+grows, so does their interest in active and risk-aware investment frameworks. This
+paper applies a well-established trend-following methodology, successfully deployed
+for decades in traditional asset classes, to Bitcoin, and then extends the analysis to
+a comprehensive, survivorship bias-free dataset covering all cryptocurrencies traded
+since 2015, to evaluate whether its robustness persists in the emerging digital as-
+set space. We propose an ensemble approach that aggregates multiple Donchian
+channel-based trend models, each calibrated with different lookback periods, into
+a single signal, as well as a volatility-based position sizing method. This model,
+applied to a rotational portfolio of the top 20 most liquid coins, achieved notable
+net-of-fees returns, with a Sharpe ratio above 1.5 and an annualized alpha of 10.8%
+versus Bitcoin.
+While assessing the impact of transaction costs, we propose a
+straightforward yet effective portfolio technique to mitigate these expenses.
+Fi-
+nally, we investigate correlations between crypto-focused trend-following strategies
+and those applied to traditional asset classes, concluding with a discussion on how
+investors can execute the proposed strategy through both on-chain and off-chain
+implementations.
+Keywords: Trading Systems, Algo Trading, Momentum, Trend-Following, Cryptocurrencies, Risk Man-
+agement, Technical Analysis, Decentralized Exchanges, Blockchain, Decentralized Finance
+1
+
+1
+Introduction
+The cryptocurrency market has rapidly evolved from a niche innovation into a signifi-
+cant segment of the global financial system. As noted by Harvey et al. (2022), the total
+market capitalization of cryptocurrencies stood at approximately $1.0 trillion as of July
+2022, nearly half the value of all U.S. currency in circulation at the time. By March
+2025, this figure had surpassed $3.0 trillion, driven by the launch of new digital assets
+and a broad increase in the valuation of existing cryptocurrencies. While Bitcoin and
+Ethereum continue to dominate the market, together accounting for approximately 75%
+of total capitalization, more than 100 cryptocurrencies now individually exceed a $1 bil-
+lion market capitalization, underscoring the expanding depth and diversity of the crypto
+ecosystem.
+For years, the crypto space remained highly volatile and was largely overlooked by insti-
+tutional asset managers, with participation dominated by retail investors pursuing either
+speculative gains or long-term fundamental convictions. This dynamic began to shift with
+the introduction of Bitcoin futures on the Chicago Mercantile Exchange (CME) and the
+Chicago Board Options Exchange (CBOE) in 2017, followed by the approval of Bitcoin
+Futures ETFs by the U.S. Securities and Exchange Commission (SEC) in 2021. These
+milestones paved the way for growing institutional interest, prompting many to incorpo-
+rate cryptocurrencies into their portfolios, whether through small passive allocations or
+more actively managed strategies.
+Governments and large corporations have also started to recognize and adopt cryptocur-
+rencies, exploring their use as alternative payment methods, settlement layers, or even as
+strategic assets in treasury management. As the market matures and regulatory frame-
+works continue to evolve, the need for robust, adaptable investment approaches becomes
+increasingly clear, particularly for those wishing to avoid the risks inherent in a static,
+long-term buy-and-hold position.
+Because of their high liquidity, substantial volatility, absence of conventional valuation
+anchors, and a participant base prone to emotion-driven decisions, cryptocurrencies offer
+2
+
+fertile ground for systematic trading methods. In particular, trend-following strategies
+may capitalize on sustained price trends or parabolic moves.
+The primary objective of this paper is to backtest and evaluate classic trend-following
+approaches within the cryptocurrency market. We begin with a base model applied to
+Bitcoin and subsequently extend the analysis to a broader set of liquid digital assets. The
+base model is constructed as an ensemble of short and long-term trend signals, designed
+to capture different types of momentum and trend dynamics across various time hori-
+zons. Transaction costs are also carefully examined, with particular attention given to
+rebalancing methodologies intended to reduce unnecessary turnover and mitigate trading
+fees.
+With this paper, we aim to provide investors and speculators with a valuable resource to
+better understand the risks and opportunities inherent in crypto markets, enabling them
+to embrace a new, volatile asset class without incurring the implicit risk of a passive
+buy-and-hold approach.
+Throughout the analysis, we restrict attention to a long-only implementation of the trend-
+following model. This choice reflects the institutional reality that most market partic-
+ipants engage with cryptocurrencies from a structurally long-biased perspective. More-
+over, the estimation of short-selling costs, particularly for less liquid tokens, remains
+highly uncertain, rendering long-short backtests sensitive to modeling assumptions and
+less informative for practical deployment. Nevertheless, a symmetric long-short exten-
+sion of the model has also demonstrated favorable performance in historical simulations.
+Comprehensive results and further portfolio construction considerations for the long-short
+version are presented in the Appendix.
+Disclaimer: While this study presents a comprehensive analysis of trend-following strategies applied
+to digital assets, all results are derived from historical backtests. As such, they reflect past market
+dynamics and should not be interpreted as guarantees of future performance. The profitability and
+robustness of the proposed approach are inherently dependent on the persistence of trending behavior
+in cryptocurrency markets—an aspect that may evolve over time. Readers and investors should re-
+main mindful that future outcomes may differ substantially from those observed in this retrospective
+evaluation.
+3
+
+2
+Literature Review
+Over the past three decades, extensive research has documented the pervasive and signif-
+icant presence of momentum across diverse asset classes, industries, and time horizons.
+Momentum is commonly characterized as the tendency for asset prices to continue moving
+in the same direction they have recently taken. Broadly, momentum can be categorized
+into time-series momentum and cross-sectional momentum. In this paper, we focus on
+time-series momentum, often referred to as trend-following.
+Academic literature has long established evidence of profitable trend-following across
+traditional markets (Moskowitz et al., 2012), spanning centuries (Hurst et al., 2017;
+Lemp´eri`ere et al., 2014), multiple economic environments (Daniel and Moskowitz, 2016),
+as well as in U.S. industries (Zarattini and Antonacci, 2024), US stocks (Zarattini et al.,
+2025) and intraday frequencies (Zarattini et al., 2024). These studies collectively high-
+light the robustness and adaptability of momentum-based strategies under various market
+conditions, suggesting that psychological and behavioral factors, such as investor herding
+or slow information diffusion, may contribute to persistent price trends (Jegadeesh and
+Titman, 1993; Barberis et al., 1998).
+Within the realm of cryptocurrencies, recent work (Rozario et al., 2020; Harvey et al.,
+2022; Le et al., 2023; Fraikin et al., 2024) has begun to document the existence of momen-
+tum effects similar to those observed in more traditional asset classes. Jia et al. (2022)
+find evidence for the existence of a momentum factor using weekly data, while Fieberg
+et al. (2023) report that momentum is among the most relevant anomalies in the cross-
+section of cryptocurrency returns. Liu et al. (2022) show that a 3-factor model including
+market, size, and momentum captures a large fraction of variation in the cross-section of
+expected cryptocurrency returns.
+Nonetheless, much of this research either centers exclusively on Bitcoin, potentially intro-
+ducing selection bias, or employs trend-following techniques that diverge markedly from
+real-world applications. Furthermore, the nascent literature often omits critical details
+about transaction costs, order execution, and portfolio rebalancing, all of which can sig-
+4
+
+nificantly impact the net profitability of systematic strategies.
+Our paper aims to contribute to and expand upon the existing literature by empirically
+testing a diversified trend-following approach across multiple cryptocurrencies and time
+horizons. To offer a more practical perspective, we explicitly account for transaction
+costs, liquidity constraints, and operational details related to strategy implementation.
+By illustrating how a systematic trend-following strategy can be adapted to real-world
+crypto trading, we hope to provide actionable insights for investors and speculators who
+want to participate into this emerging and volatile asset class.
+3
+Database
+We construct a survivorship bias-free dataset using data from CoinMarketCap, compris-
+ing 21,616 individual cryptocurrencies spanning the period from January 2010 to March
+2025. To ensure consistency with our research objectives, we exclude stablecoins, wrapped
+tokens, and tokens primarily associated with NFT collectibles.
+Our final dataset is a daily panel of OHLCV data (Open, High, Low, Close, and Volume)
+for the entire cross-section of eligible cryptocurrencies. The data is aggregated across
+multiple exchanges, as outlined in the official CoinMarketCap documentation.1
+4
+Trend-Following Model
+Over the years, technical analysts and quantitative researchers have introduced hundreds
+of indicators and methodologies aimed at identifying trends in asset prices across various
+markets and timeframes. Despite the abundance of approaches, many of them introduce
+unnecessary complexity, making the resulting signals harder to interpret and significantly
+more vulnerable to overfitting. In our view, the true edge in trend-following systems lies
+only marginally in the specific indicator chosen to detect the trend itself. Rather, it
+is the formulation of effective exit criteria and the consistent application of robust risk
+1According to the methodology described in the official documentation, CoinMarketCap aggregates
+price and volume data from numerous exchanges.
+5
+
+management techniques that play a far more critical role in shaping long-term profitability
+and resilience across market regimes.2
+4.1
+Entry and Exit Criteria
+Consistent with methodologies outlined in prior studies (Zarattini and Antonacci, 2024;
+Zarattini et al., 2025), we employ Donchian Channels, a widely recognized technical in-
+dicator originally developed by Richard Donchian in the late 1950s. Donchian, a leading
+figure in managed futures and commodities trading, initially applied this tool, calibrated
+with a 20-day window, in his market newsletters.
+Donchian Channels comprise three primary components: an upper boundary marking
+the highest high, a lower boundary marking the lowest low, and a middle boundary cal-
+culated as the midpoint between these extremes. Traders utilize these channels to discern
+prevailing market trends, volatility, and potential reversal points. Specifically, a breakout
+above the upper boundary signals bullish sentiment, whereas a breach below the lower
+boundary indicates bearish momentum.
+Furthermore, the distance between the upper and lower bands of the Donchian Channel
+serves as an indicator of asset volatility. A broader channel denotes elevated volatility
+and larger price movements, whereas a narrower channel indicates relatively stable or
+consolidating market conditions.
+Historically, Donchian Channels gained significant recognition through the 1980s exper-
+iment by Richard Dennis and William Eckhardt, famously known as the Turtle Traders
+experiment. In this initiative, novice traders successfully demonstrated the profitability
+of systematic, rules-based trading utilizing Donchian Channels and other trend-following
+techniques.
+Mathematically, we define the boundaries of the Donchian Channels as follows:
+2Inspired by research conducted by Tom Basso in the late 1990s, we backtested a trend-following
+system based on randomly generated entry signals.
+The results, which support the notion that the
+choice of trend indicator may be secondary to position management and exits, are presented on the
+Concretum Research X page: https://x.com/ConcretumR/status/1638446734807375872
+6
+
+DonchianUpn
+t = max {Closet, Closet−1, . . . , Closet−n+1}
+DonchianDownn
+t = min {Closet, Closet−1, . . . , Closet−n+1}
+DonchianMidn
+t = 0.5 ∗
+
+DonchianUpn
+t + DonchianDownn
+t
+
+A trend-following system is constructed such that as soon as the closing price hits the
+upper boundary of the Donchian Channel, a new long position is established.
+Each
+position is then maintained until the first closure below a trailing stop which is updated
+daily according to the following formula
+TrailingStopn
+t+1 = max
+
+TrailingStopn
+t , DonchianMidn
+t
+
+In line with trend-following habits, we never allow the trailing stop to be updated down-
+ward. In practice, the prevailing Trailing Stop used in day t+1 is the maximum between
+the Trailing Stop used in day t and the middle line of the Donchain channel computed
+at the end of day t.3
+To better illustrate the mechanics of the trend-following model, Figure 1 provides a
+graphical example of how a few historical trades would have unfolded when applying the
+Donchian-based entry and exit rules to Bitcoin. The chart displays the upper and lower
+Donchian Channel boundaries (green and red lines), the closing price of Bitcoin (black
+line), and the corresponding trailing stop (red dotted line) that dynamically adjusts
+over time. Entry points are marked with colored triangles, in green when price crosses
+the upper Donchian threshold, in red while exits are triggered by a close below the ac-
+tive trailing stop. This visualization clearly demonstrates how the system systematically
+captures upward momentum while enforcing disciplined exits to protect against reversals.
+3For newly opened positions, the initial trailing stop is set equal to the midpoint of the Donchian
+Channel at the time of entry.
+7
+
+Figure 1: Illustrative example of the long-only trend-following model applied to Bitcoin between Jan-
+uary 2020 and January 2021. The model is calibrated using 60-day Donchian Channels for trend sig-
+nals and employs a volatility targeting scheme based on a 3-month rolling window of daily returns.
+The portfolio is scaled to achieve an annualized target volatility of 25%. The chart highlights the en-
+try and exit signals, as well as the dynamic position sizing over the life of each trade. Data source:
+https://www.coinmarketcap.com.
+4.2
+Position Sizing
+Similar to other asset classes, cryptocurrencies exhibit persistence in volatility and due
+to the high level of returns variability, investors should be better-off by stabilizing return
+streams by using risk management techniques as suggested by Goodall and Tarek (2024).
+We thus size a trend position such as the target annualized volatility is 25%. In mathe-
+matical terms, at the end of day t, a trend position is sized as
+wt = 25%
+σt
+,
+8
+
+where σt is the 90-day annualized volatility of the returns of the underlying asset com-
+puted on day t. To prevent excessive leverage, we do not allow the allocation to exceed
+200%.
+The lower part of Figure 1 shows the resulting position exposure, depicted by the blue
+line and computed using a volatility targeting framework, plotted against the right-hand
+axis. As shown, the exposure dynamically adjusts over the life of each trade in response
+to changes in Bitcoin’s return volatility. Periods of elevated volatility result in smaller po-
+sition sizes, whereas calmer market regimes allow for increased exposure. This approach
+is intended to ensure a more stable portfolio-level risk profile over time.
+However, this figure also highlights one of the key drawbacks of applying volatility scaling
+to trend-following strategies. While the technique effectively stabilizes portfolio volatil-
+ity, it may also hinder full participation in large trending moves. Specifically, if return
+volatility rises during a strong directional trend, as observed during the sharp uptrend
+that began in late 2020, the scaling mechanism reduces exposure just when the oppor-
+tunity for outsized returns is highest. This creates a structural trade-off between risk
+management and trend participation.
+Throughout this research project, we have tested alternative position-sizing methodolo-
+gies that are less sensitive to this effect and allow for greater participation in strong
+trends. The potential for performance improvement is notable, although a full discussion
+of these methods lies outside the scope of the present paper.4
+4.3
+An Ensemble Trend Model
+The effectiveness of a trend-following strategy can vary significantly depending on the
+length of the look-back window used to compute Donchian Channels. Shorter windows
+(e.g., 5 days) tend to capture quick, short-lived price movements, while longer windows
+(e.g., 360 days) are better suited for identifying persistent, slower-moving trends that
+4For readers interested in this topic, we explored these alternative techniques in traditional asset
+classes in a dedicated article available on our website: www.concretumgroup.com/position-sizing-in-
+trend-following-comparing-volatility-targeting-volatility-parity-and-pyramiding/.
+9
+
+may be driven by fundamental factors.
+To explore the impact of trend horizon selection, we evaluate strategy performance across
+a range of look-back periods: specifically, 5, 10, 20, 30, 60, 90, 150, 250, and 360 days.
+For each look-back window n, the optimal portfolio weight at the end of day t is defined
+as:
+wn
+t = min
+0.25
+σt
+, 200%
+
+× Posn
+t ,
+where σt represents the 3-month annualized volatility of the underlying asset, and Posn
+t
+is the binary trading signal determined as follows:
+Posn
+t =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+if Closet = DonchianUpt(n)
+0
+if Closet ≤TrailingStopt
+Posn
+t−1
+otherwise.
+The daily return on day t for the portfolio employing an n-day Donchian Channel is given
+by:
+rn
+t = wn
+t−1 × retasset
+t
+Consistent with best practices in systematic trend-following, we implement a model en-
+semble that diversifies across multiple trend horizons. Conceptually, the final portfolio,
+referred to as the Combo portfolio, is constructed as an equal-weighted aggregation of
+N sub-portfolios, each driven by a different trend signal length. The aggregate portfolio
+weight on day t is given by:
+wCombo
+t
+= 1
+N
+N
+X
+i=1
+wni
+t ,
+where ni ∈{5, 10, 20, 30, 60, 90, 150, 250, 360}. The return for the Combo portfolio on day
+t is computed as:
+retCombo
+t
+= wCombo
+t−1
+× retasset
+t
+10
+
+5
+Empirical Results on Bitcoin
+We begin our empirical analysis by evaluating the historical performance of each indi-
+vidual trend-following model, as well as the ensemble approach, on Bitcoin, the most
+prominent and widely traded cryptocurrency. The backtest period begins in January
+2015 and extends through March 2025.
+This preliminary analysis serves two main purposes. First, it allows us to assess the
+behavior and robustness of various trend signal horizons in a single-asset setting before
+generalizing the framework to a broader multi-asset crypto portfolio. Second, Bitcoin’s
+relatively long and uninterrupted trading history, combined with its dominance in market
+capitalization and liquidity, provides a natural benchmark for evaluating the efficacy of
+trend-following techniques in digital assets.
+Table 1 reports a comprehensive set of performance metrics for each model, including
+annualized return (CAGR), annualized volatility, Sharpe and Sortino ratios, maximum
+drawdown (MDD), the MAR ratio, annualized alpha and beta relative to Bitcoin itself.
+As seen in the results, models with short look-back periods (5 to 30 days) exhibited the
+strongest risk-adjusted returns, while the ensemble Combo model offered a solid overall
+profile with a Sortino ratio of 2.03, a Sharpe ratio of 1.58, a maximum drawdown of just
+19% (versus >80% for Bitcoin passive exposure) and an annualized alpha of 14%. With
+the exception of the 150-day and 250-day models, all reported alphas were statistically
+significant in the historical sample, with p-values well below 2.5%.
+In Table 2, we present trade-level statistics for each model.
+These include the total
+number of trades, hit ratio, average PnL and return per trade, maximum and minimum
+trade returns, drawdown of closed trades, and the gain-to-loss ratio. As expected, as the
+look-back horizon increases, the number of trades decreases significantly.
+In Figure 2, we plot the equity curves for each individual trend-following model alongside
+the resulting Combo portfolio. To facilitate a risk-adjusted comparison, we also include
+a rescaled version of Bitcoin’s price trajectory (black line), adjusted to match the ex-
+11
+
+Table 1: Performance of BTC trend-following models across various Donchian lookback windows. All
+models use Donchian Channels for trend signal generation and implement a daily volatility targeting
+scheme based on a 3-month rolling window of Bitcoin returns, targeting an annualized volatility of 25%.
+The Combo model refers to the ensemble approach described in Section 4.3. Metrics include CAGR,
+volatility, Sharpe and Sortino ratios, maximum drawdown (MDD), MAR (CAGR/MDD), annualized
+alpha, and beta versus BTC. The backtest period spans from January 1, 2015 to March 19, 2025.
+Transaction costs are not included. Alphas in bold are statistically significant at the 2.5% level. Data
+source: https://www.coinmarketcap.com.
+Model
+CAGR
+Vol.
+Sharpe
+Sortino
+MDD
+MAR
+Alpha
+Beta
+5d
+36%
+19%
+1.66
+1.87
+25%
+1.41
+19%
+0.16
+10d
+32%
+18%
+1.55
+1.64
+27%
+1.19
+18%
+0.15
+20d
+34%
+18%
+1.60
+1.60
+26%
+1.32
+19%
+0.16
+30d
+34%
+19%
+1.61
+1.61
+24%
+1.41
+19%
+0.16
+60d
+28%
+19%
+1.30
+1.25
+19%
+1.46
+13%
+0.17
+90d
+27%
+20%
+1.20
+1.15
+24%
+1.12
+11%
+0.18
+150d
+21%
+20%
+0.99
+0.97
+29%
+0.74
+7%
+0.19
+250d
+25%
+20%
+1.13
+1.15
+33%
+0.76
+9%
+0.20
+360d
+29%
+20%
+1.28
+1.27
+34%
+0.83
+12%
+0.18
+Combo
+30%
+17%
+1.58
+2.03
+19%
+0.88
+14%
+0.17
+Table 2: Trade-level statistics of BTC trend-following models across various Donchian lookback win-
+dows. Metrics include the number of trades, win rate, average PnL and return per trade, maximum and
+minimum trade returns, and the gain-to-loss ratio. Unit refers to PnL and returns assuming the strategy
+trades one BTC contract per signal, while all other return figures are computed at the portfolio level.
+The backtest period spans from January 1, 2015 to March 19, 2025. Transaction costs are not included.
+Data source: https://www.coinmarketcap.com.
+Model
+Trades
+Win
+AvgPnL
+AvgRet
+AvgRet
+MaxRet
+MinRet
+Gain:
+Rate
+× Unit
+× Unit
+Loss
+5d
+292
+41%
+$229
+2.8%
+1.2%
+29%
+-5%
+3.7
+10d
+156
+40%
+$380
+4.7%
+2.0%
+34%
+-5%
+4.5
+20d
+78
+47%
+$730
+10%
+4.3%
+45%
+-6%
+5.2
+30d
+49
+49%
+$1,493
+17%
+7.4%
+69%
+-5%
+6.7
+60d
+28
+46%
+$3,137
+27%
+11%
+89%
+-7%
+9.2
+90d
+20
+60%
+$4,266
+35%
+15%
+84%
+-9%
+6.5
+150d
+15
+60%
+$3,804
+47%
+17%
+90%
+-11%
+4.1
+250d
+9
+78%
+$4,902
+126%
+35%
+111%
+-11%
+4.7
+360d
+5
+80%
+$12,648
+477%
+99%
+350%
+-10%
+12.8
+12
+
+Figure 2: Cumulative equity curves of long-only trend-following models applied to Bitcoin, each cali-
+brated using a different Donchian Channel look-back window. All strategies employ daily volatility tar-
+geting based on a 3-month rolling window of Bitcoin returns, scaled to a 25% annualized volatility target.
+The black line represents a passive long exposure in Bitcoin, rescaled to match the ex-post volatility of the
+ensemble Combo portfolio described in Section 4.3. The backtest spans from January 1, 2015, to March
+19, 2025, and does not include transaction costs. Data source: https://www.coinmarketcap.com.
+post volatility of the Combo portfolio. This normalization enables a more meaningful
+comparison between strategies operating at comparable levels of risk, highlighting the
+effectiveness of systematic trend-following in delivering superior risk-adjusted returns
+over passive exposure.
+5.1
+Transaction Costs and Advanced Portfolio Techniques
+The results presented thus far do not account for transaction costs. In practice, however,
+trading fees can materially affect the performance of high-turnover strategies such as
+daily rebalanced trend-following systems. Following the methodology of Le et al. (2023),
+we assess the sensitivity of our results to transaction costs set at three conservative levels:
+10 basis points (bps), 25 bps, and 50 bps. These values exceed the typical fee structure
+observed on major cryptocurrency exchanges, where Bitcoin trading costs are generally
+13
+
+Figure 3: Impact of transaction costs on the annualized performance (CAGR) of Bitcoin trend-following
+models across different Donchian look-back windows. The Combo model refers to the ensemble approach
+described in Section 4.3. Each bar represents the compound annual growth rate under different trans-
+action cost assumptions: 0, 10, 25, and 50 basis points (bps), following the methodology of Le et al.
+(2023). The green bars show results under a 50 bps cost combined with a 20% rebalance threshold,
+which helps reduce unnecessary turnover. All models use daily volatility targeting based on a 3-month
+rolling window, targeting a 25% annualized volatility. Backtest period: January 1, 2015 to March 19,
+2025. Data source: https://www.coinmarketcap.com.
+below 5 bps, thus providing a cautious view of cost impact.
+As shown in Figure 3, profitability decreases as transaction costs increase, particularly for
+short-horizon models which require more frequent trading. For instance, at 50 bps, the
+CAGR of the 5-day model is significantly reduced (from 34% to 18%) while longer-term
+models are less affected.
+This confirms that excessive rebalancing may erode returns
+without delivering a commensurate improvement in risk-adjusted performance.
+To mitigate this effect, we evaluate an enhancement inspired by Zarattini et al. (2025).
+Specifically, we implement a threshold-based rebalancing rule: the portfolio is only re-
+balanced if the difference between the current and target allocation exceeds 20%. This
+14
+
+adjustment is applied exclusively to rebalancing activity driven by volatility targeting. It
+is important to distinguish that portfolio weights can change for two main reasons:
+(i) A new entry or stop-loss trigger from the trend signal.
+(ii) Changes in asset volatility that affect sizing under volatility targeting.
+The threshold mechanism is applied only to the second case (i.e. volatility-induced re-
+balancing) while any signal-based adjustments, such as a fresh breakout or trailing stop
+event, result in an immediate position update regardless of the threshold.
+The results show that introducing this rebalancing threshold under a 50 bps cost scenario
+would have led to a material recovery in performance, which can be estimated at approx-
+imately 100 basis points per year. As shown by the green bars in Figure 3, this simple
+enhancement helped restore a significant portion of the strategy’s gross returns, thereby
+improving the historical viability of volatility-targeted trend-following in cost-sensitive
+implementations.
+In the remainder of the paper, all results are presented net of a transaction cost of 10 basis
+points (in line with the estimates proposed by Liu and Tsyvinski (2021)) and incorporate
+a rebalancing threshold of 20% to limit unnecessary turnover.
+6
+Trend-Following on Other Cryptocurrencies
+In this section, we extend the analysis previously conducted on Bitcoin to a broader uni-
+verse that encompasses more than 10,000 cryptocurrencies traded over the past decade.
+The construction and filtering criteria of the full dataset are described in detail in Sec-
+tion 3.
+As a first step, we identify the top 40 cryptocurrencies in our database based on their
+cumulative trading volume since inception. For each of these assets, we backtest the
+15
+
+trend-following strategies across all signal lengths, incorporating a transaction cost of 10
+basis points and applying a 20% rebalancing threshold to mitigate excessive turnover.
+While we acknowledge that this study is affected by selection bias, given that we focus
+only on the most liquid and well-known cryptocurrencies, the objective is to give readers
+a clearer understanding of how trend-following models perform when applied to recog-
+nizable and historically significant digital assets.
+The resulting performance statistics are presented in Table 3. Due to space constraints,
+we report results for the ensemble portfolio only. For detailed performance decomposi-
+tion by individual trend signal horizon, interested readers are encouraged to contact the
+authors at info@concretumgroup.com.
+7
+A Diversified Trend-Following Program
+While the preceding sections examine trend-following applied to individual assets such
+as Bitcoin or subsets of well-known cryptocurrencies, a more robust and resilient imple-
+mentation should incorporate a dynamically selected, diversified set of tradable tokens.
+By continuously adapting the investment universe based on liquidity and activity filters,
+the portfolio becomes better positioned to capture idiosyncratic trends and to capitalize
+on price momentum in newly emerging or reactivated digital assets.
+To this end, we construct and backtest a dynamic, cross-sectional trend-following pro-
+gram. The strategy applies the same signal generation and execution rules outlined in
+Section 4 to a rotating universe of eligible cryptocurrencies, with asset selection and
+rebalancing performed on a monthly basis.
+7.1
+Universe Construction and Filtering Criteria
+At the end of each month, we identify the set of eligible assets using the following screening
+criteria:
+16
+
+Table 3: Performance statistics of the ensemble trend-following model (Combo) applied to a selection
+of major cryptocurrencies. The Combo model, described in Section 4.3, aggregates signals from multiple
+Donchian lookback windows and applies a volatility targeting scheme based on a 3-month rolling window,
+targeting 25% annualized volatility.
+Metrics reported include CAGR, volatility, Sharpe and Sortino
+ratios, maximum drawdown (MDD), and the MAR ratio (CAGR divided by MDD). The backtest starts
+in January 2015 or later, depending on the asset’s listing date. Results include a 10 basis point transaction
+cost and a 20% rebalance threshold. Data source: https://www.coinmarketcap.com.
+Name
+Symbol
+From
+CAGR
+Vol.
+Sharpe
+Sortino
+MDD
+MAR
+Bitcoin
+BTC
+Jan-2015
+30%
+17%
+1.56
+1.23
+19%
+1.15
+Ethereum
+ETH
+Aug-2015
+27%
+16%
+1.51
+1.22
+15%
+0.96
+XRP
+XRP
+Jan-2015
+18%
+17%
+1.00
+0.97
+14%
+1.10
+Bitcoin Cash
+BCH
+Jul-2017
+7%
+14%
+0.48
+0.42
+19%
+0.42
+Litecoin
+LTC
+Jan-2015
+11%
+14%
+0.72
+0.53
+29%
+0.44
+EOS
+EOS
+Jul-2017
+7%
+12%
+0.53
+0.27
+19%
+0.36
+Solana
+SOL
+Apr-2020
+27%
+14%
+1.68
+1.64
+12%
+2.04
+BNB
+BNB
+Jul-2017
+17%
+15%
+1.06
+0.99
+17%
+0.77
+WETH
+WETH
+Jan-2018
+10%
+14%
+0.67
+0.49
+15%
+0.35
+Cardano
+ADA
+Oct-2017
+17%
+14%
+1.13
+0.94
+18%
+0.88
+TRON
+TRX
+Sep-2017
+19%
+21%
+0.82
+0.88
+16%
+1.21
+Ethereum Classic
+ETC
+Jul-2016
+16%
+14%
+1.08
+0.76
+14%
+0.83
+Dogecoin
+DOGE
+Jan-2015
+24%
+18%
+1.20
+1.21
+15%
+1.13
+Chainlink
+LINK
+Sep-2017
+15%
+14%
+0.99
+0.72
+19%
+0.80
+Polkadot
+DOT
+Aug-2020
+7%
+12%
+0.60
+0.41
+17%
+0.34
+Bitcoin SV
+BSV
+Nov-2018
+3%
+12%
+0.21
+0.19
+23%
+0.22
+Avalanche
+AVAX
+Sep-2020
+22%
+14%
+1.49
+1.37
+12%
+1.64
+Shiba Inu
+SHIB
+Aug-2020
+39%
+55%
+0.60
+3.27
+18%
+6.64
+Polygon
+MATIC
+Apr-2019
+10%
+13%
+0.78
+0.76
+12%
+0.49
+Stellar
+XLM
+Jan-2015
+14%
+15%
+0.86
+0.85
+19%
+0.85
+Neo
+NEO
+Sep-2016
+17%
+15%
+1.00
+0.80
+20%
+0.73
+Cosmos
+ATOM
+Mar-2019
+6%
+12%
+0.47
+0.30
+16%
+0.28
+Dash
+DASH
+Jan-2015
+14%
+14%
+0.91
+0.81
+24%
+0.85
+Qtum
+QTUM
+May-2017
+9%
+13%
+0.66
+0.40
+13%
+0.42
+Zcash
+ZEC
+Oct-2016
+8%
+13%
+0.57
+0.33
+22%
+0.35
+Filecoin
+FIL
+Dec-2017
+5%
+13%
+0.39
+0.36
+30%
+0.39
+Terra Classic
+LUNC
+Jul-2019
+23%
+15%
+1.38
+1.12
+12%
+0.74
+Uniswap
+UNI
+Sep-2020
+3%
+10%
+0.33
+0.23
+17%
+0.21
+Pepe
+PEPE
+Apr-2023
+23%
+14%
+1.48
+1.72
+8%
+1.47
+NEAR Protocol
+NEAR
+Oct-2020
+14%
+13%
+1.02
+1.06
+12%
+1.18
+Aave
+AAVE
+Oct-2020
+5%
+12%
+0.43
+0.32
+11%
+0.22
+VeChain
+VET
+Aug-2018
+14%
+13%
+1.03
+0.84
+11%
+0.70
+Monero
+XMR
+Jan-2015
+11%
+16%
+0.67
+0.53
+35%
+0.36
+Fantom
+FTM
+Oct-2018
+23%
+14%
+1.51
+1.35
+11%
+1.04
+Algorand
+ALGO
+Jun-2019
+9%
+14%
+0.64
+0.49
+21%
+0.46
+OMG Network
+OMG
+Jul-2017
+5%
+12%
+0.42
+0.29
+20%
+0.33
+Curve DAO Token
+CRV
+Aug-2020
+4%
+10%
+0.42
+0.33
+15%
+0.40
+yearn.finance
+YFI
+Jul-2020
+8%
+13%
+0.62
+0.13
+14%
+0.52
+OKB
+OKB
+May-2019
+12%
+15%
+0.79
+0.68
+13%
+0.68
+THORChain
+RUNE
+Jul-2019
+21%
+14%
+1.39
+1.05
+16%
+1.21
+17
+
+• The asset must have been listed for at least 365 calendar days;
+• It must not be a wrapped token, stablecoin, or collectible NFT;
+• It must have recorded a median daily trading volume of at least $2 million over the
+preceding 30 days.
+From the resulting filtered list, we rank cryptocurrencies by their median daily trading
+volume during the same month and retain only the top B assets. These selected tokens
+constitute the tradable universe for the subsequent month. This dynamic selection process
+ensures that the portfolio focuses on assets with sufficient liquidity, while also adapting
+over time to market evolution.
+7.2
+Portfolio Construction and Rebalancing
+Capital is allocated equally across all selected assets, with each receiving one-Bth of the
+portfolio’s total capital. For each asset, the ensemble trend-following strategy, as de-
+scribed in Section 4.3, is applied independently. The cross-sectional trend portfolio is
+rebalanced at the end of each month.
+Formally, the assets under management (AUM) allocated on cryptocurrency i at the end
+of day t are given by:
+AUMt,i = AUMt0
+B
+·
+tY
+s=t0
+
+1 + retCombo
+s,i
+
+where retCombo
+s,i
+denotes the return of the trend-following strategy applied to asset i on
+day s while AUMt0 represents the asset under management at the beginning of the month.
+To avoid exposure to illiquid or structurally compromised assets, we implement an exit
+rule based on two liquidity conditions. An asset is removed from the portfolio if:
+• Its median daily trading volume over the past 30 days falls below $1 million; or
+• Its median daily price change over the same period is less than 0.5%.
+18
+
+Table 4: Performance statistics of long-only diversified trend-following portfolios across different uni-
+verse sizes, based on the strategy described in Section 7. Metrics include cumulative return (Tot.Ret.),
+compound annual growth rate (CAGR), annualized volatility (Vol.), Sharpe and Sortino ratios, maxi-
+mum drawdown (MDD), MAR ratio (CAGR/MDD), and annualized alpha and beta relative to Bitcoin.
+The backtest includes a 10 basis point (bps) transaction cost and a 20% rebalance threshold, and spans
+the period from January 1, 2015 to March 19, 2025. Alphas in bold are statistically significant at the
+2.5% level. Data source: https://www.coinmarketcap.com.
+# Assets
+Tot.Ret.
+CAGR
+Vol.
+Sharpe
+Sortino
+MDD
+MAR
+Alpha
+Beta
+5
+452%
+18%
+10%
+1.44
+1.77
+14%
+1.28
+9.7%
+0.10
+10
+438%
+18%
+9%
+1.50
+1.87
+12%
+1.44
+10.3%
+0.09
+20
+443%
+18%
+9%
+1.57
+1.97
+11%
+1.61
+10.8%
+0.08
+30
+404%
+17%
+8%
+1.56
+1.96
+11%
+1.54
+10.5%
+0.07
+40
+366%
+16%
+8%
+1.53
+1.92
+11%
+1.46
+9.9%
+0.07
+50
+359%
+16%
+8%
+1.54
+1.93
+11%
+1.44
+9.9%
+0.07
+These exit rules are designed to eliminate stale, inactive, or manipulated tokens that no
+longer exhibit sufficient trading activity or price discovery dynamics.
+Table 4 reports the performance of the long-only diversified trend-following program
+across portfolios of increasing breadth, ranging from 5 to 50 assets. Historical simulations
+indicate that performance improved with broader diversification up to approximately 20
+assets, beyond which the marginal benefits of including additional cryptocurrencies dimin-
+ished. The Sharpe ratio remained remarkably stable across all portfolio sizes, fluctuating
+only slightly around 1.5, suggesting that risk-adjusted returns are largely preserved once
+basic liquidity conditions are met. The Sortino ratio exhibited a similar pattern, peaking
+at 1.97 for the 20-asset portfolio.
+The compound annual growth rate (CAGR) remains close to 18% for portfolios of up to
+20 assets, before declining slightly. While volatility and maximum drawdown continue
+to decline modestly as the number of assets increases, the alpha versus Bitcoin peaks at
+10.8% per year for the portfolio composed of 20 assets.
+In Figure 4, we plot the Sharpe ratios of the trend-following strategy as a function of
+the number of crypto assets included in the portfolio. While the highest Sharpe ratios
+are observed in highly concentrated portfolios—peaking with as few as two assets—these
+19
+
+Figure 4: Sharpe ratios of the diversified trend-following strategy described in Section 7 as a function
+of the number of crypto assets included in the portfolio. Each point represents the performance of the
+portfolio when trading the top N cryptocurrencies ranked by median daily volume over the previous
+month.
+The strategy includes a transaction cost of 10 basis points and a 20% rebalance threshold.
+Backtest period: January 1, 2015 to March 19, 2025. Data source: https://www.coinmarketcap.com.
+configurations are not desirable in practice. Although such setups may appear optimal
+ex post, they are typically associated with elevated idiosyncratic risk and limited diversi-
+fication. A more balanced allocation, involving a broader cross-section of assets, provides
+greater robustness and aligns more closely with established principles of prudent portfolio
+construction.
+Notably, beyond 20 assets, the Sharpe ratio stabilizes, suggesting that moderate diversi-
+fication is sufficient to achieve most of the attainable benefits in terms of risk-adjusted
+performance. This reinforces the notion that trend-following in crypto does not require
+exhaustive breadth, but that some degree of diversification is essential to reduce single-
+asset risk while preserving strategy efficiency.
+Taken together, these findings suggest that a diversified portfolio of approximately 10 to
+20 cryptocurrencies may already represent an optimal balance between capturing broad
+20
+
+Figure 5: Performance of the diversified trend-following program described in Section 7, applied to the
+top 20 most liquid cryptocurrencies each month. The blue line shows the equity curve of the strategy,
+which includes a 10 basis point transaction cost and a 20% rebalance threshold. The black line represents
+a passive long exposure to Bitcoin, rescaled to match the volatility of the trend strategy. The red line
+(right axis) shows the number of eligible assets included in the portfolio over time. Backtest period:
+January 1, 2015 to March 19, 2025. Data source: https://www.coinmarketcap.com.
+market trends and maintaining capital efficiency within a long-only trend-following frame-
+work. This range appears even more appropriate when considering that efforts to further
+diversify the portfolio by including a larger number of assets (e.g., 50 or more) would
+likely expose the portfolio to diminishing liquidity, wider bid-ask spreads, and higher
+transaction costs; factors that could offset or even outweigh the marginal benefits of ad-
+ditional diversification.
+Figure 5 displays the equity curve of the long-only trend-following program applied to
+the 20 most liquid cryptocurrencies, selected each month based on their trailing 30-day
+trading volume. The total return path exhibits the characteristic stair-step behavior fre-
+quently observed in well-constructed trend-following systems: periods of consolidation
+or mild drawdown are followed by sharp, sustained advances. This pattern reflects the
+model’s ability to endure low-trend regimes while remaining positioned to capture emer-
+gent momentum.
+21
+
+Superimposed on the chart, the red line (right axis) indicates the number of cryptocur-
+rencies that met the program’s eligibility and liquidity criteria and were included in the
+portfolio at each point in time. Notably, prior to mid-2017, the number of qualifying as-
+sets was below 20, underscoring the limited market depth in the early years of the crypto
+ecosystem. As the market matured and trading volumes increased across a broader range
+of assets, the strategy was able to operate with its full allocation, enabling greater diver-
+sification and more stable capital deployment.
+7.3
+Profitability versus Size
+We investigate whether the profitability of the Diversified Trend-Following Program is
+influenced by the size of the underlying cryptocurrencies.
+Specifically, we ask: does
+trend-following tend to perform better when applied to highly traded assets?
+To explore this, we construct ten distinct trend-following portfolios as detailed in Sec-
+tion 7. These portfolios are rebalanced monthly and are formed by ranking the tradable
+universe based on average daily trading volume over the preceding 30 days. Each port-
+folio includes 10 cryptocurrencies.
+For instance, the portfolio labeled D1 consists of the 10 most liquid cryptocurrencies;
+those ranked 1 to 10 by trading volume (with rank 1 indicating the highest volume).
+Conversely, D10 includes less liquid assets, specifically those ranked 91 to 100. This
+decile-based approach allows us to assess the relationship between liquidity and trend-
+following performance across the cross-section of cryptocurrencies. To ensure each portfo-
+lio contains sufficiently liquid assets (defined as a median daily volume above $1 million),
+the backtest begins in January 2020.
+Figure 6 reports the Sharpe ratios of the ten decile portfolios. The results indicate no
+meaningful size effect on the performance of trend-following strategies, at least when
+focusing on the top 100 most traded cryptocurrencies, dynamically selected on a monthly
+basis, and when evaluating returns on a risk-adjusted basis.
+22
+
+Figure 6: Sharpe ratios of the diversified trend-following strategy across liquidity deciles. The strategy
+is applied to the 100 most traded cryptocurrencies, selected at the end of each month. Assets are sorted
+each month into deciles based on their average daily trading volume over the preceding 30 days, with
+D10 containing the least liquid and D1 the most liquid assets. Each portfolio holds 10 cryptocurrencies.
+Backtest period: January 1, 2020 to March 19, 2025. Data source: https://www.coinmarketcap.com.
+8
+Crypto Trend versus Traditional CTAs
+To assess the degree to which trend-following in cryptocurrency markets aligns with tra-
+ditional trend-following strategies, we compare our diversified Trend-Following program
+applied to 20 assets with the SG Trend Index, a widely used benchmark representing
+the performance of large institutional managed futures programs across traditional asset
+classes.
+We begin by examining the correlation between the two return series using a 6-month
+rolling window over the past decade. As shown in Figure 7, the correlation varies substan-
+tially over time, oscillating between slightly negative values and peaks exceeding +30%.
+The average rolling correlation over the sample period is approximately 7.4%, indicating
+a generally low linear relationship between the strategies.
+23
+
+Figure 7: 6-month rolling correlation between the Crypto Trend strategy and the SG Trend Index. The
+Crypto Trend portfolio consists of the top 10 most traded cryptocurrencies from the previous month,
+rebalanced monthly with a 20% threshold and incorporating transaction costs of 10 basis points. The
+SG Trend Index (data source: Bloomberg) is a widely used benchmark that tracks the performance of
+major trend-following CTAs. Backtest period: January 1, 2015 to March 19, 2025. Crypto data source:
+https://www.coinmarketcap.com.
+Importantly, there are extended periods, such as during 2015–2016 and again in 2022–2023,
+when the correlation turned negative or hovered near zero.
+These findings suggest
+that crypto trend-following offers meaningful diversification benefits when included in
+a broader trend-following allocation. The structural and behavioral characteristics of
+digital assets may explain the relatively distinct return profile observed in comparison to
+traditional trend programs.
+In Figure 8, we compare the cumulative performance of the diversified crypto trend-
+following program and the SG Trend Index, with both series initialized at a base value of
+$100,000. The divergence is notable: while the SG Trend Index shows modest gains over
+the 10-year period, reflecting the relatively subdued trends in traditional asset classes, the
+crypto trend program delivers substantially stronger performance. This outperformance
+is particularly pronounced during major momentum phases in the digital asset space,
+such as in 2017, 2020–2021, and late 2023, underscoring the potential of trend-following
+models to capitalize on structural price dislocations and persistent directional moves in
+crypto markets.
+24
+
+Figure 8: Cumulative performance of the Crypto Trend strategy versus the SG Trend Index. The
+Crypto Trend strategy allocates capital equally across the top 10 most traded cryptocurrencies each
+month, using a trend-following model with monthly rebalancing, a 20% rebalance threshold, and 10
+basis points of transaction costs.
+Both strategies are initialized at $100,000.
+The SG Trend Index
+(data source: Bloomberg) reflects the aggregate performance of leading trend-following CTAs across
+traditional asset classes. Backtest period: January 1, 2015 to March 19, 2025. Crypto data source:
+https://www.coinmarketcap.com.
+These historical findings suggest two key observations. First, trend-following in crypto
+has exhibited non-redundant exposure, offering return streams with limited correlation
+with traditional trend strategies. Second, the crypto market provides a uniquely dynamic
+environment in which well-designed trend-following systems can achieve substantial per-
+formance. As such, a crypto trend allocation may serve as a powerful complement to
+macro-oriented and managed futures strategies.
+9
+Managing Risks in Digital Asset Trading
+Investing in crypto tokens involves additional risks compared to traditional financial as-
+sets. These risks largely stem from the fundamental trade-off between delegating custody
+to centralized exchanges versus managing assets independently using non-custodial wal-
+lets.
+To better understand these risks, it is important to recall that ownership of crypto to-
+25
+
+kens is recorded directly on a blockchain, that is, a decentralized digital ledger recording
+transaction data.
+Investors manage their holdings through specific software applications, commonly re-
+ferred to as non-custodial wallets or crypto wallets. These wallets allow users to transfer
+tokens by sending a specified amount to the public address of the recipient. Crucially,
+the user retains full control over the assets, without relying on a third-party intermediary.
+Furthermore, non-custodial wallets can be connected to Decentralized Finance (DeFi)
+applications, enabling interaction with smart contracts that power these protocols. Of
+particular relevance are decentralized exchanges (DEXs), which allow users to swap ar-
+bitrary quantities of token “A” for token “B”. These transactions, known as token swaps,
+do not involve trading with a counterparty in the traditional sense. Instead, users in-
+teract with liquidity pools, which hold reserves of both tokens. Transaction prices are
+determined algorithmically based on the relative supplies of tokens in the pool, following
+rules embedded in the underlying smart contracts.
+A trading strategy involving crypto tokens and the U.S. Dollar can typically be imple-
+mented in two ways:
+1.
+Via centralized exchanges. The investor may purchase tokens directly from a cen-
+tralized exchange, such as Binance or Kraken, using U.S. Dollars or other fiat currencies.
+Alternatively, the investor may transfer tokens to the exchange from her wallet. Within
+the exchange platform, crypto assets can be traded for other tokens or converted back
+to fiat, using a centralized limit order book to determine prices. This setup is similar
+to the structure of traditional financial exchanges. Algorithmic trading strategies can be
+implemented by calling the exchange’s internal APIs.
+2.
+Via decentralized exchanges. The investor may connect her wallet to a DEX,
+such as Uniswap or Hyperliquid, and execute token swaps through the application’s user
+interface or via smart contract interaction. In this setup, tokens are never deposited to
+26
+
+the exchange; they remain under the user’s control in the wallet. Since DEXs only sup-
+port blockchain-native assets, they do not support direct trades against fiat currencies.
+Instead, investors obtain cash-equivalent exposure by swapping tokens for stablecoins –
+such as USDC or USDT – which are tokenized representations of fiat currencies. Au-
+tomated trading strategies can be executed using Web3 libraries to interact with the
+relevant smart contracts on-chain.
+To trade on a decentralized exchange, one must first initialize a wallet and fund it with
+crypto tokens or stablecoins. Typically, this involves buying tokens on a centralized ex-
+change using fiat and then transferring them to the wallet by sending them to its public
+address.
+Each of these trading modalities is associated with different risks and trade-offs. Trading
+on centralized exchanges exposes investors to counterparty risk, since assets are deposited
+under the exchange’s custody. Exchanges may be subject to hacking attacks, or may mis-
+manage or misappropriate user funds. Notable examples include the 2014 collapse of Mt.
+Gox, which lost over 650,000 bitcoins to a security breach, and the more recent failure of
+FTX, where client funds were allegedly misused by the platform itself.
+In contrast, using decentralized exchanges avoids counterparty risk, as assets remain un-
+der the user’s control. However, this setup shifts the responsibility for asset security
+entirely onto the user. If the private keys associated with a wallet are lost or compro-
+mised, access to the tokens is permanently lost, with no recourse or recovery mechanism.
+Another layer of risk arises from the use of stablecoins as cash substitutes. While stable-
+coins like USDC and USDT aim to maintain a 1:1 peg to the U.S. Dollar, historical events
+have shown that de-pegging is possible, particularly during periods of market stress or
+liquidity imbalances. That said, in recent years, leading stablecoin issuers have improved
+transparency regarding their reserves, including regular attestation reports and enhanced
+regulatory compliance. Nevertheless, the risk of temporary or permanent deviation from
+the dollar peg cannot be ruled out.
+27
+
+Finally, transactions on decentralized exchanges are fully recorded on the public blockchain,
+including the sender’s and recipient’s wallet addresses. As a result, on-chain activity is
+transparent and publicly accessible, allowing third parties to analyze wallet behavior and,
+potentially, reverse engineer trading strategies. While transaction data on centralized ex-
+changes is not public, these platforms could theoretically monitor or even monetize user
+activity for their own benefit.
+Finally, centralized and decentralized exchanges may also differ in terms of trading fees,
+execution costs, slippage, and asset coverage. For a detailed discussion, see Barbon and
+Ranaldo (2024).
+10
+Conclusion
+Cryptocurrencies have rapidly evolved from a niche technological innovation into a glob-
+ally recognized asset class. As of early 2025, total market capitalization has surpassed
+$3 trillion, with over 100 tokens individually exceeding $1 billion in market value. While
+both retail and institutional investors are increasingly embracing digital assets, the inher-
+ent volatility and structural risks of crypto markets highlight the importance of adopting
+robust, adaptive, and risk-aware investment frameworks.
+In this paper, we backtested a tactical trend-following approach rooted in a classic
+breakout methodology that has been successfully deployed in traditional asset classes
+for decades. Our strategy, built on an ensemble of Donchian Channel-based models with
+varying lookback horizons, consistently delivered strong risk-adjusted performance across
+both Bitcoin and a wide selection of altcoins.
+On Bitcoin, shorter-horizon models (5 to 30 days) proved particularly effective, yielding
+Sharpe ratios near 1.60 and reducing drawdowns to roughly one-third of those experi-
+enced under a passive long position. The ensemble model, combining signals from nine
+different horizons, achieved a compound annual growth rate (CAGR) of 30%, a Sortino
+ratio of 2.03, and an annualized alpha of 14% versus Bitcoin.
+28
+
+Expanding the analysis to a broader universe of cryptocurrencies, we applied the same
+trend-following framework to rotational portfolios of the most liquid digital assets, re-
+balanced monthly. A diversified strategy targeting the top 20 most actively traded cryp-
+tocurrencies would have produced net-of-fees Sharpe ratio 1.57, a maximum drawdown
+of just 11%, and a statistically significant alpha of 11% relative to Bitcoin.
+Taken together, our results suggest that a tactical trend-following approach in crypto
+markets may be particularly appealing to two types of investors: those seeking to en-
+hance diversification within a traditional trend-following portfolio, and those looking to
+capture the upside potential of crypto markets while avoiding the severe drawdowns that
+have characterized passive exposure to many digital assets.
+29
+
+Author Biography
+Andrea Barbon
+Born in Venice, currently resides in Zurich, Switzerland. He holds a Master degree in
+pure mathematics from the University of Amsterdam and a PhD in finance from the
+University of Lugano.
+He is Assistant Professor of Financial Technology at the FSI
+Center of the University of St.Gallen, Switzerland and at the Swiss Finance Institute.
+His research interests include asset pricing, monetary policy, fintech, blockchain, and
+machine learning. He is also head of AI at Concretum Research, and lead developer for
+the R-Candles web application.
+Carlo Zarattini
+Originally from Italy, Carlo Zarattini currently resides in Lugano, Switzerland. After
+completing his mathematics degree in Padova, he pursued a dual master’s in quantitative
+finance at Imperial College London and USI Lugano. He formerly served as a quantitative
+analyst at BlackRock, where he developed volatility and trend-following trading strate-
+gies.
+Carlo later established Concretum Research, assisting institutional clients with
+both high and medium-frequency quantitative strategies in stocks, futures, and options.
+Additionally, he founded R-Candles.com, the first backtester for discretionary technical
+traders.
+Alberto Pagani
+Based in Piacenza, Italy, Alberto Pagani holds a bachelor’s degree in management engi-
+neering from the University of Parma. In 2020, he was included in the National Registry
+of Excellence by the Ministry of Education, University, and Research (MIUR), and in
+2022 he received the Young Students Fund Award (MIUR), honoring high-achievers in
+STEM disciplines. As of 2024, he is pursuing a master’s degree in supply chain man-
+agement. Driven by a strong interest in finance and mathematics, his research focuses
+on quantitative investment strategies, particularly trend-following and volatility-based
+approaches.
+30
+
+References
+Barberis, N., Shleifer, A., and Vishny, R. (1998). A model of investor sentiment. Journal
+of financial economics, 49(3):307–343.
+Barbon, A. and Ranaldo, A. (2024). On the quality of cryptocurrency markets: Central-
+ized versus decentralized exchanges. arXiv preprint arXiv:2112.07386.
+Daniel, K. and Moskowitz, T. J. (2016).
+Momentum crashes.
+Journal of Financial
+economics, 122(2):221–247.
+Fieberg, C., Liedtke, G., Metko, D., and Zaremba, A. (2023). Cryptocurrency factor
+momentum. Quantitative Finance, 23(12):1853–1869.
+Fraikin, A., Rzym, A., and Tarek, A. Z. (2024). In crypto we trend. Available from MAN
+AHL website.
+Goodall, R. and Tarek, A. Z. (2024). Cryptocurrencies. if you’re gonna do it, do it right.
+Available from MAN AHL website.
+Harvey, C. R., Abou Zeid, T., Draaisma, T., Luk, M., Neville, H., Rzym, A., and
+Van Hemert, O. (2022). An investor’s guide to crypto. Journal of Portfolio Man-
+agement, 49(1).
+Hurst, B., Ooi, Y. H., and Pedersen, L. H. (2017).
+A century of evidence on trend-
+following investing. SSRN.
+Jegadeesh, N. and Titman, S. (1993).
+Returns to buying winners and selling losers:
+Implications for stock market efficiency. The Journal of finance, 48(1):65–91.
+Jia, B., Goodell, J. W., and Shen, D. (2022). Momentum or reversal: Which is the
+appropriate third factor for cryptocurrencies? Finance Research Letters, 45:102139.
+Le, T., Ruthbah, U., and Kapur, D. (2023). Trend-following strategies for crypto in-
+vestors. Available at SSRN 4551518.
+Lemp´eri`ere, Y., Deremble, C., Seager, P., Potters, M., and Bouchaud, J.-P. (2014). Two
+centuries of trend following. arXiv preprint arXiv:1404.3274.
+Liu, Y. and Tsyvinski, A. (2021). Risks and returns of cryptocurrency. The Review of
+Financial Studies, 34(6):2689–2727.
+Liu, Y., Tsyvinski, A., and Wu, X. (2022). Common risk factors in cryptocurrency. The
+Journal of Finance, 77(2):1133–1177.
+Moskowitz, T. J., Ooi, Y. H., and Pedersen, L. H. (2012). Time series momentum. Journal
+of financial economics, 104(2):228–250.
+Rozario, E., Holt, S., West, J., and Ng, S. (2020). A decade of evidence of trend following
+investing in cryptocurrencies. arXiv preprint arXiv:2009.12155.
+Zarattini, C. and Antonacci, G. (2024). A century of profitable industry trends. Available
+at SSRN.
+31
+
+Zarattini, C., Aziz, A., and Barbon, A. (2024). Beat the market: An effective intraday
+momentum strategy for s&p500 etf (spy). Available at SSRN 4824172.
+Zarattini, C., Pagani, A., and Wilcox, C. (2025).
+Does trend-following still work on
+stocks? Available at SSRN.
+32
+
+Appendix. Long-Short Implementation
+The long-only trend-following strategy described in Section 4.3 can be extended to a
+long-short framework by allowing the position to turn negative when downward breakouts
+occur. Specifically, the binary position signal Posn
+t ∈{−1, 0, 1} is modified to account
+for both upward and downward Donchian Channel breakouts.
+The updated signal rule is defined as:
+Posn
+t =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+if Closet = DonchianUpn
+t
+−1
+if Closet = DonchianDownn
+t
+0
+if Closet ≤TrailingStopn
+t and Posn
+t−1 = 1
+0
+if Closet ≥TrailingStopn
+t and Posn
+t−1 = −1
+Posn
+t−1
+otherwise.
+The trailing stop mechanism is also adjusted to be direction-aware. For long positions,
+the trailing stop evolves as:
+TrailingStopn
+t+1 = max (TrailingStopn
+t , DonchianMidn
+t ) ,
+whereas for short positions, it follows:
+TrailingStopn
+t+1 = min (TrailingStopn
+t , DonchianMidn
+t ) .
+The portfolio weight remains volatility-targeted and direction-sensitive, computed as:
+wn
+t = min
+0.25
+σt
+, 200%
+
+× Posn
+t ,
+where σt is the 3-month rolling annualized volatility of the asset. The daily return of the
+n-day strategy remains:
+rn
+t = wn
+t−1 × retasset
+t
+.
+The ensemble Combo portfolio aggregates the signals of N models as before:
+wCombo
+t
+= 1
+N
+N
+X
+i=1
+wni
+t ,
+ni ∈{5, 10, 20, 30, 60, 90, 150, 250, 360},
+retCombo
+t
+= wCombo
+t−1
+× retasset
+t
+.
+33
+
+Figure 9: Cumulative equity curves of long-short trend-following models applied to Bitcoin, each cali-
+brated using a different Donchian Channel look-back window. All strategies employ daily volatility tar-
+geting based on a 3-month rolling window of Bitcoin returns, scaled to a 25% annualized volatility target.
+The black line represents a passive long exposure in Bitcoin, rescaled to match the ex-post volatility of the
+ensemble Combo portfolio described in Section 4.3. The backtest spans from January 1, 2015, to March
+19, 2025, and does not include transaction costs. Data source: https://www.coinmarketcap.com.
+34
+
+Table 5: Performance of BTC long-short trend-following models across various Donchian lookback win-
+dows. All models use Donchian Channels for signal generation and implement a daily volatility targeting
+scheme based on a 3-month rolling window of Bitcoin returns, targeting an annualized volatility of 25%.
+The Combo model refers to the ensemble approach described in Section 4.3. Metrics include CAGR,
+volatility, Sharpe and Sortino ratios, maximum drawdown (MDD), MAR (CAGR/MDD), annualized
+alpha, and beta versus BTC. The backtest period spans from January 1, 2015 to March 19, 2025. Trans-
+action costs are not included. Alphas in bold are statistically significant at the 2.5% level. Data source:
+https://www.coinmarketcap.com.
+Model
+CAGR
+Vol.
+Sharpe
+Sortino
+MDD
+MAR
+Alpha
+Beta
+5d
+30%
+26%
+1.05
+1.53
+28%
+1.07
+30%
+0.00
+10d
+25%
+25%
+0.91
+1.22
+24%
+1.02
+25%
+0.00
+20d
+32%
+24%
+1.15
+1.47
+27%
+1.20
+29%
+0.02
+30d
+29%
+24%
+1.05
+1.31
+27%
+1.04
+26%
+0.03
+60d
+25%
+24%
+0.94
+1.13
+29%
+0.85
+20%
+0.07
+90d
+21%
+24%
+0.81
+0.94
+28%
+0.75
+14%
+0.10
+150d
+17%
+23%
+0.67
+0.78
+39%
+0.43
+10%
+0.10
+250d
+24%
+22%
+0.96
+1.06
+33%
+0.73
+12%
+0.15
+360d
+26%
+22%
+1.04
+1.13
+43%
+0.61
+15%
+0.14
+Combo
+27%
+18%
+1.31
+1.78
+19%
+0.63
+20%
+0.07
+Table 6: Trade-level statistics of BTC long-short trend-following models across various Donchian look-
+back windows.
+Metrics include the number of trades, win rate, average PnL and return per trade,
+maximum and minimum trade returns, and the gain-to-loss ratio. Unit refers to PnL and returns assum-
+ing the strategy trades one BTC contract per signal, while all other return figures are computed at the
+portfolio level. The backtest period spans from January 1, 2015 to March 19, 2025. Transaction costs
+are not included. Data source: https://www.coinmarketcap.com.
+Model
+Trades
+Win
+AvgPnL
+AvgRet
+AvgRet
+MaxRet
+MinRet
+Gain:
+Rate
+× Unit
+× Unit
+Loss
+5d
+591
+37%
+$90
+1.3%
+0.5%
+29%
+-7%
+2.82
+10d
+304
+34%
+$141
+2.1%
+0.9%
+34%
+-7%
+3.45
+20d
+144
+41%
+$356
+5%
+2.3%
+45%
+-7%
+3.68
+30d
+98
+39%
+$573
+8%
+3.4%
+69%
+-9%
+4.27
+60d
+50
+39%
+$1’782
+15%
+6%
+89%
+-7%
+5.44
+90d
+35
+41%
+$1’961
+17%
+8%
+84%
+-12%
+4.71
+150d
+23
+48%
+$1’735
+26%
+10%
+90%
+-12%
+3.36
+250d
+12
+67%
+$4’289
+93%
+26%
+111%
+-12%
+4.97
+360d
+7
+57%
+$8’897
+340%
+68%
+350%
+-13%
+12.68
+35
+
+Table 7: Performance statistics of long-short diversified trend-following portfolios across different uni-
+verse sizes, based on the strategy described in Section 7. Metrics include cumulative return (Tot.Ret.),
+compound annual growth rate (CAGR), annualized volatility (Vol.), Sharpe and Sortino ratios, maxi-
+mum drawdown (MDD), MAR ratio (CAGR/MDD), and annualized alpha and beta relative to Bitcoin.
+The backtest includes a 10 basis point (bps) transaction cost and a 20% rebalance threshold, and spans
+the period from January 1, 2015 to March 19, 2025. Alphas in bold are statistically significant at the
+2.5% level. Data source: https://www.coinmarketcap.com.
+# Assets
+Tot.Ret.
+CAGR
+Vol.
+Sharpe
+Sortino
+MDD
+MAR
+Alpha
+Beta
+5
+340%
+16%
+11%
+1.09
+1.38
+18%
+0.85
+13.9%
+0.02
+10
+358%
+16%
+10%
+1.18
+1.52
+16%
+0.99
+15.0%
+0.01
+20
+363%
+16%
+10%
+1.24
+1.61
+13%
+1.20
+15.5%
+0.00
+30
+339%
+16%
+10%
+1.23
+1.61
+12%
+1.27
+15.3%
+0.00
+40
+314%
+15%
+10%
+1.20
+1.57
+12%
+1.22
+14.9%
+0.00
+50
+303%
+15%
+10%
+1.19
+1.57
+12%
+1.19
+14.8%
+-0.01
+Figure 10: Performance of the long-short diversified trend-following program described in Section 7,
+applied to the top 20 most liquid cryptocurrencies each month. The blue line shows the equity curve of
+the strategy, which includes a 10 basis point transaction cost and a 20% rebalance threshold. The black
+line represents a passive long exposure to Bitcoin, rescaled to match the volatility of the trend strategy.
+The red line (right axis) shows the number of eligible assets included in the portfolio over time. Backtest
+period: January 1, 2015 to March 19, 2025. Data source: https://www.coinmarketcap.com.
+36
+
+  : 
+1
+c/o University of Geneva, Bd. Du Pont d'Arve 42, CH-1211 Geneva 4
+T +41 22 379 84 71, rps@sfi.ch, www.sfi.ch
+Swiss Finance Institute
+Swiss Finance Institute (SFI) is the national center for fundamental 
+research, doctoral training, knowledge exchange, and continuing
+education in the fields of banking and finance. SFI’s mission is to 
+grow knowledge capital for the Swiss financial marketplace. Created 
+in 2006 as a public–private partnership, SFI is a common initiative 
+of the Swiss finance industry, leading Swiss universities, and the 
+Swiss Confederation.

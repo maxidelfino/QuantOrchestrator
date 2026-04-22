@@ -1,0 +1,413 @@
+Optimizing Portfolio Performance: A Comprehensive Approach with 
+Swing Trading, Asset Allocation, and Enhanced Lazy Portfolio  
+ 
+ 
+Abstract:  
+ 
+This paper introduces a comprehensive trading model, harnessing the strengths of three 
+distinct strategies —Swing Trading, Asset Allocation, and an Enhanced Lazy Portfolio. Through 
+the integration of these uncorrelated strategies, the model seeks a well -rounded and 
+diversified approach to financial markets. Utilizing historical market data, the study assesses 
+the performance and synergy of these strategies, providing insights into the potential benefits 
+of adopting a multifaceted trading approach.  
+Furthermore, the inclusion of a market risk filter enhances capital allocation decisions, 
+particularly in optimizing each strategy's contribution under specific market conditions. This 
+element plays a pivotal role in constructing a portfolio that strives t o emulate the Optimal 
+Efficient Portfolio's performance, aligning closely with the Efficient Frontier's objectives. The 
+analysis explores the combined impact of these strategies and the market risk filter in creating 
+a dynamic and adaptable portfolio manag ement solution, suitable for diverse market 
+environments. The paper aims to demonstrate how this integrated approach can offer a 
+comprehensive solution for portfolio management in various market conditions.  
+ 
+Introduction:  
+ 
+In the fluid and ever -changing financial markets, adaptability and strategic alignment with 
+proven investment principles, like those of the Efficient Frontier, are key to successful trading.  
+This paper delves into a comprehensive trading model that blends Swing Trading, Asset 
+Allocation, and an Enhanced Lazy Portfolio, all guided by a market risk filter. This model not 
+only adapts to market volatility but also seeks to emulate the performance characteristics of 
+the Optimal Efficient Portfolio, as defined by the Efficient Frontier. The integration of these 
+strategies and the market risk filter aims to enhance the overall performance and resilience 
+of the portfolio, offering a robust solution for  navigating the complexities of the financial 
+markets in various conditions.  
+  
+Electronic copy available at: https://ssrn.com/abstract=4659866
+(*) The results for the three models are based on data spanning from January 1, 2005, to November 30, 2023. This specific 
+timeframe was selected due to the use of certain ETFs in the analysis, which initiated trading activities in that year.  Trading Strategies  
+ 
+1. Swing Trading Strategy:  
+The swing trading component of the model aims to capitalize on short to medium -term price 
+movements within an overarching trend by identifying opportune entry and exit points for 
+both long and short trades. For a n understanding of this strategy, refer to the paper : 
+ https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4643126  
+ 
+2. Asset Allocation Strategy:  
+The asset allocation strategy focuses on distributing investments across different asset classes 
+to achieve a balanced and diversified portfolio. Through strategic allocation based on market 
+conditions and risk tolerance, this strategy aims to optimize ret urns while managing overall 
+portfolio risk. Asset allocation contributes a risk mitigation element to the holistic model. The 
+specific model used is described in this paper:  
+https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4648981  
+ 
+3. Improved Lazy Portfolio Management:  
+Building upon a Lazy portfolio, the active portfolio management component incorporates 
+monthly rebalancing and a risk assessment approach to dynamically allocate capital based on 
+market risks. This enhances the model's adaptability in dynamic market environments. Refer 
+to this paper for details:  
+https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4648981  
+ 
+As demonstrated in the previously mentioned papers, the results metrics for the three 
+individual strategies are  (*) Data from Yahoo Finance from 01 -01-2005 until 30 -11-2023) : 
+ 
+SWING ASSET ALLOCATION LAZY PORTFOLIO
+01/01/2005 - 30/11/2023 01/01/2005 - 30/11/2023 01/01/2005 - 30/11/2023
+Annual Return % 19.73% 17.83% 15.42%
+Max. % drawdown -19.37% -16.97% -16.16%
+Recovery Factor 6.37 5.39 6.11
+Profit Factor 4.57 2.33 2.39
+Payoff Ratio 2.54 1.62 1.35
+Sharpe Ratio 1.28 1.16 1.3
+Sortino Ratio 2.13 2.17 2.28
+Annualized Volatility 15.20% 15.30% 11.60%
+Note:  formulas for the statiscis are in Anexo 1: Formulas
+Electronic copy available at: https://ssrn.com/abstract=4659866
+ Holistic Model  Methodology  
+ 
+In the Holistic Model  (called from now Quantitative Portfolio Resilient) , capital is allocated 
+across these three strategies in two distinct scenarios. The first scenario involves an equal 
+distribution of 33% in each strategy, providing a balanced and diversified foundation. In the 
+second scenario, the model introduces a marke t filter designed to assess the optimal times to 
+activate or deactivate specific strategies  based on market risks perception . This dynamic filter 
+aims to enhance adaptability by reallo cating capital based on identified market conditions, 
+potentially improving overall performance. The Holistic Model Description explores the 
+intricate interplay of these strategies, offering insights into their collective strength and 
+adaptability in diffe rent market scenarios.  
+ 
+Study 1 - Equal Distribution (33% Allocation)   
+Analysis of the drawdowns of the three strategies, as illustrated in Figure 1, indicates that the 
+maximum drawdown for each strategy occurs at distinct points in time. This observation 
+suggests that combining  the three strategies into a portfolio, with an allocation of 33% of the 
+capital for each, has the potential to mitigate the overall maximum drawdown without 
+significant penalty on the returns.  This is referred to as Portfolio 33.  
+ 
+Fig.1 Illustrat es the Draw Down profile of the three strategies:  
+ 
+ 
+Electronic copy available at: https://ssrn.com/abstract=4659866
+ Backtesting Results for Study 1: Portfolio of Systems with Equal Distribution  
+ 
+Metrics:  
+ 
+ 
+ 
+Fig.2 illustrates  Cumulative Returns  and Draw Down of the  three individual Systems and the Portfolio of equal distribution 
+(Portfolio 33) :  
+ 
+ 
+The results demonstrate that allocating 33% of capital to each strategy in the portfolio 
+significantly improves the drawdown of all the individual strategies without imposing a 
+substantial penalty on the overall return.  
+SWING ASSET ALLOCATION LAZY PORTFOLIOPortfolio 33
+ (Equal Distribution)
+01/01/2005 - 30/11/2023 01/01/2005 - 30/11/2023 01/01/2005 - 30/11/2023 10/03/2005 - 30/11/2023
+Annual Return % 19.73% 17.83% 15.42% 18.06%
+Max. % drawdown -19.37% -16.97% -16.16% -11.33%
+Recovery Factor 6.37 5.39 6.11 13.16
+Profit Factor 4.57 2.33 2.39 2.43
+Payoff Ratio 2.54 1.62 1.35 2.59
+Sharpe Ratio 1.28 1.16 1.3 1.66
+Sortino Ratio 2.13 2.17 2.28 2.83
+Annualized Volatility 15.20% 15.30% 11.60% 10.40%
+Note:  formulas for the statiscis are in Anexo 1: Formulas
+           Detailed metrics can be found in Anexo 2: Detailed MetricsIndividual Systems
+Electronic copy available at: https://ssrn.com/abstract=4659866
+ Study 2 – Applying Market Filter  
+ 
+For this study, we will use a market filter to divide the market into two risk profiles: active risk 
+(high probability of a bearish market) and non -active risk (high probability of a bullish market). 
+Different  filters can be used , such as momentum, moving average of the SPY , VIX levels, VIX 
+moving average , etc. In our case, we utilize  a momentum filter based on market breadth data.  
+ 
+After conducting various tests, we are considering two scenarios:  
+Scenario 1  (Portfolio 33 -50):  
+Deactivating the Asset Allocation system when the risk is active. This is referred to as Portfolio 
+33-50 and operates as follows:  
+• Risk not active: 33% of the capital is assigned to each strategy.  
+• Risk active: 50% of the capital is allocated to the swing strategy, and the remaining 50% 
+is allocated to the Lazy Portfolio Strategy.  
+Scenario 2  (Portfolio 50 -50): 
+Deactivating the Asset Allocation system when risk is active and deactivating the Lazy 
+Portfolio when risk is not active. This is referred to as Portfolio 50 -50 and operates as 
+follows:  
+• Risk not active: 50% of the capital is assigned to the swing strategy, and the other 50% 
+is allocated to the Asset Allocation strategy.  
+• Risk active: 50% of the capital is assigned to the swing strategy, and the remaining 50% 
+is allocated to the Lazy Portfolio Strategy.  
+ 
+Metrics:  
+ 
+ 
+SWING ASSET ALLOCATION LAZY PORTFOLIO Portfolio 33-50 Portfolio 50-50
+01/01/2005 - 30/11/2023 01/01/2005 - 30/11/2023 01/01/2005 - 30/11/2023 01/01/2005 - 30/11/2023 01/01/2005 - 30/11/2023
+Annual Return % 19.73% 17.83% 15.42% 19.05% 20.20%
+Max. % drawdown -19.37% -16.97% -16.16% -11.33% -12.91%
+Recovery Factor 6.37 5.39 6.11 13.04 13
+Profit Factor 4.57 2.33 2.39 2.59 2.62
+Payoff Ratio 2.54 1.62 1.35 1.47 1.59
+Sharpe Ratio 1.28 1.16 1.3 1.7 1.66
+Sortino Ratio 2.13 2.17 2.28 2.95 2.89
+Annualized Volatility 15.20% 15.30% 11.60% 10.60% 11.50%
+Note:  formulas for the statiscis are in Anexo 1: Formulas
+           Detailed metrics can be found in Anexo 2: Detailed MetricsIndividual Systems
+Electronic copy available at: https://ssrn.com/abstract=4659866
+ Three portfolios  results  comparison:  
+ 
+Metrics:  
+ 
+ 
+ 
+Fig.3 illustrates  the Annual Returns for the Three portfolios:  
+ 
+  
+Portfolio 33
+(Equal Distribution)Portfolio 33-50 Portfolio 50-50
+01/01/2005 - 30/11/2023 01/01/2005 - 30/11/2023 10/03/2005 - 30/11/2023
+18.06% 19.05% 20.20%
+-11.33% -11.33% -12.91%
+13.16 13.04 13
+2.43 2.59 2.62
+1.41 1.47 2.43
+1.66 1.7 1.66
+2.83 2.95 2.89
+10.40% 10.60% 11.50%
+Note:  formulas for the statiscis are in Anexo 1: Formulas
+            Detailed metrics can be found in Anexo 2: Detailed Metrics-20.00%0.00%20.00%40.00%60.00%80.00%Portfolio 33 Portfolio 33-50 Portfolio 50-50
+Electronic copy available at: https://ssrn.com/abstract=4659866
+ Fig.4 illustrates  Profit  and Draw Down of the three Portfolios :  
+ 
+ 
+ 
+The results show  that combining the strategies in three different ways results in a lower 
+drawdown. Additionally, one of the three combinations (Portfolio 50 -50) product s superior 
+performance compared to the best -performing individual strategy. In the following section, 
+we will conduct a comprehensive risk -reward analysis to further compare the strategies and 
+portfolios   
+Electronic copy available at: https://ssrn.com/abstract=4659866
+ Risk vs. Reward  
+ 
+Fig.5 Annualized Return vs Annualized Volatility  (Risk -Reward  Profiles):  
+ 
+ 
+The Risk-Reward  diagram illustrates the Risk -Reward profiles for both individual strategies 
+and the three combinations (Portfolios).  It highlights that the assumption of higher risks 
+leading to greater rewards cannot be universally applied.  
+The three Portfolios  of strategies  show more  favourable  Risk-Reward profiles, suggesting that 
+employing a combination of Strategies is superior to selecting a singular approach. Despite 
+the higher returns associated with Portfolio 50 -50, our inclination is to trade the Portfolio 33 -
+50 for the following reasons : 
+1. Diversification:  
+The strategy Portfolio 33 -50 is more diversified across assets and timeframes, offering 
+a comprehensive approach to risk management.  
+2. Risk Mitigation in Bullish  Markets:  
+The exclusion of the Lazy portfolio during potential bullish markets not only increases 
+the risk by almost 1% to achieve a 1% increase in return but also amplifies the 
+Maximum Drawdown by 1.58%. This marginal gain in return does not justify 
+undertaking additional risks . 
+In conclusion, the analysis supports the notion that optimal Risk -Reward balance is achieved 
+through a strategic combination of systems. The selection of Portfolio 33 -50, driven by 
+considerations of diversification and risk -return ratios during bullish  markets, aligns with a 
+prudent and nuanced approach to trading.  
+Electronic copy available at: https://ssrn.com/abstract=4659866
+ Efficient Frontier and Portfolio 33 -50 Analysis  
+ 
+The concept of the 'efficient frontier' presents a powerful tool for portfolio optimization. This 
+section delves into an analytical comparison between  the efficient frontier derived from the 
+combination of the three strategies: Swing , Lazy Portfolio , and Assets Allocation . With the 
+performance of the dynamic allocation strategy, Portfolio 33 -50. 
+Understanding the Efficient Frontier  
+The efficient frontier is a fundamental concept in modern portfolio theory introduced by Harry 
+Markowitz in the 1950s. It represents a set of optimal portfolios that provide the highest 
+expected return for a given level of risk or the lowest risk for a given level of expected return. 
+Portfolios that lie on this frontier are deemed 'efficient' as they optimally balance risk an d 
+reward.  
+On a graph, the efficient frontier is typically plotted with expected return on the y -axis and 
+standard deviation (risk) on the x -axis. Each point on this curve represents a portfolio with a 
+specific combination of assets that maximizes returns for a given  risk level.  
+Analysis of Investment Strategies  
+The study involves the strategies: Swing , Lazy Portf olio and Assets Allocation . By simulating 
+numerous portfolio combinations with varying allocations to these strategies, we create an 
+efficient frontier. Each point on this frontier signifies a different mix of the three strategies, 
+showcasing the trade -off between risk (volatility)  and expected return.  
+ 
+Electronic copy available at: https://ssrn.com/abstract=4659866
+ The graph illustrates how varying the allocation between Swing , Lazy Portfolio , and Assets 
+Alloc ation  influences the portfolio's risk and return profile. The point marked by a red star  
+(Optimal Efficient Frontier) , representing the portfolio with the highest Sharpe Ratio  an  
+indicator of the best risk -adjusted return.  
+The optimal efficient frontier is composed as follows:  
+• Swing:  34.40 % 
+• Lazy Portfolio: 34.83 % 
+• Asset Allocation: 30.79%  
+ 
+The key metrics for The Optimal efficient frontier and Portfolio 33 -50: 
+ 
+ 
+ 
+ 
+In assessing Portfolio 33 -50 against the efficient frontier, it is evident that the strategy closely 
+mirrors the performance of the optimal portfolios. The Portfolio  33-50's higher Sortino Ratio 
+reflects its superior management of downside risk, while its Sharpe Ratio, nearly on par with 
+the frontier's portfolios, confirms similar risk -adjusted returns.  
+The strategy's effectiveness  of the Portfolio 33 -50 becomes especially clear during risk -off 
+market phases, where it adeptly diversifies, embodying the efficient frontier's principles. 
+Portfolio 33 -50 stands out as a dynamic allocation strategy that not only matches the efficient 
+frontier's benchmarks but also seizes market opportunities to potentially enhance investor 
+outcomes, exemplifying the strategic advantage of adaptable asset allocation within the realm 
+of optimal portfolio construction.   
+Optimal efficient 
+PortfolioPortfolio 33-50
+Annualized Volatility 10.71% 10.60%
+Annualized Return 19.07% 19.05%
+Sharpe Ratio 1.78 1.7
+Sortino Ratio 2.83 2.95
+Electronic copy available at: https://ssrn.com/abstract=4659866
+ Conclusion  
+ 
+This paper introduces the Quantitative Portfolio Resilient model, a holistic trading approach 
+that synergistically combines Swing Trading, Asset Allocation, and an Enhanced Lazy Portfolio. 
+By integrating these diverse strategies, the model aims for a diversified stance in financial 
+markets, augmented by adaptability through a dynamic market filter.  
+In our findings, the equal distribution scenario (Portfolio 33) demonstrates its efficacy in 
+mitigating overall maximum drawdown while preserving substantial returns. Moreover, the 
+implementation of the market filter in both Portfolio 33 -50 and Portfolio 5 0-50 configurations 
+exhibits an enhanced risk -adjusted performance, surpassing individual strategy outcomes.  
+The Risk -Reward analysis underscores the advantage of a multi -strategy portfolio over a 
+singular approach. It challenges the conventional belief that higher risks lead to greater 
+rewards, illustrating the benefits of strategic diversity. Despite Portfolio 50-50's higher returns, 
+our preference for Portfolio 33 -50 is grounded in its broader diversification and more 
+favourable  risk-return ratios, particularly in bullish market conditions.  
+Furthermore, our analysis through the lens of the efficient frontier strongly reinforces our 
+preference for Portfolio 33 -50. The efficient frontier analysis reveals that Portfolio 33 -50 aligns 
+closely with the optimal portfolios, demonstrating a robust bal ance of risk and return. This 
+portfolio not only adheres to the principles of modern portfolio theory but also exhibits a 
+superior risk -adjusted performance compared to the individual strategies.  
+ 
+ 
+About the Author  
+ 
+Daniel Requejo is a seasoned computer engineer with over 27 years of experience in IT consulting 
+across diverse countries, including Spain, the USA, Ireland, Australia, Malta, and Portugal. In the past 
+15 years, he has dedicated himself to a self -education  journey in the stock market, leveraging his 
+analytical skills and technical background to craft profitable investment models.  
+ 
+Daniel has collaborated with various institutions and hedge funds in the development of trading 
+algorithms and the refinement of investment strategies, applying his expertise in Amibroker and 
+Python development.  
+ 
+For further inquiries or comprehensive details regarding this paper, please feel free to contact the 
+author via email at drequejo71@gmail.com .  
+  
+Electronic copy available at: https://ssrn.com/abstract=4659866
+ Anexo 1: Formulas  
+ 
+Below are the formulas used to calculate the performance metrics:  
+ 
+Annual Return %: The annualized percentage return is a measure of the average annual rate of return 
+on an investment over a specified time period .   
+Annual Return % = 100 % x  (𝐹𝑖𝑛𝑎𝑙  𝑉𝑎𝑙𝑢𝑒
+𝐼𝑛𝑖𝑡𝑖𝑙  𝑉𝑎𝑙𝑢𝑒   )(365
+𝐷𝑎𝑦𝑠  𝑖𝑛 𝑇𝑒𝑠𝑡)−1
+  
+  
+Max. system % drawdown: Maximum  percentage decline in the value of a trading system from its 
+highest point (peak) to the lowest subsequent point (trough) over a specified period.  
+ 
+ Max. system % drawdown = 𝑃𝑒𝑎𝑘  𝑉𝑎𝑙𝑢𝑒 −𝑇𝑟𝑜𝑢𝑔 ℎ 𝑉𝑎𝑙𝑢𝑒
+𝑃𝑒𝑎𝑘  𝑉𝑎𝑙𝑢𝑒  x 100%  
+Where:  
+• Peak  Value is the highest point in the value of the trading or investment system.  
+• Trough  Value is the lowest subsequent point in the value of the system.  
+ 
+Recovery Factor: Assesses the ability of an investment or trading strategy to recover from losses. It is 
+calculated using the following formula:  
+ Recovery Factor = Net  Profit
+𝑀𝑎𝑥𝑖𝑚𝑢𝑚  𝐷𝑟𝑎𝑤𝑑𝑤𝑜𝑛  
+ 
+Profit Factor:  Measures the profitability of a trading strategy. It is calculated using the following 
+formula:  
+ Profit Factor  = 𝑇𝑜𝑡𝑎𝑙  𝑃𝑟𝑜𝑓𝑖𝑡
+𝑇𝑜𝑡𝑎𝑙  𝐿𝑜𝑠𝑠 
+ 
+Payoff Ratio : Also  known as the risk -reward ratio, is a financial metric used in investing to assess the 
+potential return of an investment relative to the amount of risk undertaken . 
+ 
+ Payoff Ratio  = 𝐴𝑣𝑒𝑟𝑎𝑔𝑒  𝐺𝑎𝑖𝑛  𝑝𝑒𝑟  𝑊𝑖𝑛𝑛𝑖𝑛𝑔  𝑇𝑟𝑎𝑑𝑒
+𝐴𝑣𝑒𝑟𝑎𝑔𝑒  𝑙𝑜𝑠𝑠  𝑝𝑒𝑟  𝐿𝑜𝑠𝑖𝑛𝑔  𝑇𝑟𝑎𝑑𝑒 
+ 
+ 
+  
+Electronic copy available at: https://ssrn.com/abstract=4659866
+ Sharpe Ratio: Is a measure of the risk -adjusted performance of a trading strategy. It helps investors 
+evaluate the return of an investment relative to its risk.  
+ 
+Sharpe Ration  = 𝐼𝑛𝑣𝑒𝑠𝑡𝑚𝑒𝑛𝑡  𝑅𝑒𝑡𝑢𝑟𝑛 − 𝐼𝑛𝑣𝑒𝑠𝑡𝑚𝑒𝑛𝑡  𝑅𝑒𝑡𝑢𝑟𝑛 −𝑅𝑖𝑠𝑘  𝐹𝑟𝑒𝑒  𝑅𝑎𝑡𝑒
+𝐼𝑛𝑣𝑒𝑠𝑡𝑚𝑒𝑛𝑡  𝑆𝑡𝑎𝑛𝑑𝑎𝑟𝑑  𝐷𝑒𝑣𝑖𝑎𝑡𝑖𝑜𝑛 
+Where:  
+• Investment  Return is the return of the investment or portfolio.  
+• Risk Free  Rate   is the return on a risk -free investment . 
+• Investment  Standard  Deviation  is the standard deviation of the  Investment’s  
+returns, which measures the volatility or risk of the portfolio.  
+ 
+Annualized Volatility : Is a measure of the variability of returns of a n investment over a one -year 
+period, expressed as a percentage. It is commonly used in finance to quantify the level of risk or 
+uncertainty associated with an investment.  
+ 
+Calculated using Monthly returns:  
+Annualized  Volatility  =  √12  × 𝑀𝑜𝑛𝑡 ℎ𝑙𝑦 𝑉𝑜𝑎𝑙𝑡𝑖𝑙𝑡𝑦  
+Where:  
+• Monthly  Volatility is the standard deviation of monthly returns.  
+• 12 is the number of months in a year . 
+ 
+ 
+Ratio Sortino:  Is a measure of risk -adjusted return that focuses on the downside risk of an 
+investment. It is similar to the Sharpe Ratio, but it considers only the volatility of the 
+downside . while the Sharpe Ratio considers total volatility (both upside and downside), the 
+Sortino Ratio specifically looks at the downside risk, providing a more targeted measure for 
+investors primarily concerned with minimizing losses. The Sortino Ratio can be us eful in 
+situations where protecting against downside risk is a critical factor in the investment 
+strategy.  
+ 
+Sortino Ratio  = 𝐴𝑣𝑒𝑟𝑎𝑔𝑒  𝑅𝑒𝑡𝑢𝑟𝑛
+𝑉𝑜𝑙𝑎𝑡𝑖𝑙𝑖𝑡𝑦  𝑜𝑓 𝑁𝑒𝑔𝑎𝑡𝑖𝑣𝑒  𝑅𝑒𝑡𝑢𝑟𝑛𝑠 
+  
+Electronic copy available at: https://ssrn.com/abstract=4659866
+ Anexo 2: Detailed Systems  metrics  
+ 
+Correlation Matrix : (Data from monthly observations)  
+ 
+ 
+ 
+ 
+Metrics:  
+ 
+ 
+SWING Assets Alloc Lazy porf Portfolio 33 Portfolio 33-50 Portfolio 50-50 SPY
+SWING 1
+Assets Alloc0.22 1
+Lazy porf0.48 0.36 1
+Portfolio 330.76 0.72 0.77 1
+Portfolio 33-500.79 0.65 0.77 0.981
+Portfolio 50-500.76 0.73 0.63 0.95 0.971
+SPY0.30 0.03 0.32 0.27 0.25 0.241
+SWING Assets Alloc Lazy porf Portfolio 33 Portfolio 33-50 Portfolio 50-50 SPY
+Sharpe Ratio 1.28 1.16 1.30 1.66 1.70 1.66 0.54
+Sortino Ratio 2.13 2.17 2.28 2.83 2.95 2.89 0.74
+Annualized Volatility 15.15% 15.25% 11.56% 10.40% 10.61% 11.53% 15.21%
+Annualized Return 19.73% 17.83% 15.42% 18.06% 19.05% 20.20% 8.27%
+Max. DrawDown -19.37% -16.97% -16.16% -11.33% -11.33% -12.91% -56.47%
+Largest Monthly Return 19.20% 14.30% 14.00% 10.60% 10.60% 11.20% 12.70%
+Largest Monthly Loss -14.10% -12.00% -8.80% -7.50% -7.50% -7.70% -16.50%
+Average Monthly Return 1.61% 1.47% 1.26% 1.44% 1.51% 1.60% 0.69%
+Growth of $100 3060.90 2239.88 1507.63 2304.19 2689.73 3234.26 381.74
+Total Return 2960.90% 2139.88% 1407.63% 2204.19% 2589.73% 3134.26% 281.74%
+Electronic copy available at: https://ssrn.com/abstract=4659866

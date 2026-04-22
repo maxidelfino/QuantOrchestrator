@@ -1,0 +1,786 @@
+
+--- Page 1 ---
+Can ChatGPT Forecast Stock Price Movements?
+Return Predictability and Large Language Models∗
+Alejandro Lopez-Lira and Yuehua Tang
+University of Florida
+First Version: April 6, 2023; This Version: April 9, 2026
+Abstract
+We document the capability of large language models (LLMs) like ChatGPT to predict
+stock market reactions from news headlines without direct financial training. Using post-
+knowledge-cutoff headlines, GPT-4 captures initial market responses, achieving approximately
+90% portfolio-day hit rates for the non-tradable initial reaction. GPT-4 scores also signifi-
+cantly predict the subsequent drift, especially for small stocks and negative news. Forecasting
+ability generally increases with model size, suggesting that financial reasoning is an emerging
+capacity of complex LLMs. Strategy returns decline as LLM adoption rises, consistent with
+improved price efficiency. To rationalize these findings, we develop a theoretical model that
+incorporates LLM technology, information-processing capacity constraints, underreaction, and
+limits to arbitrage.
+Keywords: Large Language Models, ChatGPT, Machine Learning, Return Predictability, Textual Analysis,
+Market Efficiency
+JEL Classification: G10, G11, G12, G14, C53
+∗Alejandro Lopez-Lira: alejandro.lopez-lira@warrington.ufl.edu, 305 Stuzin Hall, Gainesville, FL 32611;
+Yuehua Tang: yuehua.tang@warrington.ufl.edu, 317A Stuzin Hall, Gainesville, FL 32611. We are grateful
+for the comments and feedback from Dimitris Papanikolaou (the editor), two anonymous referees, Svetlana
+Bryzgalova, Andrew Chen, Carter Davis, Andrea Eisfeldt, Xiao Han, Ryan Israelsen, Wei Jiang, Ben Lee,
+Holger von Jouanne-Diedrich, Andy Naranjo, Jay Ritter, Nikolai Roussanov, Jinfei Sheng, Avanidhar (Subra)
+Subrahmanyam, Baozhong Yang, Jialin Yu, and seminar and conference participants at UCLA, UC Irvine,
+Florida State University, Bank of Mexico, CEIBS, Peking University HSBC Business School, University
+of Florida, the SEC, AllianceBernstein, Bloomberg, Qube Research & Technologies, Santander Bank, UBS
+Australia, 4th Frontiers of Factor Investing 2024, UBS US Quant Conference, The 36th Australasian Finance
+and Banking Conference, RSFAS Summer Research Camp, EDHEC Speaker Series, Online Seminars in
+Finance Series, Artificial Intelligence and the Economy, the 1st New Finance Conference, ITAM Alumni
+Conference, and the Insightful Minds in Artificial Intelligence Seminar Series.
+1
+--- Page 2 ---
+1 Introduction
+The recent proliferation of generative artificial intelligence and large language models (LLMs)
+like ChatGPT has significantly impacted multiple domains. Although these models are
+primarily trained to predict the next word in a sequence, they have exhibited surprising
+proficiency in complex tasks, such as coding, fueling widespread interest in their emerging
+capabilities. However, their potential in economic applications remains largely unexplored.
+A fundamental question in financial markets is how quickly and accurately investors in-
+corporate new information into prices. Understanding this process has proven challenging
+because it requires measuring both the “true” economic implications of news and the mar-
+ket’s interpretation of it. To bridge this gap, we investigate whether LLMs can serve as a
+novel instrument to study market information processing by evaluating their ability to assess
+the economic content of news headlines and comparing these assessments with how markets
+actually respond initially and whether there is a subsequent price drift.
+Our key finding is that GPT-4 demonstrates a strong ability to predict the immediate
+market reaction to news headlines, achieving daily portfolio hit rates of approximately 90%
+for correctly identifying the direction of the initial price response. This result is notable
+for two reasons. First, it is not obvious that a general-purpose language model trained
+without explicit financial supervision should excel at this task. The fact that it does suggests
+that sophisticated financial reasoning—understanding not just whether news is positive or
+negative, but also how markets will interpret it—emerges naturally from the model’s general
+language training.1Second, and more importantly for financial economics, this high accuracy
+provides a unique window into market information processing. By comparing what GPT-4
+identifies as the economic implications of news with how markets actually respond over time,
+we can quantify instances where markets initially underreact to information that the LLM
+correctly assesses. This allows us to study which types of news create information processing
+frictions and whymarkets may be slow to incorporate certain information.
+1. Unlike prior studies that rely on supervised methods requiring labeled training data and domain-
+specific fine-tuning (Tetlock 2007; Tetlock, Saar-Tsechansky, and Macskassy 2008; Tetlock 2011; Garcia
+2013; Calomiris and Mamaysky 2019), our analysis evaluates LLMs’ off-the-shelf ability to interpret news
+without explicit financial training. This approach requires no labeled data or financial expertise and provides
+interpretable assessments that any investor can understand.
+2
+--- Page 3 ---
+Since GPT-4 can accurately understand the economic impact of news, one would expect
+to observe return predictability patterns consistent with phenomena documented in the
+literature on delayed information diffusion and limits to arbitrage.2Indeed, following the
+initial reaction to news, stock prices tend to continue drifting in the same direction indicated
+by GPT-4’s assessment over the next one to two trading days. A long-short daily-rebalanced
+strategy based on GPT-4’s assessments of overnight news generates average returns of 34
+basis points (bps) per day before transaction costs.3Furthermore, the underreaction is
+particularly pronounced for smaller stocks and following negative news. However, exploiting
+these patterns in practice is only feasible for market participants whose transaction costs are
+sufficiently low, such as market makers. Still, the central contribution of this study lies not
+only in documenting LLMs’ ability to generate return predictability but also in uncovering
+what LLM assessments reveal about how markets process and react to different types of
+information.
+We guide our empirical investigation by developing a theoretical model that incorporates
+LLM technology, information processing constraints, and limits to arbitrage. Our model al-
+lows us to explore the potential impact of LLM information-processing capabilities on market
+dynamics and generates several testable implications. First, return predictability aligns with
+theories of delayed information diffusion and limits to arbitrage, with underreaction more
+pronounced for smaller stocks and short positions. Second, greater LLM model complexity
+enhances forecasting ability, establishing a critical threshold in AI capabilities above which
+these technologies can profitably predict returns. Third, as LLMs become more sophisticated
+and widely adopted, prices should better reflect fundamentals, though return predictability
+persists in equilibrium.
+Empirically, we analyze a comprehensive data set of news headlines relevant to 4,123
+U.S. common stocks from major news media and newswires over the period from October
+2021 to May 2024. This sample period is selected to avoid look-ahead bias and ensure an
+out-of-sample evaluation of LLMs like ChatGPT, as the version we evaluate was trained on
+2. For example, Bernard and Thomas (1989), Chan, Jegadeesh, and Lakonishok (1996), DellaVigna and
+Pollet (2009), Hirshleifer, Lim, and Teoh (2009), Jiang, Li, and Wang (2021), and Fedyk and Hodson (2023).
+3. We obtain similar results using abnormal returns from the CAPM model and the 5-factor model of
+Fama and French (2015) as the strategy has low loadings on standard risk factors, including the market
+factor.
+3
+--- Page 4 ---
+data up until September 2021.4We prompt ChatGPT to assess the economic implications
+of each headline for the relevant firm’s stock price, categorizing it as positive, negative, or
+neutral news, and use this signal to study the market’s initial reaction and subsequent drift.
+Consistent with the idea that LLMs are trained to mimic human reasoning, our evidence
+shows that sophisticated models like GPT-4 can accurately discern the immediate economic
+implications of a news headline, achieving a daily portfolio hit rate of 93.3% (88.8%) for
+identifying the initial response direction of overnight (intraday) headlines.
+We next use LLM assessments to better understand how markets process different types
+of information. In particular, we develop an interpretability framework using topic modeling
+to group news into themes and then examine which themes are associated with GPT-4’s
+most accurate predictions of the initial reaction and where the subsequent drift is most
+pronounced. Our results reveal substantial heterogeneity in how markets process different
+kinds of information. For certain topics, such as earnings reports, strategic partnership
+announcements, and clinical trial results, markets react efficiently. GPT-4 scores show strong
+alignment with initial reactions but minimal drift prediction. In contrast, for topics such as
+insider stock transactions and specialized conference presentations, we observe underreaction:
+a strong initial response alignment is accompanied by significant subsequent drift. This
+suggests that markets are slow to fully incorporate the information in these types of news,
+given that GPT-4 correctly identifies their implications from the outset.
+Consistent with our theory, we find that LLMs’ ability to discern the economic implica-
+tions of news increases with model size. Basic models such as GPT-1, GPT-2, and Llama2-7b
+exhibit limited off-the-shelf stock assessment capability, with low hit rates in predicting the
+initial reaction and no significant predictability for subsequent return drift.5More advanced
+models, such as GPT-3.5 and DistilBART-MNLI, demonstrate stronger assessment ability
+than the basic models but remain noticeably weaker compared to the state-of-the-art model,
+GPT-4. For example, the hit rate and the drift-strategy Sharpe ratios generally increase
+with model size. A long-short strategy based on next-day drift returns that buys stocks with
+positive GPT-4 scores and sells those with negative scores delivers an annualized Sharpe
+4. Sarkar and Vafa (2024) and Lopez-Lira, Tang, and Zhu (2025) provide strong evidence that one must use
+a sample period after an LLM’s knowledge cutoff date to avoid lookahead bias and memorization problems.
+5. Section A of the Appendix provides details on the full list of 12 LLMs we examine.
+4
+--- Page 5 ---
+ratio of 2.97 over the sample period, compared with 1.66 for GPT-3.5, 1.26 for DistilBART-
+MNLI, and negative Sharpe ratios for most basic models. Overall, our findings suggest that
+financial decision-making ability is an emerging capacity of more complex LLMs.
+Next, we examine the performance differences across LLMs within the same family to
+identify which types of financial information require greater processing capacity for correct
+interpretation. Our theory predicts that larger models exhibit the greatest performance
+advantages where information processing is most challenging, and that is where markets are
+most likely to display inefficiencies. Comparing GPT-4 to GPT-3.5, the largest advantages
+appear precisely in categories requiring complex synthesis: insider stock transactions show a
+25.2 bps advantage for initial reactions and 13.8 bps for the drift, while healthcare conference
+participation shows the strongest drift advantage at 20.4 bps. The Llama2 family exhibits
+even more pronounced differences in predicting initial reactions, with the larger Llama2-70b
+model outperforming the smaller Llama2-7b model by 316 bps for earnings announcements
+and 140 bps for stock rating changes. Our evidence suggests that topics requiring deeper
+analytical reasoning or specialized knowledge benefit most from greater model sophistication.
+We further investigate how LLM-based approaches differ from traditional embedding-
+based methods. Specifically, we directly compare GPT-4’s conversational prompting ap-
+proach with embedding-based supervised learning models trained on actual return outcomes
+with rolling 6-month windows. The embedding models collapse when training data becomes
+limited: for intraday news (26,109 observations), performance deteriorates dramatically with
+OpenAI embeddings achieving a Sharpe ratio of only 1.71 compared to 2.53 for overnight
+news (105,742 observations). In contrast, GPT-4 maintains consistent performance (Sharpe
+ratio of 2.63 for intraday), demonstrating that its zero-shot semantic reasoning does not
+depend on massive training samples. Moreover, unlike traditional methods that require sta-
+tistical expertise and continuous retraining, LLMs’ conversational interface is accessible to
+any investor. Our model predicts that this accessibility should enhance market efficiency by
+improving information processing among previously inattentive agents.
+Finally, considering the widespread adoption of LLMs like ChatGPT and the capabilities
+they demonstrate, it is imperative to assess their potential impact on market efficiency.
+Our theoretical framework posits that LLMs can increase investors’ information processing
+5
+--- Page 6 ---
+capacity and reduce market inefficiencies. As a result, the return predictability should weaken
+as LLMs’ size increases and more investors start using them. While testing this hypothesis
+represents an empirical challenge, we find some suggestive evidence: a general decline in the
+performance of the ChatGPT-based strategy during our sample period, over which GPT
+models’ capabilities and adoption skyrocketed. For example, its annualized Sharpe ratio
+drops from 6.54 in 2021Q4 to 3.68 in 2022, 2.33 in 2023, and to 1.22 over January-May 2024.
+Our findings provide several novel insights about financial economics and market func-
+tioning. First, and most importantly, we demonstrate that LLMs serve as a powerful in-
+strument for studying what drives information processing frictions in markets. Markets
+efficiently process transparent, quantifiable information (e.g., earnings reports and clinical
+trials) but systematically underreact to information requiring complex synthesis (e.g., insider
+transactions and specialized conference presentations). The pattern of where GPT-4 out-
+performs GPT-3.5 (complex synthesis tasks) versus where they perform equally (formulaic
+announcements) reveals which types of information processing create bottlenecks for market
+participants. This granular mapping of processing frictions, which is impossible to obtain
+with traditional methods, provides new evidence on the mechanisms underlying delayed price
+discovery.
+Second, the threshold effect in model complexity combined with the limitations of su-
+pervised learning approaches indicates that market underreaction may stem from scarcity
+of genuine semantic reasoning capacity, not merely lack of statistical sophistication. Since
+LLMs approximate human reasoning patterns, GPT-4’s unique success while simpler models
+and domain-specific approaches fail suggests that the analytical sophistication required to
+anticipate market responses is relatively rare among investors. This interpretation unifies
+seemingly disparate findings about underreaction: markets struggle precisely where reason-
+ing capacity is most scarce.
+Third, the declining Sharpe ratios as LLMs proliferate provide suggestive evidence that
+AI adoption is actively reducing information processing frictions in real time. This temporal
+evolution, together with LLMs’ accessibility compared to traditional quantitative methods,
+suggests that financial markets may be undergoing a structural shift in how efficiently they
+process complex information. These findings have important implications for understanding
+6
+--- Page 7 ---
+how technological change affects market efficiency and the fundamental nature of information
+processing constraints in financial markets.
+Related Literature
+The application of LLMs in economics, particularly ChatGPT, is a relatively unexplored
+area. In addition to our study, recent research on ChatGPT in economics includes Korinek
+(2023), Hansen and Kazinnik (2023), Bybee (2023), Noy and Zhang (2023), and Manning,
+Zhu, and Horton (2024), each addressing different questions than ours.6Furthermore, a con-
+temporaneous work by Chen, Kelly, and Xiu (2023) employs a supervised two-step procedure
+by first embedding news articles in a high-dimensional space using different embedding tech-
+niques, including LLM-based embeddings, and then using these embeddings as inputs for
+a forecasting model to predict stock returns. Different from their focus, we test the off-
+the-shelf capabilities of LLMs in extracting economic content from news (accessible to most
+investors), use them as instruments to study market information processing, and provide
+a conceptual framework to explain their potential economic impact on financial markets.
+Additionally, for predicting future returns, the two approaches are complementary: our di-
+rect application of conversational AI systems offers accessibility and interpretability, while
+their two-step procedure provides flexibility in customization and optimization for specific
+prediction tasks.
+We also contribute to the literature that employs machine learning to study finance re-
+search questions, including textual analyses of news articles to extract sentiment and predict
+stock returns.7Our unique contribution is being the first to provide a theoretical framework
+on LLMs and their potential impact on market dynamics and document comprehensive
+6. Moreover, Xie et al. (2023) find ChatGPT is no better than simple methods such as linear regression
+when using numerical data in prediction tasks, and Ko and Lee (2023) try to use ChatGPT to help with a
+portfolio selection problem but find no positive performance. Both results are unsurprising since ChatGPT is
+better at text-based tasks. In addition, Eisfeldt, Schubert, and Zhang (2023) study the impact of ChatGPT
+on firm value through the channel of labor productivity. Finally, Kogan et al. (2023) utilize ChatGPT to
+classify job tasks into routine vs. non-routine categories, and W. Jiang et al. (2023) use ChatGPT to evaluate
+the complementary vs. substitutive impact of fintech innovations on different occupations.
+7. See, e.g., Jegadeesh and Wu (2013), Rapach, Strauss, and Zhou (2013), Hoberg and Phillips (2016),
+Baker, Bloom, and Davis (2016), Manela and Moreira (2017), Hansen, McMahon, and Prat (2018), Gu, Kelly,
+and Xiu (2020), Ke, Kelly, and Xiu (2019), Ke, Montiel Olea, and Nesbit (2019), F. Jiang et al. (2019),
+Cohen, Malloy, and Nguyen (2020), Freyberger, Neuhierl, and Weber (2020), Bybee et al. (2023), Lopez-Lira
+(2023), and Cong, Liang, and Zhang (2024).
+7
+--- Page 8 ---
+empirical evidence on LLMs’ financial decision-making capabilities. Our theoretical model
+adds to the literature on information incorporation into market prices and introduces LLM
+technology.8Our paper also relates to the growing literature on employment exposures and
+vulnerability to artificial intelligence (AI) related technology by documenting an important
+task in the financial industry where off-the-shelf LLMs perform well.9Finally, our results,
+along with the interpretability technique we propose to analyze LLMs’ performance across
+topics, contribute to understanding LLMs’ potential in processing financial information and
+forecast stock returns, which can inspire future research on developing LLMs tailored to the
+financial industry’s needs.10
+2 Institutional Background
+ChatGPT is a large-scale language model developed by OpenAI based on the GPT (Genera-
+tive Pre-trained Transformer) architecture. It is one of the most advanced natural language
+processing (NLP) models developed so far and was trained on a massive corpus of text data
+to understand the structure and patterns of natural language. The Generative Pre-trained
+Transformer (GPT) architecture is a deep learning algorithm for natural language processing
+tasks. It was developed by OpenAI and is based on the Transformer architecture, which was
+introduced in Vaswani et al. (2017). The GPT architecture has achieved state-of-the-art
+performance in various natural language processing tasks, including language translation,
+text summarization, question answering, and text completion.
+The GPT architecture uses a multi-layer neural network to model the structure and
+patterns of natural language. It is pre-trained on a large corpus of text data, such as
+Wikipedia articles or web pages, using unsupervised learning methods. This pre-training
+process allows the model to develop a deep understanding of language syntax and semantics,
+8. For example, Van Nieuwerburgh and Veldkamp (2010), Kyle (1985, 1989), Verrecchia (1982), D´ avila
+and Parlatore (2018), and D´ avila and Parlatore (2021).
+9. Recent works by Agrawal, Gans, and Goldfarb (2019), Webb (2019), Acemoglu et al. (2022), Acemoglu
+and Restrepo (2022), Acemoglu (2024), Babina et al. (2024), W. Jiang et al. (2023), Kogan et al. (2023), Noy
+and Zhang (2023), and Hampole et al. (2025) have examined the extent of job exposure and vulnerability to
+AI-related technology as well as the consequences for employment and productivity.
+10. See, for example, Wu et al. (2023) on a large language model for finance—BloombergGPT. In addition,
+see Lerner et al. (2024) for a recent study on increasingly valuable financial innovations in the U.S.
+8
+--- Page 9 ---
+which is then fine-tuned for specific language tasks. One of the unique features of the GPT
+architecture is its use of the transformer block, which enables the model to handle long
+sequences of text by using self-attention mechanisms to focus on the most relevant parts
+of the input. This attention mechanism allows the model to understand the input context
+better and generate more accurate and coherent responses.
+ChatGPT has been trained to perform various language tasks such as translation, sum-
+marization, question answering, and generating coherent and human-like text. ChatGPT’s
+ability to generate human-like responses has made it useful for creating chatbots and virtual
+assistants to converse with users. While ChatGPT is designed for general-purpose language-
+based tasks, it is not explicitly trained to predict stock returns.
+In addition to evaluating ChatGPT, we also assess the capabilities of other prominent nat-
+ural language processing models such as BERT, BART, FinBERT, and Llama2. Specifically,
+the 12 models we study are GPT-1, BERT, BERT-Large, GPT-2, BART-Large, DistilBart-
+MNLI-12-1, GPT-3.5, GPT-4, Llama2-7B, Llama2-13B, Llama2-70B, and FinBERT (or-
+dered by their release time). By considering the more basic models alongside GPT-4, we can
+examine the importance of model complexity for stock return prediction based on textual
+data. Appendix A at the end of the paper provides an overview of the 12 LLMs we study in
+this paper.
+3 Conceptual Framework: LLMs, Information Process-
+ing, and Market Dynamics
+To understand the economic mechanisms underlying the observed ability of LLMs like Chat-
+GPT to predict stock returns from news headlines and guide our empirical exploration, we
+develop a conceptual framework grounded in a formal theoretical model (presented in full
+detail in Section B of the Appendix). This framework not only explains LLMs’ return pre-
+dictability but also explores how their emergence as effective information processors interacts
+with established market features like bounded human rationality, information frictions, and
+limits to arbitrage. It aims to provide economic intuition for our empirical findings and to
+9
+--- Page 10 ---
+offer new insights into the broader implications of artificial intelligence in financial markets.
+3.1 Key Ingredients
+Our framework considers a market with an asset whose fundamental value is revealed over
+time. Trading occurs over short horizons following the arrival of public news signals about
+these fundamentals. Importantly, the market is populated by heterogeneous agents who
+differ in their capacity to process this news immediately. We include attentive agents , who
+are sophisticated participants capable of quickly processing a significant portion of the in-
+formation content in news. Alongside them are inattentive agents , participants with limited
+information processing capacity who only grasp a fraction of the news implications initially,
+fully updating their beliefs with a delay; this element captures aspects of bounded rational-
+ity or information acquisition costs. Finally, the framework incorporates limits to arbitrage
+through the presence of noise trading, which represents non-fundamental demand shocks and
+introduces risk for attentive agents attempting to correct temporary mispricings. This setup
+allows for temporary deviations of prices from values implied by fully processed information.
+3.2 LLMs as Information Processors
+A central element is the explicit modeling of LLMs as information processors whose effec-
+tiveness depends on their characteristics. We conceptualize LLM capacity as depending on
+both model sophistication (e.g., measured by model size k), where more advanced models can
+extract information with higher precision, and news complexity (c), recognizing that even
+advanced models may struggle with overly complex or nuanced information. The formal
+model in the Appendix captures this through a function λ(c, k) representing the precision of
+the LLM’s interpretation relative to the total information content in the news. This allows
+the framework to account for the empirically observed heterogeneity in performance across
+different LLMs and different types of news.
+10
+--- Page 11 ---
+3.3 Mechanism of Predictability
+Within this framework, the potential for LLMs to predict returns arises from a mismatch
+in information processing speeds and capacities. If an LLM (particularly a sophisticated
+one) can interpret the implications of news more accurately or quickly than the marginal
+human trader who sets the current price (often influenced by the slower-reacting inattentive
+agents), a temporary divergence occurs. The LLM’s assessment of the public news ( µL|sin the
+formal model) reflects a better estimate of the post-news fundamental value than the current
+market price ( p1). LLM predictability emerges as the price subsequently drifts towards the
+more fully-processed information level ( p2≈µA|s), aligning with the LLM’s initial, more
+accurate assessment. The presence of noise trader risk ensures that this convergence is not
+instantaneous or riskless for attentive agents, allowing the predictability to persist in the
+short run.
+3.4 Key Theoretical Insights
+Our model yields several key economic insights relevant to understanding LLMs in finance.
+First, the model establishes the existence of an LLM quality threshold. It posits that
+there is a critical threshold ( k∗) in LLM sophistication, below which models cannot generate
+profitable predictions, and only sufficiently advanced LLMs ( k > k∗) demonstrate robust
+predictive power (i.e., Theorem 1). A threshold exists because markets contain inherent
+frictions, including noise trader risk, transaction costs, and limits to information-processing
+capacity, that create a hurdle any predictive signal must overcome. Below this quality level,
+an LLM may extract some information from news, but its signal-to-noise ratio remains too
+low for reliably profitable trades. The threshold’s level depends on market structure: when
+markets have many attentive participants or high trading volume, prices incorporate infor-
+mation quickly, raising the bar for LLM usefulness. Conversely, noisier markets with high
+risk aversion or substantial noise trading allow even moderately capable LLMs to identify
+profitable opportunities. Thus, the threshold reflects both fundamental market frictions and
+the competitive information environment.
+Second, the framework sheds light on the determinants of predictability. Consistent with
+11
+--- Page 12 ---
+theories of limits to arbitrage and delayed information diffusion, the model predicts that
+LLM-based return predictability should be more pronounced where information frictions or
+arbitrage constraints are higher, such as in smaller, less liquid stocks or following negative
+news (i.e., Proposition 1). In small-cap or illiquid stocks, fewer sophisticated traders find
+it worthwhile to pay the fixed costs of active participation, leaving more “room” between
+the initial underreaction and full-information valuation. For negative news, shorting faces
+higher costs and regulatory restrictions, which limit the ability of attentive arbitrageurs to
+correct mispricings. In both cases, the LLM exploits gaps that arbitrage forces are slower to
+close.
+Third, our model analyzes the impact on market efficiency from LLM adoption. It pre-
+dicts that widespread use of capable LLMs can enhance market efficiency by accelerating
+information incorporation into prices through two channels: empowering less informed (inat-
+tentive) agents (i.e., Theorem 2) and augmenting already sophisticated (attentive) agents
+(i.e., Proposition 3). The mechanism operates through price formation itself. Since the
+equilibrium price is a precision-weighted average of all agents’ assessments, when inattentive
+agents adopt superior LLMs, their improved beliefs pull the price closer to fundamentals.
+Similarly, when attentive agents adopt even better LLMs, the most informed component of
+the price becomes more accurate, further improving price discovery.
+Finally, a key corollary concerns the potential erosion of LLMs’ predictability. As high-
+quality LLMs become widely adopted, the very predictability they initially exploited may
+diminish or disappear (i.e., Proposition 2). This reflects a price impact effect: profitability
+depends on the gap between the LLM’s assessment and the current market price. As more
+traders act on the same LLM signal, their collective demand drives the initial price closer
+to the LLM’s valuation, shrinking this gap. When adoption becomes widespread and LLM
+capabilities approach those of the most informed traders, LLM’s information advantage
+vanishes as everyone sees the same signal already reflected in prices. Thus, the LLM’s
+predictive success inherently contains the seeds of its own obsolescence as a trading signal.
+This conceptual framework, backed by the formal model in the Appendix, provides a
+structured way to interpret our empirical results. It helps explain why different LLMs per-
+form differently, why predictability varies across stocks and news types, and offers insights
+12
+--- Page 13 ---
+into the potential evolution of market efficiency as AI technologies proliferate. It guides
+our analysis beyond simply documenting predictability to understanding the underlying eco-
+nomic forces at work.
+4 Data
+We utilize four primary datasets for our analysis: the Center for Research in Security Prices
+(CRSP) daily returns, news headlines, RavenPack news database, and the NYSE Trade and
+Quote (TAQ) database. The sample period begins in October 2021 and ends in May 2024.
+This sample period ensures that our evaluation is out-of-sample as the training data of the
+ChatGPT models stops in September 2021 (e.g., Sarkar and Vafa (2024) and Lopez-Lira,
+Tang, and Zhu (2025)).11
+We obtain daily stock returns, open prices, and close prices from the CRSP. Our sample
+consists of all the stocks listed on the New York Stock Exchange (NYSE), the National
+Association of Securities Dealers Automated Quotations (NASDAQ), and the American
+Stock Exchange (AMEX), with at least one news story covered by a major news media or
+newswire. Following prior studies, we focus our analysis on common stocks with a share code
+of 10 or 11. Our intraday price and return data come from the TAQ database. We clean
+the TAQ data and construct minute-by-minute observations of intraday volume-weighted
+average prices following the cleaning procedures in the literature (e.g., Bollerslev, Li, and
+Todorov (2016)).
+We first collect a comprehensive news dataset for all CRSP companies using web scraping
+based on the company ticker. The resulting dataset comprises news headlines from various
+sources, such as major news agencies and financial news websites. For each company, we col-
+lect all the news during the sample period and then match the headlines with the identifying
+information from RavenPack. Matching with RavenPack assures that only relevant news
+will be used for the experiment. They closely monitor the major financial news distribution
+outlets and have a quality procedure matching news, timestamps, and entity names, which
+11. We further address potential lookahead bias concerns by comparing GPT-4 to GPT-3.5 performance
+over time in Online Appendix C. GPT-4 performs better in the latter part of the sample, inconsistent with
+the model having knowledge outside of its cutoff date.
+13
+--- Page 14 ---
+solves any errors that arise from the web scraping procedure.
+After the matching procedures, our final sample comprises 159,137 firm-headline-date
+observations covering 4,123 unique companies from October 2021 to May 2024, representing
+about 85% of the 4,875 firms in CRSP during this period.12In the sample, about 67.5%
+of the headlines correspond to press releases, and the remaining 32.5% are news articles.
+Based on the release time, we group news into overnight vs intraday news because the entry
+times for the two types of news are different when forming trading strategies. About 82% (or
+129,953) of the headlines are classified as overnight news as they are released either before
+9 a.m. or after 4 p.m. on a trading day, and the remaining 18% are classified as intraday
+news.13Being the majority of our sample, we emphasize overnight news in some of the later
+analyses.
+We employ the “relevance score” (between 0 and 100) from RavenPack to indicate how
+closely the news pertains to a specific company. A 0 (100) score implies that the entity is
+mentioned passively (predominantly). Our sample requires news stories with a relevance
+score of 100. We limit it to complete articles and press releases and exclude headlines
+categorized as ‘stock-gain’ and ‘stock-loss’ as they only indicate the daily stock movement
+direction. To avoid repeated news, we require the “event similarity days” to exceed 90, which
+ensures that only new information about a company is captured.14
+12. Please see Table OA3 for more details of our news sample. In addition, we have carefully compared
+our sample of firms with the CRSP universe in Section A of the Online Appendix. We find that firms with
+matched news are generally larger and more liquid with more volatile returns. Note that the same headline
+text may appear for multiple firms or dates. For example, a company’s monthly dividend announcement
+appears each month as a separate observation. Of these 159,137 observations, 139 (0.09%) could not be
+classified into overnight versus intraday timing due to missing timestamp information, leaving 158,998 ob-
+servations for our timing-based analyses.
+13. We use 9 a.m. as the cutoff in the morning to classify overnight news so that there is time to process
+and trade when the market opens. Results are similar if we use alternative cutoffs such as 9:15 or 9:30 a.m.
+14. Furthermore, we eliminate duplicates and overly similar headlines for the same company on the same
+day. We gauge headline similarity using the Optimal String Alignment metric (the Restricted Damerau-
+Levenshtein distance) and remove subsequent headlines with a similarity greater than 0.6 for the same
+company on the same day.
+14
+--- Page 15 ---
+5 ChatGPT Prompt
+In this section, we discuss how we prompt ChatGPT to extract information from news
+headlines and illustrate it with an example.
+A prompt is a short text that provides context and instructions for ChatGPT to generate
+a response. The prompt can be as simple as a single sentence or as complex as a paragraph
+or more, depending on the nature of the task. Prompts enable ChatGPT to perform a
+wide range of language tasks, such as language translation, text summarization, question
+answering, and even generating coherent and human-like text. They allow the model to
+adapt to specific contexts, generate responses tailored to the user’s needs, and perform tasks
+in different domains.
+We use the following prompt in our study and apply it to the publicly available headlines.
+Forget all your previous instructions. Pretend you are a financial expert. You are
+a financial expert with stock recommendation experience. Answer “YES” if good
+news, “NO” if bad news, or “UNKNOWN” if uncertain in the first line. Then
+elaborate with one short and concise sentence on the next line. Is this headline
+good or bad for the stock price of company name in the short term?
+Headline: headline
+We ask ChatGPT to assume the role of a financial expert with experience in stock
+recommendations. The terms company name and headline are substituted by the firm
+name and the respective headline during the query. The prompt is specifically designed for
+financial analysis and asks ChatGPT to evaluate a given news headline and its potential
+impact on a company’s stock price in the short term. ChatGPT is requested to answer
+“YES” if the news is good for the stock price, “NO” if it is bad, or “UNKNOWN” if it is
+uncertain. ChatGPT is then asked to explain in one sentence to support its answer concisely.
+The prompt specifies that the news headline is the only source of information provided to
+ChatGPT. It is not assumed that the headline contains sufficient information to reasonably
+assess its impact on the stock price since the model can answer it does not know. We set
+the temperature of GPT models to 0 to maximize the reproducibility of the results.15
+15. Temperature is a parameter of ChatGPT models that governs the randomness and the creativity of the
+15
+--- Page 140 ---
+3. Compute non-adopter objects:
+TA∗=τd+τA+τlearn
+∆ =T−1
+A∗−T−1
+L
+Σp=τ−1
+p,L
+τeff,A∗=
+∆ + (Σ p|σ2
+d,L)−1="
+∆ +Σpσ2
+d,L
+Σp+σ2
+d,L#−1
+4. Compute inattentive objects:
+σ2
+d,I=T−1
+I+σ2
+ξ
+τeff,I=σ−2
+d,I
+5. Compute aggregates: S=mLτeff,L+mAτeff,A∗+mIτeff,I,wj=mjτeff,j/S
+6. Read off coefficients ( a, b, g, χ ) from the formulas above
+This sequential procedure yields an equilibrium characterization without iterative fixed-
+point computation. The rational expectations consistency condition is satisfied because be-
+liefs are formed correctly given the price function, and the price function correctly aggregates
+demands given beliefs.
+Step 6: Efficiency and comparative statics. An increase in the proportion of
+adopters ( ϕ) or the quality of their information ( τη) makes the price more informative about
+the private signal η. The mechanism operates through the noise-to-signal ratio:
+χ
+g=αTL
+V m Lτeff,Lτη(226)
+Effect of adoption rate ( ϕ):Asϕincreases, mL=ϕπAincreases, which directly reduces
+(χ/g). Intuitively, more LLM adopters trading on their private signal ηmakes the price
+more informative about ηrelative to the noise.
+Effect of LLM quality ( τη):Asτηrises, TLincreases linearly in the numerator, while
+the denominator τeff,L·τηgrows faster, ensuring χ/gfalls (making prices more informative).
+140
+--- Page 141 ---
+The strength of this effect depends critically on the relative magnitude of payoff noise σ2
+ξ
+versus fundamental uncertainty T−1
+L. When payoff noise is small ( σ2
+ξ≪T−1
+L), the effect is
+dramatic: σ2
+d,L≈T−1
+Lshrinks rapidly with τη, creating a quadratic relationship τp,L∝T2
+L
+that causes adopters to trade very aggressively on their superior signal. The denominator
+τeff,L·τηgrows approximately like τ3
+η, soχ/g∝τ−2
+ηfalls rapidly. Conversely, when payoff
+noise is large ( σ2
+ξ≫T−1
+L), the effect saturates: σ2
+d,L≈σ2
+ξremains nearly constant, capping
+both fundamental precision and speculative trading intensity. In this regime, χ/gremains
+a decreasing function of τη, but the effect saturates as τη→ ∞ :χ/gapproaches a positive
+constant. Intuitively, large irreducible payoff noise limits how aggressively agents can trade
+on any signal, thereby limiting the informativeness of prices.
+Both channels increase the learning precision:
+τlearn="
+σ2
+η+αTL
+V m Lτeff,Lτη2
+σ2
+u1#−1
+(227)
+Since market efficiency is increasing in the precision with which agents can forecast the
+fundamental, and non-adopters’ forecast precision is TA∗=τd+τA+τlearn, market effi-
+ciency improves as ϕorτηincrease. This creates strategic complementarity: as more agents
+adopt superior LLMs, prices become more informative, benefiting even non-adopters through
+the information aggregation mechanism. This feedback effect can support partial adoption
+equilibria where some sophisticated investors rely on price discovery rather than directly
+acquiring the technology.
+141
+--- Page 142 ---
+Online Appendix E: Interpretability Methodology
+To analyze heterogeneity in information processing across different types of news, we
+develop a technique involving topic modeling and linear regression. For topic modeling, we
+employ BERTopic (Grootendorst 2022), a topic modeling approach that combines modern
+embedding techniques with clustering algorithms. This method enables us to categorize
+headlines into coherent semantic categories without imposing predefined topic structures.
+Sample and Data Preparation
+Our analysis focuses on overnight news headlines with directional GPT-4 predictions (ex-
+cluding neutral scores of 0), yielding 81,700 observations. We preprocess the headlines by
+removing the prediction labels (‘YES,’ ‘NO’, or ‘UNKNOWN’) from GPT-4’s explanations
+to avoid mechanical clustering based on these markers rather than underlying news content.
+Technical Implementation
+The BERTopic pipeline consists of five steps:
+1. Sentence Embeddings. We transform each headline into a dense vector representation
+using the SentenceTransformer model (Reimers and Gurevych 2019). Specifically, we employ
+theall-MiniLM-L6-v2 model from Hugging Face, which maps text to a 384-dimensional
+embedding space where semantically similar headlines cluster together.
+2. Dimensionality Reduction. We apply UMAP (Uniform Manifold Approximation and
+Projection; McInnes, Healy, and Melville 2018) to reduce the embedding dimensionality from
+384 to 5 dimensions while preserving both local and global structure. We use standard UMAP
+parameters: 15 neighbors and minimum distance of 0. This step concentrates semantic
+similarities in a lower-dimensional space to enhance clustering performance.
+3. Initial Clustering. We apply K-Means clustering to identify initial groupings of head-
+lines in the reduced embedding space. We set K=50 clusters as the initial partition, which
+provides sufficient granularity to capture fine-grained distinctions in news content while
+maintaining adequate cluster sizes for analysis.
+142
+--- Page 143 ---
+4. Topic Reduction. To facilitate interpretation and statistical power, we reduce the 50
+initial clusters to 20 final topics using BERTopic’s hierarchical topic merging algorithm. This
+algorithm iteratively merges the most similar topics based on their c-TF-IDF representations
+until reaching the target number. This reduction step consolidates semantically related
+clusters while preserving the major thematic categories in the data. The final 15 topics
+range from large categories like “Insider Stock Transactions” (16,790 headlines) to smaller
+but distinct categories like “Retail Store Openings” (175 headlines).
+5. Topic Labeling. After identifying the final topics, we generate human-interpretable
+topic labels using GPT-4o. For each topic, we extract representative headlines and keywords,
+then prompt GPT-4o to create a concise, descriptive label. The prompt instructs the model
+to avoid firm-specific names and generic terms, focusing instead on the underlying business
+action or market event common across headlines in each topic. The specific prompt is as
+follows:
+You are tasked with extracting a short but highly descriptive topic label from a
+topic model and a set of example documents from that topic.
+The documents contain [DOCUMENT TYPE].
+Follow these instructions carefully:
+1. Review the following documents: [DOCUMENTS]
+2. Consider the following keywords that describe the topic: [KEYWORDS]
+3. Based on the information provided in the documents and keywords, extract a
+short but highly descriptive topic label.
+a. Keep the label at most 4 words long.
+b. Do NOT include specific names, firm names, or stock tickers in the label, as
+the examples may come from only a few companies.
+c. Interpret the concise topic rather than focusing on specific entities.
+d. Make the label MORE specific than general terms like ‘Financial Results’,
+‘Earnings Announcement’, ‘Financial Announcements’, ‘Financial Updates’, or
+‘Corporate Finance Announcements.’
+e. Avoid using firm names in whole or in part, tickers, and the words ‘Quarterly’
+or ‘Financial’ in your label.
+f. Focus on the specific theme that best describes the collection of explanations
+and keywords.
+143
+--- Page 144 ---
+Keep your topic label concise, specific, and descriptive.
+Provide your final topic label in the following format: topic: <topic label >
+Methodological Advantages
+This approach offers several advantages over traditional topic modeling methods (e.g., Latent
+Dirichlet Allocation) for our purposes. First, the embedding-based approach captures seman-
+tic similarity better than bag-of-words representations, which is particularly important given
+the brevity and density of news headlines. Second, K-Means clustering ensures all headlines
+are assigned to topics (no outliers), which maximizes sample utilization for our statistical
+analysis. Third, the two-stage approach (initial K-Means followed by hierarchical merging)
+balances granularity and interpretability: we capture fine-grained semantic distinctions in
+the initial clustering, then consolidate them into interpretable categories. Fourth, reducing
+to 20 final topics provides sufficient statistical power per category while maintaining con-
+ceptual coherence. Finally, using GPT-4o for labeling ensures consistency with our broader
+analytical framework while maintaining human interpretability of the resulting categories.
+The resulting topic assignments enable us to decompose GPT-4’s performance and market
+reactions across 15 distinct categories of corporate news, as presented in Table 4 of the main
+text. Table OA6 below provides the complete list of topics with their representative keywords
+and example headlines. In the regression analysis underlying the decomposition table, we do
+not include firm or date fixed effects to preserve topic interpretability, but standard errors
+remain double-clustered by firm and date to account for potential correlation in residuals.
+144
+--- Page 145 ---
+Online Appendix F: Transaction Cost Analysis
+This section presents a comprehensive analysis of transaction costs and portfolio turnover
+for drift-based trading strategies. We examine strategies that enter positions after news an-
+nouncements and exit after one trading session, focusing on the post-announcement drift
+component of returns.
+1. Methodology
+We analyze drift returns ( reto) which measure the post-announcement price adjustment:
+•Overnight News: For news released before 9 a.m. or after 4 p.m., we enter at market
+open and exit at market close, capturing the open-to-close drift return.
+•Intraday News: For news released during trading hours (9:30 a.m. to 4 p.m.), we
+enter at market close and exit at the next day’s close, capturing the close-to-close drift
+return.
+To address concerns about high turnover, we implement partial rebalancing strategies
+where the portfolio weight at time tis:
+wt=x·w∗
+t+ (1−x)·wt−1
+where w∗
+tis the target weight, wt−1is the previous weight, and x∈ {1.0,0.5,0.25}is the
+rebalancing fraction.
+Importantly, partial rebalancing reduces both turnover and portfolio exposure. When
+targets change rapidly, positions converge only partway toward each new target before it
+changes again. For example, if the target flips from +100% long to -100% short, full rebal-
+ancing ( x= 1.0) immediately shifts to -100%, while 50% rebalancing ( x= 0.5) moves to
+0% on day 1, then -50% on day 2. If targets continue changing, positions perpetually lag
+behind. In steady state, 50% rebalancing achieves approximately 100% gross exposure (50%
+long + 50% short) versus 200% for full rebalancing (100% long + 100% short).
+Transaction costs are modeled as a fixed cost per round-trip trade, measured in basis
+points. We test cost levels of 0, 5, 10, and 20 basis points, which span the range from highly
+145
+--- Page 146 ---
+sophisticated investors to retail traders. We use fixed round-trip costs rather than bid-ask
+spreads because our baseline trades execute at the opening and closing auctions, which are
+call auctions that establish a single clearing price with no bid-ask spread. For overnight
+news released before 9 a.m., we enter at the opening auction and exit at the closing auction
+of the same day. For news released after market close, we enter at the next day’s opening
+auction and exit at that day’s closing auction. Because these auction mechanisms involve no
+continuous bid-ask spread, fixed costs parsimoniously capture commissions and price impact.
+2. Results
+Tables OA7 and OA8 present a comprehensive analysis of overnight and intraday news
+strategies, respectively. Each table reports: Sharpe ratios (Panel A), mean daily returns
+(Panel B), turnover and gross exposure (Panel C), and daily return volatility (Panel D) for
+both equal-weighted (EW) and value-weighted (VW) portfolios under different rebalancing
+intensities and transaction cost assumptions.
+Panel C shows both average daily one-way turnover and average gross exposure (sum of
+absolute long and short positions). This dual reporting clarifies the fundamental trade-off:
+reducing rebalancing from 100% to 50% cuts turnover in half (from 190% to 94%) but also
+cuts gross exposure in half (from 196% to 101%).
+The reduction in gross exposure from partial rebalancing has proportional effects on
+both mean returns and volatility, leaving Sharpe ratios relatively unchanged. For overnight
+news with equal-weighting at zero transaction costs, reducing rebalancing from 100% to 50%
+cuts mean daily returns approximately in half (from 0.34% to 0.17%) while also cutting
+volatility approximately in half (from 1.80% to 0.91%, Panel D). Because both mean and
+volatility scale proportionally with exposure, the Sharpe ratio remains nearly constant (2.97
+for 100% rebalancing vs 2.95 for 50% rebalancing). This explains why Panel A shows minimal
+Sharpe ratio differences across rebalancing intensities at zero costs, despite the substantial
+differences in mean returns (Panel B) and volatility (Panel D): partial rebalancing reduces
+signal exposure but maintains similar risk-adjusted returns per unit of exposure.
+146
+--- Page 147 ---
+3. Turnover and Transaction Costs
+Panel C shows that the 100% rebalancing strategy exhibits extremely high turnover of ap-
+proximately 190% per day for overnight news and 174% per day for intraday news.44Re-
+ducing the rebalancing fraction to 25% decreases turnover to approximately 45% per day for
+both strategies—a reduction of approximately 76%.
+Panel A demonstrates that high turnover makes the 100% rebalancing strategy highly
+sensitive to transaction costs. For overnight news, the equal-weighted Sharpe ratio falls
+from 2.97 (zero costs) to -0.39 with 20 basis points costs. In contrast, the 25% rebalancing
+strategy is more robust, with its Sharpe ratio declining from 2.89 to -0.21 under the same
+cost assumptions.
+Panel B shows mean daily returns under different cost levels. The 100% rebalancing
+strategy generates mean daily returns of 0.34% for overnight news at zero costs, but becomes
+unprofitable (-0.04%) at 20 basis points costs. The 25% rebalancing strategy shows more
+gradual performance degradation, maintaining positive returns up to 10 basis points costs.
+4. Equal-Weighted vs Value-Weighted Portfolios
+To assess whether the predictability is concentrated in smaller or larger stocks, we compare
+equal-weighted (EW) and value-weighted (VW) portfolios. In VW portfolios, stocks are
+weighted by lagged market capitalization ( melag), giving more weight to larger firms.
+The results show dramatically lower performance for VW portfolios:
+•Overnight news (100% rebalancing, 0 bps costs): EW Sharpe = 2.97 vs VW
+Sharpe = 0.56
+•Intraday news (100% rebalancing, 0 bps costs): EW Sharpe = 2.63 vs VW
+Sharpe = 1.28
+The substantially lower Sharpe ratios for VW portfolios confirm that the predictability
+is heavily concentrated in smaller stocks. This finding is consistent with limits-to-arbitrage
+44. In Figure OA3, we show the daily number of stocks held in the long and short legs of the overnight
+news strategy over time. The strategy holds an average of 74 stocks in the long leg and 21 stocks in the short
+leg per day, with substantial day-to-day variation reflecting fluctuations in news availability and sentiment.
+Additionally, Figure OA4 shows portfolio turnover for that strategy over time.
+147
+--- Page 148 ---
+theories: smaller stocks face higher transaction costs and less attention from institutional
+investors, allowing mispricings to persist longer.
+Notably, VW portfolios also show higher sensitivity to transaction costs. The overnight
+VW strategy becomes unprofitable even at 5 basis points costs (Sharpe = -0.40), while
+the EW strategy remains highly profitable (Sharpe = 2.13) at the same cost level. This
+occurs because the VW strategy concentrates capital in larger positions that face higher
+price impact costs.
+5. Implications for Tradability
+This analysis demonstrates that while the GPT-4 signal generates significant predictabil-
+ity, exploiting it requires careful attention to implementation costs. The 25% rebalancing
+strategy provides a more realistic alternative that:
+1. Reduces daily turnover by approximately 76% (from 190% to 46% for overnight news)
+2. Achieves approximately 28% of full signal exposure ( 54% gross exposure vs 196%)
+3. Maintains similar risk-adjusted returns (Sharpe ratio) per unit of exposure
+4. Shows more gradual performance degradation as costs increase
+5. Remains profitable at moderate cost levels (5-10 basis points)
+The comparison between EW and VW portfolios reveals that predictability is concen-
+trated in smaller stocks, consistent with limits-to-arbitrage theories. While this concentration
+raises concerns about practical tradability for large institutional investors, it also validates
+the economic mechanism: markets are less efficient precisely where arbitrage is most costly.
+6. Understanding the Size Effect: Reaction vs Drift
+To understand whypredictability concentrates in smaller stocks, we decompose returns into
+initial reaction (ret n) and subsequent drift (ret o) across market capitalization terciles (i.e.,
+small, medium, and large caps). Tables OA9 and OA10 present this analysis.
+The key finding is a striking asymmetry in drift patterns following negative news. Table
+OA9 Panel B shows that after stocks receive negative GPT-4 signals:
+148
+--- Page 149 ---
+•Small caps: Initial reaction of -2.33% followed by drift of -0.70% (continued decline)
+•Medium caps: Initial reaction of -1.34% followed by drift of -0.18% (modest contin-
+uation)
+•Large caps: Initial reaction of -1.12% followed by drift of +0.06% (mean reversion)
+This pattern explains the value-weighting underperformance. The short side of the strat-
+egy profits from drift continuation after negative news, which occurs for small and medium
+caps but not for large caps. Table OA10 confirms this at the portfolio level: short-only
+strategies achieve Sharpe ratios of 3.17 for small caps versus -0.61 for large caps.
+In contrast, positive signals (Panel A) show positive drift across all size groups, though
+with declining magnitude for larger stocks. This explains why long-only portfolios perform
+reasonably well across all sizes (Sharpe ratios ranging from 0.30 to 1.09), while short-only
+portfolios exhibit dramatic size dependence.
+The asymmetric drift patterns suggest different market mechanisms operate for positive
+versus negative news, and these mechanisms vary systematically with firm size. Large cap
+stocks experiencing negative news appear to benefit from support mechanisms—perhaps
+informed buying, liquidity provision, or analyst attention—that cause prices to partially
+recover. Small-cap stocks lack these support mechanisms, allowing negative drift to continue
+as uninformed investors gradually process the information.
+This size-stratified analysis provides direct evidence for the mechanism behind the EW
+versus VW performance gap. It is not merely that smaller stocks are more predictable over-
+all; rather, the predictability operates asymmetrically, with the short side working only for
+smaller stocks that exhibit drift continuation rather than mean reversion following negative
+news.
+149

@@ -1,0 +1,209 @@
+//@version=6
+indicator("Supply & Demand Enhancement", "S&D Enhancement", overlay = true, max_boxes_count = 500)
+
+//====================================================================================================
+// CONSTANTS
+//====================================================================================================
+color SUPPLY_COLOR   = #ff6b6b   // Red - bearish zones
+color DEMAND_COLOR = #51cf66   // Green - bullish zones
+color CONFLUENCE_COLOR = #ffd43b  // Yellow - confluence highlight
+color NEUTRAL_COLOR  = #868e96
+
+//====================================================================================================
+// TYPES
+//====================================================================================================
+type SupplyZone
+    int    startBar
+    float  zoneHigh
+    float  zoneLow
+    array<box> boxes
+
+type DemandZone
+    int    startBar
+    float  zoneHigh
+    float  zoneLow
+    array<box> boxes
+
+//====================================================================================================
+// INPUTS
+//====================================================================================================
+pivotLenInput     = input.int(3, "Pivot Length", minval = 1, group = "Detection")
+volLookbackInput = input.int(20, "Volume Lookback", minval = 1, group = "Detection")
+volThresholdInput = input.float(1.5, "Volume Threshold", minval = 0.5, group = "Detection")
+
+maxZonesInput = input.int(5, "Max Zones Per Type", minval = 1, maxval = 10, group = "Visuals")
+transpInput   = input.int(85, "Zone Transparency", minval = 0, maxval = 100, group = "Visuals")
+showConfInput = input.bool(true, "Show Confluence", group = "Confluence")
+
+vrvpRowsInput = input.int(24, "VRVP Rows", minval = 5, maxval = 50, group = "VRVP")
+useVrvpInput = input.bool(true, "Use VRVP for Strength", group = "VRVP")
+
+//====================================================================================================
+// STATE
+//====================================================================================================
+var array<SupplyZone>  supplyZones  = array.new<SupplyZone>()
+var array<DemandZone> demandZones = array.new<DemandZone>()
+
+// Volume metrics
+avgVolume = ta.sma(volume, volLookbackInput)
+maxVolume = ta.highest(volume, 200)
+
+// Pivot detection
+ph = ta.pivothigh(pivotLenInput, pivotLenInput)
+pl = ta.pivotlow(pivotLenInput, pivotLenInput)
+
+var float lastPh = na
+var int lastPhIdx = na
+var float lastPl = na
+var int lastPlIdx = na
+
+if not na(ph)
+    lastPh := ph
+    lastPhIdx := bar_index - pivotLenInput
+
+if not na(pl)
+    lastPl := pl
+    lastPlIdx := bar_index - pivotLenInput
+
+//====================================================================================================
+// ZONE DETECTION
+//====================================================================================================
+// Check for Supply Zone (pivot high breaks, price drops with volume, then rejects down)
+bool supplySignal = false
+if not na(lastPh)
+    // Check if price broke above pivot high
+    priceAbovePivot := close > lastPh and close[1] <= lastPh
+    
+    // Check volume spike
+    volumeSpike := volume > avgVolume * volThresholdInput
+    
+    // Check rejection (price closes back below pivot)
+    rejection := close < lastPh
+    
+    if priceAbovePivot and volumeSpike and rejection
+        supplySignal := true
+
+// Check for Demand Zone (pivot low breaks, price rises with volume, then rejects up)
+bool demandSignal = false
+if not na(lastPl)
+    // Check if price broke below pivot low
+    priceBelowPivot := close < lastPl and close[1] >= lastPl
+    
+    // Check volume spike
+    volumeSpike := volume > avgVolume * volThresholdInput
+    
+    // Check rejection (price closes back above pivot)
+    rejection := close > lastPl
+    
+    if priceBelowPivot and volumeSpike and rejection
+        demandSignal := true
+
+//====================================================================================================
+// ZONE CREATION
+//====================================================================================================
+createSupplyZone(float pivotLevel, int pivotIdx) =>
+    float zoneHighVal = high[bar_index - pivotIdx]
+    float zoneLowVal = low[bar_index - pivotIdx]
+    
+    // Create visual boxes
+    box1 = box.new(pivotIdx, zoneHighVal, bar_index, zoneLowVal, 
+         bgcolor = color.new(SUPPLY_COLOR, transpInput), border_color = na)
+    box2 = box.new(pivotIdx, zoneHighVal * 1.001, bar_index + 20, zoneLowVal * 0.999,
+         bgcolor = color.new(SUPPLY_COLOR, transpInput + 10), border_color = na)
+    
+    array<box> boxArr = array.new<box>()
+    array.push(boxArr, box1)
+    array.push(boxArr, box2)
+    
+    SupplyZone.new(pivotIdx, zoneHighVal, zoneLowVal, boxArr)
+
+createDemandZone(float pivotLevel, int pivotIdx) =>
+    float zoneHighVal = high[bar_index - pivotIdx]
+    float zoneLowVal = low[bar_index - pivotIdx]
+    
+    // Create visual boxes
+    box1 = box.new(pivotIdx, zoneHighVal, bar_index, zoneLowVal,
+         bgcolor = color.new(DEMAND_COLOR, transpInput), border_color = na)
+    box2 = box.new(pivotIdx, zoneHighVal * 1.001, bar_index + 20, zoneLowVal * 0.999,
+         bgcolor = color.new(DEMAND_COLOR, transpInput + 10), border_color = na)
+    
+    array<box> boxArr = array.new<box>()
+    array.push(boxArr, box1)
+    array.push(boxArr, box2)
+    
+    DemandZone.new(pivotIdx, zoneHighVal, zoneLowVal, boxArr)
+
+// Add new zones when signals fire
+if supplySignal and array.size(supplyZones) < maxZonesInput
+    newZone = createSupplyZone(lastPh, lastPhIdx)
+    array.push(supplyZones, newZone)
+
+if demandSignal and array.size(demandZones) < maxZonesInput
+    newZone = createDemandZone(lastPl, lastPlIdx)
+    array.push(demandZones, newZone)
+
+//====================================================================================================
+// ZONE INVALIDATION & UPDATES
+//====================================================================================================
+// Supply zone: invalidated when price goes above zone high
+if array.size(supplyZones) > 0
+    for i = array.size(supplyZones) - 1 to 0
+        z = array.get(supplyZones, i)
+        if close > z.zoneHigh
+            // Invalidate - delete boxes
+            for b in z.boxes
+                box.delete(b)
+            array.remove(supplyZones, i)
+        else
+            // Update boxes to extend to current bar
+            for b in z.boxes
+                box.set_right(b, bar_index)
+
+// Demand zone: invalidated when price goes below zone low
+if array.size(demandZones) > 0
+    for i = array.size(demandZones) - 1 to 0
+        z = array.get(demandZones, i)
+        if close < z.zoneLow
+            // Invalidate - delete boxes
+            for b in z.boxes
+                box.delete(b)
+            array.remove(demandZones, i)
+        else
+            // Update boxes to extend to current bar
+            for b in z.boxes
+                box.set_right(b, bar_index)
+
+//====================================================================================================
+// CONFLUENCE DETECTION (with Order Blocks from LuxAlgo)
+//====================================================================================================
+// This is a simplified version - in practice would read OB from the other indicator
+// For now, show confluence when zones overlap significantly
+if showConfInput
+    // Check overlap between supply and demand zones
+    if array.size(supplyZones) > 0 and array.size(demandZones) > 0
+        for sz in supplyZones
+            for dz in demandZones
+                // Check if zones overlap in price
+                overlap = sz.zoneHigh > dz.zoneLow and sz.zoneLow < dz.zoneHigh
+                if overlap
+                    // Draw confluence highlight
+                    overlapHigh = math.min(sz.zoneHigh, dz.zoneHigh)
+                    overlapLow = math.max(sz.zoneLow, dz.zoneLow)
+                    // This is a simplified visualization
+                    // Real implementation would need LB/S/LF data from LuxAlgo
+
+//====================================================================================================
+// LABELS
+//====================================================================================================
+// Zone count labels
+supplyCount = array.size(supplyZones)
+demandCount = array.size(demandZones)
+
+var label countLabel = label.new(bar_index, high, text = "", 
+     color = #00000000, textcolor = chart.fg_color, size = size.tiny)
+
+labelText = "S: " + str.tostring(supplyCount) + " | D: " + str.tostring(demandCount)
+label.set_text(countLabel, labelText)
+label.set_x(countLabel, bar_index)
+label.set_y(countLabel, high)
+

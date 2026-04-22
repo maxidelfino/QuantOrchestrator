@@ -1,0 +1,1424 @@
+
+--- Page 1 ---
+151 Trading Strategies
+Zura Kakushadzexy1and Juan Andr es Serur]2
+xQuantigicrSolutions LLC
+1127 High Ridge Road #135, Stamford, CT 069053
+yFree University of Tbilisi, Business School & School of Physics
+240, David Agmashenebeli Alley, Tbilisi, 0159, Georgia
+]Universidad del CEMA
+Av. C ordoba 374, C1054AAP, Ciudad de Buenos Aires, Argentina
+(August 17, 2018)
+ZK: To my mother Mila and my children Mirabelle and Maximilien
+JAS: To my parents, Claudio and Andrea, and my brother Emiliano
+Abstract
+We provide detailed descriptions, including over 550 mathematical formu-
+las, for over 150 trading strategies across a host of asset classes (and trading
+styles). This includes stocks, options, xed income, futures, ETFs, indexes,
+commodities, foreign exchange, convertibles, structured assets, volatility (as
+an asset class), real estate, distressed assets, cash, cryptocurrencies, miscel-
+lany (such as weather, energy, ination), global macro, infrastructure, and tax
+arbitrage. Some strategies are based on machine learning algorithms (such as
+articial neural networks, Bayes, k-nearest neighbors). We also give: source
+code for illustrating out-of-sample backtesting with explanatory notes; around
+2,000 bibliographic references; and over 900 glossary, acronym and math def-
+initions. The presentation is intended to be descriptive and pedagogical.
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights Reserved.
+1Zura Kakushadze, Ph.D., is the President and CEO of QuantigicrSolutions LLC, and a Full
+Professor at Free University of Tbilisi. Email: zura@quantigic.com
+2Juan Andr es Serur, M.Fin., is an Assistant Professor at University of CEMA. Email:
+jaserur15@ucema.edu.ar
+3DISCLAIMER: This address is used by the corresponding author for no purpose other than
+to indicate his professional aliation as is customary in publications. In particular, the contents
+of this paper are not intended as an investment, legal, tax or any other such advice, and in no
+way represent views of QuantigicrSolutions LLC, the website www.quantigic.com or any of their
+other aliates.
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 2 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+Contents
+Praises of 151 Trading Strategies 7
+Author Biographies 9
+Preface (by Zura Kakushadze) 10
+1 Introduction and Summary 15
+2 Options 17
+2.1 Generalities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+2.2 Strategy: Covered call . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+2.3 Strategy: Covered put . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+2.4 Strategy: Protective put . . . . . . . . . . . . . . . . . . . . . . . . . 19
+2.5 Strategy: Protective call . . . . . . . . . . . . . . . . . . . . . . . . . 19
+2.6 Strategy: Bull call spread . . . . . . . . . . . . . . . . . . . . . . . . 19
+2.7 Strategy: Bull put spread . . . . . . . . . . . . . . . . . . . . . . . . 20
+2.8 Strategy: Bear call spread . . . . . . . . . . . . . . . . . . . . . . . . 20
+2.9 Strategy: Bear put spread . . . . . . . . . . . . . . . . . . . . . . . . 20
+2.10 Strategy: Long synthetic forward . . . . . . . . . . . . . . . . . . . . 21
+2.11 Strategy: Short synthetic forward . . . . . . . . . . . . . . . . . . . . 21
+2.12 Strategy: Long combo . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+2.13 Strategy: Short combo . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+2.14 Strategy: Bull call ladder . . . . . . . . . . . . . . . . . . . . . . . . . 22
+2.15 Strategy: Bull put ladder . . . . . . . . . . . . . . . . . . . . . . . . . 23
+2.16 Strategy: Bear call ladder . . . . . . . . . . . . . . . . . . . . . . . . 23
+2.17 Strategy: Bear put ladder . . . . . . . . . . . . . . . . . . . . . . . . 23
+2.18 Strategy: Calendar call spread . . . . . . . . . . . . . . . . . . . . . . 24
+2.19 Strategy: Calendar put spread . . . . . . . . . . . . . . . . . . . . . . 24
+2.20 Strategy: Diagonal call spread . . . . . . . . . . . . . . . . . . . . . . 25
+2.21 Strategy: Diagonal put spread . . . . . . . . . . . . . . . . . . . . . . 25
+2.22 Strategy: Long straddle . . . . . . . . . . . . . . . . . . . . . . . . . 26
+2.23 Strategy: Long strangle . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+2.24 Strategy: Long guts . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+2.25 Strategy: Short straddle . . . . . . . . . . . . . . . . . . . . . . . . . 27
+2.26 Strategy: Short strangle . . . . . . . . . . . . . . . . . . . . . . . . . 27
+2.27 Strategy: Short guts . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+2.28 Strategy: Long call synthetic straddle . . . . . . . . . . . . . . . . . . 28
+2.29 Strategy: Long put synthetic straddle . . . . . . . . . . . . . . . . . . 28
+2.30 Strategy: Short call synthetic straddle . . . . . . . . . . . . . . . . . 28
+2.31 Strategy: Short put synthetic straddle . . . . . . . . . . . . . . . . . 29
+2.32 Strategy: Covered short straddle . . . . . . . . . . . . . . . . . . . . 29
+2.33 Strategy: Covered short strangle . . . . . . . . . . . . . . . . . . . . . 29
+1
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 3 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+2.34 Strategy: Strap . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+2.35 Strategy: Strip . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+2.36 Strategy: Call ratio backspread . . . . . . . . . . . . . . . . . . . . . 30
+2.37 Strategy: Put ratio backspread . . . . . . . . . . . . . . . . . . . . . 31
+2.38 Strategy: Ratio call spread . . . . . . . . . . . . . . . . . . . . . . . . 31
+2.39 Strategy: Ratio put spread . . . . . . . . . . . . . . . . . . . . . . . . 31
+2.40 Strategy: Long call buttery . . . . . . . . . . . . . . . . . . . . . . . 32
+2.40.1 Strategy: Modied call buttery . . . . . . . . . . . . . . . . . 32
+2.41 Strategy: Long put buttery . . . . . . . . . . . . . . . . . . . . . . . 32
+2.41.1 Strategy: Modied put buttery . . . . . . . . . . . . . . . . . 33
+2.42 Strategy: Short call buttery . . . . . . . . . . . . . . . . . . . . . . 33
+2.43 Strategy: Short put buttery . . . . . . . . . . . . . . . . . . . . . . 33
+2.44 Strategy: \Long" iron buttery . . . . . . . . . . . . . . . . . . . . . 34
+2.45 Strategy: \Short" iron buttery . . . . . . . . . . . . . . . . . . . . . 34
+2.46 Strategy: Long call condor . . . . . . . . . . . . . . . . . . . . . . . . 34
+2.47 Strategy: Long put condor . . . . . . . . . . . . . . . . . . . . . . . . 35
+2.48 Strategy: Short call condor . . . . . . . . . . . . . . . . . . . . . . . . 35
+2.49 Strategy: Short put condor . . . . . . . . . . . . . . . . . . . . . . . . 35
+2.50 Strategy: Long iron condor . . . . . . . . . . . . . . . . . . . . . . . . 36
+2.51 Strategy: Short iron condor . . . . . . . . . . . . . . . . . . . . . . . 36
+2.52 Strategy: Long box . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+2.53 Strategy: Collar . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+2.54 Strategy: Bullish short seagull spread . . . . . . . . . . . . . . . . . . 37
+2.55 Strategy: Bearish long seagull spread . . . . . . . . . . . . . . . . . . 38
+2.56 Strategy: Bearish short seagull spread . . . . . . . . . . . . . . . . . 38
+2.57 Strategy: Bullish long seagull spread . . . . . . . . . . . . . . . . . . 39
+3 Stocks 40
+3.1 Strategy: Price-momentum . . . . . . . . . . . . . . . . . . . . . . . . 40
+3.2 Strategy: Earnings-momentum . . . . . . . . . . . . . . . . . . . . . . 41
+3.3 Strategy: Value . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+3.4 Strategy: Low-volatility anomaly . . . . . . . . . . . . . . . . . . . . 42
+3.5 Strategy: Implied volatility . . . . . . . . . . . . . . . . . . . . . . . . 43
+3.6 Strategy: Multifactor portfolio . . . . . . . . . . . . . . . . . . . . . . 43
+3.7 Strategy: Residual momentum . . . . . . . . . . . . . . . . . . . . . . 44
+3.8 Strategy: Pairs trading . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+3.9 Strategy: Mean-reversion { single cluster . . . . . . . . . . . . . . . . 46
+3.9.1 Strategy: Mean-reversion { multiple clusters . . . . . . . . . . 47
+3.10 Mean-reversion { weighted regression . . . . . . . . . . . . . . . . . . 49
+3.11 Strategy: Single moving average . . . . . . . . . . . . . . . . . . . . . 49
+3.12 Strategy: Two moving averages . . . . . . . . . . . . . . . . . . . . . 50
+3.13 Strategy: Three moving averages . . . . . . . . . . . . . . . . . . . . 51
+3.14 Strategy: Support and resistance . . . . . . . . . . . . . . . . . . . . 51
+2
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 4 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+3.15 Strategy: Channel . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+3.16 Strategy: Event-driven { M&A . . . . . . . . . . . . . . . . . . . . . 52
+3.17 Strategy: Machine learning { single-stock KNN . . . . . . . . . . . . 53
+3.18 Strategy: Statistical arbitrage { optimization . . . . . . . . . . . . . . 55
+3.18.1 Dollar-neutrality . . . . . . . . . . . . . . . . . . . . . . . . . 56
+3.19 Strategy: Market-making . . . . . . . . . . . . . . . . . . . . . . . . . 58
+3.20 Strategy: Alpha combos . . . . . . . . . . . . . . . . . . . . . . . . . 59
+3.21 A few comments . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60
+4 Exchange-traded funds (ETFs) 61
+4.1 Strategy: Sector momentum rotation . . . . . . . . . . . . . . . . . . 61
+4.1.1 Strategy: Sector momentum rotation with MA lter . . . . . . 62
+4.1.2 Strategy: Dual-momentum sector rotation . . . . . . . . . . . 62
+4.2 Strategy: Alpha rotation . . . . . . . . . . . . . . . . . . . . . . . . . 63
+4.3 Strategy: R-squared . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+4.4 Strategy: Mean-reversion . . . . . . . . . . . . . . . . . . . . . . . . . 64
+4.5 Strategy: Leveraged ETFs (LETFs) . . . . . . . . . . . . . . . . . . . 64
+4.6 Strategy: Multi-asset trend following . . . . . . . . . . . . . . . . . . 65
+5 Fixed Income 66
+5.1 Generalities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+5.1.1 Zero-coupon bonds . . . . . . . . . . . . . . . . . . . . . . . . 66
+5.1.2 Bonds with coupons . . . . . . . . . . . . . . . . . . . . . . . 66
+5.1.3 Floating rate bonds . . . . . . . . . . . . . . . . . . . . . . . . 67
+5.1.4 Swaps . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+5.1.5 Duration and convexity . . . . . . . . . . . . . . . . . . . . . . 68
+5.2 Strategy: Bullets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+5.3 Strategy: Barbells . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+5.4 Strategy: Ladders . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+5.5 Strategy: Bond immunization . . . . . . . . . . . . . . . . . . . . . . 70
+5.6 Strategy: Dollar-duration-neutral buttery . . . . . . . . . . . . . . . 71
+5.7 Strategy: Fifty-fty buttery . . . . . . . . . . . . . . . . . . . . . . 72
+5.8 Strategy: Regression-weighted buttery . . . . . . . . . . . . . . . . . 72
+5.8.1 Strategy: Maturity-weighted buttery . . . . . . . . . . . . . . 73
+5.9 Strategy: Low-risk factor . . . . . . . . . . . . . . . . . . . . . . . . . 73
+5.10 Strategy: Value factor . . . . . . . . . . . . . . . . . . . . . . . . . . 73
+5.11 Strategy: Carry factor . . . . . . . . . . . . . . . . . . . . . . . . . . 74
+5.12 Strategy: Rolling down the yield curve . . . . . . . . . . . . . . . . . 74
+5.13 Strategy: Yield curve spread (atteners & steepeners) . . . . . . . . . 75
+5.14 Strategy: CDS basis arbitrage . . . . . . . . . . . . . . . . . . . . . . 75
+5.15 Strategy: Swap-spread arbitrage . . . . . . . . . . . . . . . . . . . . . 76
+3
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 5 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+6 Indexes 76
+6.1 Generalities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
+6.2 Strategy: Cash-and-carry arbitrage . . . . . . . . . . . . . . . . . . . 77
+6.3 Strategy: Dispersion trading in equity indexes . . . . . . . . . . . . . 77
+6.3.1 Strategy: Dispersion trading { subset portfolio . . . . . . . . . 78
+6.4 Strategy: Intraday arbitrage between index ETFs . . . . . . . . . . . 79
+6.5 Strategy: Index volatility targeting with risk-free asset . . . . . . . . 80
+7 Volatility 80
+7.1 Generalities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 80
+7.2 Strategy: VIX futures basis trading . . . . . . . . . . . . . . . . . . . 81
+7.3 Strategy: Volatility carry with two ETNs . . . . . . . . . . . . . . . . 82
+7.3.1 Strategy: Hedging short VXX with VIX futures . . . . . . . . 82
+7.4 Strategy: Volatility risk premium . . . . . . . . . . . . . . . . . . . . 83
+7.4.1 Strategy: Volatility risk premium with Gamma hedging . . . . 83
+7.5 Strategy: Volatility skew { long risk reversal . . . . . . . . . . . . . . 84
+7.6 Strategy: Volatility trading with variance swaps . . . . . . . . . . . . 84
+8 Foreign Exchange (FX) 85
+8.1 Strategy: Moving averages with HP lter . . . . . . . . . . . . . . . . 85
+8.2 Strategy: Carry trade . . . . . . . . . . . . . . . . . . . . . . . . . . . 86
+8.2.1 Strategy: High-minus-low carry . . . . . . . . . . . . . . . . . 87
+8.3 Strategy: Dollar carry trade . . . . . . . . . . . . . . . . . . . . . . . 88
+8.4 Strategy: Momentum & carry combo . . . . . . . . . . . . . . . . . . 88
+8.5 Strategy: FX triangular arbitrage . . . . . . . . . . . . . . . . . . . . 89
+9 Commodities 89
+9.1 Strategy: Roll yields . . . . . . . . . . . . . . . . . . . . . . . . . . . 89
+9.2 Strategy: Trading based on hedging pressure . . . . . . . . . . . . . . 90
+9.3 Strategy: Portfolio diversication with commodities . . . . . . . . . . 90
+9.4 Strategy: Value . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 90
+9.5 Strategy: Skewness premium . . . . . . . . . . . . . . . . . . . . . . . 91
+9.6 Strategy: Trading with pricing models . . . . . . . . . . . . . . . . . 91
+10 Futures 92
+10.1 Strategy: Hedging risk with futures . . . . . . . . . . . . . . . . . . . 92
+10.1.1 Strategy: Cross-hedging . . . . . . . . . . . . . . . . . . . . . 93
+10.1.2 Strategy: Interest rate risk hedging . . . . . . . . . . . . . . . 93
+10.2 Strategy: Calendar spread . . . . . . . . . . . . . . . . . . . . . . . . 94
+10.3 Strategy: Contrarian trading (mean-reversion) . . . . . . . . . . . . . 95
+10.3.1 Strategy: Contrarian trading { market activity . . . . . . . . . 95
+10.4 Strategy: Trend following (momentum) . . . . . . . . . . . . . . . . . 96
+4
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 6 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+11 Structured Assets 97
+11.1 Generalities: Collateralized Debt Obligations (CDOs) . . . . . . . . . 97
+11.2 Strategy: Carry, equity tranche { index hedging . . . . . . . . . . . . 99
+11.3 Strategy: Carry, senior/mezzanine { index hedging . . . . . . . . . . 99
+11.4 Strategy: Carry { tranche hedging . . . . . . . . . . . . . . . . . . . . 99
+11.5 Strategy: Carry { CDS hedging . . . . . . . . . . . . . . . . . . . . . 100
+11.6 Strategy: CDOs { curve trades . . . . . . . . . . . . . . . . . . . . . 100
+11.7 Strategy: Mortgage-backed security (MBS) trading . . . . . . . . . . 100
+12 Convertibles 101
+12.1 Strategy: Convertible arbitrage . . . . . . . . . . . . . . . . . . . . . 101
+12.2 Strategy: Convertible option-adjusted spread . . . . . . . . . . . . . . 102
+13 Tax Arbitrage 102
+13.1 Strategy: Municipal bond tax arbitrage . . . . . . . . . . . . . . . . . 102
+13.2 Strategy: Cross-border tax arbitrage . . . . . . . . . . . . . . . . . . 103
+13.2.1 Strategy: Cross-border tax arbitrage with options . . . . . . . 104
+14 Miscellaneous Assets 104
+14.1 Strategy: Ination hedging { ination swaps . . . . . . . . . . . . . . 104
+14.2 Strategy: TIPS-Treasury arbitrage . . . . . . . . . . . . . . . . . . . 105
+14.3 Strategy: Weather risk { demand hedging . . . . . . . . . . . . . . . 106
+14.4 Strategy: Energy { spark spread . . . . . . . . . . . . . . . . . . . . . 108
+15 Distressed Assets 108
+15.1 Strategy: Buying and holding distressed debt . . . . . . . . . . . . . 108
+15.2 Strategy: Active distressed investing . . . . . . . . . . . . . . . . . . 109
+15.2.1 Strategy: Planning a reorganization . . . . . . . . . . . . . . . 109
+15.2.2 Strategy: Buying outstanding debt . . . . . . . . . . . . . . . 109
+15.2.3 Strategy: Loan-to-own . . . . . . . . . . . . . . . . . . . . . . 110
+15.3 Strategy: Distress risk puzzle . . . . . . . . . . . . . . . . . . . . . . 110
+15.3.1 Strategy: Distress risk puzzle { risk management . . . . . . . 110
+16 Real Estate 111
+16.1 Generalities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 111
+16.2 Strategy: Mixed-asset diversication with real estate . . . . . . . . . 111
+16.3 Strategy: Intra-asset diversication within real estate . . . . . . . . . 112
+16.3.1 Strategy: Property type diversication . . . . . . . . . . . . . 112
+16.3.2 Strategy: Economic diversication . . . . . . . . . . . . . . . . 112
+16.3.3 Strategy: Property type and geographic diversication . . . . 113
+16.4 Strategy: Real estate momentum { regional approach . . . . . . . . . 113
+16.5 Strategy: Ination hedging with real estate . . . . . . . . . . . . . . . 113
+16.6 Strategy: Fix-and-ip . . . . . . . . . . . . . . . . . . . . . . . . . . . 114
+5
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 7 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+17 Cash 114
+17.1 Generalities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 114
+17.2 Strategy: Money laundering { the dark side of cash . . . . . . . . . . 114
+17.3 Strategy: Liquidity management . . . . . . . . . . . . . . . . . . . . . 115
+17.4 Strategy: Repurchase agreement (REPO) . . . . . . . . . . . . . . . . 115
+17.5 Strategy: Pawnbroking . . . . . . . . . . . . . . . . . . . . . . . . . . 115
+17.6 Strategy: Loan sharking . . . . . . . . . . . . . . . . . . . . . . . . . 116
+18 Cryptocurrencies 116
+18.1 Generalities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 116
+18.2 Strategy: Articial neural network (ANN) . . . . . . . . . . . . . . . 116
+18.3 Strategy: Sentiment analysis { na ve Bayes Bernoulli . . . . . . . . . 120
+19 Global Macro 121
+19.1 Generalities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 121
+19.2 Strategy: Fundamental macro momentum . . . . . . . . . . . . . . . 122
+19.3 Strategy: Global macro ination hedge . . . . . . . . . . . . . . . . . 122
+19.4 Strategy: Global xed-income strategy . . . . . . . . . . . . . . . . . 123
+19.5 Strategy: Trading on economic announcements . . . . . . . . . . . . . 123
+20 Infrastructure 123
+Acknowledgments 124
+A R Source Code for Backtesting 125
+B DISCLAIMERS 132
+References 134
+Glossary 279
+Acronyms 336
+Some Math Notations 340
+Explanatory Comments for Index 341
+Index 342
+6
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 8 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+Praises of 151 Trading Strategies
+\If you want to work as a trader or quant on Wall Street, you have to walk the
+walk and talk the talk. This unique book is a comprehensive introduction to a wide
+variety of tried and tested trading strategies. I highly recommend a 152nd trading
+strategy called buy this book!"
+{Peter Carr , Professor and Chair of Finance and Risk Engineering Depart-
+ment, NYU's Tandon School of Engineering; and 2010 Financial Engineer of the
+Year, International Association for Quantitative Finance & Sungard
+\This book is an encyclopedic guided tour of \quant" investment strategies, from
+the simplest ones (like trend following) to much more exotic ones using sophisticated
+derivative contracts. No claim is made about the protability of these strategies: one
+knows all too well how much implementation details and transaction costs matter.
+But no quant trader can aord ignoring what's out there, as a source of inspiration
+or as a benchmark for new ideas."
+{Jean-Philippe Bouchaud , Chairman and Chief Scientist, Capital Fund Man-
+agement; Professor, Ecole Normale Sup erieure; Member, French Academy of Sci-
+ences; and Co-Director, CFM-Imperial Institute of Quantitative Finance
+\Zura Kakushadze and Juan Andr es Serur have created a masterful encyclopedia
+of quantitative trading strategies. The authors oer us a rigorous but accessible
+treatment of the mathematical foundations of these strategies. The coverage is
+comprehensive, starting with simple and well-known strategies such as covered call
+and then moving naturally to strategies involving cryptocurrencies. The supporting
+material such as a detailed glossary and an extensive list of references will make this
+book an essential reference for nancial economists and investment professionals."
+{Hossein Kazemi , Michael & Cheryl Philipp Endowed Professor of Finance,
+University of Massachusetts at Amherst; and Editor-in-Chief, The Journal of Alter-
+native Investments
+\The successful trading of nancial instruments is both a science and an art, just as
+the eorts of a chef reect both gastronomic artistry and the underlying chemical
+and thermal processes of cooking. In 151 Trading Strategies nancial traders are
+provided with a compendium of sound recipes, spanning the broad range of meth-
+ods that can be applied to modern investment practice. The exposition of both the
+mathematics and intuition of each described trade is clear and concise. Readers will
+appreciate the inclusion of extensive computer code so as to reduce eort needed to
+implement any required calculations."
+{Dan diBartolomeo , President, Northeld Information Services; and Editor,
+Journal of Asset Management
+\A real tour de force{ 151 Trading Strategies provides the most comprehensive un-
+7
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 9 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+covering of popular hedge fund strategies. By revealing all the hedge funds' secret
+sauce, Kakushadze and Serur have now rendered everything as beta-strategies. Time
+to lower 'em fees!"
+{Jim Kyung-Soo Liew , Assistant Professor of Finance, Carey Business School,
+Johns Hopkins University; Advisory Board Member, The Journal of Portfolio Man-
+agement ; and Co-Founder, SoKat
+\This book is an impressive concentration of strategies and formulas to expand
+knowledge in quantitative nance; it's a must-read for anyone who wants to drasti-
+cally improve his or her expertise in nancial markets dynamics."
+{Daniele Bernardi , CEO, DIAMAN Capital; and Chairman of the Board,
+INVESTORS' Magazine Italia
+8
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 10 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+Author Biographies
+Zura Kakushadze received his Ph.D. in theoretical physics from Cornell Univer-
+sity, USA at 23, was a Postdoctoral Fellow at Harvard University, USA and an
+Assistant Professor at C.N. Yang Institute for Theoretical Physics at Stony Brook
+University, USA. He received an Alfred P. Sloan Foundation Fellowship in 2001.
+After expanding into quantitative nance, he was a Director at RBC Capital Mar-
+kets, Managing Director at WorldQuant, Executive Vice President and substantial
+shareholder at Revere Data (now part of FactSet), and Adjunct Professor at the Uni-
+versity of Connecticut, USA. Currently he is the President and CEO of Quantigicr
+Solutions and a Full Professor at Free University of Tbilisi, Georgia. He has over
+17 years of hands-on experience in quantitative trading and nance, 130+ publi-
+cations in physics, nance, cancer research and other elds, 3,400+ citations and
+h-index 30+, 170,000+ downloads on SSRN, and over a quarter million followers on
+LinkedIn.
+Juan Andr es Serur holds a Master's Degree in Finance from the University of
+CEMA, Argentina. With more than 6 years of experience in trading in the stock
+market, he currently works as a quantitative analyst and strategist in an Argentine
+quantitative asset management rm and as a nancial consultant for large corpo-
+rations. In addition, he serves as the Academic Secretary of the Master of Finance
+Program at the University of CEMA, where he teaches undergraduate and postgrad-
+uate computational nance courses as an Assistant Professor. In 2016 he won the
+First Prize in an Argentine Capital Markets Simulation Challenge for Universities
+and Professional Institutions.
+9
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 11 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+Preface (by Zura Kakushadze)
+The purpose of this \post-factum" Preface is to give some history, which sheds light
+on why we (the authors) have decided to make this book, which has been published
+in hardcover (and as an e-book),4into a freely downloadable PDF e-book on SSRN.
+In December of 2015 I posted the paper \101 Formulaic Alphas" on SSRN
+[Kakushadze, 2016], which provides explicit formulas (that are also computer source
+code) for 101 real-life formulaic quantitative trading alphas. That paper was a hit
+{ in hindsight, perhaps unsurprisingly, considering how secretive quant trading is.
+So, at some point down the road, a light bulb went on in my head and I got this
+seemingly \crazy" idea to write a paper entitled \101 Trading Strategies", except
+that this time these 101 strategies would be spread across all asset classes (as opposed
+to equities (StatArb) quant trading alphas as in \101 Formulaic Alphas"). I did not
+envision this as a book, just as a paper, maybe 100+ pages long, 1 page per strategy
+on average, plus overhead (introduction, references, etc.), something publishable in
+a journal (at least online). I also thought it would be both fun and ecient to get
+around 10-12 coauthors together, each would contribute about 10 strategies in one
+or two asset classes according to their elds of expertise, so the project would go
+faster. So, I pinged my contacts by email and posted several posts in the LinkedIn
+feed and groups saying that I was looking for collaborators for this project. I got a
+rather decent number of responses, some evidently were not serious, but some were.
+However, once I outlined in more detail what I had in mind for this project { I
+had a written plan { apparently people realized that this would not be a cakewalk,
+and most disappeared. As it turned out, the only person who was truly serious
+about this project was Juan Andr es Serur, a young professor from Buenos Aires,
+Argentina, whom I had never even met in person. There were a lot of challenges
+along the way (including that Juan had never worked on a project of this magnitude
+and was learning on the job, so to speak). But at the end we got through it. Except
+that we did not have just 100+ pages with 101 strategies but over 350 pages with
+around 160-170 strategies (depending on how one counts). This was not publishable
+in any journal, by any stretch. This project basically had taken on a life of its own
+and turned into... a book. So, we discussed it and decided to publish it as such.
+Publishing a quant trading/nance book such as \151 Trading Strategies" is not
+a very rewarding business (at least nancially), for several reasons. First, the target
+audience is rather limited because of the highly technical nature of the material.
+In my original exploratory call with them, the publisher mentioned that books like
+this sell around 1,000 copies total. This was consistent with what I was told by
+someone who is well-known in the eld and had published 5 quant trading/nance
+books over the years, which had sold around 5,000 copies altogether. Second, if the
+book is published by a major publisher, the authors get dismal royalties, usually
+in the 8-12% range, which can go to around 20% if the book sells better than
+4Z. Kakushadze and J.A. Serur. 151 Trading Strategies. Cham, Switzerland: Palgrave Macmil-
+lan, an imprint of Springer Nature, 1st Edition (2018), XX, 480 pp; ISBN 978-3-030-02791-9.
+10
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 12 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+expected. At $60-$70 for a hardcover, your book has to sell 100,000+ copies for
+you to make any decent money so it is a least somewhat commensurate with the
+time you spend on writing the book { this book took about 9 months to write,
+not including the time I spent on it before drafting started (conceiving it, looking
+for coauthors, etc.) or the time spent dealing with the publisher, advertising it,
+etc. Third, this particular publisher does not publish paperbacks as a matter of
+some policy I do not comprehend, and when the price is set around $60-$70 for
+a hardcover, the pool of potential buyers is dramatically reduced compared with
+a $20-$30 price point a paperback would have. Fourth, there are plenty of people
+working in quant trading/nance who can easily aord $60-$70, but many of these
+people { not to oend anyone { would rather download a pirated PDF copy from the
+internet... Fifth, the publisher's business model appears to be immune to the fact
+that they cannot make much money from hardcover sales. Instead, their business
+model appears to hinge on e-book downloads through their existing (institutional)
+subscriptions: a subscriber, who pays a subscription fee, can freely download any
+book from the publisher's portfolio. So, the success of a book is measured by e-book
+downloads by subscribers, not by hardcover sales, and the authors do not get paid
+per download, they only get paid a very symbolic (mildly put) at fee irrespective
+of the number of such downloads. The bottom line is that there is no money to be
+made in this business for the authors. We were well-aware of this from the get-go.
+We did not publish this book for money { originally, it was going to be a paper.
+What is worse though is that, unlike in the olden days when editors would read
+every word of your manuscript and mark it up so it could be improved, etc., nowadays
+there appears to be little to no editorial support. We wrote the manuscript in LaTeX
+(as there are over 550 elevated equations in the book, not counting inline math), we
+created the index ourselves (which is a major pain and very time-consuming, if done
+right; in fact, it is probably the single worst part of writing a book), and proofread
+the manuscript several times to the point where upon the nal proofreading right
+before printing we found only 5 minor typos attributable to our original manuscript.
+The bottom line is that we spent a lot of time perfecting our manuscript and it was
+very much print-ready. However, things got really messy on the publisher's end.
+The nightmare started with the book cover. The publisher ask me if I had any
+concrete ideas for how I wanted the cover designed, and if I had a specic cover
+image in mind and to feel free to send along some images from Getty and Alamy
+(the image providers the publisher uses). I was taken aback. They keep almost
+all the prots and they ask me for the cover design? If we have to design our
+own cover, then we might as self-well publish and keep most royalties. I told them
+to design the cover professionally, as this was their responsibility. Their so-called
+\designs" they forwarded were highly unimpressive (just really super-minimalist {
+mildly put). So, I ended up designing the cover myself, including picking the cover
+image from the library of thousands of available images, placing the title and author
+names on the cover, etc. Their \design team" used my cover design and the only
+\substantial" change they made was changing the color of the title fonts to (in my
+11
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 13 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+humble opinion) suboptimal white { the publisher said they could not accommodate
+the color I suggested. So, imagine how appalled and taken aback I was when in the
+ready-to-publish nal book version, on the copyright page, they put some name for
+the cover design credit, and did not even mention mine. They said the cover design
+\is theirs", apparently referring to their \design team". This was just factually false.
+But we did not wish to appear \dicult" or \unaccommodating", so we let this go.
+However, the nightmare continued with author biographies on an inside ap of
+the dust jacket. They asked us to provide our headshots. We did. At least three
+times they produced the author biographies with one of the headshots sizably larger
+than the other, even though we provided identically sized headshots. Worse yet,
+they claimed that the headshots on the dust jacket were the same size when they
+clearly were not. So, again, not to appear \dicult" or \unaccommodating", having
+wasted an inordinate amount of time on this, we let them leave our headshots out of
+the inside ap as their \design team" either could not or would not get them right.
+Little did we know that this was only the tip of the iceberg. When we nally
+(and belatedly) received the proofs from the publisher, we found over 100 typos
+introduced by the publisher's typesetters in most incomprehensible ways. Worse yet,
+the one inadvertent grammar typo we did have in our original manuscript (along
+with four other, more subtle, non-grammar typos) was not xed. It was painfully
+evident that they did not proofread the manuscript very carefully { them creating
+100+ unfathomable typos speaks volumes. So, we spent countless additional hours
+xing their typos, and it took more than one round of revisions for them to get it
+right. In hindsight, this should come as no surprise: as many other publishers, they
+apparently outsource typesetting, copyediting, cover design, etc., to a developing
+country, and I highly doubt that, e.g., the English prociency on the other end of
+this outsourcing process is top-notch. It is the all-familiar and prevalent sad story:
+English-language books are produced by people whose rst language is not English.
+Finally, the book was online. However, the nightmare continued. There is an
+appendix in the book with computer source code and a lengthy discussion. This
+appendix was just another chapter in the book and was not supposed to be a part
+of the free preview of the book, which we expressly discussed and agreed on with
+the publisher in writing to be limited to the rst two chapters. Yet, they included
+the appendix in the back matter of the book, which is freely downloadable from
+the publisher's website along with the front matter. When I pointed this out to the
+publisher, their reply was that, for them to redo the les, it would delay the release of
+the book accordingly (and, based on prior history, that meant weeks, if not longer).
+This was already after multiple delays on the publisher's end. So, once again, not to
+appear \dicult" or \unaccommodating", we let this go and the appendix stayed
+in the freely-downloadable back matter. Speaking of which, while in our original
+manuscript all references were in one place, at the end, in the published version the
+references were cited at the end of each chapter. However, the publisher { for the
+reasons we do not comprehend { also kept the full list of references in the freely-
+downloadable back matter. While in the modular (where all chapters, front matter
+12
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 14 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+and back matter have separate PDF les) electronic e-book version this is not a big
+deal, they actually also included these duplicate references in the back matter in the
+printed version, which substantially (and articially) increased its number of pages.
+But there is more. One would imagine that their production team would do some
+basic quality control post-production. Months later we found out that the Kindle
+version on Amazon was all messed up, with equations not displaying properly, etc.
+The publisher claimed that they provided correct les to Amazon and that the
+problem was on Amazon's end. It took them several weeks to x this issue, and
+the x was a \hack": they replaced the Kindle version with the so-called \replica"
+version, which is just a replica of the PDF. Anyone can easily create a \replica"
+version from a PDF using Kindle Create { this does not take a leading publisher.
+Furthermore, the Kindle preview version displays material substantially outside of
+the preview material we agreed on. But then again, who cares about the authors?
+Nor did the publisher seem to care much about the apparent pirated versions
+of the book PDF appearing on various websites. Basically, it was unclear what, if
+anything, the publisher was doing for the book. Their entire marketing eort was
+apparently limited to whopping two tweets they sent when the book was published.
+Essentially all the marketing eorts came from me promoting the book on LinkedIn
+(where I have over quarter million followers) by posting links to the preview version
+then-available on SSRN and the full version/hardcover on the publisher's websites.
+Perhaps most unfathomably, not only did the publisher apparently did not do
+much to protect the book from pirated copies being available on the internet, or
+to promote the book, they outright refused to refute a factually false and defama-
+tory \review" an anonymous purchaser placed on Amazon. E.g., that review falsely
+claims that \there is only a tiny paragraph (no more than 10 lines), very general,
+on each strategy and then close to 10 pages of book references after each strategy."
+This is factually false: there are not \10 pages of book references after each strat-
+egy". There are references after each chapter (not strategy or section) pursuant
+to the publisher's own formatting (see above). The review also falsely claims that
+\A 10 line description of a very general strategy, no math, no backrest, no opti-
+mization." Again, this is factually false: as the reader can readily see, the book
+has over 550 elevated equations (not counting lots of math embedded in the text),
+the source code for backtesting in Appendix A, strategies involving optimization,
+900+ glossary terms, acronyms and math denitions, etc. Furthermore, simpler
+strategies have concise (but precise) descriptions, while others span pages, not \10
+lines", contrary to what the review falsely claims. The review also complains about
+the number of references in the book. The book description on Amazon (as well as
+the publisher's websites) expressly states that there are around 2,000 bibliographic
+references in the book, one of whose aims is to serve as a reference guide into (and
+essentially an encyclopedia of) trading strategies (which is also stated in the Edi-
+torial Reviews of the book). Therefore, the anonymous reviewer was well aware of
+this before purchasing the book. The review further falsely claims: \And then, as
+if it were not enough, at the end of the book the author recaps all the references
+13
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 15 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+one more time." The review is expressly attacking \the author" of the book, even
+though, as mentioned above, the specic formatting of the references (whereby the
+references pertinent to each chapter are included after each chapter, and all refer-
+ences are also included in the back matter, which is freely downloadable from the
+publisher's website) was performed by the publisher, not by the authors. Our origi-
+nal manuscript has references only at the end. Again, as mentioned above, why the
+publisher duplicated the references both after the chapters and in the back matter
+is not something we understand, and it is not something we did or had control over,
+contrary to the anonymous reviewer's factually false and defamatory statements.
+When we discovered the aforesaid factually false and defamatory review on Ama-
+zon, we contacted the publisher and asked them, at the minimum to put a comment
+on the review refuting its factually false statements, and also to contact Amazon to
+remove the review (as under Amazon's policies, defamatory reviews are not allowed).
+To our bewilderment, the publisher suggested that we use our contacts to generate
+positive reviews on Amazon to counteract that negative review. Incredible, isn't it?
+To be clear, having over a quarter million followers on LinkedIn and putting lots
+of content out there on social media, I have had my share of haters. And one thing
+I have learned is that there is some truth to the common expression \haters make
+us famous". When you write a paper or a book or anything else you stick your neck
+out with, it comes with the territory: some will love it, some will hate it, and some
+will not care. I write things for the \some-will-love-it" demographic and I do not
+care about the rest. However, there is a big dierence between someone expressing
+a negative opinion about what you have written { this is perfectly acceptable, we
+live in a free country with freedom of speech { and someone making factually false
+and defamatory statements, which is not acceptable. And when you write a book
+and grant the publisher all kinds of rights for the book, it falls onto the publisher to
+protect its integrity and reputation, as the publisher owns the rights to the book.
+There is a lesson to be learned from all this. That a large publisher will do
+little to nothing to protect the integrity and reputation of the book or its authors
+(especially if it involves a potential headache with Amazon) or to promote the book.
+So, as an author, you do all the hard work, and your publisher just takes over your
+sweat-and-blood creation, makes money from it, while you do all the work promoting
+the book, with little to no support from the publisher, including protecting the book
+from, e.g., being pirated on the internet, defamed, etc. Is this fair? Absolutely not!
+So, we have terminated the publishing agreement and are making our work free
+for everyone to download and benet from the knowledge we have compiled in this
+now-free e-book. We hope you enjoy it and thanks for reading our book and our
+story, which hopefully will also be useful to other authors contemplating publishing
+a book. Consider this. Without real editorial support, when you have to design the
+book cover, deal with a large number of typos introduced by the typesetters, etc.,
+is publishing with a big-name publisher all that dierent from \vanity publishing"?
+Finally, I will let you read the book. Innovate. Disrupt. Spread the knowledge.
+14
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 352 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+long-maturity wing, 72
+long-only, 50
+long-only portfolio, 40, 41
+long-only strategy, 62
+long-only trend-following portfolio, 65
+long-run mean, 92
+long-short strategy, 122
+lookback, 125
+lookback period, 79
+losers, 40{42, 44, 95, 97
+loss, contango, 82
+loss, roll, 82
+low-return-volatility portfolio, 42
+low-risk anomaly, 73
+low-risk factor, 73
+low-volatility anomaly, 42
+Macaulay duration, 68
+machine learning, 16, 53, 55, 59
+machine learning algorithm, 54
+machine learning classication scheme, 120
+machine learning methods, 59, 121
+machine learning techniques, 53, 116
+macro strategy, 122
+macro trading strategy, 121, 123
+macroeconomic trends, 122
+managed futures, 122
+Manhattan distance, 44, 54
+margin account, 76
+mark-to-market (MTM), 98, 99
+market, 16, 17, 58, 61, 65, 70, 83, 110,
+113
+market activity, 95
+market beta, 110
+market cap, 59, 78, 116
+market cap weighted index, 77
+market capitalization, 42, 44, 76, 116
+market crashes, 41
+market data, 89
+market downturn, 110
+market index, 95, 97
+market index return, 95, 97
+market portfolio, 44market price, 52, 92, 102, 114
+market underreaction, 122
+market value, 111
+market volatility, 94
+market-making, 58, 59
+married call, 19
+married put, 19
+maturity, 17, 18, 21, 24, 25, 66{71, 73{76,
+81, 82, 84, 87, 93, 94, 104{106
+maturity date, 69, 87
+maturity time, 17, 66
+maturity-weighted buttery, 73
+MBS passthrough, 100
+MBS price, 100, 101
+MBtu, 108
+mean-reversion, 46, 47, 49, 54, 60, 64, 81,
+92, 95, 128
+mean-reversion parameter, 92
+mean-reversion strategy, 45, 47, 64, 81,
+95
+mean-variance optimization, 57, 112, 126
+Megawatt, 108
+Megawatt hour (Mwh), 108
+merger, 125
+merger arbitrage, 52
+merger arbitrage opportunity, 52
+mergers and acquisitions (M&A), 52
+metropolitan statistical area (MSA), 113
+mini-S&P 500 futures, 81, 82
+mishedge, 77
+mispricing, 45, 79
+mixed-asset diversication, 111
+MMBtu, 108
+model covariance matrix, 55, 57
+modied duration, 68{70, 72, 74, 94
+momentum, 43, 44, 61, 62, 65, 96, 97,
+123, 128
+momentum & carry combo, 88
+momentum eect, 40, 41, 60, 61, 113
+momentum strategy, 41, 60, 88, 96
+momentum, absolute, 62
+momentum, cross-sectional, 62
+momentum, industry, 62
+351
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 353 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+momentum, relative, 62
+momentum, sector, 62
+momentum, time-series, 62
+monetary policy, 122
+monetary policy trends, 122
+money laundering, 114
+moneyness abbreviations
+(ATM, ITM, OTM), 18
+mortgage, 100
+mortgage-backed security (MBS), 15, 100,
+102
+moving average, 49{51, 53, 60, 62, 63, 65,
+85, 86
+moving average length, 117
+moving average, exponential, 117
+moving standard deviation, 125
+moving standard deviation, exponential,
+117
+multi-asset portfolio, 65
+multi-asset trend following, 65
+multi-currency arbitrage, 89
+multifactor model, 57, 91
+multifactor portfolio, 43, 123
+multifactor risk model, 57
+multifactor strategy, 44
+multinomial distribution, 120
+municipal bond, 103, 124
+municipal bond tax arbitrage, 102
+mutual fund, 59, 63, 64, 111
+mutual fund return, 63
+naked call, 19
+naked put, 18
+near-month contract, 94
+near-month futures, 94
+neutral curve buttery, 72
+New York Stock Exchange (NYSE), 16
+no-risk-free-arbitrage condition, 87
+node, 118
+noise, 85, 97, 122
+non-announcement days, 123
+non-deliverable bond, 94
+non-directional strategy, 18non-discretionary strategy, 122
+non-systematic risk, 112
+non-systematic risk reduction, 112
+nonlinear least squares, 92
+normalized demeaned return, 60
+notional, 106
+notional amount, 98
+objective function, 56, 57, 85
+open, 125, 128
+open interest, 95, 96
+open price, 51, 127
+operational distress, 108
+opportunity management tool, 114
+optimal hedge ratio, 82, 83, 93
+optimal weighting scheme, 43
+optimization, 55, 57, 128
+optimization strategy, 96
+optimization techniques, 71
+optimization, mean-variance, 125
+optimizer function, 128
+option, 15, 17, 18, 21, 78, 80, 81, 83, 84,
+104, 113
+option Gamma, 102
+option holder, 17
+option premia, 18, 84
+option pricing, 17
+option straddle, 78
+option styles, 17
+option trading strategy, 37{39, 80
+option writer, 17
+option, all-or-nothing, 17
+option, ATM (at-the-money), 19{34, 37{
+39, 78
+option, binary, 17
+option, call, 26, 27, 84, 104
+option, digital, 17
+option, ITM (in-the-money), 25{28, 31{
+35, 37, 104
+option, OTM (out-of-the-money), 18{23,
+25{27, 29{39, 84
+option, put, 26, 27, 84, 104
+option-adjusted spread (OAS), 102
+352
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 354 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+order, 58, 128
+order execution system, 80
+order ow, dumb, 58
+order ow, informed, 58
+order ow, smart, 58
+order ow, toxic, 58
+order, market, 58
+orders, cancel-replaced, 58
+orders, canceled, 58
+orders, placed, 58
+Ornstein-Uhlenbeck process, 91
+orthogonality condition, 49
+OTM option, 78
+out-of-sample backtest, 118
+out-of-sample backtesting, 16, 125
+outcome, 120, 121
+output gap, 123
+output layer, 116, 118, 119
+over-tting, 118
+overnight return, 126
+overreaction, 95, 109
+P&L, 76, 84, 93, 100, 104, 129
+P&L drawdown, 82
+pairs trading, 45{47
+pairs trading strategy, 46
+parallel shift, 68, 70, 72, 75, 102
+passive approach, 90
+passive distressed debt strategy, 109
+passive limit order, 58
+passive trading strategy, 109
+passthrough MBS, 100
+passthrough MBS price, 101
+pawnbroker, 115
+pawnbroking, 115, 116
+pawnbroking strategy, 115
+payment period, 66
+payment, coupon, 106
+payment, principal, 106
+payo, 17{19, 78, 84, 93
+peer-to-peer (P2P) internet protocol, 116
+pension fund, 59
+performance characteristics, 90, 112, 129period, formation, 90
+periodic compounding, 66, 68, 71
+periodic premium payment, 97, 98
+periodic premium payment rate, 97
+physical commodity, 115
+pivot point, 51
+placement, 114
+Porter stemming algorithm, 120
+portfolio, 15, 40, 41, 43, 44, 55, 62, 65, 67,
+69{72, 74, 75, 78, 79, 82, 83, 90,
+91, 95, 110, 112, 114, 115, 122,
+123, 125, 126
+portfolio construction techniques, 112
+portfolio diversication, 90
+portfolio management, 115
+portfolio optimization, 125
+portfolio P&L, 55
+portfolio performance, 112
+portfolio weights, 56
+portfolio, barbell, 69
+portfolio, HML, 44
+portfolio, ladder, 69
+portfolio, MKT, 44
+portfolio, SMB, 44
+position bounds, 125
+position, bearish, 23
+position, bullish, 23
+predicted class, 119
+predicted value, 54
+predictor variable, 53
+premium, 15, 17, 84, 99
+premium leg, 98
+premium payment, 100
+premium, annual, 75
+premium, periodic, 75
+prepayment model, 101
+prepayment risk, 100
+price and volume data, 53, 126
+price reversal, 52
+price, close, 64
+price, fully adjusted, 40, 45, 126, 127
+price, high, 51, 64, 126
+price, intraday, 126
+353
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 355 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+price, low, 51, 64, 126
+price-momentum, 40
+price-momentum strategy, 40{42, 44
+price-volume, 59
+pricing data, 61
+pricing model, 91, 102
+principal, 66, 67, 70, 94, 105, 106
+principal component analysis (PCA), 79
+principal components, 61, 79
+private equity-type investments, 124
+probability distribution, 120
+probability measure, 92
+property type, 113
+property type diversication, 112
+protection buyer, 98
+protection seller, 97
+protective call, 19
+protective call option strategy, 19
+protective put, 19
+protective put option strategy, 19
+protective put strategy, 19
+publicly traded company, 52
+publicly traded infrastructure companies,
+124
+put option, 17{39, 84, 104, 107
+put spread, 20, 23, 34, 36{38
+put, naked, 18
+put, short, 18
+put-call parity, 18
+quantile, 87, 118{120, 123
+quantitative trading alpha, 59
+quark spread, 108
+quintile, 44, 64, 90, 91
+R Package for Statistical Computing (R),
+125
+R-squared, 63
+R-squared strategy, 64
+rallies, 81
+rank, 44, 79
+ranking, 44, 122
+rate, xed, 104
+rate, oating, 104ratio call spread, 31
+ratio put spread, 31
+raw close price, 127
+raw ination, 122
+raw open price, 127
+raw spot rate, 85
+real estate, 15, 111{113, 124
+real estate asset, 111, 112
+real estate holdings, 112
+real estate investment, 111, 112
+real estate investment strategy, 114
+real estate investment trust (REIT), 111,
+113
+real estate momentum, 113
+real estate momentum strategy, 113
+real estate property, 113
+real estate return, 113
+real estate, commercial, 111
+real estate, residential, 111
+real interest rate, 123
+realized alpha return, 60
+realized P&L, 58
+realized prot, 50
+realized variance, 84
+realized volatility, 83, 85, 111
+rebalancing, 80, 82, 89, 90, 110
+recovery rate, 98
+rectied linear unit (ReLU), 119
+reference entities, 98
+reference pools, 98
+regression, 45, 48, 49, 54, 60, 72, 73
+regression coecient, 45, 48, 63, 73, 74
+regression R-squared, 63
+regression residual, 48, 73
+regression weights, 49
+regression, cross-sectional, 73
+regression-weighted buttery, 72, 73
+reinvestment risk, 70
+relative momentum, 62
+relative strength index (RSI), 117, 118
+relative value strategy, 122
+reorganization, 109, 110
+reorganization plan, 109
+354
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 356 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+reorganization process, 109
+replication, 106
+repo rate, 76
+repo strategy, 115
+repurchase agreement (repo), 114, 115
+residual momentum, 44
+residual momentum strategy, 45
+resistance, 51, 60
+retail trader, 58
+return, risk-adjusted, 40, 45, 112, 124
+reverse repurchase agreement, 115
+rich stock, 45
+risk, 15, 19, 28, 33, 35, 36, 42, 52, 62, 70,
+77, 81, 82, 87, 92, 99, 100, 112,
+125
+risk arbitrage, 52
+risk factor, 49, 79
+risk management, 15, 57, 110, 128
+risk management tool, 114
+risk model, 125, 127, 128
+risk premium, 110
+risk reversal, 21, 22, 38, 39, 84
+risk sentiment, 122
+risk sentiment trends, 122
+risk, idiosyncratic, 79
+risk, interest rate, 70
+risk, specic, 79
+risk-free arbitrage, 87
+risk-free arbitrage opportunity, 86
+risk-free asset, 80, 86, 123
+risk-free discount factor, 98
+risk-free instrument, 75
+risk-free interest rate, 86
+risk-free interest rate curve, 102
+risk-free position, 87
+risk-free probability measure, 92
+risk-free prot, 27, 76
+risk-free rate, 44, 73{75, 77, 94
+riskless asset, 80
+risky duration, 99, 100
+roll loss, 82
+roll yield, 89
+roll-down component, 74rolling down the curve, 75
+rolling down the yield curve, 74
+rolling down the yield curve strategy, 75
+root mean square error (RMSE), 54
+rotation, industry, 62
+rotation, sector, 62
+Russell 3000, 76
+S&P 500, 76, 79, 83
+S&P 500 ETFs, 79
+S&P 500 option, 83
+sample correlation matrix, 78, 79
+sample covariance matrix, 55, 83, 88
+sample variance, 60
+scale invariance, 56, 57
+seagull spread, 37{39
+second-month futures price, 89
+sector, 46, 47, 49, 61, 62, 65, 106, 124
+sector ETF, 62
+sector momentum rotation, 61, 62
+sector momentum rotation strategy, 61{
+63, 65
+sector rotation signal, 62
+secured cash loan, 115
+secured loan, 110
+security, 115
+selectivity, 64
+sell signal, 86, 92, 119
+sell-os, 81
+sell-write strategy, 18
+semiannual compounding, 94
+semiannual xed coupons, 105
+sentiment analysis, 120
+sentiment data, 59, 121
+serial regression, 44, 63, 82, 93
+serial variance, 88
+serially demeaned return, 60, 117
+settlement, 81
+share, 17, 41, 42, 46, 52, 58
+shareholder, 103
+shares outstanding, 78
+Sharpe ratio, 55, 56, 58, 65
+Sharpe ratio maximization, 56, 57
+355
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 357 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+short-maturity wing, 72
+short-sale, 47
+short-selling issues, 77
+shorting ETFs, 62
+shorting stock, 18, 19, 28, 29, 42, 43, 45
+shorting Vega, 83
+shorting VIX futures, 81
+sideways market, 83
+sideways strategy, 18, 27{29, 32{36
+sigmoid, 119
+signal, 16, 50, 52, 54, 55, 58, 128
+signal, buy, 120
+signal, ephemeral, 16
+signal, machine learning, 57
+signal, mean-reversion, 57
+signal, momentum, 57
+signal, sell, 120
+simple moving average (SMA), 49, 50,
+127
+simple moving standard deviation, 127
+single-stock KNN, 53, 60
+single-stock KNN trading strategy, 117
+single-stock methods, 59
+single-stock option, 17, 78, 79, 83
+single-stock option straddle, 78
+single-stock strategy, 53
+single-stock technical analysis strategies,
+60
+single-stock trading, 54
+single-tranche CDO, 98
+skew, 84
+skewness, 91
+skewness premium, 91
+skip period, 40, 43, 45
+slippage, 16, 41, 77, 80
+Small minus Big (SMB), 44
+smart order ow, 58
+smoothing parameter, 85
+social media sentiment analysis, 120
+softmax, 119
+sorting, 64
+source code, 16, 57, 79, 125
+sovereign risk, 123spark spread, 108
+SPDR Trust, 79
+specialist system, 16
+specic risk, 57, 79
+speculative bubble, 116
+speculative buy-and-hold asset, 116
+speculator, 90, 108
+spike, 82
+splits, 40, 45, 126
+spot, 77, 82
+spot FX rate, 86, 122
+spot price, 77, 91, 93
+spot value, 77
+spread, 69, 75, 83, 100, 102, 108, 123
+spread change, 72
+spread curve, 100
+spread, calendar, 24
+spread, CDO tranche, 98{100
+spread, diagonal, 24
+spread, ratio, 30, 31
+standard deviation, 42
+Standard Industrial Classication (SIC),
+128
+standardized unexpected earnings (SUE),
+42
+state variable, 122
+statistical arbitrage, 15, 54, 55, 61
+statistical arbitrage strategy, 16, 61
+statistical industry classication, 125, 128
+statistical risk model, 79, 128
+steepener, 75, 100
+stemming, 120
+stochastic dynamics, 92
+stochastic gradient descent (SGD), 119
+stochastic processes, 91
+stochastic volatility models, 91
+stock loan, 104
+stock market, 61
+stock merger, 52
+stock price, break-even, 18
+stock trading strategy, 60
+stock, cheap, 46
+stock, rich, 46
+356
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 358 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+stop-loss price, 24, 25
+stop-loss rule, 50
+stop-words, 120
+straddle, 26{29, 33, 35, 36, 79, 80, 83, 85
+strangle, 26, 27, 33, 35, 36
+strap, 30
+strategy, ANN, 120
+strategy, barbell, 69
+strategy, bullet, 69
+strategy, capital gain, 18, 35, 36
+strategy, contrarian, 49
+strategy, delay-0, 128
+strategy, delay-1, 128
+strategy, Delta-neutral, 83
+strategy, earnings-momentum, 42
+strategy, HMD, 110, 111
+strategy, income, 18, 35, 36
+strategy, ladder, 70
+strategy, mean-reversion, 49
+strategy, momentum, 60
+strategy, price-momentum, 42
+strategy, resistance, 51
+strategy, straddle, 26
+strategy, strangle, 26
+strategy, strap, 30
+strategy, strip, 30
+strategy, support, 51
+strategy, trend following, 60
+strategy, zero-cost, 110
+strike, 32{36, 84
+strike price, 17{39, 84, 104, 107
+strip, 30
+STRIPS (Separate Trading of Registered
+Interest and Principal of Securi-
+ties), 106
+structured assets, 15, 97
+style factor, 61
+style risk factor, 61
+subset portfolio, 78
+sum of squares (SS), 63
+supply, 94
+support, 51, 60
+support vector machine (SVM), 121survivorship bias, 125
+swap, 67, 76, 105
+swap agreement, 104
+swap contract, 105
+swap xed rate, 105
+swap rate, 101
+swap spread, 76
+swap strategy, 76, 104
+swap-spread arbitrage, 76
+synthetic call, 19, 28, 29
+synthetic CDO, 98
+synthetic coupon payment, 106
+synthetic forward, 21, 37
+synthetic forward contract, 21
+synthetic futures, 21
+synthetic index, 106
+synthetic portfolio, 106
+synthetic put, 19, 28
+synthetic short bond position, 76
+synthetic straddle, 28, 29
+systematic approach, 122
+systematic macro, 122
+systematic macro trading strategy, 123
+systematic risk, 79
+T-bond, 94
+T-note, 94
+tactical asset allocation, 90
+target company, 52
+target variable, 53
+target volatility, 111
+tax arbitrage, 15, 102
+tax credit, 103, 104
+tax credit rate, 103, 104
+tax shield, 103
+tax strategy, 37
+tax-exempt municipal bonds, 102, 103
+technical analysis strategies, 61
+technical indicator, 116, 117
+tercile, 91
+term spread, 123
+term structure, 74, 89, 92
+Theta, 83
+357
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 359 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+Theta play, 83
+Theta-decay, 84
+ticker, 79, 125{127
+ticker symbol, 127
+time series, 40, 43, 50, 55, 60, 78, 80, 91
+time-series lter, 97
+time-stamping, 116
+time-to-maturity (TTM), 18, 24, 25, 29
+TIPS principal, 106
+TIPS-Treasury arbitrage, 105
+tracking error, 82, 83
+tracking ETF, 124
+tradables, 15
+trade execution system, 89
+traded volume, 52
+trader's outlook, 69
+trader's outlook, bearish, 19{23, 25, 30,
+38
+trader's outlook, bullish, 19{22, 25, 29,
+30, 37, 39
+trader's outlook, conservatively bearish,
+23
+trader's outlook, conservatively bullish,
+22
+trader's outlook, moderately bullish, 37
+trader's outlook, neutral, 26{29, 32{37
+trader's outlook, neutral to bearish, 19,
+24, 31
+trader's outlook, neutral to bullish, 18,
+24, 31
+trader's outlook, non-directional, 22, 23
+trader's outlook, strongly bearish, 31
+trader's outlook, strongly bullish, 30
+trades, establishing, 58
+trades, liquidating, 58
+trading bounds, 125
+trading costs, 16, 41, 56, 57, 59
+trading day, 17, 43, 50, 53, 79, 84, 126{
+128
+trading portfolio, 15, 96
+trading rule, 81, 119, 120
+trading signal, 51, 85, 119
+trading signal, faint, 16trading strategy, 15{17, 52, 85, 90, 115
+trading universe, 40, 59, 125, 127
+traditional assets, 111, 112, 116
+traditional portfolio, 112
+training, 54, 118, 119
+training data, 120, 121
+training dataset, 118
+training period, 53
+tranche, 97{100
+tranche hedging, 99
+tranche MTM, 100
+tranche notional, 99, 100
+tranche value, 97
+tranche, equity, 97, 99
+tranche, junior mezzanine, 97
+tranche, senior, 97
+tranche, senior mezzanine, 97
+tranche, super senior, 97
+transaction costs, 17, 71, 77, 79, 80, 86,
+87, 104, 106, 112, 115
+Treasuries, 123
+Treasury bill rate, 44
+Treasury bills, 80, 114
+Treasury bond, 76, 105, 106, 109
+Treasury bond coupons, 106
+Treasury curve, 102
+Treasury ETF, 63, 65
+Treasury Ination-Protected Securities (TIPS),
+105, 106
+Treasury note, 105
+tree boosting algorithms, 121
+trend, 52, 63, 97, 122
+trend component, 85
+trend data mining, 116
+trend following, 96
+trend, ephemeral, 16
+Twitter sentiment, 121
+U.S. regions, 113
+unadjusted close price, 126
+unadjusted open price, 126
+unadjusted volume, 126
+uncertainty index, 80
+358
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 360 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+uncompounded rate, 66
+Uncovered Interest Rate Parity (UIRP),
+86
+underlying, 83, 84
+underlying asset, 17, 76, 93
+underlying index, 64, 65, 79
+underlying index portfolio, 77
+underlying instrument, 59, 65
+underlying price, 93
+underlying security, 17
+underlying single-stock options, 79
+underlying stock, 25, 26, 59, 62, 77, 101
+underlying stock price, 101
+underreaction, 122
+unexpected earnings, 42
+unlisted infrastructure fund, 124
+USD (U.S. dollar), 86, 116
+value, 42{44, 61, 73, 74, 90, 91, 123
+value factor, 73
+value strategy, 42, 90
+value-based strategies, 116
+variable coupon bond, 67
+variable rate, 67
+variable rate coupon payment, 76
+variable, feature, 53
+variable, predictor, 53
+variance, 83, 88
+variance notional, 84
+variance strike, 84
+variance swap, 84, 85
+variance, conditional, 92
+vector autoregressive model (VAR), 112
+vector, feature, 120
+Vega, 83
+Vega play, 83
+vertical spread, 19, 20, 22, 23
+VIX (CBOE Volatility Index), 80{83
+VIX futures, 81, 82
+VIX futures basis, 81
+VIX futures basis trading, 81
+VIX futures contract, 82
+VIX futures curve, 81, 82VIX futures price, 81, 82
+VIX price, 81
+volatility carry, 82
+volatility ETN, 82
+volatility index, 81
+volatility risk premium, 83
+volatility skew, 84
+volatility spike, 83
+volatility strategy, 18, 26, 28, 30, 33{37,
+78, 80
+volatility target, 80
+volatility targeting strategy, 80
+volatility, constituent, 78
+volatility, index, 78
+volume, 53, 95, 96
+weather, 15
+weather conditions, 106, 107
+weather derivative, 106, 107
+weather index, 106, 107
+weather risk, 106
+weighted average, 44, 68, 95
+weighted regression, 49, 57
+weighting scheme, 41, 44, 54, 65, 95
+well-diversied portfolio, 124
+Whittaker-Henderson method, 85
+wing, 72
+winners, 40{42, 44, 95, 97
+word, 120, 121
+world, 122
+year-on-year ination swap, 105
+yield, 66, 68{71, 74{76, 109
+yield curve, 68{72, 74, 75
+yield curve dynamics, 75
+yield curve spread, 75
+yield curve spread strategy, 75
+YoY (year-on-year), 105, 123
+zero-cost combination, 71
+zero-cost long-short portfolio, 89
+zero-cost portfolio, 42, 90, 91, 110, 122,
+123
+zero-cost strategy, 40, 72, 74, 91, 113
+359
+Electronic copy available at: https://ssrn.com/abstract=3247865
+--- Page 361 ---
+Copyright c2018 Zura Kakushadze and Juan Andr es Serur. All Rights
+Reserved.
+zero-coupon bond, 66, 69, 70, 74
+zero-coupon discount bond, 106
+zero-coupon government Treasury curve,
+102
+zero-coupon ination swap, 105, 106
+zero-coupon swap, 105
+360
+Electronic copy available at: https://ssrn.com/abstract=3247865

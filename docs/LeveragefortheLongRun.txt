@@ -1,0 +1,776 @@
+ 
+ 
+    
+ 
+Leverage for the Long Run  
+A Systematic Approach to Managing Risk and Magnifying Returns in Stocks  
+  
+Michael A. Gayed, CFA  
+ 
+2016 Charles H. Dow Award Winner   
+Updated Through December  31, 2020  
+        
+Abstract:  Using leverage to magnify performance is an idea that has enticed investors and traders 
+throughout history. The critical question of when to employ leverage and when to reduce risk, though, is 
+not often addressed. We establish that volatility is the enemy of leverage and that streaks in performance 
+tend to be beneficial to using margin. The conditions under which higher returns would be achieved from 
+using leverage, then, are low volatility environments that are more likely to experience consecutive positiv e 
+returns. We find that Moving Averages are an effective way to identify such environments in a systematic 
+fashion. When the broad U.S. equity market is above its Moving Average, stocks tend to exhibit lower than 
+average volatility going forward, higher av erage daily performance, and longer streaks of positive returns. 
+When below its Moving Average, the opposite tends to be true, as volatility often rises, average daily returns 
+are lower, and streaks in positive returns become less frequent. Armed with this  finding, we developed a 
+strategy that employs leverage when the market is above its Moving Average and deleverages (moving to 
+Treasury bills) when the market is below its Moving Average. This strategy shows better absolute and risk -
+adjusted returns than a  comparable buy and hold unleveraged strategy as well as a constant leverage 
+strategy. The results are robust to various leverage amounts, Moving Average time periods, and across 
+multiple economic and financial market cycles.  
+All rights are reserved. This  publication is the sole property of Lead -Lag Publishing, LLC. You may not copy, 
+reproduce, distribute, publish, display, perform, modify, create derivative works, transmit (in any form of by 
+any means), or in any way exploit any such publication. Further,  you may not distribute, sell or offer to sell, or 
+store this publication. You may not alter or remove any copyright or other notice from copies of this 
+publication. Copying or storing this publication except as provided above is expressly prohibited witho ut prior 
+written permission of the Lead -Lag Publishing, LLC. For permission to use the publication, please contact 
+michaelgayed@leadlagreport.com.  
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+1  
+  Introduction  
+Using leverage to magnify performance is an idea that has enticed investors and traders throughout history. 
+The concept is simple enough: borrowing funds allows you to buy more of an asset than with cash alone, 
+multiplying the effect of any gains and losse s. The critical question of when to employ leverage and when 
+to reduce risk, though, is not often addressed. Under academic theory, one cannot develop a strategy to time 
+the use of leverage due to market efficiency and the randomness of security prices.  
+We find strong evidence to the contrary. Security prices are non -random and tend to exhibit trends over 
+time as well as volatility regimes under which leverage is more or less beneficial. As such, one can combine 
+these two concepts to create a strategy that  employs the use of leverage only during periods which have a 
+higher probability of success. In doing so, one can achieve higher returns with less risk than a comparable 
+buy and hold strategy. This is the primary focus of our paper: systematically determin ing environments 
+favorable to leverage and developing a strategy to exploit them.  
+The idea that you can achieve a higher return with less risk stands in direct conflict with the Capital Asset 
+Pricing Model (CAPM). Developed in the early -to-mid 1960s, the CAPM dictates that the expected return 
+for a given security should be determined by its level of systematic risk, or Beta. A linear relationship is 
+said to exist between Beta and return, which is represented in chart form as the Security Market Line (SML).  
+The SML progresses linearly (up and to the right) whereby the higher the Beta, the higher the expected 
+return.  
+Though still widely regarded as one of the key tenets of Finance, the CAPM has been challenged by a 
+number of studies over the years. Empirical research has shown that anomalies such as the small firm effect, 
+the value effect, and the momentum effect cannot be explained by the CAPM.1  
+The low volatility anomaly has also called into question the presumed absolute relationship between risk 
+and retu rn. Low volatility stocks have exhibited above market performance with lower than market Beta, 
+opposing the risk/return laws of the CAPM.2 Similarly perplexing is the tendency for high beta stocks to 
+exhibit lower performance than predicted by their level  of risk.3  
+In this paper, we put forward an additional factor that is unexplained by traditional Finance theory: the 
+volatility and leverage anomaly that allows for long -run outperformance using leverage. Key to any study 
+which counters efficient markets is understanding what allows for the anomaly to exist. We propose that 
+the combination of structural and behavioral conservatism in the use of leverage brings with it inefficiencies 
+which are not easily arbitraged away.  
+In addition to facing margin requir ements, certain institutional investors such as pension plans, mutual 
+funds, and endowments are simply unable to borrow money to invest beyond their portfolio’s asset value 
+based on stated mandates and regulatory requirements.  For those institutional inve stors who do not face 
+such restrictions, leverage brings with it a new set of risks, including “costs of margin calls, which can force 
+borrowers to liquidate securities at adverse prices due to illiquidity; losses exceeding the capital invested; 
+and the po ssibility of bankruptcy.”3  In the case of hedge funds, for example, the “fragile nature of the 
+capital structure, combined with low market liquidity, creates a risk of coordinated redemptions among 
+ 
+1 See Fama and French (1992).  
+2 See Baker and Haugen (2012). 
+3 See Blitz and Vliet (2007).  
+3 See Jacobs and Levy (2012).   
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+2  
+  investors that severely limits hedge funds arbitrage cap abilities.  The risk of coordination motivates 
+managers to behave conservatively [in their usage of maximum leverage].”4  
+Leverage aversion is also due to innate behavioral biases. The availability heuristic is a mental rule of thumb 
+which argues that individuals will use the first immediate example that comes to mind when evaluating a 
+topic, or making a decision. Often times , the most extreme negative events are the first things considered. 
+The word leverage, or margin, makes most individuals immediately think of historically catastrophic events, 
+loss, or the risk of ruin, creating a natural aversion to using borrowed money t o generate excess returns. 
+Some of the most prominent examples that come to mind include:   
+1) The 1929 stock market crash,   
+2) The 1987 stock market crash,   
+3) The 1998 Long -Term Capital Management blowup,  
+4) The 2007 Quant Quake,  
+5) The 2007 -2009 Financial Crisis ,  
+6) The 2015 stock market selloff (European sovereign debt crisis),  
+7) The 2018 “Volmageddon”, and  
+8) The 2020 stock market crash  
+ 
+Leverage aversion is understandable given these traumatic events, but it is not “rational” as Finance theory 
+assumes. In theory, when presented with the option to construct an unleveraged portfolio or a leveraged 
+one, mean -variance optimization views the two as equal so long as the expected return and volatility of the 
+two portfolios remains the same.5 The fact that leverage is used  becomes irrelevant, which means there 
+should be no preference between the two portfolios.  In practice, however, investors are more likely to avoid 
+the leveraged portfolio despite having the same risk/return characteristics as the unleveraged one.  
+Prior studies on the use of lever age to enhance risk/return in a portfolio have primarily been centered on 
+low beta stocks6 and risk parity.7 These studies suggest there are benefits to leveraging lower beta assets 
+which investors, due to leverage aversi on, ar e either unable or unwilling to do. To the best of our knowledge, 
+however, there has not yet been a study using technical indicators which evaluates the potential timing 
+benefits of using leverage purely on the stock market itself to not just increas e abso lute return, but also 
+improve risk -adjusted performance.  
+In this paper, we propose that using widely -referenced Moving Average indicators for evaluating stock 
+market trends can enhance absolute return and generate higher risk -adjusted performance be yond what the 
+CAPM and Modern Portfolio Theory would argue is possible. To do this, however, we first need to dispel 
+mistaken beliefs about leverage and Moving Averages independently to better understand exactly why a 
+strategy which leverages or deleverage s based on Moving Averages produces superior results over time.  
+ 
+4 See Tolonen (2014).  
+5 See Jacobs and Levy (2013).  
+6 See Frazzini and Pedersen (2012).  
+7 See Asness, Frazzini, and Pedersen (2012).   
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+3  
+  Volatility and the Importance of Path  
+While the availability heuristic leads us to think of leverage in terms of a constant source of significant risk, 
+objective quantitative analysis can he lp us identify what actually causes leverage to result in loss, and under 
+what conditions leverage is beneficial. In this paper, we focus on daily re -leveraging of the multiplier (ex: 
+tracking 1.25x, 2x, or 3x the S&P 500 daily total return), which is the most commonly used time frame in 
+leveraged mutual funds and Exchange Traded Funds (ETFs).8  
+One of the mistaken notions about daily re -leveraging is the idea that there is some form of natural decay. 
+This is the belief that over time the cumulative return s from such rebalancing will end up moving towards 
+zero or at the very least be considerably less than a constant buy an d hold strategy.  Going back to 1928, we 
+find this is simply not the case.9 While a daily releveraged buy and hold of the S&P 500 i nitially suffered 
+from great losses going  into and following the 1929 stock market cr ash ( -99.9% f or the 3x), over the long 
+run it would have significantly outperformed the unleveraged strategy, by multiples in excess of the leverage 
+factor.10 We ob serve this i n Table 1, where the 3x leveraged cumulative return since 1928 is an astonishing 
+681 times that of the unleveraged S&P 500.  
+Table 1: S&P 500 vs. Daily Leveraged S&P 500, Growth of $1 (October 1928 – December  2020)  
+Metric  S&P 500  S&P 500 1.25  S&P 500 2x  S&P 500 3x  
+Growth of $1  $4,059  $19,313  $591,035  $2,763,322  
+Multiple vs. Buy/Hold  1 5 146 681 
+ 
+There is no natural form of decay from leverage per se, as the long-run view illustrate s. While we cannot 
+conclude that the daily leveraged always outperforms in an upward trending market,  the idea that leverage 
+is only suitable for very short -term trading is false when looking at how daily leveraging can perform over 
+long-term cycles. That is not to say that leverage is without risk, just that the s ource of that risk does not 
+come from some inherent decay.  
+What does cause significant problems for constant leverage over time is volatility. Daily re -leveraging 
+combined with high volatility creates compounding issues, often referred to as the “constant  leverage 
+trap.”11 When the path of returns is not trending but alternating back and forth between positive and negative 
+returns (seesawing action), the act of re -leveraging is mathematically destructive. The reason: you are 
+increasing exposure (leveraging  from a higher level) after a gain and decreasing exposure ( deleveraging 
+from a lower level) after a loss, again and again. An example from recent history will make this point 
+clearer.  
+In August 2011, the S&P 500 experienced extremely high volatility, where over a six -day period the 
+annualized standard deviation was above 75%. The cumulative return for the S&P 500 over these six trading 
+days was a positive 0.51%, but the levered returns fell far short of multiplying this return as we see in Table 
+2. Using 1.25x leverage, the total return was still positive but less than the unlevered return at 0.46%. When 
+2x and 3x leverage was applied, the cumulative returns actually turned negative even  though the unlevered 
+return was positive.  
+ 
+8 The most popular of long -leveraged S&P 500 ETFs are the ProShares Ultra S&P500 (SSO)  which tracks twice the 
+daily return, and the ProShares UltraPro S&P500 (UPRO)  which tracks 3x the return. The Direxion S&P 500 Bull 
+1.25X  (PPSP) has been discontinued in 2018 due to decreasing pop ularity.  
+9 Source: S&P 500 Total Return Index (Gross Dividends) data from Bloomberg.  
+10 We assume no cost to using leverage in this section but will introduce an assumed cost in the strategy section.   
+11 See Trainor Jr. (2011).   
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+4  
+  Table 2: S&P 500 vs. Daily Leveraged S&P 500 (August 8, 2011 – August 15, 2011)  
+Index  08/08/2011  08/09/2011  08/10/2011  08/11/2011  08/12/2011  08/15/2011  Cumulative 
+Return  
+S&P 500  -6.65%  4.74%  -4.37%  4.65%  0.53%  2.19%  0.51%  
+1.25x  -8.31%  5.93%  -5.47%  5.81%  0.66%  2.73%  0.46%  
+2x -13.30%  9.49%  -8.75%  9.29%  1.06%  4.37%  -0.14%  
+3x -19.95%  14.23%  -13.12%  13.94%  1.58%  6.56%  -2.02%  
+ 
+Why is this the case? After the 6.65% decline on August 8, instead of increasing leverage as would occur 
+naturally from a decline in one’s equity, leverage is reset to the lower asset base. Exposure is effectively being 
+reduced ahead of the gain of 4.74% o n August 9. Next, after the gain on August 9, instead of decreasing 
+leverage as would occur naturally from an increase in one’s equity, leverage is reset to the higher asset base. 
+Exposure is now increasing ahead of the loss of 4.37% on August 10.  
+The mor e leverage that is applied, the more pernicious the constant leverage trap. This is why the 3x 
+leveraged S&P 500 performs worse than the 2x leveraged and the 2x leveraged performs worse than 1.25x 
+leveraged. Additionally, the higher the volatility in the p ath of returns, the more harmful such compounding 
+issues become, as we will see in the next example.  
+High volatility and seesawing action are the enemies of leverage while low volatility and streaks in 
+performance are its friends. We can see this clearly in Table 3. With the same unleveraged cumulative return 
+of 19.41%, the four paths illustrated have dif ferent leveraged returns. In both Path 1 and Path 2, the S&P 
+500 is positive for six consecutive days, but the lower volatility Path 1 achieves a higher return. Both Path 
+1 and Path 2 perform better than the leverage multiplier as the constant re -leveragin g benefits from 
+compounding. The opposite is true in Path 3 and Path 4, which have alternating positive and negative returns 
+during the first five days. These paths fall directly into the constant leverage trap and the highest volatility 
+Path 4 is hurt the  most when leverage is applied.  
+Table 3: S&P 500 vs. Daily Leveraged S&P 500 - Path Dependency, Volatility and Leverage  
+S&P 500  Day 1  Day 2  Day 3  Day 4  Day 5  Day 6  Cumulative 
+Return  Annualized 
+Volatility  
+Path 1  3.00%  3.00%  3.00%  3.00%  3.00%  3.00%  19.41%  0.00%  
+Path 2  2.00%  4.00%  2.00%  4.00%  2.00%  4.03%  19.41%  17.48%  
+Path 3  7.00%  -7.00%  7.00%  -7.00%  7.00%  12.70%  19.41%  131.21%  
+Path 4  14.00%  -14.00%  14.00%  -14.00%  14.00%  8.97%  19.41%  221.40%  
+2x S&P 500  Day 1  Day 2  Day 3  Day 4  Day 5  Day 6  Cumulative 
+Return  Multiple  
+of 1x  
+Path 1  6.00%  6.00%  6.00%  6.00%  6.00%  6.00%  41.85%  2.16 
+Path 2  4.00%  8.00%  4.00%  8.00%  4.00%  8.06%  41.78%  2.15 
+Path 3  14.00%  -14.00%  14.00%  -14.00%  14.00%  25.40%  37.41%  1.93 
+Path 4  28.00%  -28.00%  28.00%  -28.00%  28.00%  17.95%  28.23%  1.45 
+3x S&P 500  Day 1  Day 2  Day 3  Day 4  Day 5  Day 6  Cumulative 
+Return  Multiple  
+of 1x  
+Path 1  9.00%  9.00%  9.00%  9.00%  9.00%  9.00%  67.71%  3.49 
+Path 2  6.00%  12.00%  6.00%  12.00%  6.00%  12.09%  67.46%  3.48 
+Path 3  21.00%  -21.00%  21.00%  -21.00%  21.00%  38.10%  52.69%  2.71 
+Path 4  42.00%  -42.00%  42.00%  -42.00%  42.00%  26.92%  22.25%  1.15 
+ 
+The conclusion drawn from the fictitious return paths can be confirmed when looking at historical returns 
+in the S&P 500.  In weeks with low volatility (annualized below 10%), the compounded performance of the 
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+5  
+  3x daily leveraged approach largely follows the 3x of the weekly performance. This can be seen in Chart 1, 
+where the return observations mostly lay on the diagonal with  slope 3. For volatilities between 10 and 40%, 
+still most observations lay on the diagonal, or in the extremes even above, meaning that the 3x leveraged 
+path outperformed the unleveraged index by more than the leverage factor in up -weeks and less than the 
+leverage factor in down -weeks. Therefore, below 40% volatility is the sweet spot for being daily -leveraged.  
+In weeks with volatility over 40%, many weekly 3x leveraged returns fall below the diagonal, meaning that 
+they start to systematically underperform.  In the volatility above 70% bin, this underperformance is yet 
+amplified. Some positive returning weeks in the S&P 500 translate into negative performing weeks in the 
+3x leveraged, i.e. falling in the red -highlighted lower -right square in Chart 1. One of t hese extreme weeks 
+has already been shown in Table 2.  
+ 
+ 
+From the stylized facts , we see that while volatility hurts leverage, the relations hip is non -linear , i.e. low 
+volatilit y (below 40%) does not lead to much decay and is even beneficial to leveraged performance, while 
+extreme volatility has a highly negative impact. Demonstrating this further are simulated  normally -
+distributed returns over 252 trading days  with each11 simulation at five different volatilit y levels (0%, 10%, 
+40%, 70%, and 100%),  and a  mean of 10% (upward trend in the market). The results are shown in Chart 2. 
+ 
+11 The Monte Carlo simulation uses 3,000 annual return paths for each volatility level, which results in 3.78 mill ion 
+random runs.  
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+6  
+  At low volatility levels, the decay is minimal, while at higher volatilities (above 40%), a dail y leveraged 
+strategy is very likely to lose over the course of a year.  
+ 
+Notabl y, the chance of losing is higher than the chance of winning, as the mean is pushed up by fewer highl y 
+beneficial return paths.  What is not captured in the simulations is empirically observed positive 
+autocorrelation in daily returns, i.e. several up -days in a row, which leads to yet better performances at low -
+volatilities (see in Chart 6 that follows later).  
+Yet trending markets are paramount and v olatility and streakiness are related as we will show in the next 
+section. The reason for this in our view is behavioral. High volatility environments tend to be characterized 
+by investor overreaction which is more prone to back -and-forth market movement. In contrast, low volatility 
+environments are more consistent with investor underreaction which in turn results in more streaks or 
+consecutive up days.  The autocorrelation exhibited by stocks in low volatility regimes is an important 
+precondition for leveraged strategies to perform well in, as streaks present themselves and leverage best 
+takes advantage of them.12 As we have shown in this section looking at only six trading days, different 
+return scenarios can have a large impact on how c umulative returns look.  As such, during considerably  
+longer stretches of time than those illustrated here, path dependency and volatility only heightens the 
+disparity among path scenarios.  
+ 
+12 As referenced in Grinblatt and Moskowitz (2000), autocorrelation across various horizons is well documented 
+throughout academic literature looking at market momentum and trend persistence.  
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+7  
+  The conclusion here is that the popular belief that leveraging re sults in decay ove r time is a myth, as 
+performance ov er time has nothing to do with time itself, but rather: 1) the behavior of the underlying asset 
+in its overall trend, 2) the path of daily returns (streaks versus seesawing action), and 3) whether the re gime 
+under which leverage is utilized is high or low volatility.  Given that higher volatility is the enemy of 
+leverage precisely because of the constant leverage trap, we next examine a systematic way of identifying 
+lower volatility regimes with higher st reak potential.  
+The Trend is Your [Downside Protection] Friend  
+While smoothing out a data series in statistics may not seem like anything groundbreaking, in the world of 
+investing not a day goes by where the market’s Moving Average isn’t referenced.  The  first analysis of 
+Moving Averages in the stock market dates all the way back to 1930.13 In their seminal work, “Technical 
+Analysis of Stock Trends,” Edwards and Magee refer to the Moving Average as a “fascinating tool” that 
+“has real value in showing the trend of an irreg ular series of figures (like a fluctu ating market) more 
+clearly.”14  They go on to define “uptrends” as periods when the price “remains above the Moving Average 
+Line” and “downtrends” as periods when the price “remains below the Moving Ave rage.” As the say ing 
+goes, the trend is your friend unt il it ends, and Moving Averages are among the most popular ways of 
+systematically identifying whether stocks are in an uptrend, or downtrend.15  
+Despite the popular notion that Moving Averages can help  an investor make more money by participating 
+in an uptrend, empirical testing suggests this view is not entirely accurate.  A trading rule which buys the 
+S&P 500 Index above its 200 -day Moving Average and sells the S&P 500 Index (rotating into 3 -month 
+Treasury bills) below its 200 -day Moving Average illustrates this point. If Moving Averages were about 
+upside returns, they should have resulted in significant outperformance during powerful bull markets like 
+those experienced in the 1990s, 2002 through 2007,  and 2009 through 2018 .16   
+As shown in Table 4, however, using a simple 200 -day Moving Average strategy in these uptrending, Bull 
+Market periods underperforms a buy and hold approach. This analys is assumes no cost to execute.   
+The differential between th e two increases once commissions, slippage, and taxes are incorporated, 
+suggesting the Moving Average strategy in practice would likely significantly underperform.  
+Table 4: S&P 500 vs. S&P 500 200 -day Moving Average Rotation (Selected Bull Markets)  
+Bull Markets  Cumulative Return  
+Time Period  S&P 500  200-day MA Rotation  
+Oct 12, 1990 - Jul 17, 1998  390.3%  303.1%  
+Oct 10, 2002 - Oct 09, 2007  120.6%  42.9%  
+Mar 10, 2009 - Sep 20, 2018  428.8%  164.4%  
+Mar 24, 2020 - Dec 31, 2020  70.2%  26.9%  
+ 
+ 
+13 See Gartley (1930).   
+14 See Edwards, Magee an d Bassetti (2007).  
+15 While there are various types of Moving Average (Simple, Exponential, Weighted, etc.), we limit our focus in this 
+paper to the simplest and most frequently used form: the Simple Moving Average. A Simple n -day Moving Average 
+is the unw eighted mean of the prior n days. We use daily closing prices of the total return series to calculate the 
+Moving Average for the S&P 500.  
+16 All data and analysis presented is total return, inclusive of dividends and interest payments.  Source for Treasury 
+bill data: http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html.    
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+8  
+  If it’s not about outperforming on the upside, what is the true value using Moving Averages to “follow the 
+trend?” As Jeremy Siegel notes in “Stocks for the Long Run,” the “major gain of the [Moving Average] 
+timing strategy is a reduction in risk.”17 We ca n see t his in Table 5 which shows how the same strategy 
+performed during Bear Market periods.  The outperformance here is sub stantial, indicating that the Moving 
+Average is more about downside protection than upside participation.  
+Table 5: S&P 500 vs. S&P  500 200 -day Moving Average Rotation (Selected Bear Markets)  
+Bear Markets  Cumulative Return  
+Time Period  S&P 500  200-day MA Rotation  
+Sep 16, 1929 - Jun 01, 1932  -86.0%  -14.7%  
+Mar 24, 2000 - Oct 09, 2002  -47.4%  -12.7%  
+Oct 09, 2007 - Mar 09, 2009  -54.9%  -9.1%  
+Feb 19, 2020 - Mar 23, 2020  -33.5%  -16.9%  
+ 
+  
+A Non -Random Walk Down Wall Street  
+Beyond being an effective risk management tool, Moving Averages also provide important clues about 
+stock market behavior. If stock prices moved in a “random walk” as was asserted by Samuelson and others, 
+trends would not persist and there would be no differentiation in behavior above and below Moving 
+Averages.18 We find that is not th e case, affirming the work of Lo and MacKinlay in a “NonRandom Walk 
+Down Wall Street.”19  
+ 
+Chart 3 shows the annualized volatility of the S&P 500 Index above and below various popular Moving 
+Average time periods, going back to October 1928.  As confirmed by Monte Carlo simulations, irrespective 
+of which Moving Average inter val is used, the underlying finding remains the same: when stocks trade 
+below their Moving Average, volatility going forward is considerably higher than when stocks trade above 
+their Moving Average.20  
+ 
+17 See Siegel (1998). See also Faber (2006) which not es a similar finding when Moving Average timing is applied to 
+Tactical Asset Allocation.  
+18 See Samuelson (1965).  
+19 See Lo and MacKinlay (2002).  
+20 We observe a similar phenomenon in other markets, including Small Cap stocks, Commodities and High Yield  
+Bonds. The Russell 2000 Index has an annualized volatility of 14.8% above its 200 -day moving average versus  
+28.6% below it (1979 -2020). The Bloomberg Commodity Index has an annualized volatility of 1 3.9% above  its 200 -
+day Moving Average versus 1 5.2% below it (1994 -2020). The Bloomberg Barclays US Corporate High Yield Index 
+has an annualized volatility of 3.6% above its 200 -day Moving average versus 8.5% below it (1998 -2020).  
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+9  
+   
+We propose that there is a fundamental underpinning to this stark differentiation in beha vior. Since 1928, 
+the U.S. economy has experienced 15 recessions, spending approximately 18% of the time in contraction. 
+In Chart 4, we see that during these recessionary periods, the S&P 500 has traded below its 200 -day Moving 
+Average 68.2%  of the time versus only 19.4%  of the time during expansions. Meanwhile, during 
+expansionary periods the S&P 500 has traded above its 200 -day Movi ng Average 80.6%  of the time versus 
+only 31.8%  of the time in recession. The uncertainty in growth and inflation expectations that coincides 
+with periods of economic weakness is in our view what leads to investor overreaction and increased beta 
+volatility.   
+                                                           
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+10  
+   
+ 
+This is important because high volatility and uncertainty have not typically been constructive for equity 
+markets. We can observe this tendency in Chart 5 which shows the significant disparity in S&P 500 returns 
+between periods when it is above and below v arious Moving Averages.  
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+11  
+   
+Viewing  the Moving Average as a volatility indicator more so than a trend identifier helps explain how 
+Moving Average strategies can underperform in strong equity bull markets. If t he market is in an unrelenting 
+up phase, a decli ne below the Moving Average result s in a sell trigger which ends up being a false positive, 
+resulting in missing out on subsequent returns for that moment in time.  Over the course of a full economic 
+and mark et cycle, however, where uptrends are interrupte d by periods of higher volatility, the Moving 
+Average can help limit equity exposure to environments which most favor return generation. The key 
+component to exploiting the Moving Average in strategy form is less about being exposed to equities above 
+it, but rather in avoiding higher equity volatility below it.   
+More so than that, Moving Averages can help investors mitigate the potential for loss aversion to result in 
+sub-optimal portfolio decision making.  Chart 6 shows that historically, the worst 1% of trading days have 
+occurred far more often than not below the Moving Average.  Included in this list are the two worst days in 
+market history: October 19th in 1987 and October 28th in 1929. Entering both of these historic days, the 
+market was already tradin g below all of its major Moving Averages (10 -day through 200 -day).  While not 
+of use for true buy and hold investors with an infinite time horizon, to the extent that Moving Averages can 
+help sidestep such extreme down days, the power of the indicator rema ins in mitigating downside more so 
+than participating in the upside.  
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+12  
+   
+Extreme down days are consistent with investor fear and overreaction, while gradual movements higher are 
+characterized by investor under reaction which is well documented in academic li terature related to 
+behavioral finance.  Important to this dynamic is the likelihood of consecutive up days depending on 
+whether the market is above or below its Moving Average.  Chart 7 illustrates that the S&P 500 is more 
+likely to experience consecutive  up days when it is above its Moving Average than below it.  
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+13  
+   
+This suggests that we should view the stock market as not simply being in a trend when above the Moving 
+Average, but rather in an environmen t which favors lower volatility and higher potential for consecutive 
+positive returns.  These are the two characteristics which are of critical importance for a strategy which 
+utilizes leverage.   
+The Leverage Rotation Strategy  
+We have established that leverage performs best when in a low volatility environment with a higher 
+probability of positive performance streaks.  By extension, it performs worst during periods of extreme 
+volatility and choppier asset class behavior.  
+With t his knowledge, our systematic Leverage Rotation Strategy (“LRS”) is as follows:  
+When the S&P 500 Index closes above its Moving Average, rotate into the S&P 500 and use leverage 
+to magnify returns.  
+When the S&P 500 Index closes below its Moving Average, r otate into Treasury bills to manage risk.  
+Before illustrating the results of the LRS, it is important to examine how an unleveraged timing strategy 
+based on the Moving Averages alone performs going back to 1928. The data is summarized in Table 6.  
+Note th at the Moving Average rule results in higher risk -adjusted performance and lower drawdowns versus 
+buy and hold, generating significant positive alpha in all Moving Average periods examined (10 through 
+200-day).  
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+14  
+  Table 6: Unleveraged Buy and Hold versus Unleveraged Moving Average Timing 
+(October 1928 – December  2020)  
+Metric  S&P 500  10-Day 20-Day 50-Day 100-Day 200-Day 
+Annual Return  9.4%  11.7%  10.4%  10.2%  10.7%  10.9%  
+Annual Volatility  18.9%  12.0%  11.6%  11.6%  12.1%  12.4%  
+Sharpe Ratio  0.32 0.68 0.6 0.58 0.59 0.59 
+Sortino Ratio  0.57 1.07 0.93 0.89 0.91 0.9 
+Max Drawdown  -86.2%  -49.5%  -46.6%  -46.6%  -46.5%  -49.5%  
+Beta 1 0.4 0.38 0.38 0.41 0.43 
+Annual Alpha  0.0%  5.3%  5.4%  5.2%  6.4%  5.7%  
+Avg Trades/Year  0 38 26 15 10 5 
+ 
+The key finding here is not about absolute return but risk -adjusted performance. To further illustrate this 
+point, the Moving Average rule beats buy -and-hold in absolute performance in only 49% of rolling 3 -year 
+periods.21 This is due to the fact that Moving Averages can whipsaw market participants in sideways or 
+trendless periods. However, the true value here is in terms of risk -adjusted outper formance, where the 
+Moving Average rule generates posit ive alpha in 69 % of rolling 3 -year periods.22  
+This is of critical importance because of the unspoken flaw in buy and hold: that almost nobody holds 
+through large drawdowns. Chart 8 illustrates drawdowns since 1928 in the S&P 500 (yellow line) and the 
+200-day timing stra tegy (blue line). During all large Bear Markets, the 200 -day strategy significantly 
+truncates the downside. This is the major value in the Moving Average: minimizing risk and increasing the 
+likelihood of sticking with a strategy over time.  
+ 
+  
+ 
+21 Average of outperformance using 10 -day, 20 -day, 50 -day, 100 -day and 200 -day Movin g Averages. 
+22 Average of rolling alpha using 10 -day, 20 -day, 50 -day, 100 -day and 200 -day Moving Averages.   
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+15  
+  While unleveraged strategies using the Moving Average as a timing indicator suggest one can achieve 
+similar returns to buy -and-hold over time but with less volatility and drawdown, the question of  how to 
+generate higher returns using the market itself can only b e answered with leverage.  
+From October 1928 through December  2020 , a buy and hold strategy using leverage (with a 1% annual 
+expense) significantly outperforms the unleveraged strategy. There is no free lunch here, though, as the 
+annualized volatility is m ultiples of the unlevered index, leading to inferior risk -adjusted performance and 
+larger drawdowns (see Table 7).  
+Table 7: Unleveraged Buy and Hold versus Leveraged Buy and Hold  
+Metric  S&P 500  S&P 500 1.25  S&P 500 2x  S&P 500 3x  
+Annual Return  9.5%  10.2%  14.4%  16.3%  
+Annual Volatility  18.9%  23.6%  37.8%  56.7%  
+Sharpe Ratio  0.32 0.29 0.29 0.22 
+Sortino Ratio  0.57 0.56 0.66 0.71 
+Max Drawdown  -86.2%  -92.4%  -98.8%  -99.9%  
+Beta 1 1.25 2 3 
+Annual Alpha (weekly)22 0.0%  -1.1%  -1.5%  -2.4%  
+ 
+While an annualized return of 16.3% for the 3x strategy sounds irresistible, the reality is that few would 
+have stuck with a return path that incurred multiple 50+% drawdowns over time  (see our discussion in the 
+later Part “Risk of Ruin”) . Leveraged buy an d hold, then, only magnifies that major flaw of buy and hold. 
+We can this more clearly in Chart 9.  
+ 
+22 The alpha computed on daily returns is naturally zero, however various compounding periods generally lead to 
+negative alphas of different amplitu de. The alpha on weekly performances is reported here. The beta also deviates 
+from the leverage factor, and one generally ends up with a lower beta than the leverage factor over the long run. On a 
+weekly basis, the beta deviation is small.  
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+16  
+   
+Alternatively, by implementing the Leverage Rotation Strategy, we can harness the power of leverage while 
+increasing the odds of an investor sticking to the strategy over time. Although shorter Moving Average 
+periods achieve similarly strong results, we wi ll narrow our focus here to the 200 -day Moving Average as 
+it incurs the fewest transaction co sts (average of 5 rotations per year) and is most applicable in time frame 
+to both traders and investors. We will also assume for th e purposes of this section a le verage fee of 1% per 
+year, which approximates the current expense ratio for the largest leveraged ETFs.23  
+As shown in Table 8, as compared to a buy and hold of the S&P 500 and leveraged buy and hold, the LRS 
+achieves: 1) improved absolute returns, 2) lower annualized volatility, 3) improved risk -adjusted returns 
+(higher Sharpe/Sor tino), 4) lower maximum drawdowns, 5) reduced Beta, and 6) significant positive alpha.  
+ 
+23 As of 2021, th e largest leveraged S&P 500 ETF has an expense ratio of 0.95%.  
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+17  
+  Table 8: Unleveraged Buy and Hold versus Leveraged Rotation Strategies (Oct 1928 – Dec 2020)  
+Metric  S&P 500  S&P 1.25x  S&P 2x  S&P 3x  S&P 1.25x  
+(200-d 
+LRS)  S&P 2x  
+(200-d 
+LRS)  S&P 3x  
+(200-d 
+LRS)  
+Annual Return  9.4%  10.2%  14.3%  16.2%  12.4%  19.0%  26.7%  
+Annual Volatility  18.9%  23.6%  37.8%  56.7%  15.5%  24.9%  37.3%  
+Sharpe Ratio  0.32 0.28 0.28 0.22 0.57 0.61 0.61 
+Sortino Ratio  0.57 0.56 0.65 0.71 0.89 0.99 1.05 
+Max Drawdown  -86.2%  -92.4%  -98.8%  -99.9%  -59.0%  -78.7%  -92.2%  
+Beta 1 1.25 2 3 0.54 0.86 1.3 
+Annual Alpha  0.0%  -1.0%  -1.0%  -1.0%  6.4%  11.0%  17.5%  
+Avg Trades/Year  0 0 0 0 5 5 5 
+ 
+Chart 10 displays the growth of $10,000 from October 1928 through December 2020 . A buy and hold of 
+the S&P 500 grows to over $ 39 million while the 1.25x, 2x and 3x LRS grow to over $ 463 million, $ 89 
+billion and $ 28 trillion respectively.  
+ 
+In Chart 11, we see that this outperformance is consistent over time and through multiple economic and 
+financial market cycles. On average, the LRS outperforms the S&P 500 in 80% of rolling 3 -year periods.  
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+18  
+   
+ 
+We also see in Table  9 that during the four worst bear markets in U.S. history, all of the Leverage Rotation 
+Strategies have a lower maxim um drawdowns than an unleveraged buy and hold of the S&P 500.  
+Table 9: Maximum Drawdown during Bear Markets, S&P 500 vs. LRS  
+Peak  Trough  S&P 500  1.25x LRS  2x LRS  3x LRS  
+09/17/1929  01/06/1932  -86.2%  -22.9%  -35.3%  -49.6%  
+12/01/1973  03/10/1974  -44.8%  -15.4%  -25.1%  -36.6%  
+05/09/2000  09/10/2002  -47.4%  -9.4%  -17.5%  -27.3%  
+10/10/2007  09/03/2009  -55.2%  -13.4%  -21.3%  -31.1%  
+02/20/2020  03/23/2020  -33.8%  -21.3%  -32.1%  -44.7%  
+ 
+Another way to view the power of minimizing drawdowns is in the time it takes to reach new highs after a 
+Bear Market. If we look at the worst Bear Markets in history, the LRS reaches new highs ahead of buy and 
+hold in every example, from 1.25x through 3x. After peaking in September 1929, a buy and hold of the 
+S&P 500 did not reach new highs until 1946, while the 1.25x and 2x LRS reached new highs ten years 
+earlier, in 1936. Using constant leverage, the 3 x S&P 500 without a rotation strategy reach ed new highs 
+after both the 2000 -02 and 2007 -09 Bear Markets  only in December 2016 respectively in October 2014  (see 
+Table 10), illustrating the strong need for timing leverage in different volatility regimes.  Unlike in previous 
+corrections, after the low in March 2020, the LRS took longer to catch up to previous heights , avoiding 
+much of the volatility of 2020. The 2020 volatilities of all LRS were about half the volatilities of the ir buy 
+and hold counterparts, at  the cost of slightly reduced returns ( the 2x S&P 500 gained +22.6% at an 
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+19  
+  annualized volatil ity of 68.9% versus the 2x LRS +16.9% at 34.2% volatility, and the 3x +12.5% at 103.3% 
+volatility versus the 3x LRS +21% at 51.3% volatility) . 
+Table 10: Bear Market s and New High Dates, S&P 500 vs. LRS  
+Worst 4  Bear Markets  New Highs By  
+Bear Market Period  Bull Market 
+Peak  S&P 500  S&P 1.25x  S&P 2x  S&P 3x  
+1929 -32 (Buy and Hold)  09/16/1929  01/28/1946  09/18/1950  03/18/1954  10/07/1958  
+1929 -32 (200 -day LRS)  09/16/1929  01/31/1936  04/02/1936  10/30/1936  01/08/1945  
+1973 -74 (Buy and Hold)  01/11/1973  07/09/1976  12/31/1976  08/04/1978  08/10/1979  
+1973 -74 (200 -day LRS)  01/11/1973  02/05/1975  02/13/1975  03/04/1975  03/17/1975  
+2000 -02 (Buy and Hold)  03/24/2000  10/23/2006  04/20/2007  08/01/2013  12/08/2016  
+2000 -02 (200 -day LRS)  03/24/2000  11/03/2003  12/18/2003  01/05/2004  01/21/2004  
+2007 -09 (Buy and Hold)  10/09/2007  04/02/2012  02/08/2013  08/01/2013  10/31/2014  
+2007 -09 (200 -day LRS)  10/09/2007  08/21/2009  08/21/2009  09/08/2009  09/10/2009  
+2020 (Buy and Hold)  02/19/2020  08/10/2020  08/24/2020  09/02/2020  N/A 
+2020 (200 -day LRS)  02/19/2020  11/16/2020  11/16/2020  12/01/2020  12/04/2020  
+ 
+Risk of Ruin  
+  
+Leverage bears the risk of substantial loss and possible total ruin. As was shown in Table 7, fo llowing a 
+buy-and-hold strategy using da ily leverage resulted in a maximum drawdown in April 1942 of -99.9% for 
+the 3x and -98.8% for the 2x. An investment of $10,000 using the 3x buy -and-hold at the all -time-heigh in 
+September 1929 would have dropped to just $5.74 by 1942, a theoretical amount, as an investor would most 
+probably have given up long before reaching that. Only by January 1960 the 3x investment would have 
+recovered to the initial $10,000 (which r equired an incredible gain of 174,037%), and by December 2020 
+the value would reach $3,6 billion, outperforming the unleveraged by more than the leverage factor ..If an 
+investor abandon s a strategy given a loss that exceeds his drawdown tolerance, this strategy fail s, even if in 
+hindsight massive gains were to come. For many investors, the down tolerance might be  related to  the initial 
+investment, e.g. -50%, -70%, or -90%. Once below, the investor  abandons,  and any chance of  recovery 
+disappears . 
+Logically, t he chance of running into ruin is the highest when investing at all -time-height , just before a 
+correction . This is ev en amplified when applying leverage just before a correction. This is what is seen in 
+the drawdowns  in Chart 9. The 3x leveraged S&P 500 fe ll below -90% from  October 1930 to March 1954, 
+in October 2002, and October 200 7 to August 2008. Other major drawdowns occurred in 1974 ( -86%), and 
+1987 ( -79%) , as seen in the introduction, mainly driven by the high volatility effect . 
+The proposed Moving A verage based LRS aims to avoid the extreme corrections, i.e. reducing the 
+drawdowns. The 3x LRS has extreme drawdowns similar to the unleveraged S&P 500, while the 2x LRS 
+generally shows maximum drawdowns not exceeding the S&P 500. This is seen in Chart 12  (and in Tables 
+9 and 10 ). 
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+20  
+   
+Modern Day Implementation   
+  
+Going back to 1928, executing the Leverage Rotation Strategy as outlined would have been hampered by 
+higher transaction costs, increased slippage, and higher costs of leverage. In today’s market, all of these 
+issues have been minimized. Transaction costs a nd slippage are considerably less and the cost of leverage 
+has decreased substantially , and most importantly, one is not required to re -leverage daily manually, as 
+there are daily -leveraged products available . Currently, the lowest cost and most efficient way to replicate 
+the strategies discussed in this paper (for most investors) are through S&P 500 leveraged ETFs.  
+The results for the 200 -Day Moving Average LRS using leveraged ETFs (2x SSO and 3x UPRO) are given 
+in Tables 11 and 12. Different than discuss ed, we hold cash during risk -off periods (and not a T -Bill tracking 
+product, e.g. the 1 -3 Month Treasury ETF “BIL”).  
+The performance figures are slightly below the theoretical computed performances using the S&P 500 index 
+total returns, likely due to a neg ative leverage premium (performance lag) in the leveraged ETFs. Still and 
+as argued before, all metrics show a clear risk -adjusted improvement over a buy -and-hold leveraged 
+strategy.  
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+21  
+  Table 11: Unleveraged Buy and Hold versus Leveraged Rotation Strategies u sing 
+Leveraged ETFs (Jul 2006 – Dec 2020)  
+Metric  S&P 500  S&P 500 2x  SSO  S&P 500 2x 
+(200-d 
+LRS)  SSO  
+(200-d 
+LRS)  
+Annual Return  10.1%  15.1%  13.2%  14.6%  13.2%  
+Annual Volatility  20.5%  41.0%  39.9%  23.6%  23.4%  
+Sharpe Ratio  0.44 0.34 0.3 0.57 0.52 
+Sortino Ratio  0.73 0.73 0.68 0.89 0.81 
+Max Drawdown  -55.2%  -83.9%  -84.7%  -37.6%  -37.5%  
+Beta 1 2 1.94 0.66 0.65 
+Annual Alpha  0.0%  -1.0%  -1.0%  11.6%  11.0%  
+ 
+Table 11: Unleveraged Buy and Hold versus Leveraged Rotation Strategies using Leveraged ETFs  
+(Jul 2009 – Dec 2020)  
+Metric  S&P 500  S&P 500 
+2x SSO  S&P 500 
+3x UPRO  S&P 500 
+2x (200 -d 
+LRS)  SSO 
+(200-d 
+LRS)  S&P 500 
+3x (200 -d 
+LRS)  UPRO 
+(200-d 
+LRS)  
+Annual Return  15.3%  27.7%  26.4%  38.3%  35.4%  18.4%  17.4%  26.3%  24.2%  
+Annual 
+Volatility  17.5%  34.9%  34.6%  52.4%  51.9%  24.7%  24.5%  37.1%  36.8%  
+Sharpe Ratio  0.85 0.77 0.75 0.72 0.67 0.72 0.68 0.69 0.64 
+Sortino Ratio  1.23 1.21 1.17 1.23 1.17 1.07 1.02 1.1 1.03 
+Max 
+Drawdown  -33.8%  -59.1%  -59.3%  -76.6%  -76.8%  -37.6%  -37.5%  -51.5%  -51.2%  
+Beta 1 2 1.98 3 2.96 1 0.99 1.5 1.48 
+Annual Alpha  0.0%  -1.0%  -1.2%  -1.0%  -1.6%  5.4%  5.1%  8.7%  8.0%  
+ 
+   
+Conclusion  
+  
+Since 1928, the highest source of real returns in any asset class by far has come from the stock market. 
+This is true in spite of the Great Depression of 1929 through 1933 and in spite of the 13 recessions 
+thereafter. Through wars, disasters and political turmoil, stocks have been the best vehicle to not only 
+keep up with inflation but far surpass it.  
+  
+The tremendous wealth generation from stocks over this period, averaging over 9% annualized returns, 
+makes a buy and hold strategy of the S&P 500 extremely  difficult to beat. Beyond this, the Efficient 
+Market Hypothesis maintains that it is impossible to consistently outperform the market while Random 
+Walk theory asserts using technical indicators is futile. Finally, the CAPM states that the only way to 
+achieve a higher return is to take more risk.   
+  
+We challenge each of these theories in this paper. First, we illustrate that Moving Averages and trends 
+contain important information about future volatility and the propensity for streaks in performance. Next,  
+we show that using Moving Averages to time the market achieves a similar to higher return with less risk. 
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+22  
+  Lastly, we show Leverage Rotation Strategies which use a systematic rule to consistently outperform the 
+market over time.  
+  
+The key to this outperfo rmance is understanding the conditions that help and hurt leverage in the long 
+term. We show that it is higher volatility and seesawing market action which is most harmful to leverage. 
+On the other hand, low vol atility periods with positive streaks in perf ormance are most helpful. Moving 
+Averages are one way of systematically identifying these conditions. When the stock market is in an 
+uptrend (above its Moving Average), conditions favor leverage  as volatility declines and there are more 
+positive streaks in  performance. When the stock market is in a downtrend (below its Moving Average), 
+the opposite is true as volatility tends to rise.   
+ 
+Moving Averages are used in this paper as they are simple signals for upcoming market volatility. Besides 
+other Moving Av erage periods than the 200 -Days discussed in this paper, other Risk -On/Risk -Off signals 
+might be applied. In our “2014 Charles H. Dow Award ” winning paper “ An Intermarket Approach to Beta 
+Rotation ,” we look at relative 4 -week rolling returns of Utilities sector versus the broad market, a leading 
+signal for market corrections, but also volatility spikes. In our “ 2014 Wagner Award, 3rd Place ” winning 
+“An Intermarket Approach to Tactical Risk Rotation ,” relative short to long Treasury index returns are 
+used to predict bullish versus bearish markets (incepted by spikes in the yield spreads). Lastly, in the 
+“2015 NAAIM Founders Award ” winning paper “ Lumber: Worth Its Weight in Gold Offense and Defense 
+in Active Portfolio Management ”, we find that the L umber/Gold return ratio is a strong leading indicator 
+for market stress and heightened volatility. As market corrections, volatility, and High Yield spreads come 
+hand -in-hand, a wide variety of such signals could be used. The described mechanism that volat ility hurts 
+leverage is what matters the most.  
+  
+We find that being exposed to equities with leverage in an uptrend and rotating into risk -free Treasury 
+bills in a downtrend leads to significant outperformance over time. For investors and traders seeking a  
+destination with higher returns who are willing to take more risk at the right time, systematic leverage for 
+the long run is one way of moving there, on average.  
+  
+Further Research  
+  
+While outside the scope of this paper, our conclusions have important implications for further areas of 
+research. These include: 1) timing of leverage in asset classes outside of equities, 2) determining if volatility 
+predictors in one asset class can be u sed to time leverage in another, and 3) determining if other technical 
+indicators which are predictors of volatility yield similar results. We look forward to exploring these issues 
+in upcoming papers.  
+      
+References   
+  
+Asness, Clifford S., Andrea Frazz ini, and Lasse Heje Pedersen, 2012, Leverage Aversion and Risk Parity, 
+Financial Analysts Journal.   
+Baker, Nardin L. and Robert A. Haugen, 2012, Low Risk Stocks Outperform within All Observable Markets 
+of the World .   
+Electronic copy available at: https://ssrn.com/abstract=2741701
+ 
+ 
+23  
+  Blitz, David and Pim V. Vliet, 2007, T he Volatility Effect: Lower Risk Without Lower Return, Journal of 
+Portfolio Management.   
+Edwards, Robert D., John Magee, and W.H.C. Bassetti, 2007, Technical Analysis of Stock Trends, CRC 
+Press.  
+Faber, Mebane T., 2007, A Quantitative Approach to Tactical Asset Allocation, The Journal of Wealth 
+Management.  
+Fama, Eugene F. and Kenneth R. French, 1992, The Cross -Section of Expected Stock Returns, The Journal 
+of Finance.   
+Frazzini, Andrea and Lasse Heje  Pedersen, 2012, Betting Against Beta, Swiss Finance Institute Research 
+Paper.  
+Gartley, H. M., 1930, Profits in the Stock Market, Lambert Gann Publishing.   
+Gayed, Michael A., 2014, An Intermarket Approach to Beta Rotation - The Strategy, Signal and Power  of 
+Utilities, Social Science Research Network   
+Gayed, Michael A., 2014, An Intermarket Approach to Tactical Risk Rotation - Using the Signaling Power 
+of Treasuries to Generate Alpha and Enhance Asset Allocation, Social Science Research Network   
+Gayed, Michael A., 2015, Lumber: Worth Its Weight in Gold - Offense and Defense in Active Portfolio 
+Management, Social Science Research Network  
+Grinblatt, Mark, and Tobias J. Moskowitz, 2003, Predicting Stock Price Movements from Past Returns: The 
+Role of Consistency and Tax -Loss Selling, The Journal of Financial Economics.  
+Jacobs, Bruce I. and Kenneth N. Levy, 2013, Introducing Leverage Aversion Into Portfolio Theory and 
+Practice, The Journal of Portfolio Management.  
+Jacobs, Bruce I. and Kenneth N. Levy,  2012, Leverage Aversion and Portfolio Optimality, Financial 
+Analysts Journal.  
+Jacobs, Bruce I. and Kenneth N. Levy, 2012, Leverage Aversion, Efficient Frontiers, and the Efficient 
+Region, The Journal of Portfolio Management.  
+Samuelson, Paul A., 1965, Pr oof That Properly Anticipated Prices Fluctuate Randomly, Industrial 
+Management Review.   
+Siegel, Jeremy J., 1998, Stocks for the Long Run, McGraw -Hill Education.   
+Tang, Hongfei, and Xiaoqing Eleanor Xu, 2011, Solving the Return Deviation Conundrum of Lever aged 
+Exchange -Traded Funds, Journal of Financial and Quantitative Analysis.   
+Tolonen, Pekka, 2014, Hedge Fund Leverage and Performance: New Evidence From Multiple Leveraged 
+Share Classes, Aalto University.   
+Trainor Jr., William J., 2011, Solving the Levera ged ETF Compounding Problem, The Journal of Index 
+Investing.  
+  
+    
+Electronic copy available at: https://ssrn.com/abstract=2741701

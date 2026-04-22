@@ -1,0 +1,1105 @@
+
+--- Page 1 ---
+Agentic Artificial Intelligence in Finance: A
+Comprehensive Survey
+Irene Aldridge1*, Jolie An1†, Riley Burke1†, Michael Cao1†,
+Chia-Yi Chien1†, Kexin Deng1†, Ruipeng Deng1†, Yichen Gao1†,
+Olivia Guo1†, Shunran He1†, Zheng Li1†, George Lin1†,
+Weihang Lin1†, Percy Lyu1†, Alex Ng1†, Qi Wang1†,
+Hanxi Xiao1†, Dora Xu1†, Yuanyuan Xue1†, Sheng Zhang1†,
+Sirui Zhang1†, Yun Zhang1†, Sirui Zhao1†, Xiaolong Zhao1†,
+Yihan Zhao1†, Waner Zheng1†
+1*ORIE, Financial Engineering, Cornell University, 214 Frank L. Porter
+Hall, Ithaca, NY, 14863, USA.
+*Corresponding author(s). E-mail(s): irene.aldridge@gmail.com;
+Contributing authors: xa39@cornell.edu; rgb234@cornell.edu;
+yc849@cornell.edu; cc2889@cornell.edu; kd537@cornell.edu;
+rd639@cornell.edu; yg635@cornell.edu; qg77@cornell.edu;
+sh2662@cornell.edu; zzl2@cornell.edu; jl2969@cornell.edu;
+wl769@cornell.edu; fl466@cornell.edu; kn438@cornell.edu;
+qw297@cornell.edu; hx299@cornell.edu; dx33@cornell.edu;
+yx665@cornell.edu; sz696@cornell.edu; sz694@cornell.edu;
+yz2847@cornell.edu; sz695@cornell.edu; xz935@cornell.edu;
+yz3337@cornell.edu; wz462@cornell.edu;
+†These authors contributed equally to this work.
+Abstract
+The emergence of agentic artificial intelligence (AI) represents a fundamental
+transformation in financial markets, characterized by autonomous systems capa-
+ble of reasoning, planning, and adaptive decision-making with minimal human
+intervention. This comprehensive survey synthesizes recent advances in agentic
+AI across multiple dimensions of financial operations, including system architec-
+ture, market applications, regulatory frameworks, and systemic implications. We
+1
+
+--- Page 2 ---
+examine how agentic AI differs from traditional algorithmic trading and gener-
+ative AI through its capacity for goal-oriented autonomy, continuous learning,
+and multi-agent coordination. Our analysis shows that while agentic AI offers
+substantial potential for enhanced market efficiency, liquidity provision, and risk
+management, it also introduces novel challenges related to market stability, reg-
+ulatory compliance, interpretability, and systemic risk. Through a systematic
+review of foundational research, technical architectures, market applications, and
+governance frameworks, this survey provides scholars and practitioners with a
+structured understanding of how agentic AI is reshaping financial markets and
+identifies critical research directions for ensuring that these systems enhance both
+operational efficiency and market resilience.
+Keywords:Agentic artificial intelligence, financial markets, multi-agent systems,
+algorithmic trading, regulatory frameworks, market microstructure, autonomous
+systems
+1 Introduction
+Financial markets are experiencing a profound transformation as artificial intelli-
+gence evolves from narrow, task-specific automation toward agentic systems capable
+of autonomous reasoning, strategic planning, and adaptive coordination. Over the
+past decade, AI has progressed from rudimentary rule-based systems performing dis-
+crete functions to sophisticated multi-agent architectures that plan, learn, and act
+semi-autonomously under human oversight. This shift from automation to agency rep-
+resents more than a technological upgrade; it signals a fundamental restructuring of
+how financial decisions are made, risks are managed, and markets function.
+Agentic AI systems differ from their predecessors in three critical dimensions. First,
+they possess goal-oriented autonomy, allowing them to set intermediate objectives and
+decompose complex tasks without continuous human instruction. Second, they employ
+contextual reasoning, integrating perception, memory, and planning to adapt strategies
+based on evolving market conditions. Third, they engage in multi-agent collabora-
+tion, coordinating with other intelligent systems through structured communication
+protocols to achieve collective outcomes. These capabilities enable financial institu-
+tions to move beyond static algorithmic execution toward dynamic, adaptive decision
+ecosystems where machines handle scale and pattern recognition while humans provide
+strategic oversight and ethical judgment.
+The operational and strategic implications of agentic AI extend across multi-
+ple domains of financial markets. In trading, multi-agent reinforcement learning
+systems now replicate and enhance institutional behaviors through coordinated exe-
+cution strategies. In portfolio management, agents dynamically rebalance allocations
+based on regime detection and predictive state representations. In risk management,
+autonomous systems perform real-time stress tests and scenario analysis at scales
+previously infeasible. In compliance, agentic architectures automate regulatory mon-
+itoring while maintaining audit trails for accountability. In all of these applications,
+2
+
+--- Page 3 ---
+agentic AI is redefining how expertise, control, and accountability are distributed
+within financial institutions.
+However, this technological evolution introduces significant challenges that require
+the attention of researchers and practitioners. The opacity of multi-agent decision pro-
+cesses raises questions about interpretability and regulatory compliance. The adaptive
+nature of learning algorithms creates non-stationarity that complicates traditional
+validation and risk assessment frameworks. The interconnection of autonomous sys-
+tems across institutions amplifies the potential for correlated behaviors and systemic
+instability. The concentration of computational power and data infrastructure risks
+creating competitive asymmetries and market dependencies. Addressing these chal-
+lenges requires not only technical innovation but also fundamental rethinking of
+governance structures, evaluation methodologies, and market design principles.
+This survey provides a comprehensive synthesis of the emerging literature on agen-
+tic AI in finance, organized around four core research streams. First, we examine
+the foundational concepts that distinguish agentic systems from classical and gener-
+ative AI, establishing the definitional clarity essential for rigorous analysis. Second,
+we analyze technical architectures that enable autonomous decision-making, includ-
+ing cognitive frameworks, memory systems, reasoning modules, and communication
+protocols. Third, we review applications across key financial domains, from trading
+and portfolio optimization to risk management and regulatory compliance. Fourth,
+we assess systemic implications for market structure, including impacts on liquidity,
+price discovery, resilience, and competitive dynamics. Finally, we synthesize current
+regulatory approaches and governance frameworks, identifying critical gaps between
+technological capabilities and oversight mechanisms.
+1.1 Motivation and Scope
+The motivation for this survey stems from the recognition that agentic AI represents
+a discontinuous shift in the way financial markets operate, demanding fresh theoret-
+ical frameworks and empirical methodologies. While substantial research exists on
+algorithmic trading, machine learning in finance, and market microstructure, the liter-
+ature on truly autonomous, multi-agent financial systems remains fragmented across
+computer science, economics, and operations management. This survey bridges these
+disciplinary perspectives, providing operations management scholars with a structured
+understanding of both the technical foundations and the practical implications of
+agentic AI.
+Our scope encompasses several interconnected research areas. We review agent
+design patterns and architectures that define how autonomous systems organize
+internal components for perception, reasoning, and action. We examine multi-agent
+reinforcement learning frameworks that enable coordination and competitive strat-
+egy development. We analyze how agentic systems affect the properties of the
+microstructure of the market such as depth, resilience, and price discovery. We
+investigate regulatory frameworks and governance mechanisms designed to maintain
+accountability and stability as autonomy increases. Throughout, we emphasize the
+tension between individual optimization and collective stability, a central concern for
+operations management in complex adaptive systems.
+3
+
+--- Page 4 ---
+This survey deliberately focuses on systems that exhibit genuine
+agency—autonomy in goal formulation, adaptive learning, and strategic coordina-
+tion—rather than merely automated or predictive systems. We exclude traditional
+algorithmic trading that executes fixed strategies, basic machine learning models that
+generate predictions without autonomous action, and rule-based compliance systems
+that lack adaptive capabilities. By maintaining this focus, we isolate the unique
+challenges and opportunities presented by the evolution toward truly autonomous
+financial agents.
+1.2 Contribution and Organization
+This survey makes several contributions to the literature. First, it provides defini-
+tional clarity by distinguishing agentic AI from related concepts and establishing a
+taxonomy of agency dimensions. Second, it synthesizes technical architectures from
+computer science into frameworks accessible to operations researchers, highlighting
+decision structures relevant for system design and evaluation. Third, it systemati-
+cally reviews empirical evidence on market impacts, identifying both benefits and
+risks through the lens of market microstructure theory. Fourth, it analyzes regula-
+tory and governance challenges through the perspective of accountability mechanisms
+and mechanism design. Fifth, it identifies persistent gaps in evaluation methodologies,
+interpretability techniques, and systemic risk assessment—bridging academic research
+and practical deployment.
+The remainder of this survey is organized as follows. Section 2 establishes the foun-
+dational concepts that define agentic AI and its distinguishing characteristics. Section
+3 examines technical architectures, covering cognitive frameworks, memory systems,
+planning mechanisms, and multi-agent communication. Section 4 reviews applica-
+tions in trading, portfolio management, and risk operations. Section 5 analyzes the
+impacts of the market structure, including effects on liquidity, resilience, and competi-
+tive dynamics. Section 6 addresses regulatory landscapes and governance frameworks.
+Section 7 synthesizes the research challenges and future directions. Section 8 concludes.
+2 Foundational Concepts and Definitions of Agentic
+AI
+The concept of agentic artificial intelligence has emerged as a defining paradigm in AI
+research, representing a fundamental evolution beyond simple automation and static
+prediction models. Understanding what constitutes ”agency” in artificial systems is
+essential for analyzing how these systems differ from traditional approaches and what
+unique challenges and opportunities they present for financial markets.
+2.1 Defining Agentic AI
+The notion of ”agentic” intelligence originates from the broader concept of agency,
+which refers to an entity’s capacity to act independently and make choices. Within AI,
+agency involves a system’s ability to set goals, plan actions, learn from feedback, and
+execute decisions without continuous external input. Nisa et al. (2025) define agentic
+4
+
+--- Page 5 ---
+AI as ”AI systems capable of autonomous reasoning and goal-driven action in dynamic
+environments,” emphasizing that such systems integrate perception, planning, and
+execution to operate continuously on open-ended tasks.
+A critical distinction emerges between reactive AI systems that passively respond
+to predefined prompts and proactive agentic systems that actively formulate goals and
+decompose tasks. The taxonomy proposed in recent research distinguishes agentic AI
+from traditional AI agents along a spectrum of capability—from reactive agents that
+respond merely to stimuli to self-aware agents capable of metacognitive reasoning. The
+key differentiation is the degree of autonomy and goal formulation: agentic AI systems
+not only execute actions, but also decide what to do next based on evolving contexts.
+Recent conceptual work frames agentic AI as a natural progression from gener-
+ative models. Whereas generative AI produces content based on prompts, agentic
+AI engages in continuous reasoning and decision-making loops—decomposing tasks,
+selecting tools, and assessing intermediate outcomes. This progression from generation
+to agency represents a shift from content creation to autonomous problem-solving and
+strategic action.
+2.2 Core Characteristics of Agentic Systems
+Five core characteristics distinguish agentic AI systems from traditional automation
+and predictive models:
+Autonomy
+Autonomy is the defining characteristic of agentic AI, referring to a system’s ability
+to make independent decisions without step-by-step human guidance. This autonomy
+is both behavioral—the ability to execute tasks—and cognitive—the ability to set and
+justify goals. From a governance perspective, autonomy must coexist with account-
+ability: autonomous systems should remain interpretable and ethically aligned. This
+duality of freedom and responsibility defines the modern debate surrounding agency
+in AI and is particularly acute in financial applications where autonomous decisions
+carry significant monetary and regulatory consequences.
+Autonomy is often achieved through reinforcement learning (RL). Reinforcement
+learning reframes trading as sequential decision-making under uncertainty, directly
+optimizing risk-adjusted returns by interacting with an environment (Pippas et al.,
+2024). An agent’s objective often follows the standard formulation:
+max πE"TX
+t=0γtRt#
+(1)
+whereR tdenotes the reward at timet,γis the discount factor, andπrepresents the
+state mapping policy with actions. In trading contexts, rewards typically incorporate
+volatility-scaled returns:
+Rt=rt
+σt(2)
+ensuring that exposure decreases when volatility rises (Zhang et al., 2020). Recent
+surveys synthesize RL applications across portfolio allocation, execution, and market
+5
+
+--- Page 6 ---
+making, noting advances in policy optimization, exploration under non-stationarity,
+and reward shaping (Pippas et al., 2024). RL connects naturally to agent-based
+perspectives where multiple heterogeneous agents co-evolve and interact.
+Reasoning and Planning
+Reasoning enables agentic AI systems to infer, generalize, and make context-aware
+decisions, while planning allows them to structure multistep processes. Architectures
+such as ReAct (Reason + Act) and Reflection allow agents to deliberate before execu-
+tion, combining internal reasoning with external action. This reasoning-based planning
+distinguishes agentic systems from reactive large language models that perform one-
+shot prompt completion. Instead, these systems employ internal memory and feedback
+loops to continuously refine actions, mirroring human cognitive cycles of hypothesis
+formation, action execution, and outcome evaluation.
+Adaptability and Self-Improvement
+Agentic AI must operate in non-stationary, real-world environments where conditions
+change unpredictably. Adaptability refers to a system’s capacity to learn from environ-
+mental feedback and modify internal models accordingly. This capability is essential for
+achieving long-term competence—for example, adjusting trading strategies as market
+regimes shift or re-prioritizing risk management protocols based on emerging threats.
+Adaptability is tied to model-based reasoning, enabling agents to anticipate outcomes
+and revise behaviors proactively rather than merely reacting to observed patterns.
+This self-improvement capacity distinguishes agentic AI from static systems that rely
+solely on pre-trained parameters.
+Multi-Agent Collaboration and Tool Use
+Modern agentic AI systems often function within ecosystems rather than in isola-
+tion. Recent architectural patterns introduce coordination layers that manage multiple
+agents and external tools, allowing communication, delegation of subtasks, and inte-
+gration with databases and APIs. This distributed coordination mirrors human
+organizational structures, facilitating complex task decomposition and cooperative
+problem-solving. For instance, one agent may handle analytical reasoning while
+another executes trades, with a supervising agent coordinating their activities and
+resolving conflicts. Such multi-agent architectures enhance robustness and scalability
+by distributing cognitive and computational load across specialized components.
+Long-Term Goals and Multistep Workflows
+Unlike reactive AI that responds to immediate input, agentic AI systems pursue
+long-term objectives through multistep reasoning chains. This temporal dimen-
+sion introduces new challenges in alignment and predictability. long-term autonomy
+requires persistent memory, evaluation metrics, and feedback loops to maintain goal
+coherence over long time horizons. Architecturally, planning-reflection-execution loops
+exemplify this trait, enabling agents to maintain continuity across extended workflows
+such as continuous trading, autonomous research, or multistage data analysis. The
+ability to maintain goal-directed behavior over time is fundamental to genuine agency.
+6
+
+--- Page 7 ---
+2.3 Comparison with Classical and Generative AI
+The evolution from classical AI to agentic AI can be understood as a progressive
+shift in control, cognition, and continuity. Classical AI systems are human-driven and
+rely on explicit programming and symbolic reasoning for specific tasks. They excel
+at well-defined problems with clear rules, but struggle with ambiguity and adapta-
+tion. Generative AI represents an intermediate stage—it is prompt-driven, capable of
+producing creative output through learned statistical patterns, yet still dependent on
+human input for direction and task specification.
+In contrast, agentic AI is self-driven: it integrates reflective reasoning, long-
+term planning, and adaptive decision-making to pursue goals continuously and
+autonomously. Although generative AI excels at creating novel outputs, it lacks sus-
+tained reasoning or goal awareness beyond the immediate prompt. Agentic AI bridges
+this gap by embedding generative capabilities within reasoning frameworks, using gen-
+erative models as tools rather than endpoints. This shift represents a transformation
+from stochastic creativity to structured cognition, where the system not only gener-
+ates responses, but also evaluates their appropriateness, adjusts strategies based on
+outcomes, and maintains coherent goal-directed behavior over extended interactions.
+For financial applications, this distinction is critical. A classical algorithmic trading
+system executes predetermined strategies based on fixed rules. A generative AI sys-
+tem might predict price movements or generate investment reports based on prompts.
+However, an agentic trading system would continuously monitor markets, adapt its
+strategy based on regime changes, coordinate with other trading agents to optimize
+execution, and maintain risk controls autonomously—all while pursuing overarching
+portfolio objectives specified by human managers. This level of integration and auton-
+omy fundamentally changes the nature of human-machine collaboration in financial
+operations.
+3 Technical Architecture and System Design
+The deployment of agentic AI in financial markets requires sophisticated technical
+architectures that support autonomous reasoning, adaptive learning, and coordinated
+decision-making. This section examines the core architectural components that enable
+agentic systems to function effectively in complex financial environments, drawing on
+recent advances in cognitive architectures, memory systems, planning frameworks, and
+communication protocols.
+3.1 Cognitive Architectures for Financial Agents
+Beyond generating predictions or numeric scores, modern financial agents built on
+foundation models are designed to handle complex, multimodal inputs—such as text,
+prices, and structured financial indicators—and reason through the broader economic
+context before acting. Cognitive architecture refers to how an agent organizes its
+internal components for perception, memory, reasoning, and decision-making. It also
+describes how different roles or modules interact within a single agent or across
+multiple agents.
+7
+
+--- Page 8 ---
+Zhu et al. (2023) provide a comprehensive foundation through their Agent Design
+Pattern Catalogue, which organizes over thirty design patterns commonly used in
+foundation-model-based agents. The patterns are divided into several functional cat-
+egories: Prompting, Tool Use, Memory, Planning and Reasoning, Self-Reflection, and
+Multi-Agent Collaboration. Each pattern describes a specific way to organize the inter-
+nal modules of an agent. For example, the ReAct pattern combines reasoning and
+acting in a loop, where the agent thinks about the next step before calling a tool or
+API. The Reflection pattern adds a self-evaluation stage, allowing the agent to review
+its previous outputs and improve them.
+Wang et al. (2024) expand on these ideas through their FS-ReasoningAgent frame-
+work, which separates the reasoning process into two distinct paths: a fact reasoning
+path and a subjectivity reasoning path. The fact reasoning path handles objective
+information such as blockchain data, technical indicators, and factual news, while the
+subjectivity reasoning path focuses on investor opinions, social sentiment, and market
+mood. Each path is controlled by its own specialized sub-agent, and their outputs are
+combined by a trade decision agent. A reflection agent monitors the final results and
+adjusts how much weight to give each reasoning path in future trades. This multi-role
+setup allows the system to balance data-driven logic and sentiment-driven reasoning.
+Yu et al. (2023) introduce a different structural approach with their FINMEM
+framework, built around memory and personality. The system has three main mod-
+ules: a profiling module that defines the agent’s risk tolerance and trading style, a
+memory module divided into short-term working memory and three long-term layers
+(shallow, intermediate, and deep) that store events with different levels of importance,
+and a decision module that retrieves key memories and combines them with current
+market state. By connecting memory retrieval, reflection, and personality in one loop,
+FINMEM produces trading behavior that is more stable and interpretable over time.
+3.2 Memory Systems and Knowledge Representation
+Financial agents rely on memory systems to keep track of information over time,
+learn from past events, and use that knowledge to guide future actions. In traditional
+trading algorithms, information is often processed in short batches without long-term
+awareness. In contrast, agent-based architectures introduce structured memory sys-
+tems that allow agents to recall, summarize, and reuse context over extended periods,
+improving both performance and interpretability.
+The FINMEM framework’s memory module provides a clear example of structured
+memory design. The working memory acts as an immediate workspace, where recent
+data such as daily prices or market news are summarized before trading decisions. long-
+term memory is organized into three layers—shallow, intermediate, and deep—each
+corresponding to different time sensitivities. Daily news is deposited in the shallow
+layer, quarterly reports are in the intermediate layer, and annual reports or long-
+term performance summaries are in the deep layer. Information flows between layers
+according to importance and recency, allowing significant events to be retained longer.
+This layered structure helps agents remember both short-term trends and long-term
+fundamentals.
+8
+
+--- Page 9 ---
+Wang et al. (2024) introduce a different approach through Sequential Knowledge-
+Guided Prompting (SKGP) in their LLMFactor framework. Rather than explicit
+memory storage, the system uses prompt-chaining, where language models gener-
+ate intermediate knowledge representations before making predictions. The process
+builds background knowledge on company relationships, extracts factors from financial
+news, and combines these with textual representations of past price data. Although
+the model does not store memory across time in the traditional sense, its prompt-
+chaining structure functions as a temporary context-sensitive memory that enables
+interpretable reasoning aligned with human understanding of financial events.
+Another widely adopted mechanism is Retrieval-Augmented Generation (RAG),
+which combines an external document retriever with a generative model. This allows
+agents to dynamically access relevant information at query time rather than relying
+solely on internal memory. In financial applications, RAG might retrieve specific filings,
+earnings reports, or market news to provide context for ongoing analysis. Although
+RAG does not maintain persistent memory of past reasoning steps, it acts as an on-
+demand memory extension that improves factual grounding and reduces hallucinations
+during reasoning.
+3.3 Planning and Reasoning Modules
+The planning and reasoning modules determine how a financial agent interprets
+information, makes intermediate decisions, and takes final actions. In traditional
+quantitative systems, reasoning is often embedded implicitly in statistical models
+or reinforcement learning policies. In contrast, LLM-based agents make reasoning
+an explicit part of the architecture through structured prompts, multi-step logic, or
+role-based coordination.
+The FS-ReasoningAgent framework addresses reasoning complexity by separat-
+ing it into coordinated pathways for objective and subjective analysis. Each path is
+managed by a dedicated sub-agent, with outputs merged by a trade decision agent
+that weighs both factual and subjective evidence. A reflection agent monitors the
+results and adjusts the influence of each path over time, allowing the system to learn
+which reasoning pattern performs better under different market regimes. This struc-
+ture makes the reasoning process more interpretable and reduces overreliance on any
+single information source.
+The LLMFactor framework demonstrates sequential reasoning through its struc-
+tured prompting approach. The agent first constructs background knowledge of
+company relationships, then identifies major factors from news, and finally integrates
+this with historical price data to make predictions. Each step acts as an intermediate
+reasoning layer that feeds into the next, acting as a form of planning where the model
+decides what to recall, analyze, and synthesize. Compared with end-to-end prediction
+models, this modular reasoning improves transparency and allows users to trace how
+conclusions are reached.
+Han et al. (2024) provide empirical evidence of how reasoning structures affect
+financial analysis through multi-agent collaboration. Their study compares single-
+agent, dual-agent, and triple-agent configurations across fundamental, sentiment, and
+risk analysis tasks. The results show that the effectiveness of reasoning depends on the
+9
+
+--- Page 10 ---
+complexity of the task and the communication structure. Single agents perform best
+in simple, data-driven tasks where consistent reasoning is valuable, while multi-agent
+setups with distinct roles for data collection, evaluation, and synthesis outperform in
+complex, ambiguous tasks like risk analysis. These findings highlight how reasoning
+structures and planning hierarchies directly influence agent performance and decision
+quality.
+Zhu et al. (2023) expand reasoning architectures through patterns such as Chain-
+of-Thought, where agents produce step-by-step intermediate reasoning before action;
+ReAct, which alternates reasoning with tool use; and Simulation, where agents
+mentally explore multiple hypothetical outcomes before acting. These patterns are
+particularly relevant for financial agents that must evaluate multiple strategies under
+uncertainty. For example, simulation-style reasoning could compare several trad-
+ing actions under different macroeconomic scenarios before committing, making
+decision-making both more interpretable and more testable against market data.
+3.4 Communication Protocols Between Agents
+As financial agents evolve from isolated systems to collaborative frameworks, commu-
+nication protocols become critical to ensure that information is shared effectively and
+decisions remain coordinated. Communication refers to the structured exchange of
+messages, reasoning outputs, and intermediate analyzes between agents. Well-designed
+protocols allow agents to combine different analytical perspectives while maintaining
+stability and preventing conflicts.
+Han et al. (2024) provide a systematic analysis of communication strategies in
+financial research. Their framework compares horizontal, vertical, and hybrid col-
+laboration structures. In horizontal setups, all agents communicate equally, sharing
+reasoning steps and analyzes in open discussion. This structure performs best for
+straightforward analytical tasks where pooling independent insights increases com-
+pleteness. Hybrid structures maintain a leader agent while allowing open discussion
+among subordinates, balancing autonomy and control. Vertical communication, where
+a single leader assigns and aggregates work, outperforms others in complex analyti-
+cal tasks like risk assessment. The hierarchical design allows specialized subordinate
+agents to focus on component tasks while the leader consolidates results into unified
+decisions.
+Fang et al. (2023) advance communication through their Intention-Aware Multi-
+Agent Communication (IMAC) framework. Instead of broadcasting raw observations,
+each trading agent communicates intentions—such as planned trade volume and direc-
+tion—to other agents in multiple rounds. This allows agents to predict peers’ actions
+and adjust strategies before execution. The IMAC model employs reinforcement learn-
+ing with action-value attribution loss that measures how each agent’s communication
+contributes to team reward. In simulated trading environments, this design leads
+to more efficient coordination, reduced resource conflicts, and improved portfolio
+performance. The multi-round protocol is especially relevant for systems involving
+constrained resources like capital allocation or liquidity management, where agents
+must negotiate rather than act independently.
+10
+
+--- Page 11 ---
+Zhu et al. (2023) describe communication from an architectural perspective
+through reusable design templates including the Broadcasting Pattern, where agents
+share updates with all peers; the Negotiation Pattern, which enables cooperative
+problem-solving; and the Shared Workspace Pattern, which acts as a memory buffer
+accessible to multiple agents. These structures provide flexible building blocks for col-
+laborative financial systems. When applied to trading or portfolio optimization, these
+patterns help define whether communication is synchronous (message passing in real
+time) or asynchronous (agents updating a shared knowledge base over time).
+3.5 Technical Infrastructure and Risk Management
+The deployment of agentic AI systems requires a robust technical infrastructure that
+supports stress testing and automated scenario analysis. Tirulo et al. (2025) provide
+a systematic framework distinguishing agentic intelligence from classic automation
+through three key features: autonomy of independent decisions, flexibility when deal-
+ing with changing environments, and decision-making initiative exceeding predefined
+responses.
+Their proposed three-layer technology stack includes an Infrastructure Layer with
+edge and cloud computing for distributed processing, an Intelligence Layer with cog-
+nitive architectures and multi-agent system models, and a Decision and Learning
+Layer based on large language models and reinforcement learning algorithms. This
+architecture provides a blueprint for building automated stress testing systems capa-
+ble of operating at various scales and complexity levels. The framework emphasizes
+world models—internal simulations agents use to envision outcomes without real-world
+experimentation—allowing agents to simulate thousands of scenarios mentally before
+implementation.
+Bahrpeyma and Reichelt (2022) demonstrate multi-agent reinforcement learning
+(MARL) in dynamic environments through analysis of smart factory applications,
+which parallel financial trading in their uncertainty and coordination requirements.
+Their research shows that simulation-trained MARL-based systems must learn robust
+strategies through adversarial training and environmental perturbations. The dis-
+tributed agent architecture proves to be more suitable than centralized control
+for handling unexpected system states, where individual agents respond locally to
+failures while coordinating globally. This approach directly informs stress testing
+methodologies for financial systems.
+Lohn et al. (2023) provide a development pipeline for autonomous systems consist-
+ing of distinct testing stages: simulated laboratory tests in controlled ranges, testing
+bed validation against known scenarios, red-team testing with human opponents,
+and partial operational deployment. This progressive methodology serves as a tem-
+plate for risk management in autonomous financial systems. Their emphasis on cyber
+ranges—virtualized environments that enable automated red-teaming—illustrates how
+AI agents can explore defensive systems at machine speed, creating thousands of
+attack scenarios that are impractical for human testers. The continuous testing model
+they propose transitions from discrete phases to ongoing stress evaluation throughout
+operational life.
+11
+
+--- Page 12 ---
+Lombardo et al. (2022) demonstrate fine-grained agent-based modeling for large-
+scale scenario analysis, showing how automated policy combinations can be evaluated
+to find effective interventions across uncertainty dimensions. Their sensitivity analysis
+identifying parameters with greatest impact provides a principled approach to prior-
+itizing stress test scenarios. Applied to financial systems, this methodology enables
+automated scenario generation exploring environmental conditions, system failures,
+and adversarial behavior through combinatorial approaches, focusing on critical edge
+cases where small parameter changes cause large behavioral shifts.
+4 Applications in Financial Markets
+Agentic AI systems are being deployed across multiple domains of financial markets,
+from high-frequency trading and portfolio management to risk assessment and reg-
+ulatory compliance. This section examines key application areas where autonomous
+agents are transforming traditional financial operations, highlighting both the techni-
+cal innovations and practical challenges encountered in real-world deployments.
+4.1 Multi-Agent Trading and Game Theory
+Modern financial markets can be viewed as multi-agent systems where
+autonomous participants—high-frequency algorithms, market makers, and institu-
+tional investors—interact strategically to maximize returns under uncertainty. Game
+theory provides the mathematical foundation for analyzing such strategic interactions,
+while multi-agent reinforcement learning adds an adaptive, data-driven layer allowing
+agents to learn policies from experience.
+Classical game theory models rational agents making interdependent decisions,
+with the Nash equilibrium representing strategy profiles where no participant can
+improve utility by unilaterally changing strategy. In financial markets, this maps to
+trading equilibria where no trader can improve risk-adjusted returns given others’
+positions and expectations. However, traditional game theory assumes agents have
+perfect rationality and complete information—assumptions often violated in real mar-
+kets. Multi-agent reinforcement learning relaxes these assumptions by allowing agents
+to learn from limited observations and adapt to others’ evolving strategies.
+Zhang et al. (2023) formalize quantitative trading as a stochastic game defined by
+multiple trading agents observing the state of the shared market, taking simultane-
+ous actions, and receiving rewards as the environment changes probabilistically. Each
+agent’s reward depends on the joint action of all agents, capturing strategic inter-
+dependence. From a game-theoretic perspective, the joint policy defines a dynamic
+learning game in which each agent adapts to the’ evolving strategies of the others. This
+creates non-stationarity from any single agent’s viewpoint, undermining convergence
+guaranties of classical single agent reinforcement learning.
+Their integration of Multi-Agent Deep Deterministic Policy Gradient (MAD-
+DPG) with portfolio insurance mechanisms—specifically -specifically constant
+proportion portfolio insurance (CPPI) and Time-Invariant Portfolio Protection
+(TIPP)—demonstrates how rule-based risk constraints can be embedded within
+learning-based frameworks. The CPPI mechanism divides wealth into a protection
+12
+
+--- Page 13 ---
+floor and a cushion, with risky asset exposure proportional to the cushion. TIPP main-
+tains similar protection with time-based stabilization. By transforming neural policy
+output through these constraints before execution, the hybrid system ensures solvency
+while exploring profitable regions of action space.
+Empirical evaluation of 100 Shenzhen Stock Exchange stocks during 2018-2021
+shows that TIPP-MADDPG achieves an annual return of 9.68% with Sharpe ratio
+2.09, while CPPI-MADDPG delivers a return of 7.76% with a superior Sharpe ratio
+of 2.18 and a maximum drawdown of 6.60%. Both outperform vanilla MADDPG
+(8.22% return, 2.99 Sharpe, 12.26% drawdown), demonstrating that embedding risk
+controls directly into action space improves risk-adjusted performance while maintain-
+ing exploration. These results suggest that carefully designed MARL frameworks that
+combine constraints of the economic mechanism with adaptive learning can reproduce
+the equilibrium-like dynamics observed in real markets.
+Fang et al. (2023) advance multi-agent coordination through intention-aware com-
+munication, where agents share planned trade volumes and directions in multiple
+rounds rather than broadcasting raw observations. This allows agents to predict peers’
+actions and adjust strategies before execution. Their reinforcement learning framework
+employs action-value attribution loss measuring each agent’s communication contri-
+bution to team reward. In simulated environments, this design achieves more efficient
+coordination, reduced resource conflicts, and improved portfolio performance, partic-
+ularly relevant for capital allocation and liquidity management where agents must
+negotiate constrained resources.
+4.2 Dynamic Portfolio Management
+Portfolio management has evolved from early model-free reinforcement learning toward
+architectures that incorporate market-state awareness, regime structure, and cooper-
+ative learning. This progression reflects increasing sophistication in how autonomous
+agents balance multiple objectives—return maximization, risk control, transaction cost
+management, and diversification—under non-stationary market conditions.
+Jiang, Xu, and Liang (2017) introduced one of the first deep-enhancement learning
+frameworks for continuous portfolio rebalancing. Their design included an ensemble
+evaluator for asset scoring, a memory mechanism that captures previous weights and
+transaction costs, and an online learning procedure for incremental updating. The
+model directly mapped price histories to portfolio allocations without explicit return
+forecasting. Empirical tests on high-frequency cryptocurrency data demonstrated that
+model-free reinforcement learning can outperform traditional mean-variance bench-
+marks in volatile markets by learning allocation policies endogenously, though it lacked
+explicit mechanisms for regime recognition or exogenous signal incorporation.
+Ye et al. (2020) expanded this paradigm through State-Augmented Reinforcement
+Learning, adding asset-movement predictions derived from price and news informa-
+tion to the state space. This enables agents to infer latent market dynamics rather
+than simply reacting to observed prices. A deterministic policy-gradient method with
+differentiable transaction costs produced smooth continuous-weight allocations. Exper-
+iments on cryptocurrency and technology equities showed a significant improvement in
+cumulative return and Sharpe performance relative to equal-weight, mean-reversion,
+13
+
+--- Page 14 ---
+and baseline reinforcement learning methods, demonstrating that enriched state rep-
+resentations transition agents from reactive behavior to proactive pattern recognition
+grounded in both quantitative and semantic information.
+Wu, Guo, and Liu (2024) advanced reinforcement learning into continuous-time
+regime-switching frameworks where asset returns and volatilities evolve under hidden
+Markov states. Analytical optimization becomes infeasible under such non-stationarity,
+motivating their actor-critic algorithm for learning dynamic policies that adjust allo-
+cations across regime transitions. The learned strategies achieved smoother transitions
+and superior risk-adjusted outcomes compared to static and single-regime baselines,
+linking reinforcement learning with financial control theory, and providing theo-
+retically coherent methods for dynamic asset allocation in markets where regime
+identification is essential.
+Lee, Park, Lee, and Jung (2020) explored cooperative intelligence through their
+Multi-Agent Portfolio System where each agent learns distinct investment behavior
+shaped by different objectives or risk preferences. A diversity regularization constraint
+encouraged heterogeneous strategies, while a meta-allocator combined individual poli-
+cies into unified portfolios. long-horizon U.S. equities tests demonstrated improved
+Sharpe ratios and reduced drawdowns, especially during turbulent regimes, highlight-
+ing how multiple learning agents can collectively capture varied market signals and
+stabilize performance—an evolution from single-policy learning to coordinated decision
+intelligence.
+Recent work by Castelli, Giudici, and Piergallini (2025) emphasizes automation
+through agentic task orchestration for cryptocurrency portfolio construction, where
+specialized agents manage data loading, preprocessing, optimization, and reporting.
+While the framework is modular and transparent, the underlying optimization remains
+classical mean variance, and the agents primarily automate pipeline tasks rather than
+learn market behavior. This reflects an emerging but limited research stream focused
+on operational automation rather than extending reinforcement learning or market-
+adaptive intelligence.
+4.3 Risk-Aware Position Sizing and Portfolio Optimization
+Recent advances have shifted AI portfolio optimization from predictive error mini-
+mization to finance-based objectives that directly optimize trading outcomes. This
+evolution integrates position-level learning with allocation-level optimization, embed-
+ding risk awareness throughout the decision pipeline.
+Khubiyev et al. (2025) formalize this approach by replacing generic loss functions
+with finance-specific objectives, including Sharpe ratio, Profit and Loss (PnL), max-
+imum drawdown, and turnover penalties. Their framework treats model output as
+position vectors rather than predictions, computing per-period PnL and defining losses
+that directly optimize risk-adjusted returns. They introduce a turnover regularizer
+penalizing deviations from target rebalancing bands, ensuring models learn tradable
+positions rather than theoretically optimal but impractical allocations. This position-
+level learning paradigm reframes portfolio management as sequential control driven
+by realized outcomes rather than prediction accuracy.
+14
+
+--- Page 15 ---
+Lin et al. (2024) advance sparse portfolio construction through m-Sparse Sharpe
+Ratio Maximization, which maximizes Sharpe ratio under exact cardinality constraints
+limiting active holdings. They prove that this non-convex problem admits an equiv-
+alent quadratic program in auxiliary variables, enabling proximal-gradient methods
+with optimality guaranties under mild conditions. The sparsity constraint directly
+improves the implementability by limiting the cross-sectional footprint, whereas the
+quadratic reformulation makes the problem tractable for first-order optimization.
+This work bridges the gap between financial objectives and computational methods,
+providing theoretically grounded sparse portfolio construction.
+Pan et al. (2024) enable end-to-end decision learning through their Backward Pass
+via Quadratic Programming (BPQP) framework, which makes optimization layers
+differentiable without inverting Karush-Kuhn-Tucker systems. This is crucial when the
+layer encodes convex portfolio problems with box or linear constraints, allowing joint
+training of feature extractors and allocation rules. By creating structured quadratic
+programs whose solutions yield gradients, BPQP decouples backwards from forward
+passes, enabling efficient first-order methods. In portfolio tasks, this approach often
+improves the Sharpe ratio over two-stage predict-then-optimize baselines by optimizing
+representation and allocation jointly.
+Bongiorno et al. (2025) implement end-to-end global minimum-variance (GMV)
+estimation by encoding portfolio algebra into rotation-invariant neural architectures.
+Three learnable blocks produce lag-transformed returns, eigenvalue-cleaned correla-
+tions, and inverse marginal volatilities, combining into covariance inverse estimates.
+Training minimizes the out-of-sample variance realized directly, bypassing explicit
+covariance estimation. Although training on short horizons may induce high turnover,
+integrating the turnover regularizer from Khubiyev et al. suppresses trading inten-
+sity while maintaining variance minimization. This demonstrates how variance-driven
+allocations can be learned end-to-end while controlling execution costs.
+Sheng et al. (2025) address tail risk through CVaR-based risk parity combining
+Conditional Value-at-Risk budgeting with machine learning forecasts and dynamic
+rebalancing. Weights are chosen so CVaR contributions are balanced across assets,
+with adjustments based on predicted regime changes. Reported improvements in the
+Sharpe ratio, drawdown, and Calmar ratio over volatility parity and equal weight
+demonstrate that CVaR-driven allocations can enhance resilience when combined with
+adaptive learning. Together, these approaches—SR-driven sparsity, variance minimiza-
+tion, CVaR budgeting, and turnover control—form a comprehensive pipeline that
+integrates risk awareness throughout autonomous portfolio management.
+4.4 Transformation of Traditional Financial Institutions
+The deployment of agentic AI fundamentally transforms the way traditional financial
+institutions operate, moving beyond incremental automation toward a comprehensive
+restructuring of decision pipelines, organizational hierarchies, and risk management
+frameworks. This transformation occurs across technical, organizational, and systemic
+dimensions.
+Okpala et al. (2025) describe this evolution through ”agentic crews”—systems of
+multiple intelligent agents that plan, reason, and act semi-autonomously under human
+15
+
+--- Page 26 ---
+BPQP broadly applies across convex programs, benchmarking on non-convex prob-
+lems remains challenging, inviting further applications and convex reformulations of
+non-convex tasks.
+Future research should develop evaluation frameworks specifically designed for
+agentic financial systems, including standardized benchmarks for multi-agent trad-
+ing environments, metrics capturing system-level stability properties, and methods
+for assessing robustness across market regimes. These frameworks should balance
+competing objectives—profitability vs. stability, individual vs. collective performance,
+short-term vs. long-term outcomes—rather than optimizing single metrics. Addition-
+ally, evaluation must account for strategic manipulation: agents that perform well in
+isolated testing may behave differently when deployed alongside other strategic agents
+or when facing adversarial strategies designed to exploit their learned behaviors.
+7.2 Interpretability and Transparency Techniques
+The tension between performance and interpretability represents a fundamental chal-
+lenge for agentic AI deployment. The most accurate models often lack transparency,
+while interpretable models sacrifice performance. Arrieta et al. (2020) document that
+making AI systems more interpretable typically reduces performance by 15-30%, cre-
+ating difficult tradeoffs in high-stakes financial applications where small performance
+differences translate to substantial monetary outcomes.
+Current interpretability techniques including attention mechanisms, saliency maps,
+and counterfactual explanations provide partial insights but do not fully address
+the black-box nature of complex multi-agent systems. For systems where outcomes
+emerge from interactions between multiple learning agents, explaining why particu-
+lar outcomes occurred may be fundamentally impossible because no single component
+decided the outcome—it emerged from collective dynamics. However, the most recent
+work by Aldridge (2025) offers a holistic predictive measurement in the spirit of
+predict-then-optimize solutions.
+Future research should explore several promising directions. First, developing archi-
+tectural patterns that embed interpretability by design rather than adding it post
+hoc—for example, the FS-ReasoningAgent framework’s separation of fact-based and
+sentiment-based reasoning paths provides some intrinsic interpretability about decision
+factors. Second, create hierarchical explanation systems where the decisions of the low-
+level model remain opaque, but the higher-level strategic choices and their rationales
+are transparent. Third, developing explanation techniques specifically designed for
+multi-agent systems that can characterize emergent behaviors and collective dynamics
+rather than individual agent decisions.
+Fourth, shifting the focus from full transparency of decision processes to main-
+taining adequate outcome monitoring, audit trails sufficient for accountability, and
+clear boundaries on acceptable behavior through reward function design and hard con-
+straints. This outcome-focused approach recognizes that some degree of opacity may
+be inevitable in complex adaptive systems while maintaining sufficient oversight for
+governance. Fifth, develop tools to detect when agent behaviors deviate from expected
+patterns or violate implicit assumptions, allowing early intervention before problems
+escalate.
+26
+
+--- Page 27 ---
+7.3 Robustness and Systemic Risk Assessment
+Most of the evidence on agentic AI performance derives from simulated environments
+calibrated to stylized markets, with limited empirical validation using real-world data.
+Actual markets contain mixed populations of human traders, algorithmic strategies,
+and passive liquidity providers operating under complex latency and regulatory con-
+straints that are difficult to reproduce in models. Moreover, current reinforcement
+learning agents are optimized for private objectives such as profit or execution cost
+rather than collective outcomes such as liquidity continuity or systemic stability.
+This misalignment can produce equilibria in which individually rational agents
+collectively erode market depth and slow recovery, even though no agent intends to
+destabilize markets. Gufler, Sangiorgi, and Tarantino (2025) demonstrate how increas-
+ing the density of learning agents can lead to greater volatility, thinner liquidity, and
+slower shock recovery through feedback noise and signal contamination—a paradox
+where individual rationality produces collective fragility.
+Future research must integrate resilience directly into the design of the reward
+function, incorporate agent heterogeneity to prevent excessive correlation, and explore
+governance mechanisms that align local optimization with global stability. This
+requires developing methods for stress testing multi-agent systems that capture emer-
+gent risks not visible in individual agent testing. Tirulo et al. (2025) emphasize that
+scalable testing requires high-fidelity simulation that allows exploration of scenario
+spaces that physical testing cannot examine. Lohn et al. (2023) propose continu-
+ous testing models in which autonomous agents are challenged with new scenarios
+throughout their operational life to identify capability decay or environmental changes
+invalidating earlier validation.
+Additionally, research should address the sim-to-real gap—behavior proven suc-
+cessful in simulation may not work in production environments. This requires
+developing methods for progressive deployment with careful monitoring, maintaining
+parallel testing facilities where agents are continuously evaluated against simulated
+and captured real scenarios, and creating feedback loops enabling rapid detection and
+mitigation of unexpected behaviors. The challenge is to balance thorough testing with
+timely deployment, recognizing that some risks can only be assessed through limited
+exposure in the real-world with appropriate safeguards.
+7.4 Market Design and Mechanism Innovations
+Traditional market microstructure design treats market rules and institutions as fixed
+and analyzes participant behavior within those constraints. With agentic AI, market
+design must account for the fact that both market structure and participant behav-
+ior co-evolve. This requires developing dynamic market design principles where rules
+and incentives adapt based on observed agent behaviors to maintain desired market
+properties.
+Several research directions emerge. First, designing circuit breakers and trading
+halts that effectively address agent-driven volatility without creating gaming oppor-
+tunities or predictable patterns that agents can exploit. Traditional circuit breakers
+trigger on price moves beyond thresholds, but learning agents may learn to trade just
+27
+
+--- Page 28 ---
+below trigger levels or exploit predictable post-halt dynamics. Smart circuit break-
+ers might need to account for order flow patterns, liquidity conditions, and agent
+coordination indicators rather than just price movements.
+Second, developing dynamic fee structures that adjust based on market conditions
+and agent behaviors to maintain desired liquidity levels and discourage destabilizing
+strategies. For example, maker-taker fees that vary with current depth and volatility
+could incentivize liquidity provision when it is most needed. However, dynamic fees
+create their own challenges if agents learn to exploit fee changes or if fees become too
+complex for effective oversight.
+Third, exploring market structures that encourage heterogeneous agent popula-
+tions with diverse strategies and learning rates, preventing excessive correlation and
+maintaining stabilizing diversity. This might include requirements for strategy diver-
+sity documentation, limitations on concentration of similar algorithmic approaches, or
+incentives for smaller institutions to deploy innovative strategies. However, mandating
+diversity faces practical challenges in definition and enforcement.
+Fourth, developing coordination mechanisms that allow agents to collectively pro-
+vide market goods such as liquidity and price discovery without enabling collusive
+behavior disadvantaging other participants. This requires careful mechanism design
+balancing beneficial coordination with competitive discipline, potentially drawing on
+cooperative game theory and mechanism design principles adapted for multi-agent
+learning environments.
+7.5 Regulatory Evolution and Governance Innovation
+Current regulatory frameworks remain inadequate for agentic AI systems, with critical
+gaps in accountability attribution, explainability requirements, performance eval-
+uation standards, human oversight mechanisms, and adaptive system validation.
+Future research must develop governance frameworks that balance enabling beneficial
+innovation with maintaining market integrity and protecting participants.
+Several priority directions emerge. First, developing clear accountability frame-
+works that assign responsibility appropriately among developers, operators, and
+oversight personnel based on their respective roles and capabilities. This requires mov-
+ing beyond traditional models assuming individual decision-makers to frameworks
+appropriate for distributed systems with emergent behaviors. Liability structures must
+incentivize careful design, thorough testing, and ongoing monitoring without creating
+excessive compliance burdens that discourage innovation.
+Second, creating regulatory sandboxes and progressive deployment frameworks
+enabling controlled testing of novel agent architectures while protecting market
+integrity. Zetzsche et al. (2017) find that sandboxes are most effective when pro-
+viding clear participation criteria, maintaining appropriate oversight during testing,
+and creating pathways for scaling successful innovations. However, sandboxes alone
+cannot resolve all challenges—they work well for testing specific applications with lim-
+ited scope, but may not adequately address the systemic implications of widespread
+adoption.
+Third, developing standardized testing and certification requirements for agen-
+tic financial systems, analogous to safety certifications in other high-risk domains.
+28
+
+--- Page 29 ---
+These might include mandatory stress tests in standard scenarios, documentation of
+architectural choices and risk controls, ongoing monitoring requirements, and inci-
+dent reporting protocols. However, standardization faces challenges given the rapid
+technological evolution and diversity of applications—overly prescriptive requirements
+can constrain beneficial innovation, while overly flexible standards can not provide
+adequate assurance.
+Fourth, exploring alternative governance models such as industry self-regulation
+with regulatory oversight, public-private partnerships for developing best practices,
+and international coordination to address cross-border regulatory arbitrage. Given
+global nature of financial markets and rapid technological change, effective governance
+likely requires collaboration among technologists, market participants, regulators, and
+researchers grounded in rigorous empirical analysis mindful of both transformative
+potential and systemic risks.
+Fifth, developing continuous monitoring systems that can detect emergent risks
+in real-time as agent populations evolve and market conditions change. This requires
+moving from periodic reviews to ongoing assessment, potentially using meta-level AI
+systems to monitor market-level AI systems. However, this raises questions about who
+monitors the monitors and whether such layered oversight systems are themselves
+subject to gaming or exploitation.
+8 Conclusion
+This survey has examined the emergence of agentic artificial intelligence in financial
+markets, synthesizing recent advances across foundational concepts, technical archi-
+tectures, market applications, systemic implications, and regulatory frameworks. The
+transition from traditional automation toward truly autonomous systems represents a
+fundamental shift in how financial decisions are made, risks are managed, and markets
+function.
+Agentic AI systems are distinguished from classical and generative AI through five
+core characteristics: goal-oriented autonomy enabling independent decision-making
+without continuous human guidance, contextual reasoning integrating perception,
+memory, and planning to adapt strategies, multi-agent collaboration coordinating
+with other intelligent systems through structured communication, long-term goal
+pursuit through multistep workflows, and continuous learning and self-improvement
+in response to environmental feedback. These capabilities enable financial institu-
+tions to move beyond static algorithmic execution toward dynamic, adaptive decision
+ecosystems.
+Technical architectures for agentic financial systems have evolved toward modu-
+lar, multi-role designs with reasoning specialization and adaptive control. Cognitive
+architectures organize internal components for perception, memory, ReAoning, and
+decision-making, with patterns such as ReAct that combine reasoning and action in
+loops, reflection that enables self-evaluation, and tool use that connects agents to
+external data sources. Memory systems provide continuity through layered structures
+that maintain short-term working memory and long-term contextual knowledge. The
+planning and reasoning modules determine how agents interpret information through
+29
+
+--- Page 30 ---
+coordinated pathways, sequential prompting, or simulation-based exploration. Com-
+munication protocols enable effective information sharing between agents through
+horizontal, vertical, or hybrid collaboration structures.
+Applications in financial markets demonstrate substantial potential for improved
+efficiency and risk management alongside novel challenges. In trading, multi-agent rein-
+forcement learning systems integrate game-theoretic principles with adaptive learning,
+achieving improved risk-adjusted returns through coordinated strategies and embed-
+ded risk controls. In portfolio management, agents dynamically rebalance allocations
+based on market-state awareness, regime detection, and cooperative learning, with
+recent advances optimizing finance-based objectives directly rather than prediction
+accuracy. In risk management, autonomous systems perform real-time stress tests
+and scenario analysis at unprecedented scales. In compliance, agentic architectures
+automate regulatory monitoring while maintaining audit trails for accountability.
+The impacts of the market structure show that agentic AI transforms the
+fundamental properties of financial markets. Market depth and resilience become
+endogenous outcomes of co-adaptation as each agent’s learning modifies the envi-
+ronment faced by others. When agent density increases, exploration strategies and
+adaptive feedback loops can generate systemic externalities, producing higher volatil-
+ity, thinner liquidity, and slower shock recovery—a paradox in which individual
+rationality leads to collective fragility. Price discovery mechanisms change as multi-
+ple learning agents extract signals from similar data sources, potentially accelerating
+information incorporation but also creating excess co-movement and self-reinforcing
+cycles. Liquidity provision by autonomous market makers can improve depth and
+spreads during normal conditions but becomes fragile during stress periods when
+agents simultaneously withdraw. Competitive dynamics shift to concentration as insti-
+tutions with substantial computational resources, proprietary data, and technical
+expertise develop more sophisticated systems, potentially reducing strategy diversity
+and creating technological oligopolies.
+Regulatory frameworks reveal critical gaps between current oversight mechanisms
+and the capabilities of autonomous systems. Accountability attribution becomes
+problematic when decision-making is distributed across multiple specialized compo-
+nents that produce emergent outcomes. Explainability requirements face fundamental
+tradeoffs: making systems more interpretable typically reduces performance by 15-
+30%, while the most accurate models remain largely opaque. Performance evaluation
+standards lack consensus for systems operating with broader autonomy. Human
+oversight mechanisms designed for traditional algorithmic trading poorly fit archi-
+tectures making thousands of micro-decisions per second. Adaptive learning systems
+that continuously modify strategies challenge assumptions about system stability and
+validation. These gaps create regulatory uncertainty that inhibits investment and
+deployment, disproportionately affecting smaller institutions with limited resources
+for speculative development. Research challenges span technical, methodological, and
+institutional dimensions. Evaluation methodologies must move beyond single-agent
+prediction accuracy toward frameworks that capture system-level properties such as
+market stability, liquidity provision, and robustness to regime changes. Interpretabil-
+ity techniques must balance performance with transparency, potentially shifting focus
+30
+
+--- Page 31 ---
+from full decision-process transparency to adequate outcome monitoring and behav-
+ioral boundaries. Robustness assessment must integrate resilience into reward function
+design, incorporate agent heterogeneity, and explore governance mechanisms align-
+ing local optimization with global stability. Market design must evolve to account
+for co-evolution between structure and behavior, developing dynamic rules and incen-
+tives maintaining desired properties as agents adapt. Regulatory innovation must
+create appropriate accountability frameworks for distributed systems, develop stan-
+dardized testing and certification requirements, and enable progressive deployment
+with adequate safeguards.
+The path forward requires sustained collaboration among technologists, market
+participants, regulators, and researchers. Agentic AI offers substantial potential for
+enhanced market efficiency, liquidity provision, and risk management—but realizing
+these benefits while maintaining stability requires deliberate governance frameworks
+grounded in transparency, explainability, and shared accountability. The future of
+financial markets will depend not only on the sophistication of autonomous systems
+but also on the integrity of their integration and the effectiveness of human oversight.
+This survey has sought to provide operations management scholars and practi-
+tioners with a structured understanding of how agentic AI is transforming financial
+markets. By synthesizing foundational concepts, technical architectures, applications,
+market impacts, and governance challenges, we have identified both the transforma-
+tive potential and the significant risks of autonomous financial systems. The central
+insight is that agentic AI represents not merely an incremental technological advance
+but a fundamental shift in the structure of the market that requires new theoretical
+frameworks, empirical methodologies and governance mechanisms.
+As markets continue their transition toward increasingly autonomous opera-
+tion, the challenge is not to prevent or reverse this evolution, but to guide it
+toward outcomes that enhance both efficiency and resilience. This requires sustained
+interdisciplinary research that combines computer science, economics, operations
+management, and regulatory expertise—grounded in rigorous empirical analysis and
+mindful of both the transformative potential and the systemic risks of agentic AI in
+finance.
+9 References
+Abou Ali, A., and Dornaika, F. (2024). Hybrid decision ecosystems: Human–machine
+collaboration in financial intelligence systems. Journal of Computational Finance,
+28(1), 55–73.
+Aldridge, I. (2025). Predicting Black Box Performance. Preprint, available on
+SSRN.
+Alkazzi, J.-M., and Okumura, K. (2024). A comprehensive review on leveraging
+machine learning for multi-agent path finding. IEEE Access, 12, 57390–57409.
+Almgren, R. and Chriss, N. (2000). Optimal execution of portfolio transactions.
+Journal of Risk, 5–39.
+Arrieta, A. B., D´ ıaz-Rodr´ ıguez, N., Del Ser, J., Bennetot, A., Tabik, S., Bar-
+bado, A., Garc´ ıa, S., Gil-L´ opez, S., Molina, D., Benjamins, R., Chatila, R., and
+31
+
+--- Page 32 ---
+Herrera, F. (2020). Explainable Artificial Intelligence (XAI): Concepts, taxonomies,
+opportunities and challenges toward responsible AI. Information Fusion, 58, 82-115.
+https://doi.org/10.1016/j.inffus.2019.12.012
+Axelsen, H., Licht, V., and Damsgaard, J. (2025). Agentic AI for financial crime
+compliance. arXiv preprint arXiv:2509.13137. https://arxiv.org/abs/2509.13137
+Bahoo, S., Cucculelli, M., Goga, X., and Mondolo, J. (2024). Artificial intelligence
+in finance: A comprehensive review through bibliometric and content analysis. SN
+Business & Economics, 4(2), 23.
+Bahrpeyma, F., and Reichelt, D. (2022). A review of the applications of multi-agent
+reinforcement learning in smart factories. Frontiers in Robotics and AI, 9, 1027340.
+Bao, W., and Liu, X. (2019). Multi Agent Deep Reinforcement Learning for
+Liquidation Strategy Analysis. arXiv preprint arXiv:1906.11046.
+Bongiorno, C., Manolakis, E., and Mantegna, R. N. (2025). End-to-End Large Port-
+folio Optimization for Variance Minimization with Neural Networks through Covari-
+ance Cleaning. arXiv preprint arXiv:2507.01918. https://arxiv.org/abs/2507.01918
+Boudt, K., Carl, P., and Croux, C. (2013). Asset allocation with conditional value-
+at-risk budgets. Working paper. https://lirias.kuleuven.be/retrieve/235309
+Castelli, M., Giudici, P., and Piergallini, E. (2025). Building crypto portfolios with
+agentic AI. arXiv preprint arXiv:2507.20468.
+De La Fuente, N., Noguer Alonso, M., and Casadell` a, G. (2024). Game theory and
+multi-agent reinforcement learning: From Nash equilibria to evolutionary dynamics.
+arXiv preprint arXiv:2412.20523.
+Dicks, M., Paskaramoorthy, A., and Gebbie, T. (2024). A Simple Learning Agent
+Interacting with an Agent Based Market Model. Working paper.
+Fang, Y., Tang, Z., Ren, K., Liu, W., Zhao, L., Bian, J., Li, D., Zhang,
+W., Yu, Y., and Liu, T.-Y. (2023). Learning multi-agent intention-aware commu-
+nication for optimal multi-order execution in finance. In Proceedings of the 29th
+ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD ’23).
+https://doi.org/10.1145/3580305.3599856
+Gozman, D., Liebenau, J., and Mangan, J. (2018). The innovation
+mechanisms of fintech start-ups: Insights from SWIFT’s Innotribe com-
+petition. Journal of Management Information Systems, 35(1), 145-179.
+https://doi.org/10.1080/07421222.2018.1440766
+Gufler, D., Sangiorgi, F., and Tarantino, E. (2025). (Deep) Learning to Trade: An
+Experimental Analysis of AI Trading and Market Outcomes. SSRN Working Paper.
+Huang, Y., Zhou, C., Cui, K., and Lu, X. (2024). A multi-agent reinforcement
+learning framework for optimizing financial trading strategies based on TimesNet.
+Expert Systems with Applications, 237, 121502.
+IBM. (2024). Accountability and Risk Matter in Agentic AI. IBM Australia & New
+Zealand Newsroom.
+Jiang, Z., Xu, D., and Liang, J. (2017). A deep reinforcement learning framework
+for the financial portfolio management problem. arXiv preprint arXiv:1706.10059.
+Jingrong, H., Shan, H., Zhaobin, C., Yu, L., and Yingying, L. (2024). AI-driven
+digital transformation in banking: A new perspective on operational efficiency and
+risk management. Information Systems and Economics, 5(1), 82–90.
+32
+
+--- Page 33 ---
+Khubiyev, K., Semenov, M., and Podlipnova, I. (2025). Finance-Grounded
+Optimization For Algorithmic Trading. arXiv preprint arXiv:2509.04541.
+https://arxiv.org/abs/2509.04541
+Kute, D. V., Pradhan, B., Shukla, N., and Alamri, A. (2021). Deep
+learning and explainable artificial intelligence techniques applied for detect-
+ing money laundering—A critical review. IEEE Access, 9, 82300-82317.
+https://doi.org/10.1109/ACCESS.2021.3086230
+Lee, H., Park, K., Lee, J., and Jung, K. (2020). MAPS: Multi-agent reinforcement
+learning-based portfolio management system. arXiv preprint arXiv:2003.01820.
+Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., K¨ uttler,
+H., Lewis, M., Yih, W.-T., Rockt¨ aschel, T., Riedel, S., and Kiela, D. (2020).
+Retrieval-augmented generation for knowledge-intensive NLP tasks. arXiv preprint
+arXiv:2005.11401.
+Li, S., Xu, Z., Cheng, L., Liu, Y., Li, J., Yu, R., Liang, Y., and Zhang, J.
+(2023). Enhancing investment analysis: Optimizing AI-agent collaboration in financial
+research. arXiv preprint arXiv:2312.11364.
+Lin, Y., Lai, Z.-R., and Li, C. (2024). A Globally Optimal Portfo-
+lio for m-Sparse Sharpe Ratio Maximization. arXiv preprint arXiv:2410.21100.
+https://arxiv.org/abs/2410.21100
+Lohn, A., Knack, A., Burke, A., and Jackson, K. (2023). Autonomous cyber
+defence: A roadmap from lab to OPS. Center for Emerging Technology and Security.
+Lombardo, G., Pellegrino, M., Tomaiuolo, M., Cagnoni, S., Mordonini, M.,
+Giacobini, M., Cazzaniga, P., Merelli, I., Besozzi, D., and Montagna, S. (2022). Fine-
+grained agent-based modeling to predict Covid-19 spreading and effect of policies
+in large-scale scenarios. IEEE Journal of Biomedical and Health Informatics, 26(5),
+2052–2062.
+Moody’s Analytics. (2024). Agentic AI in Financial Services: Enabling Institutions
+to Move from Rule-Based Automation to Intelligent Decision Augmentation. New
+York: Moody’s Analytics.
+Nisa, U., et al. (2025). Agentic AI: The Age of Reasoning—A Review. Journal of
+Automation and Intelligence.
+Niu, L., Deng, X., Zhang, X., and Yang, Y. (2023). IMM: An Imitative Rein-
+forcement Learning Approach with Predictive Representation Learning for Automatic
+Market Making. arXiv preprint arXiv:2310.10936.
+Noguer Alonso, M., and Mfougouon Njupoun, A. (2024). Game theory and multi-
+agent reinforcement learning: A mathematical overview. Artificial Intelligence Finance
+Institute.
+Okpala, C., Bester, C., and Team. (2025). Agentic AI Systems Applied to Tasks
+in Financial Services: Modeling and Model Risk Management Crews. arXiv preprint
+arXiv:2502.05439.
+Pan, J., Ye, Z., Yang, X., Yang, X., Liu, W., Wang, L., and Bian, J. (2024). BPQP:
+A Differentiable Convex Optimization Framework for Efficient End-to-End Learning.
+arXiv preprint arXiv:2411.19285 (NeurIPS 2024). https://arxiv.org/abs/2411.19285
+Parsons, S., and Wooldridge, M. (2000). Game theory and decision theory in multi-
+agent systems. Autonomous Agents and Multi-Agent Systems. Pendharkar, P. C.
+33
+
+--- Page 34 ---
+(2012). Game theoretical applications for multi-agent systems. Expert Systems with
+Applications, 39(1), 273–279.
+Pippas, N., Kasnesis, P., Demestichas, K., Peppas, P., and Kehagias, D.
+(2024). The evolution of reinforcement learning in quantitative finance: A survey.
+arXiv:2408.10932. https://arxiv.org/abs/2408.10932
+Rockafellar, R. T., and Uryasev, S. (2000). Optimiza-
+tion of Conditional Value-at-Risk. Journal of Risk, 2, 21–41.
+https://sites.math.washington.edu/ rtr/papers/rtr179-CVaR1.pdf
+S&P Global. (2025). Beyond Automation: Agentic AI and Scaling Fragmented
+Financial Markets. New York: S&P Global Research Insights.
+Sheng, J., Chen, L., Chen, H., and An, Y. (2025). CVaR-based risk par-
+ity model with machine learning. Pacific-Basin Finance Journal, 93, 102857.
+DOI:10.1016/j.pacfin.2025.102857
+Tirulo, A., Yadav, M., Lolamo, M., Chauhan, S., Siano, P., and Shafie-
+khah, M. (2025). Beyond automation: Unveiling the potential of agen-
+tic intelligence. Renewable and Sustainable Energy Reviews, 226, 116218.
+https://doi.org/10.1016/j.rser.2025.116218
+Tucker, M., Balch, T., and Veloso, M. (2024). ABIDES MARL: A Multi Agent
+Reinforcement Learning Environment for Studying Market Dynamics and Liquidity
+Resilience. Working paper.
+Wang, L. and Pan, Q. (2025). Game-theoretic multi-agent reinforcement learning
+for economic resource allocation optimization. Informatica, 49(2), 219–234.
+Wang, Y., Zhou, Y., Luo, Y., Qian, L., Hu, J., Li, J., and Zhang, Y. (2024). LLM-
+Factor: Extracting profitable factors through prompts for explainable stock movement
+prediction. arXiv preprint arXiv:2402.10755.
+Wang, Z., Li, X., Ma, J., and Zhang, Y. (2024). Enhancing LLM trading
+performance with fact-subjectivity aware reasoning. arXiv preprint arXiv:2401.10392.
+World Economic Forum. (2024). How Agentic AI Will Transform Financial Services
+with Autonomy, Efficiency, and Inclusion. Geneva: World Economic Forum.
+Wu, L., Guo, X., and Liu, Y. (2024). Reinforcement learning for continuous-time
+mean-variance portfolio selection in a regime-switching market. Journal of Economic
+Dynamics and Control, 165, 105073.
+Ye, Y., Pei, H., Wang, B., Chen, P.-Y., Zhu, Y., Xiao, J., and Li, B. (2020).
+Reinforcement-learning based portfolio management with augmented asset-movement
+prediction states. AAAI Conference on Artificial Intelligence, 34(2), 1462–1469.
+Yu, Y., Li, H., Chen, Z., Jiang, Y., Li, Y., Zhang, D., Liu, R., Suchow, J. W., and
+Khashanah, K. (2023). FINMEM: A performance-enhanced LLM trading agent with
+layered memory and character design. arXiv preprint arXiv:2311.13743.
+Zetzsche, D. A., Buckley, R. P., Arner, D. W., and Barberis, J. N.
+(2017). Regulating a revolution: From regulatory sandboxes to smart reg-
+ulation. Fordham Journal of Corporate & Financial Law, 23(1), 31-103.
+https://ir.lawnet.fordham.edu/jcfl/vol23/iss1/2
+Zhang, H., Shi, Z., Hu, Y., Ding, W., Kuruo˘ glu, E. E., and Zhang, X.-P. (2023).
+Optimizing trading strategies in quantitative markets using multi-agent reinforcement
+learning. Shenzhen International Graduate School, Tsinghua University.
+34
+
+--- Page 35 ---
+Zhang, Z., Zohren, S., and Roberts, S. (2020). Deep reinforcement
+learning for trading. Journal of Financial Data Science, 2(2), 25-40.
+https://doi.org/10.3905/jfds.2020.1.035
+Zhao, H., Liu, Z., Wu, Z., Li, Y., Yang, T., Shu, P., Xu, S., Dai, H., Zhao, L., and
+Mai, G. (2024). Revolutionizing finance with LLMs: An overview of applications and
+insights. arXiv preprint arXiv:2401.11641.
+Zhu, Y., Liu, S., Zhang, Z., and Wang, Y. (2023). Agent design pattern catalogue: A
+collection of architectural patterns for foundation model-based agents. arXiv preprint
+arXiv:2309.07864.
+35

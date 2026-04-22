@@ -1,0 +1,1341 @@
+1 
+ 
+ 
+The distributional consequences of Bitcoin 
+ 
+Ulrich Bindseil, Jürgen Schaaf1 
+ 
+This version: 1 November 2024 (first version: 12 October 2024) 
+ 
+ 
+Abstract:  
+The original promise of Nakamoto (2008) to provide the world with a better global means of payment 
+has not materialized. Instead, the focus has increasingly shifted to Bitcoin as an investment asset 
+promising high capital gains. Promoters of this investment vision put little effort relating Bitcoin to an 
+economic function which would justify its valuation. While most economists argue that the Bitcoin 
+boom is a speculative bubble that will eventually burst, we analyse in this paper the impact of a 
+Bitcoin-positive scenario in which its price continues to rise in the foreseeable future. What sounds 
+intuitively promising or at least not harmful is problematic: Since Bitcoin does not increase the 
+productive potential of the economy, the consequences of the assumed continued increase in value 
+are essentially redistributive, i.e. the wealth effects on consumption of early Bitcoin holders can only 
+come at the expense of consumption of the rest of society, which is impoverished. While previous 
+discussions on the redistributive effects of Bitcoin assumed that badly timed trading was a necessary 
+condition for losses, this paper shows that neither poor timing of trades nor holding Bitcoin at all are 
+necessary for being negatively affected by a Bitcoin positive scenario.  
+          
+ 
+JEL classification: E21; E25; E53; G12  
+Key-words: Bitcoin; asset price bubble; wealth effect on consumption; redistribution 
+ 
+ 
+ 
+ 
+1 Views expressed in this paper are the ones of the authors and not necessarily the ones of the ECB. We would 
+like to thank Klaus Adam, Charles-Enguerrand Coste, Troy Cross, Kelvin Low, Omid Malekan, George 
+Pantelopoulos, Dirk Schumacher, Bob Seeman, Oreste Tristani, Mika Tujula, Anton van der Kraaij, for useful 
+comments. All remaining errors are ours. The version of 1 November differs from the one of 12 October as 
+follows: (i) streamlining of text; (ii) more differentiated statements on how non-holders are affected; (iii) 
+reference added to the response by Malekan (2024); Quotation of Michael Saylor on future Bitcoin price 
+evolution. 
+
+2 
+ 
+1. 
+Introduction 
+The pseudonymous Satoshi Nakamoto published the whitepaper on Bitcoin in 2008, with the vision of 
+a global digital currency by creating a structure for making payments without a trusted third party 
+acting as intermediary. But Bitcoin's conceptual design and technology appear to have prevented this 
+vision to materialise. Even 16 years after its inception, real Bitcoin payments, i.e. effectively “on 
+chain”, are still cumbersome, slow and expensive. Moreover, its value is considered too volatile to 
+fulfil the classic functions of money, i.e. unit of account, means of payment, and store of value (Bergsli 
+et al., 2022; Chu et al. 2017; Segnon and Bekiros, 2020).  
+Bitcoin has never been used to a significant extent for legal real-world transactions (Bindseil and 
+Schaaf 2022). In El Salvador, the first country to declare Bitcoin as an official currency with legal tender 
+status in 2021, Bitcoin is not extensively used and has remained “a failure” (Perez-Obregon 2023). 
+Moreover, the El Salvadorian Chivo Wallet settles Bitcoin payments in its own central ledger and not 
+on the Bitcoin blockchain, betraying the core proposition of the Bitcoin Whitepaper and of 
+Decentralised Finance (DeFi). Many Bitcoin critiques deny a real use case within the boundaries of 
+legality: Cryptocurrencies “remain the financial product of choice among financial predators, 
+lawbreakers and criminals worldwide. The least harmful use would be speculation and gambling (as 
+opposed to its other uses for tax evasion, fraud, ransomware, sanctions evasion, terrorist funding, 
+narcotics trafficking, money laundering, etc.)” (Kelleher 2024).  At the same time, and maybe for this 
+reason, the Bitcoin narrative has changed gradually for some years away from the means of payment 
+idea of the Whitepaper to Bitcoin as an attractive investment, the price of which would significantly 
+increase over time (Paterson 2022). 
+The Bitcoin price has been on an unprecedented rollercoaster ride, with interim price gains of 1,000 % 
+(e.g. from spring 2020 to November 2021) but also losses of almost 80 % during the “crypto winter”: 
+After the Bitcoin price had reached a record high of around USD 69,000 in November 2021, the price 
+fell in the subsequent correction phase, which intensified over the course of 2022, to around USD 
+16,000 in November 2022. In this respect, those who got in at relatively low prices and / or sold at 
+high prices have made high profits and those who bought and held bitcoins at low prices and did not 
+sell them have high imputed profits. Opinions differ as to how sustainable the high valuation of Bitcoin 
+is and where its fair value lies. Many economists consider the fair value of Bitcoin to be zero and 
+therefore classify the Bitcoin market capitalisation as a bubble (e.g. Taleb 2021; Avoca 2021).  In 
+contrast, Bitcoin enthusiasts believe that the rally is far from having reached its ultimate peak, even 
+though they generally find it difficult to justify or even calculate both a fair value and their price 
+forecasts. 
+Section 2 will review the question of uses cases and fair valuation of Bitcoin, and the emerging 
+investment view of Bitcoin, which also gained prominence in the political debate.  
+Section 3 analyses the macro-economic issues associated with speculative increases of asset prices 
+and applies the findings from the literature to the Bitcoin-positive scenario in which Bitcoin prices 
+increases significantly for a prolonged period.  
+Section 4 turns to the redistributive aspects of Bitcoin. A number of economists (e.g. Rogoff 2017, 
+Roubini 2018, Avoca 2021, Bindseil and Schaaf 2022) have critically examined the social damage 
+associated with the wealth redistribution resulting from high volatility of the Bitcoin price or an 
+eventual burst of the assumed Bitcoin bubble: redistribution takes place that benefits those who time 
+their trades well (e.g. bought Bitcoin at an early stage when the price was low, or in the crypto winter, 
+and sold it when the price was much higher) at the expense of those with a poor timing (e.g. who 
+
+3 
+ 
+bought in November 2021 and sold during the crypto-winter, or who bought Bitcoin any time at a high 
+price and would still hold it when the price would fall to an end state of zero).2  In this paper we go 
+one step further and ignore the scenario of high price volatility or a  bursting bubble: instead, section 
+4 focuses on a type of redistribution  that occurs in particular in a Bitcoin positive scenario of 
+continuously increasing prices in the foreseeable future. Even Bitcoin-critical economists may have 
+assumed that this scenario does no harm anyone. Earlier discussions on the redistributive effects of 
+Bitcoin assumed that trading Bitcoin in a badly timed manner was a necessary condition for welfare 
+losses from Bitcoin, but this paper demonstrates that neither poor timing of trades nor holding Bitcoin 
+at all are necessary for impoverishment under a Bitcoin positive scenario. Moreover, the redistribution 
+of wealth and consumption in this scenario at the expense of latecomers and non-holders of Bitcoin 
+is not a relative one, but an absolute one.      
+Section 5 concludes accordingly that the consequences of the Bitcoin-as-an-investment vision with 
+perpetually increasing Bitcoin prices imply a corresponding impoverishment of the rest of society, 
+endangering cohesion, stability and ultimately democracy. 3 
+ 
+2. 
+The use case of Bitcoin and its valuation 
+2.1 Bitcoin offers payment services to society: Nakamoto’s original vision of 2008  
+Nakamoto (2008) believed that Bitcoin would play a role in the future of payments, thereby also 
+generating value for society that could justify a positive price. More specifically, he explained:  
+“Commerce on the Internet has come to rely almost exclusively on financial institutions serving 
+as trusted third parties to process electronic payments.  While the system works well enough 
+for most transactions, it still suffers from the inherent weaknesses of the trust-based model. 
+Completely non-reversible transactions are not really possible, since financial institutions 
+cannot avoid mediating disputes. The cost of mediation increases transaction costs, limiting 
+the minimum practical transaction size and cutting off the possibility for small casual 
+transactions, and there is a broader cost in the loss of ability to make non-reversible payments 
+for non-reversible services this seems to be purely a contractual and legal problem, not a 
+technological one.  With the possibility of reversal, the need for trust spreads. Merchants must 
+be wary of their customers, hassling them for more information than they would otherwise 
+need. A certain percentage of fraud is accepted as unavoidable. These costs and payment 
+uncertainties can be avoided in person by using physical currency, but no mechanism exists to 
+make payments over a communications channel without a trusted party.” 
+The problem that Nakamoto (2008) believes to have identified seems however to start from a 
+misunderstanding.  In principle, financial institutions can avoid mediating disputes. Mediation is rather 
+an optional service than a necessity. It is demanded by customers and charged by payment services 
+ 
+3 Indeed, the redistribution in a zero-sum game over the time axis was already touched upon implicitly discussed 
+in in the P2Pfoundation forum with Satoshi Nakamoto himself immediately after the publication of the original 
+white paper. There, it was pointed out “that the early adopter finds the worm" in this system. But it was more 
+referring to the miners rather than investors: “This would mean that - the earlier someone gets in on the bitcoin 
+system establishing a node, the more chance they have of becoming lucky and being able to generate coins.” 
+ https://p2pfoundation.ning.com/forum/topics/bitcoin-open-source?id=2003008%3ATopic%3A9402&page=1        
+3 We (Bindseil and Schaaf 2024; Bindseil et al. 2022) and many others (e.g. Kolbert 2021) have pointed out the 
+energy consumption and implied ecological and social damage caused by Bitcoin mining. However, the focus of 
+this paper is different, and we therefore do not recall the ecological issues in detail.        
+
+4 
+ 
+providers. For example, PayPal does not offer any dispute mediation if payments are made in the 
+“friend and family” mode; and these are free of charge. Likewise, credit transfers between bank 
+accounts are not mediated, i.e. if an e-commerce delivery is paid in advance via credit transfer and 
+the customer is unsatisfied with the good received, the bank will not mediate. Nakamoto seems to 
+misinterpret the modus operandi of e-commerce by confounding it with a technical necessity. 
+“Delivery-vs-payment” (or “atomic” settlement) to prevent principal settlement risk is difficult to 
+achieve in e-commerce, and ex ante trust building mechanisms (e.g. assessment histories by users), 
+escrow accounts, or ex post mediation mitigate this problem, but are not per se necessary. Nakamoto 
+continues:  
+“What is needed is an electronic payment system based on cryptographic proof instead of 
+trust, allowing any two willing parties to transact directly with each other without the need 
+for a trusted third party.  Transactions that are computationally impractical to reverse would 
+protect sellers from fraud, and routine escrow mechanisms could easily be implemented to 
+protect buyers.  In this paper, we propose a solution to the double-spending problem using a 
+peer-to-peer distributed timestamp server to generate computational proof of the 
+chronological order of transactions.” 
+Again, it can be argued that a normal credit transfer has also no trusted third party and does not 
+promise a mediation mechanism either. Moreover, escrow accounts are also provided as add-on to 
+credit transfers in some e-commerce market platforms. Also, Nakamoto’s perspective seems to be 
+tilted towards the interest of the merchant, who according to his view, needs protection from 
+fraudulent buyers. In this context the merchant’s key interest is to receive the funds instantaneously. 
+The received money is fungible, i.e. homogeneous and standardized. The customer, however, might 
+only approve of the purchase after having assessed the quality of the purchased product or service. 
+Hence the customer has a higher interest in mediation and the option to reverse the purchase. The 
+proposed escrow mechanism for buyers’ protection would need to be provided by a third party, i.e. a 
+(trusted) intermediary. It is the nature of an escrow account that it should not be managed, controlled, 
+or owned by one of the acting parties amid potential conflict of interest.  
+A further point that Nakamoto (2008, 8) claimed to address with Bitcoin related to the perceived 
+problem of double spending in peer-to-peer networks:  
+“We started with the usual framework of coins made from digital signatures, which provides 
+strong control of ownership, but is incomplete without a way to prevent double-spending.  To 
+solve this, we proposed a peer-to-peer network using proof-of-work to record a public history 
+of transactions that quickly becomes computationally impractical for an attacker to change if 
+honest nodes control a majority of CPU power.” 
+While it is true that the history of transactions of the Bitcoin network is “impractical for an attacker to 
+change”, it is unfortunately also true that proof-of-work is highly impractical itself as it is costly and 
+inefficient compared to alternative ways to secure the safety and prevent double-spending of a 
+payment instrument. The problem of double-spending is hardly an issue in payments (because it is 
+generally solved without particular difficulties, and certainly with far less social cost than those 
+incurred in the solution offered by Bitcoin). Cyber-crime and fraud are serious risks for payment 
+systems including Bitcoin, but they are different from the problem of double-spending (see also Watts 
+and Low, 2024, for a critique of Nakamoto’s treatment of the double-spending issue in the Bitcoin 
+white paper).      
+
+5 
+ 
+Overall, Nakamoto's (2008) understanding of retail payments was inaccurate. It is therefore doubtful 
+whether his invention effectively addressed the problems he perceived in e-commerce and it is 
+therefore also hardly surprising that Bitcoin was never significantly used in legal e-commerce.4 
+ 
+2.2 The fair value of Bitcoin  
+Financial and real asset values are typically anchored in a future income or utility stream. Most assets 
+generate regular cash flows, e.g. real estate yields a rent, shares pay dividends and bonds pay interest. 
+Based on the present and expected future cash flow, the present value of such an asset can be 
+calculated. Obviously, the future income stream is exposed to a high level of uncertainty and subject 
+to expectation. As has been argued elsewhere (e.g. Bindseil and Schaaf 2022), Bitcoin lacks the traits 
+of established financial assets. It does not generate any cash flow (like real estate), interest (like bonds) 
+or dividends (like stocks), cannot be used productively (like commodities). By consequence, most 
+established ways of calculating or estimating the fair value of an asset fail when applied to Bitcoin.  
+- 
+The Discounted Cash Flow (DCF) is a valuation method that estimates the present value of an 
+investment using its expected future cash flows. Applying the DCF model to Bitcoin is 
+challenging because of Bitcoin’s lack of income streams, coupon or dividends. 
+- 
+Technical analysis is employed by traders to predict price movements by analysing historical 
+price charts, patterns, and indicators. While sometimes useful for short-term and medium-
+term predictions, this method is not typically suitable for long-term fair value estimation as it 
+is detached from economic fundamentals. 
+- 
+Relative valuation compares an asset to other assets. This method could allow investors to 
+estimate Bitcoin's value by assessing its relative strengths and weaknesses. Some indeed 
+compare Bitcoin's price to that of gold, adjusting for volatility differences to estimate Bitcoin's 
+fair value. However, in the absence of a clear understanding or notion what the autonomous 
+value of Bitcoin were, the calculation of a relative price (and exchange rate) remains doubtful. 
+- 
+Fundamental analysis evaluates Bitcoin's utility, scarcity, security, and potential use cases, 
+providing a qualitative perspective on its value based on its inherent characteristics and future 
+applications – a method that might work for believers but lack analytical rigor amid the 
+absence of legal use cases that are effectively beneficial to society. 
+- 
+Regression analysis could seek more generally relationships between Bitcoin's price and 
+various fundamental or market-related variables. This quantitative approach can offer insights 
+based on historical data and identified correlations – but fails in the not too unlikely case of 
+an inflated speculative bubble. 
+- 
+The Stock-to-Flow (S2F) model compares the current supply of Bitcoin to the new supply 
+(mined coins) over a specific period. It suggests that assets with a higher S2F ratio are scarcer 
+and should therefore have higher value. While this model has gained popularity, critics argue 
+that a basic linear regression with only one predictor (the stock-to-flow ratio) to forecast 
+something as complex as Bitcoin's price is overly simplistic. Accordingly, the S2F model had 
+failed to predict Bitcoin's price movements accurately in recent years, for example, it did not 
+anticipate the significant price drop in 2022 (Rustgi 2023). 
+Valuation is a challenging issue for other investments as well, and in particular for firms with perceived 
+high growth potential. If a new technology is discovered and/or pioneered by one company, its market 
+ 
+4 We deliberately do not consider the use of bitcoins to pay for or conceal illegal activities, as we do not think 
+that these widespread uses are socially or economically useful.  
+
+6 
+ 
+value can initially be very high relative to its net income stream over the first years (e.g. Tesla, Amazon, 
+OpenAI, Nvidia in their early years). These companies will thus exhibit a high equity to earnings ratio, 
+suggesting that investors expect a significant growth of future earnings. In some cases, it can even 
+take years until such a company stops operating at a loss and eventually earns net profits, as was the 
+case with Amazon. Some of these companies match expectations, some will disappoint, others will 
+even exceed the high-growth scenarios that had justified their very high price-to-earnings ratio. Still, 
+their valuation is typically based on fundamental analysis, and their expected capacity and risks to 
+deliver products for society in a profitable way.  
+ 
+2.3 Bitcoin as a pure investment detached from a use case  
+Many Bitcoin supporters nowadays view Bitcoin as an investment asset the value of which will 
+increase for a long time regardless of the specific service it may have for society or the traditional 
+traits which define a financial asset. They argue that a demand effect, combined with the limited 
+supply, would fuel an eternal upwards valuation trend (despite occasional cyclical term setbacks).  
+The list of prominent supporters of Bitcoin who seem to take this investment perspective is long and 
+encompasses financial professionals, huge investors, campaigning politicians and other celebrities. For 
+example, Larry Fink, CEO of BlackRock, the largest asset manager in the world, draws the analogy to 
+gold,5 and skips the attempt to explain why Bitcoin has value as means of payment (or through other 
+specific use cases). As reported widely in the media (this excerpt from Bitcoin Magazine):  
+In a notable statement, BlackRock CEO Larry Fink has expressed a positive perspective on Bitcoin during 
+an interview today with CNBC, affirming that …  "I believe it goes up if the world is frightened, if the 
+people have fearful geopolitical risks, they're fearful of their own risks," said Fink. "It's no different than 
+what gold represented over thousands of years. It is an asset class that protects you." … This 
+endorsement from the head of the world's largest asset management firm is a significant milestone for 
+Bitcoin's acceptance within mainstream financial circles. "Unlike gold where we manufacture new gold, 
+we're almost at the ceiling of the amount of Bitcoin that can be created," Fink continued. "What we're 
+trying to do is offer an instrument that can store wealth." (Nik Hoffman 2024)  
+"I'm very bullish on the long term viability of Bitcoin," Fink stated… Fink's bullish stance on Bitcoin's 
+long-term prospects aligns with the broader trend of institutional adoption and recognition of Bitcoin 
+as a legitimate investment opportunity. As the CEO of the world's largest asset management firm, 
+Fink's positive outlook on Bitcoin carries significant weight and may influence investor sentiment 
+towards BTC.  (Hoffman 2024a)  
+In a TV interview, Mike Novogratz, a former hedge fund manager and founder of Galaxy Digital, also 
+compared Bitcoin to gold: “It will be larger than gold,” – although he admitted that Bitcoin’s then 
+market cap wasn’t yet one-tenth of gold’s - USD 1.21 tr compared with USD 13.79 tr. (Rohe 2024). In 
+a similar way Tyler Winklevoss, the co-founder of Gemini, formulates: “We believe Bitcoin disrupts 
+gold. We think it's a better gold if you look at the properties of money. And what makes gold? Scarcity. 
+Bitcoin is actually fixed in supply, so it's better than scarce. It's more portable, it's fungible, it's more 
+durable. It sort of equals a better gold across the board.” Unsurprisingly, earlier Bitcoin owners also 
+continue to have a positive view on the long-term viability of Bitcoin. For example, Hope (2024) reports 
+ 
+5 A deeper analysis of the analogy with gold, is beyond the scope of this paper. Taleb (2021) dismisses the 
+analogy, he argues, that gold is used industrially and has been appreciated as jewellery for centuries before it 
+became a store of value, an investment asset, or a reserve currency. Moreover, he continues that gold it does 
+not degenerate over time and retains its value even in chaotic or degenerative states of the world like natural 
+catastrophes or in the case of a temporary or lasting failure of the electric or digital infrastructure. 
+
+7 
+ 
+that some Bitcoin investors expect the price of Bitcoin to go up significantly, notably to USD 1 million 
+per coin:   
+“Cathie Wood, CEO of the investment firm ARK Invest, has significantly increased her bullish outlook on 
+Bitcoin's price trajectory. In a recent interview, she revealed that ARK has "brought forward" its previous 
+$1 million price target for Bitcoin by 2030. Wood attributes this shift to the recent approval of spot 
+Bitcoin ETFs in the United States. The surge in interest and investment potential unlocked by these ETFs 
+has prompted ARK to re-evaluate Bitcoin's future. "That target...it was before the SEC gave us the green 
+light," Wood explained, referring to the Securities and Exchange Commission's approval of spot Bitcoin 
+ETFs. "And I think that was a major milestone, and it has pulled forward the timeline." While Bitcoin has 
+already seen significant price appreciation, Wood believes the party is just getting started.” 
+Michael Saylor sees the Bitcoin price to go up to USD 10 million per coin (Ngari 2024 and video of the 
+podcast interview available e.g. on Twitter and YouTube) due to investment inflows from new large 
+groups, notably Chinese investors, and considers that this will make the new investors wealthy: 
+“When you hear the Bank of Shanghai is rolling out a Bitcoin ETF, custody at the Bank of Shanghai, you 
+would say this is great. That will give access to Bitcoin to 1.5 billion people in China, okay? They will buy 
+a bunch of Bitcoin and the price of Bitcoin will go up to 10 million dollar a coin. So here is the question: 
+do you want billion people in China to be rich? Or do you want the people in China to be poor?”   
+With a similarly optimistic mindset, Marty Bent believes that Bitcoin can play a key role in closing gaps 
+in US pension fund solvency (Bent 2024): 
+“Once you hit the end of the road and visualize the state of the American economy through a multi-
+generational lens you'll come to the conclusion that the American pensions are absolutely f[…]. … The 
+only viable solution to this problem is to get off the hamster wheel of the fiat system. Bitcoin is the 
+antidote to this problem. It is a verifiably finite asset running on a distributed system that cannot be 
+controlled by any central authority and its demand will only increase from here on out as individuals 
+around the world rabidly search for the antidote to the fiat poison they've been free basing for a 
+decades. If pensions have any intention of closing the massive gaps between the money they've 
+promised and the money they actually have, they better start allocating to bitcoin. In all seriousness 
+though, the fact that a $1.2 Trillion pension fund out of Japan has begun the diligence process on bitcoin 
+should be a sign to every other pension around the world that the tock is clicking. … . As more and more 
+pensions follow the first domino a virtuous cycle the likes of which you have never seen before will begin 
+to take hold and there will be many pension managers kicking themselves because they didn't move 
+early enough.” 
+Celebrities who are not expected to be particularly familiar with the subject of finance and economics 
+also do not shy away from expressing their enthusiasm or loyalty for Bitcoin as an investment 
+instrument. “I’m a big believer in the future of Bitcoin”, NFL quarterback Tom Brady revealed in an 
+interview at Consensus 2021 (Coindesk 2021). Hollywood actress Gwyneth Paltrow stated on Twitter: 
+“I think Bitcoin and cryptocurrency is here to stay.” Actor Ashton Kutcher told the TechCrunch Disrupt 
+conference already in 2013 that “bitcoin revolution” is here, and it offers an investing opportunity. “I 
+think bitcoins are obviously becoming more and more relevant,” said Kutcher, who is also founder of 
+the A-Grade venture (CNBC 2013). 
+Larry Fink, Cathy Wood, Michael Saylor, and many other prominent figures share a common view on 
+Bitcoin as a pure investment asset and growing future valuations decoupled from economic services 
+Bitcoin could potentially deliver to society. In their public statements, Bitcoin's future value does not 
+rely on the Nakamoto narrative, which positions Bitcoin as an attractive means of payment. Instead, - 
+at best - they draw parallels with gold as a pure investment, assuming that society can coordinate 
+around any asset with a finite or limited supply as an investment vehicle, leading to a virtuous cycle 
+
+8 
+ 
+where its value continuously rises. They do not present or explain the reasons, why society would 
+choose Bitcoin for this purpose. While there may be volatility, they expect Bitcoin's valuation to follow 
+a long-term upward trend, independent of any utility it provides to society – apart from making its 
+holders wealthier. 
+That this vision could materialise for a significant period of time is not excluded, despite the fact that 
+economists have argued that this investment perspective would be flawed (e.g. Roubini 2021): there 
+are countless assets on earth with a limited or finite supply, and for none of them the notion that they 
+can sustain an ever-increasing valuation over the long term, regardless of the services or benefits they 
+provide to society, is particularly plausible. These scarce assets include tangible items like “German 
+stamps from the 19th century” and any other set of collectibles, pieces or art, land (which however 
+also has use for society), and virtual assets, such as various possible types of unbacked crypto-units, 
+the value of which is supposedly guaranteed by computer code that limits the number of “coins” or 
+non-fungible tokens that could be generated. Proponents of the Bitcoin investment perspective ignore 
+the fact that “scarcity” describes the relationship between supply and demand. A limited, finite supply 
+does not equate to scarcity. In the context of Bitcoin with its limited and fix supply the non-economic 
+term “rarity” seems more appropriate.  If supply is fixed, the price becomes exclusively dependent on 
+demand. And if the demand were to disappear, the price would be zero.   
+ 
+2.4 The investment vision of Bitcoin in the political debate  
+The development of the Bitcoin price does not take place in a vacuum. As there is no intrinsic anchor 
+of value and given the wide range of criticism that Bitcoin has faced, politics plays a major role for 
+Bitcoins destiny, as the legal framework, including approval as investment product or possible 
+restrictions or bans, affect price developments and market sentiment. There is a very heterogeneous 
+regulatory landscape ranging from the ban of trading and mining in some jurisdiction, via the 
+recognition in the US as an investment product (e.g. by licensing Bitcoin ETFs and Futures) to the legal 
+tender status in El Salvador. In contradiction to the initial vision of Bitcoin as being independent from 
+legal and governance interference, legislation and legal recognition are crucial for the prospects of 
+Bitcoin.   
+It is therefore hardly surprising that the crypto industry and major investors are trying to influence 
+legislation and politics in general to sustain positive price momentum.  In fact, this phenomenon is not 
+new anymore. In the US, the number of crypto lobbyists would have almost tripled from 115 in 2018 
+to 320 in 2021 (The Economist 2021). And the 2024 U.S. presidential election has brought 
+cryptocurrency regulation to the forefront of political discourse, with the major parties and their 
+potential candidates adopting distinct stances on Bitcoin and crypto (Bitfinex 2024). It fits into this 
+picture, that the current election campaign is also being financed with funds from the Bitcoin industry. 
+Public Citizen, a think-tank, reports that crypto companies have contributed USD 119 million to crypto-
+friendly super PAC (political action committee) already, representing nearly half of all corporate 
+election spending in the current cycle (Claypool 2024).  
+A significant portion of the funds donated by the crypto industry for the campaigns has not yet been 
+spent, however (as of early September 2024). Of the approximately USD 25 million which have been 
+utilized, more than USD 20 million have been allocated to supporting Republican candidates or 
+opposing Democratic ones. Interestingly, many adverts placed by these crypto reserves refrain from 
+even mentioning crypto, technology, or technology regulation. Rather, they aim to discredit alleged 
+crypto-critical candidates (White 2024). Three crypto-funded super PACs spent $62 million on video 
+
+9 
+ 
+ads in September 2024 that never mentioned crypto but that supported crypto-friendly candidates 
+and/or went against more crypto-critical ones (Ge Huang and Ostroff, 2024). 
+Voters might also be concerned by the political stance on Bitcoin – but far less than the crypto lobby 
+may want to make politicians think. The precise fraction of the US population holding Bitcoin is 
+disputed. While there are findings surveyed by the crypto industry according to which, 16 % of US 
+adults say they have invested in, traded, or used cryptocurrencies like Bitcoin or Ether (Perrin 2021), 
+and other sources indicate that more than 15 % of US adults have engaged with cryptocurrencies in 
+some form, the real figures are probably lower. A survey by the US Fed concludes that only about 7 % 
+of US adults were holding or using cryptocurrency in 2023, down 3 percentage points from 2022 and 
+down 5 percentage points from 2021 (Federal Reserve 2024). 
+To create more interest and revive capital inflows from retail customers, the cryptocurrency industry 
+is exploring strategies to engage the broader public. Firms such as Crypto.com, Kraken, Bitpanda, and 
+Arkham Intelligence have recently secured new sponsorship agreements with European football clubs, 
+contributing to the sector’s record spending of USD 170 million on the sport this season. Football, as 
+one of the most widely viewed sports globally, has emerged as a key avenue for mass-market 
+outreach, offering a more cost-effective platform compared to previous industry practices. During the 
+cryptocurrency boom in 2021, companies engaged in aggressive marketing and expansion efforts, 
+pursuing high-profile deals exceeding USD 100 million, including Formula One team sponsorships and 
+naming rights for major U.S. stadiums. At the time, cost considerations were secondary, as retail 
+investors were eager to enter the cryptocurrency market at unprecedented rates (Nicolle 2024). 
+Currently, within the relatively small group of owners, the Bitcoin related wealth is more concentrated 
+than other wealth. Research found that the Bitcoin eco-system is dominated by large players, be it 
+miners, Bitcoin holders or exchanges – despite the significant attention that Bitcoin has received over 
+the last few years. The same study shows that individual investors collectively control 8.5 million 
+Bitcoins, i.e. less than half the Bitcoins in circulation by the end of 2020, and within individual holdings, 
+there is significant skewness in ownership; the rest of the Bitcoin is held by large miners or exchanges 
+(Makarov and Schoar 2021). 
+While only a small fraction of US citizens seems to hold Bitcoin or crypto, the cryptocurrency industry 
+pushes hard to urge political candidates on both sides of the aisle to embrace crypto (White 2024). 
+Whether or not the respective candidates are convinced, there proclaimed political stances on Bitcoin 
+- and crypto in general – will most likely have an impact on the future regulation. 
+Bitcoin and crypto do not play a major role in any of the party programs. They are not mentioned at 
+all in the official 2024 Democratic Party Platform and only got a got a paragraph on the Republican 
+agenda (Kharif 2024). Still, politicians have aimed at attracting voters invested in Bitcoin to support 
+them, with mentioned US Presidential campaign generating unprecedented commitments of 
+candidates. The Democratic Party, represented by Vice President Kamala Harris as nominee, has 
+shown a nuanced approach to crypto regulation.6 Initially, the Biden administration took a cautious 
+stance, focusing on consumer protection and financial stability (The conversation 2024). However, as 
+the election approaches, there's been a moderate shift towards a more crypto-friendly view. The 
+passage of the Financial Innovation and Technology for the 21st Century Act (FIT21) in May 2024, with 
+significant Democratic support, signalled a growing recognition of the industry's importance. Harris, 
+ 
+6 However, there are internal debates within the Democratic Party, exemplifying the divergence within the party. 
+While some Democrats, like Senator Elizabeth Warren, continue to emphasize the risks associated with 
+cryptocurrencies, others are advocating for a more open approach “to foster innovation”. 
+
+10 
+ 
+while not yet articulating a definitive position, has engaged with crypto representatives, indicating a 
+willingness to consider the sector's perspectives (ibid). On the Republican side, former President 
+Donald Trump has made a dramatic pivot in his approach to crypto assets (ibid). Once a critic, Trump 
+now presents himself as a champion of digital assets, embracing the industry. For example, when 
+Trump spoke at the Libertarian National Convention on 25 May 2024 and promised supporting Bitcoin 
+if elected and emphasised that Bitcoin holders already represent 50 million voters in the US: 
+“I will ensure that the future of Crypto and the future of Bitcoin will be made in the USA, not 
+driven overseas; I will support the right to self-custody to the nation’s 50 million crypto-holders, 
+I say this, with your vote;  I will keep Elizabeth Warren and her goons away from your Bitcoin, 
+and I will never allow the creation of a central bank digital currency.” (Gerard 2024) 
+Trump continued to ramp up his support for Bitcoin over the course of the campaign. He appeared at 
+the Bitcoin 2024 Conference in Nashville on 27 July and signalled to the Bitcoin industry: 
+“In just 15 years, Bitcoin has gone from merely an idea posted anonymously on an internet 
+message board to being the ninth most valuable asset anywhere in the world. …  It's already 
+bigger than Exxon Mobil. Soon it will be surpassing the entire market cap of silver. … One day 
+it probably will overtake gold…  …bitcoin and crypto will skyrocket like never before, even 
+beyond your expectations… Because when America is prospering, bitcoin is soaring, and it will 
+go up with it…. During my four years in office, bitcoin surged by 3,900%, from $898 the day I 
+took office to $35,900 the day I left… Now, compare that to just after three and a half years of 
+Biden and Harris adjusted for inflation, bitcoin is up 50% now 50% sounds good, but not when 
+you're comparing it to almost 4,000% right? 
+… if I am elected, it will be the policy of my administration, United States of America, to keep 
+100% of all the bitcoin the U.S. government currently holds or acquires into the future, we'll 
+keep 100… This will serve, in effect, as the core of the strategic national bitcoin stockpile. … … 
+I take steps to transform that vast wealth into a permanent national asset to benefit all 
+Americans. … You are the modern-day Edisons and Wright brothers and Carnegies and Henry 
+Fords, and what you do in your lifetime stands a chance to outlive us all and inspire humanity 
+for generations to come.” 
+Trump does not explain in his speech what services of Bitcoin to society would justify its current and 
+future ever higher valuation, even though he compares it to past innovations for which this was rather 
+clear. This shift aligns with the broader Republican stance, which generally favors less regulation and 
+more market-driven approaches to the crypto sector (Bitfinex 2024). The Republican stance, as 
+embodied by Trump's recent statements, leans towards a more permissive regulatory environment 
+for crypto assets (Seatter 2024). This approach aims to attract support from the crypto community 
+and appeal to younger, tech-savvy voters who are increasingly engaged with digital assets (The 
+conversation 2024). Overall, the crypto industry perceives Trump as significantly more favourable 
+candidate. While the crypto industry has recently shown more willingness to engage with the Harris 
+campaign, hoping for a more positive policy direction, analysts anticipate a significant disparity 
+between the two political outcomes. They predict very different prices developments for Bitcoin 
+depending on who wins the U.S. Presidential election: if Trump wins, Bitcoin could go up to USD 80-
+90 000 – but if Harris wins the presidential race the price could drop to USD 30-40 000 (Hunt 2024). 
+Consistent with this, the price for Bitcoin slid as investors reacted to the presidential debate on 11 
+September between Harris and Trump, when the market assessed Harris having won the debate – 
+even though Bitcoin was not discussed at all. Indeed, Trump who has embraced the crypto sector was 
+
+11 
+ 
+often on the defensive; moreover, pop star Taylor Swift announced her endorsement of Harris right 
+after the debate (Ghosh 2024). 
+The then independent presidential candidate Robert F. Kennedy Jr. has gained traction as a prominent 
+pro-crypto candidate, resonating strongly with independent voters and those dissatisfied with the 
+policies of Trump and Biden. Kennedy has consistently emphasized his support for Bitcoin and 
+blockchain technology, distinguishing himself as a unique advocate for digital assets in the presidential 
+race. Among his campaign promises are ambitious initiatives, such as placing the entire U.S. budget 
+on the blockchain to enhance transparency and accountability in government spending. He envisions 
+a system where every American can review budget items at any time, aiming to promote greater 
+public oversight and trust (Bitfinex 2024). Kennedy promised in the 2024 Nashville Bitcoin convention 
+on 27 July 2024 that he would order massive purchases of Bitcoin by the US Treasury if he would be 
+elected and in addition that Bitcoin would effectively be exempt from capital gains taxation and from 
+controls against illicit payments: 
+“I intend as President of the United States to sign an Executive Order on day 1… to transfer 
+approximately 200,000 Bitcoin held by the US Government to the US Treasury where it will be held as a 
+strategic asset.  …. On day one as President, I will sign another Executive Order directing the US Treasury 
+to purchase 550 Bitcoin daily until the US has a reserve of at least four million Bitcoin. … our nation holds 
+approximately 19% of global gold reserves; this policy will give us around the same proportion of total 
+Bitcoin. The cascading impact of these actions will eventually move Bitcoin to a valuation of hundreds 
+of trillion of dollars. On day one as President, I will sign also an Executive Order directing the IRS to issue 
+public guidance that all transactions between BTC and the USD are unreportable transactions, and by 
+extension untaxable.  … Bitcoin is a technology for freedom, for optimism, for independence, for 
+democracy, for transparency, it is the currency of hope, it is the perfect currency.”    
+Kennedy did not elaborate further on why he believes Bitcoin to be the perfect currency, and what 
+would justify making Bitcoin transactions against USD unreportable and untaxable. In any case, a total 
+valuation of “hundreds of trillion” of USD of Bitcoin would imply a valuation of one Bitcoin of at least 
+10 million USD. Kennedy suspended his campaign on 23 August 2024. He has since the endorsed 
+Trump (CNN 2024).  
+As the election draws closer, both Democrats and Republicans are recognizing the growing importance 
+of crypto policy to voters. A recent survey indicates that a significant portion of voters in swing states 
+consider crypto policies important enough to influence their voting decisions (Seatter 2024). This has 
+led to increased efforts from both sides to court the “crypto vote”, with initiatives like Crypto4Harris 
+emerging to enhance the Democratic candidate's appeal on cryptocurrency issues (The conversation 
+2024). The outcome of the 2024 election could have far-reaching implications for the future of 
+cryptocurrency regulation in the United States. While the Democratic approach under Harris may seek 
+a middle ground, a Republican victory led by Trump could potentially usher in a more crypto-friendly 
+regulatory environment (Seatter 2024).  
+ 
+ 
+3. 
+The macro-economics of large asset price exuberance 
+In this section we briefly review the literature on the macro-economic effects of speculative asset 
+price increases and how the central bank may react to neutralise their impact on inflation or that they 
+trigger short term fluctuations in economic activity. We focus on the period of asset price increases, 
+as we are less interested in a possible burst of a bubble, consistent with our interest in a Bitcoin-
+
+12 
+ 
+positive scenario. While in section 4 we will assume for simplicity reasons that the central bank is 
+perfectly able to neutralise the effects of significant Bitcoin price increases on inflation and avoid 
+economic volatility, we briefly review in section 3 the economic literature on how the central bank 
+can achieve this result.  
+New technologies are pivotal to growth and the increase of welfare of societies. By increasing the 
+overall economic production potential, technological progress facilitates the inflation-free expansion 
+of the consumption potential. Innovations based on technological progress increase total factor 
+productivity (TFP), which leads to a more efficient utilisation of existing production factors (Grimm, 
+Kroeger, Ochsner 2024). The increase in production potential through new technologies manifests 
+itself in various forms. Investments in machines, automation systems and intangible capital can 
+increase productivity. More recently, new technologies such as artificial intelligence and robotics 
+could replace missing labour and thus counteract demographic change (Sachverständigenrat 2024).  
+For Tech companies and their market cap (Google, Tesla, Amazon, Apple or Nvidia) sudden market 
+cap explosions are assumed to match the increase of the future production potential of the economy, 
+taking also assumptions on the specific profitability path of the companies. In general, the co-
+movement of equity wealth and of the production potential enables a higher supply of goods and 
+services without leading to inflation. The increased consumption triggered by wealth effects match 
+the improved and augmented supply of goods and services, as a rise in assets’ valuation is generally 
+believed to stimulate people’s consumption. “In cases where wealth is gained and the additional value 
+is spent within the economy, there is a wealth effect […]” (WEF 2022), e.g., soaring stock markets can 
+increase the marginal propensity to consume through wealth effects even before the actual increase 
+in productivity have materialised in anticipation of future real wealth increases.7 However, the market 
+valuations of new technologies or products as well as their producers and providers can obviously be 
+based on a misjudgement by investors. The wealth effect on consumption of a significant increase in 
+asset prices and its implied macroeconomic consequences in year T are probably independent of 
+whether in T+10, the valuation of year T appears in retrospect justified or not. The more the asset 
+price increases anticipate a future increase of the production potential (in contrast to an immediate 
+one), the more the implied wealth effect will likely be inflationary and risk a boom-bust cycle, and 
+therefore raise questions of the right monetary policy reaction.    
+Several cases can be distinguished in terms of timing and uncertainty of asset price increases vs. 
+increases of the production potential of the economy. Consider the following five examples. 
+  
+(A) Productivity increase without (marketable) wealth effect 
+Some increases of the production potential (say through the invention and deployment of a new 
+technology) may come along without a directly related visible increase in asset values, for example if 
+the growth of the production potential relates to a sector which is not incorporated in the form of 
+stock-traded companies (e.g. the government sector). In this case there is no directly visible positive 
+asset valuation shock and if some assets gain value, these may be illiquid (e.g. human capital). The 
+absence or illiquidity of increases in asset values will reduce the effects of the positive productivity 
+shock on consumption, even if the anticipation of higher future incomes will likely still have a positive 
+effect on consumption. In the following figures, we show productivity increases in light green boxes 
+ 
+7 For simplicity reasons don’t take explicitly account of the differences in the wealth effect type of financial and 
+non-financial assets between the US and the euro area. Indeed, the wealth effects are generally lower in the 
+euro area than in the US (de Bondt et al. 2019; Sousa 2009; Cooper and Dynan 2016). 
+
+13 
+ 
+and related asset price increases - if any - in dark red. We show case (A) in its extreme form in which 
+a positive productivity shock would have no direct wealth effect at all. From the perspective of 
+monetary policy, this would likely be largely a positive supply shock with price-dampening effects 
+being predominant.  
+Figure 1: Productivity increase without wealth effect 
+ 
+ 
+ 
+ 
+(B) Simultaneous wealth and productivity effects.  
+In case a new technology (the news about it) appears more or less simultaneously to its deployment 
+and the start of the realisation of a steady flow of additional production, while the future productivity 
+is captured by widely held stock company, then the wealth effects on consumption and the increase 
+of the production potential may be considered to match, so that we obtain a sort of neutrality from 
+the perspective of the macroeconomic equilibrium and price pressures in the economy.  
+Figure 2: Productivity effect and wealth effect occurring simultaneously.  
+ 
+ 
+ 
+ 
+ 
+ 
+(C) Lagged productivity effects relative to wealth effects  
+It might be that a new technology is invented but will take years before being usable. Still investors 
+may believe in its future deployment are such that the stock company that invented the technology 
+(or the related industrial sector) has immediate large valuation gains. In this case, in between the 
+increase of wealth and the productivity gains, the wealth effects are likely inflationary, and monetary 
+policy may have to be tightened for a while to prevent inflation or unwarranted economic fluctuations.    
+Figure 3: Productivity effect appearing after a significant time lag relative to the wealth effect 
+ 
+ 
+ 
+ 
+ 
+ 
+T (in years) 
+1  
+2  
+3  
+10  
+T (in years) 
+1  
+2  
+3  
+10  
+T (in years) 
+1  
+2  
+3  
+10  
+
+14 
+ 
+ 
+(D) Wealth effect without productivity effect: Bitcoin-positive scenario 
+The case of Bitcoin as investment detached from any use case can be understood as an increase of 
+wealth without any increase of the production potential, whereby the wealth increase is gradual over 
+years as Bitcoin prices increase and increase. This case is likely similar for the initial years as the 
+previous one, i.e. a tightening of monetary policy is likely warranted. However, the phase in which the 
+productivity gains kick in and may allow for an opposite adjustment of policies does not materialise.  
+Figure 4: wealth effect without productivity effect 
+ 
+ 
+ 
+ 
+(E) Asset price bubble that bursts without any productivity effect  
+Finally, the classic asset price bubble would mean that there is a temporary wealth effect which is later 
+reversed when the bubble burst, and that there are no productivity gains that match the asset price 
+bubble.   
+Figure 5: wealth effects and burst of a bubble (without productivity effect) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+In the literature and the numerous analyses of exuberant asset price increases, economists mostly 
+focus on financial stability risks and the consequences of the bubble bursting. For instance, in Minsky's 
+groundbreaking theory (1993), investors initially engage in save financing at the beginning of a cycle: 
+the income that follows the investments is sufficient to repay the loans, including principal. 
+Speculative financing initially appears profitable. In the next phase, the cash flow is then only sufficient 
+to service the interest on the loans taken out; the repayments of the principle, on the other hand, are 
+replaced by new loans. Finally, the investors switch to a “Ponzi scheme”: loans are even taken out to 
+finance the interest burden, as investors still trust that at the very end the income from the investment 
+will be sufficient to meet all accumulated obligations. The economic system becomes increasingly 
+unstable until the speculative bubble bursts. 
+We are less interested here in the scenario of an asset bubble burst, as we assume a Bitcoin positive 
+scenario in which the value of Bitcoin continues to increase in the period covered by the analysis. The 
+literature is relevant in our context in the sense that if the wealth effects relate to an unjustified asset 
+price “bubble” they would also not be associated with proportionate growth of productivity, and 
+T (in years) 
+1  
+2  
+3  
+10  
+T (in years) 
+1  
+2  
+3  
+10  
+
+15 
+ 
+therefore would initially require a similar monetary policy reaction like the case of the Bitcoin positive 
+scenario.  
+Our Bitcoin-positive scenario comes closest to the Rational Bubbles approach in economics, where 
+asset prices deviate from their fundamental values but persist due to the collective belief that prices 
+will continue to rise. Tirole (1985) argues that overpriced assets (relative to their fundamentals) 
+emerge in environments where no alternative, fundamentally-driven asset has a better yield than the 
+bubble asset. Blanchard and Watson (1982) show how bubbles can persist under rational expectations 
+as long as agents believe that they can sell the asset to someone else at a higher price in the future 
+(the “greater fool theory”). Abreu and Brunnermeier (2003) show how rational traders do recognize 
+that an asset is overvalued but are uncertain about the timing of the inevitable crash. Within their 
+concept of “synchronized beliefs” such bubbles can grow even though rational investors are aware 
+that they are in a bubble. 
+. Regardless of the origins of a bubble, as the bubble grows, unsophisticated investors are drawn into 
+the market. (Mishkin, 2008, Borio and Lowe 2002; Kindleberger and Aliber 2011).  These latecomers 
+are often retail participants. Their interest is triggered by the success stories of early adopters and the 
+belief that prices will continue rising indefinitely. Lacking economic, financial and investment 
+knowledge, they contribute to the bubble by pouring new capital into already exuberantly priced 
+assets, accelerating the market frenzy (Barber and Odean, 2000; Greenwood and Nagel, 2009; Welch, 
+2000). 
+Some argue that asset price exuberance could have also positive macroeconomic effects under certain 
+circumstance. According to this view, under certain conditions, asset bubbles can crowd in productive 
+investment and lead to an expansion in total employment, and the bursting of these bubbles can have 
+an immediate negative impact on these variables (Shi et al. 2014). Similarly, bubbles could also 
+promote innovation and technological progress by channelling capital into new sectors in the presence 
+of endogenous credit constraints. Credit-driven stock price bubbles could the relax credit constraints 
+and reallocate capital more efficiently among firms (Miao and Wang 2012).  
+Central banks ask themselves how to respond to price pressures arising from wealth effects due to 
+the soaring valuations (either relative to a “bubble” or to tech companies without corresponding 
+immediate productivity gains). Despite the abundant literature, there is no consensus on the policies 
+a central bank should adopt to address price pressures stemming from soaring asset prices to enhance 
+macroeconomic stabilisation (Myftari and Rossi 2007). The problem starts with the fact that central 
+banks will normally not know in advance when the anticipated enhancement of the production 
+potential will materialise – if at all. To identify speculative asset bubbles has been one of the major 
+challenges for macroeconomists and central banks alike over the last decades (Bernanke 2002).  
+Since identifying asset price bubbles (or more generally significant asset price increases which are not 
+matched by a timely increase of the production potential) is already an analytical challenge, it is little 
+surprising that there is neither a clear consensus on how central banks or other macroeconomic 
+authorities should address supposed speculative bubbles. Indeed, various approaches exist to tackle 
+these challenges. For example, Bernanke and Gertler 2001 recognize the effect asset prices (including 
+bubbles) have on aggregate demand, like many other phenomena impacting economic developments 
+and argue that these effects should be included in the central bank’s projections for output and 
+inflation, and be addressed in that general context, implying that no special treatment of asset price 
+explosions is required. A related eclectic approach is the “flexible inflation targeting,” which involves 
+considering asset prices within the framework of inflation targeting rather than targeting them 
+
+16 
+ 
+directly. This method allows central banks to account for the broader economic implications of asset 
+price movements without making them the primary focus of monetary policy (Cecchetti et al. 2002). 
+In contrast, the “leaning against the wind” approach advocates that central banks tighten monetary 
+policy to counteract the formation of asset price bubbles. This approach assumes that pre-emptive 
+action can avoid excessive risk-taking and the buildup of financial imbalances (Lukonga 2023). 
+Hennequin and Hommes (2024) even find that a strong interest rate response is successful in 
+preventing or deflating large price bubbles, while a weak response is not. 
+However, Gali (2014) warns that central bank interventions targeting asset price bubbles might 
+backfire: If interest rates are raised in the presence of an identified bubble, the bubble must grow at 
+a higher rate to survive, potentially worsening the threat. Conversely, Adam et al. (2017) challenge 
+the rational expectation assumption and show that “Leaning Against Bubbles” can be optimal for 
+monetary policy. 
+The use of macroprudential tools has been proposed to address financial imbalances without resorting 
+to broad monetary tightening (Fernandez-Gallardo 2024). These tools, such as capital requirements 
+and countercyclical buffers, allow for targeted interventions that can help maintain financial stability 
+while minimizing the impact on overall economic growth.  
+Currently, most central banks apply a pragmatic approach that prioritizes price stability and inflation 
+targets while incorporating financial stability considerations into their policy decisions, including the 
+monitoring and analysis of asset prices. In this context, macroprudential tools are often seen as the 
+first line of defence against financial imbalances, allowing for more targeted responses to specific 
+risks. Additionally, maintaining flexibility in policy decisions is crucial for central banks to adapt to 
+rapidly changing economic conditions. In general, one could conclude, that central banks avoid 
+targeting asset prices directly, but monitor and analyse the respective phenomena and consider the 
+broader economic impacts of these prices within their existing mandates and policy frameworks. In 
+the case of Bitcoin, they would presumably also avoid a specific judgement but simply take into 
+account the positive aggregate demand effects of a significant Bitcoin price increase8 by tightening 
+policies further, i.e. imposing higher policy interest rates to bring back aggregate demand to a non-
+inflationary level. If they do not fully identify the consumption effect of Bitcoin wealth, then they might 
+tighten insufficiently and a temporary effect on inflation may materialise. 
+ 
+ 
+4. 
+The distributional effects of Bitcoin: an illustration 
+The payment services view of Bitcoin by Nakamoto has not materialised (but for illicit payments) and 
+has largely been replaced by a pure investment vision for Bitcoin. We therefore assume now that 
+Bitcoin takes its value only from a collective self-fulfilling belief of an increasing valuation, also 
+supported by steady fresh investment inflows (van Oordt 2024). While economists may not like this 
+scenario because it relies on the random choice of one equilibrium amongst many possible ones, it 
+needs to be acknowledged that societies can sustain such belief-equilibria for a long time. For 
+example, very diverse and mutually exclusive spiritual beliefs have existed simultaneously for 
+ 
+8 To refrain from an explicit judgement that Bitcoin is a speculative bubble (which would inevitably burst) we 
+replace the term “bubble” in the remainders of this paper by “price exuberance” when we discuss Bitcoin, as we 
+assume here that the valuation of Bitcoin “rises exuberantly” while this is not matched by an increase in the 
+production potential, Still, we would keep open if the prices ever were to “implode” again. 
+
+17 
+ 
+centuries or even millennia, illustrating the lasting power of beliefs beyond a purely scientific logic9. 
+Moreover, we assume that Bitcoin has no impact on the economy's production potential. This 
+assumption seems reasonable, or slightly biased to the positive side. Most economists view Bitcoin 
+negatively due to its in their view missing use case, high energy use and association with illicit 
+payments. On the other side, some supporters still believe in Nakamoto’s vision of it as an efficient 
+payment tool, even though this has still not materialised, and most holders now focus on Bitcoin as 
+an investment. Malekan (2024) in a response to our paper explains why in his view Bitcoin is positive 
+for society (and its production potential) even if Nakamoto’s vision of Bitcoin is no longer necessarily 
+relevant.  
+A price of one million USD per Bitcoin (as insinuated by Cathy Wood) would mean a market 
+capitalisation of close to USD 20 trillion, while Robert Kennedy refers to a future market capitalisation 
+of “several hundreds of trillions” implying a Bitcoin valuation of at least USD 10 million, which is 
+consistent with Michael Saylor’s prediction of June 2024. To put this in perspective: Total global equity 
+valuation was USD 111 trillion in end 2023. As of August 2024, the total market value of gold was 
+around USD 12.2 trillion. This estimation takes account of gold held in central banks as reserves (one 
+quarter) and by private investors in various forms such as jewellery, coins, and bullion (Gold Council 
+2024). Against this backdrop, Kennedy’s vision acclaimed at the Nashville Bitcoin Conversion would 
+imply a Bitcoin market cap way beyond equity and gold taken together (the size of the global bond 
+market is estimated around EUR 130 billion according to the International Capital Market Association, 
+but debt does not represent a net value, it rather cancels out between creditors and debtors). While 
+the current market value of a Bitcoin is around USD 70,000, it could be argued that any price for Bitcoin 
+is equally plausible, including 10 million or more – as none of these prices has any particular economic 
+justification or imputed basis.  
+Bitcoin wealth has, as any wealth, positive consumption effects for Bitcoin owners. At the same time, 
+since Bitcoin does not impact on the production potential of the economy, these positive consumption 
+effects must be at the expense of some other usage of GDP, so either the consumption of the rest of 
+society, or investments, or the current account (“GDP = Consumption + Investment + external 
+balance"). As we are not interested in the effects of Bitcoin in a specific country, but in principle for 
+society as a whole, we can ignore the possible Bitcoin wealth effect on the external balance (since the 
+external balance cancels out globally). Effects on investment vs. effects on consumption of others 
+depend on interest rate elasticities: when the central bank tightens monetary policy to address the 
+additional consumption of Bitcoin owners, it will normally impact on both, with elasticities 
+determining the relative decline of the two.  
+In the example below, we assume for the sake of simplicity that the crowding out goes exclusively at 
+the expense of other consumers. A scenario in which also investments are impacted requires more 
+comprehensive modelling to be meaningful. In any case, it is not a scenario that seems more attractive 
+than the one examined below in which total consumption and investments each stay the same: lower 
+investments mean lower growth which also eventually impacts negatively on the welfare of the non-
+Bitcoin owners and latecomers (in addition to the direct crowding out of the consumption). A further 
+simplifying assumption in the illustration below is to only have two subsets of the population each of 
+which is internally homogeneous with regards to their Bitcoin holdings: Early Birds (who have Bitcoin 
+ 
+9 Even the Crypto-critical Zeke Faux (2023, 237) concludes that “The one coin I especially would never bet 
+against is Bitcoin. It’s not that it is useful – if anything, it’s more unwieldy than the others. But Bitcoin’s true 
+believers are so convinced that it’s hard to imagine anything will change their minds. To them, whatever the 
+question, the answer is ‘buy Bitcoin.’ Everything they see is evidence Bitcoin will rise, like the members of a 
+cult certain that the apocalypse – and their salvation – is just around the corner.”      
+
+18 
+ 
+from the beginning) and Latecomers (who gradually buy Bitcoin from the Early Birds). We do not 
+foresee a category of people who never hold any Bitcoin, although the simulation could be adopted 
+to include those (the people never holding Bitcoin would be even worse off compared to the 
+Latecomers). For simplicity reasons we further assume that the marginal propensity to consume out 
+of wealth/income is the same for “Early Birds” and “Latecomers”. Moreover, we ignore possible 
+anticipation effects of future wealth on consumption. Last but not least, we abstract from Bitcoin 
+mining and assume the amount of Bitcoin held by society remains unchanged across time.         
+We assume, again to be able to formulate a simple example, that the over-proportional Bitcoin owners 
+sell every period some of their Bitcoins to the under-proportional Bitcoin owner, and that the latter 
+finances this partially by reducing consumption, and partially by liquidating real assets (which are 
+bought by the early Bitcoin owners). The Bitcoin sales flow is specified such that a fixed percentage of 
+the Bitcoin holding difference between the two subsets of society is sold from Early Birds to 
+Latecomers. In other words, the flow of Bitcoin from the over-proportional to the under-proportional 
+consumer is matched by both a reverse effect on consumption and a reverse flow of standard 
+investment assets (summing up to the Bitcoin transfer). Aiello et al. (2024) provide empirical evidence 
+on the impact of Bitcoin valuation gains on consumption, although they do not cover the crowding 
+out effects on the non-Bitcoin holders and how the latter finance their gradual way into higher Bitcoin 
+holdings: 
+“Household crypto investors appear to treat crypto as one piece of an investment portfolio, 
+some households chasing crypto gains and other households rebalancing a portion of crypto 
+gains into traditional brokerage investments. Households also use crypto wealth to increase 
+their discretionary consumption. The MPC [marginal propensity to consume] out of crypto 
+wealth is substantially higher than the MPC out of equity wealth, but lower than the MPC out 
+of lottery winnings. Households also withdraw crypto gains to purchase housing—both to 
+enter the market as new buyers and to upgrade their existing housing. This increased spending 
+on housing puts upward pressure on local house prices, particularly in areas that are heavily 
+exposed to crypto assets. In the aggregate, growth in county-level crypto wealth causes county 
+house prices to increase. 
+As mentioned, the Early Birds’ wealth effect on consumption is financed through gradually selling 
+some Bitcoin to the Latecomers. We assume that the amount of Bitcoin sold corresponds to w % per 
+annum of the difference of Bitcoin holdings between the initial holders and the non-initial holders. In 
+the figures below w=2%. Therefore, over time there is (at least for a range of parameter values) a 
+convergence of the exposure to Bitcoin of the two groups. The Latecomers finance their Bitcoin 
+purchase by either selling other assets or reducing consumption with shares being q and (1-q), 
+respectively. The initial Bitcoin holders will accordingly consume more and accumulate other assets, 
+mirroring the shares q and (1-q). In the figures below we assume that q=0.5, i.e. the Latecomers 
+finance their Bitcoin acquisition half by liquidating their real asset holdings and half by reducing 
+consumption. Initial Bitcoin owners will consume more for two reasons: first, they consume a part of 
+the Bitcoin they sell (1-q) and second over time they accumulate more and more real assets which 
+yield a financial return.  We assume that real assets generate a real net annual return of z % in net 
+terms that the owners of the assets consume. In the figures below z=2 %. We also assume annual 
+labour income of v (homogeneously across the two groups; set to 2 in the figures below such as to 
+obtain an equal stream). Early birds and Latecomers are assumed to have labour income of same size. 
+Total capital and labour income do not change in our economy over time (we assume a constant 
+production potential). We assume an initial Bitcoin endowment of the Early Bird of BE0, e.g. BE0 = 10. 
+The initial endowment of Latecomers with Bitcoin is 0: BL0 = 0. The real wealth of society of 100 
+
+19 
+ 
+(consisting ultimately in real assets). We also assume a Bitcoin value growth rate of y (e.g. y = 10 %), 
+consistent with the Bitcoin-positive scenario we are focusing on.  Table 1 summarises again the key 
+parameters and their definitions.  
+ 
+Table 1: Key parameters of the example for the distributional effects of Bitcoin  
+Parameters Description 
+range 
+W 
+share of difference between Bitcoin Early Birds and 
+Latecomers which is transferred every year   
+w in [0,1]  
+for example w=2 % 
+Q 
+share of transfer of Bitcoin that is financed by an equal 
+transfer in the other direction by real assets.  The other share 
+1-q is finance by reduced consumption of Latecomers 
+(implying correspondingly higher consumption of Early Birds) 
+q in [0,1] 
+for example q=0. 
+Z 
+real yield of real assets (that is consumed by the owner of the 
+asset) 
+z in [0,0.1], 
+for example z=2% 
+V 
+annual labor income (which is consumed) 
+v in R (real number) 
+Y 
+annual price increase of Bitcoin in percentage 
+y in [0,0.5] 
+For example y=10% 
+ 
+We are interested in the evolution of the six key variables summarised in table 2. 
+ 
+ Table 2: Key variables simulated  
+Variable Description 
+Initial value 
+Evolution 
+BEt 
+Bitcoin value held by an Early 
+bird in period t   
+BE0  in [0,∞[ 
+e.g.:  BE0=10 
+BEt = (1+y)BEt-1 -w(BEt – BLt) 
+BLt 
+Bitcoin 
+value 
+held 
+by 
+a 
+Latecomer in period t 
+BL0 = 0 
+BLt = (1+y)BLt-1 +w(BEt – BLt) 
+REt 
+Real asset value of held by 
+Early Birds in period t 
+RE0 in [0,∞[ 
+e.g. RE0 = 50 
+REt = REt-1 +wq(BEt – BLt) 
+RLt 
+Real asset value held by 
+Latecomers in period t 
+RL0 in [0,∞[ 
+RL0=RE0 
+REt = REt-1 -wq(BEt – BLt) 
+CEt 
+Consumption of Early Birds in 
+period t 
+ 
+CEt = v + z REt + w(1-q)(BEt – BLt) 
+CLt 
+Consumption of Latecomers in 
+period t 
+ 
+CLt = v + z REt – w(1-q)(BEt – BLt) 
+Remarkk: RLt and CLt cannot get negative. If any of the two hits zero, the evolution comes to an end. (We are 
+more interested in the parameter value combinations in which this does not occur).  
+On this basis, we can simulate for any set of parameters and horizons the evolution of the 6 variables 
+of Table 2. Figures 6 to 9 show such a simulation for w=2 %; q=0.5; v=2; y=10 %; BE0 = 10; RE0=RL0 = 
+50 and a time horizon of 35 years:  specific set of parameters, as an illustration, the evolution of the 
+shares of Early birds and Latecomers in real wealth (figure 6), Bitcoin wealth (Figures 7 and 8), and 
+consumption (Figure 9). Figure 6 shows that Early Birds gradually take over a larger share of real assets 
+since we assumed that a part of the Bitcoin transfers to Latecomers are effectively paid through a 
+transfer of real assets. Cumulating real assets implies to have a larger share per capita of capital 
+income that can be consumed.   
+ 
+
+20 
+ 
+ 
+Figure 6: Sharing of real wealth (total real wealth stays constant at 100) 
+ 
+ 
+Figures 7 and 8 show that the Latecomers have a growing share of Bitcoin and ultimately the Bitcoin 
+distribution converges to equality across the entire population. When equality is close, Bitcoin will no 
+longer trigger any material fresh distributional consequences, i.e. it will have become neutral. 
+However, when this stage is reached, (i) the Early Birds had benefitted for years from higher 
+consumption levels; (ii) they will continue enjoying higher consumption as a result of their higher share 
+in the capital stock.  
+ 
+Figure 7: Total Bitcoin wealth 
+ 
+ 
+ 
+
+21 
+ 
+Figure 8:  Sharing of Bitcoin holdings  
+ 
+Finally, Figure 9 illustrates the Early Birds increasing share in consumption, necessarily at the expense 
+of the Latecomers.   
+Figure 9: Per capita consumption 
+ 
+ 
+The model above distinguished only Early Birds and Latecomers. But what about those who never hold 
+any Bitcoin? It appears plausible that the demand overhang of consumption created by Bitcoin wealth 
+relative to the production potential will also make it difficult for the non-Bitcoin holders to maintain 
+their previous consumption level. The effects will however depend on some factors:  
+- 
+The more the Latecomers finance their Bitcoin purchases through reduced consumption, the 
+less there is a consumption demand overhang. In the extreme case that the Latecomers 
+finance all their Bitcoin purchases through consumption reduction, then the model above 
+predicts that non-Bitcoin holders are not affected negatively at all.  
+- 
+The central bank reaction matters: if the central bank tolerates that the consumption demand 
+overhang leads to inflation, and the non-Bitcoin holder is invested in long term fixed-coupon 
+bonds, then these households will lose real wealth as result of the inflation shock. In the 
+alternative case that the central bank increases interest rates in time and perfectly prevents 
+0%
+10%
+20%
+30%
+40%
+50%
+60%
+70%
+80%
+90%
+100%
+1
+3
+5
+7
+9
+11 13 15 17 19 21 23 25 27 29 31 33 35
+Latecomer share consumption
+Early Bird share consumption
+
+22 
+ 
+inflation, and/or the household is invested only in equity, then the non-Bitcoin holder wealth 
+is protected. Higher central bank interest rates may incentivise everyone to save more, which 
+would scale down the consumption demand overhang, and lead to some sort of forced saving 
+of the non-Bitcoin holding household, meaning that the foregone consumption would at least 
+result in higher savings and non-Bitcoin wealth accumulation.  
+In sum: the case of the non-Bitcoin holding household is more complex and effects are less 
+straightforward. This could be one reason why early Bitcoin holders insist on the narrative that prices 
+will go up through structural investment inflows from new investors (pension funds, Chinese investors, 
+as suggested in some of the quotations above), and not just from speculative trading flows within the 
+established Bitcoin community.        
+ 
+5. 
+Conclusion 
+The debate about the benefits, utility and sustainability of Bitcoin goes back to Nakamoto’s original 
+work from 2008. Most economists argue that Bitcoin is a speculative bubble that will burst at some 
+point and will then have accumulated substantial social cost (such as the energy costs of mining, and 
+the costs of having facilitated illicit payments). Bitcoin supporters deny this and assume that the 
+Bitcoin value will continue rising, that Bitcoin is a great investment asset, and that even a – relatively 
+– late jump on this bandwagon is still worthwhile. In this paper, we show that even a Bitcoin-positive 
+scenario, in which the Bitcoin price continues to rise (and the “bubble” diagnosed by critics does not 
+burst) is problematic from a social perspective, as all the wealth-effects enjoyed by the early adopters 
+through the rising prices would be at the expense of the latecomers (and possibly non-holders), who 
+are impoverished. Therefore, Bitcoin’s redistribution effects and the related social damage go beyond 
+the implications of good or bad timing of purchases and sales by investors amid a volatile price, or the 
+fact that some may lose all their money in case the Bitcoin bubble would eventually burst as predicted 
+by many economists.  
+In line with the shift of the Bitcoin community to emphasise less and less the role of Bitcoin as means 
+of payment, but as investment vehicle, we assumed that Bitcoin does not change the production 
+potential of the economy (which may be criticized as being a Bitcoin-benevolent in view of the high 
+energy consumption of Bitcoin and its facilitation of illicit payments). This implies that the wealth 
+effects associated with it would be viewed as a zero-sum game. In absolute terms, early adopters 
+exactly increase their real wealth and consumption at the expense of the real wealth and consumption 
+of those who do not hold Bitcoin or who invest in it only at a later stage. At some stage the Bitcoin 
+holdings are equally spread amongst the two subsets of the population we assume in section 4 (or 
+have largely converged to this state), such that subsequent valuation increases of Bitcoin will be 
+neutral (and have no effects at all on relative consumption, and none on total consumption unless 
+consumption crowds out investments and therefore undermines growth). However, the sharing of 
+real wealth has shifted from the Latecomers to the Early Birds and will remain as legacy of the initial 
+disparity in Bitcoin holdings. These redistributive effects can be significant in a long-term scenario 
+characterized by ever-increasing Bitcoin prices. The new Lamborghini, Rolex, villa, and equity 
+portfolios by early Bitcoin investors do not stem from an increase in the economy’s production 
+potential; rather, they are financed by diminishing consumption and wealth of those who initially do 
+not hold Bitcoin. It’s like filling one bucket by draining water from another — the latecomers have to 
+give up for the benefit of the early holders. This redistribution of wealth and purchasing power is 
+unlikely to occur without detrimental consequences for society. Even if the Latecomers cannot 
+
+23 
+ 
+attribute their loss of purchasing power, they will feel a malaise and frustration, that will contribute 
+further to an ever more split society.  
+The evolution of Bitcoin's price, lacking a stable intrinsic anchor, is heavily influenced by government 
+attitudes and actions, including regulatory measures, legislation, and the potential establishment of a 
+Bitcoin reserve – although this reliance on government obviously undermines the original concept of 
+Bitcoin's independence from public policies and government intervention. In a democratic context, 
+where politicians are accountable to voters, this dependency implies that attitudes toward Bitcoin 
+could sway election outcomes. The ongoing U.S. presidential election campaigns illustrate strong 
+efforts of some candidates to win over crypto voters. Early adopters have a vested interest in 
+promoting Bitcoin values to redistribute wealth and consumption from Latecomers to themselves, 
+maybe without being conscious of the redistributive nature of their vision. In any case current non-
+holders should realise that they have reasons to worry about Bitcoin and legislation favouring it. 
+Latecomers and non-holders and their political representatives should emphasize that the idea of 
+Bitcoin as an investment relies on redistribution at their expense. Failing to do so could skew election 
+results in favour of politicians who advocate pro-Bitcoin policies, fuelling the division of society.  
+ 
+ 
+
+24 
+ 
+References 
+Abreu, Dilip and Markus K. Brunnermeier (2003): Bubbles and Crashes, Econometrica, 71:1, pp. 173-
+204. 
+Adam, Klaus, Albert Marcet, and Johannes Beutel (2017): Stock Price Booms and Expected Capital 
+Gains, American Economic Review, 107(8), 2352–2408,  https://doi.org/10.1257/aer.20140205 
+Aiello, Darren, Scott R. Baker, Tetyana Balyuk, Marco Di Maggio, Mark J. Johnson and Jason Kotter 
+(2024): The Effects of Cryptocurrency Wealth on Household Consumption and Investment, NBER 
+Working Paper 31445, https://www.nber.org/papers/w31445 
+Avoca Global Advisors (2021), Bitcoin: a trojan horse, wcg avoca 14 October, 
+https://www.linkedin.com/posts/activity-6854411140617818112-NpKx 
+Barber, Brad. M. and Terrance Odean (2000): Trading is hazardous to your wealth: The common 
+stock investment performance of individual investors, in: Journal of Finance, 55: 2, April. 
+Bent, Marty (2024): Pensions are doomed without Bitcoin, 19 March, Marty’s Bent, 
+https://www.tftc.io/pensions-buying-bitcoin/  
+Bergsli, Lykke Øverland, Andrea Falk Lind, Peter Molnár, Michal Polasik (2022): Forecasting volatility 
+of Bitcoin, in: Research in International Business and Finance, vol. 59, Article 101540, 
+https://www.sciencedirect.com/science/article/pii/S0275531921001616?via%3Dihub 
+Bernanke, Ben S. (2002): Asset-Price “Bubbles” and Monetary Policy, Remarks by Governor Ben S. 
+Before the New York Chapter of the National Association for Business Economics, New York, 15 
+October. 
+Bernanke, Ben S. and Mark Gertler (2001): How should central bankers respond to asset prices, 
+American Economic Review, 91: 2, May, pp. 253–257. 
+Bindseil, Ulrich and Jürgen Schaaf (2022): Bitcoin’s last stand, in: The ECB Blog, 30 November, 
+https://www.ecb.europa.eu/press/blog/date/2022/html/ecb.blog221130~5301eecd19.en.html 
+Bindseil, Ulrich and Jürgen Schaaf (2024): ETF approval for bitcoin – the naked emperor’s new 
+clothes, in: The ECB Blog, 22 February, 
+https://www.ecb.europa.eu/press/blog/date/2024/html/ecb.blog20240222~0929f86e23.en.html 
+Bindseil, Ulrich, Patrick Papsdorf and Jürgen Schaaf (2022): The Bitcoin challenge: How to tame a 
+digital predator, in: Voxeu columns, 7 January, https://cepr.org/voxeu/columns/bitcoin-challenge-
+how-tame-digital-predator  
+Bitfinex 
+(2024): 
+Where 
+do 
+US 
+Presidential 
+Candidates 
+Stand 
+on 
+Crypto 
+Policy?; 
+https://blog.bitfinex.com/education/where-do-us-presidential-candidates-stand-on-crypto-policy/ 
+Blanchard, Olivier J. and Marc W. Watson, (1982): Bubbles, Rational Expectations, and Financial 
+Markets, in: P. Wachtel (Ed.): Crises in the Economic and Financial Structure. 
+Borio, Claudio and Philip Lowe (2002): Asset prices, financial and monetary stability: exploring the 
+nexus, in: BIS Working Papers 114, 02 July. 
+C, David (2024): Schumer Calls for Regulatory Action at Crypto4Harris Town Hall, in bankless.com, 15 
+August, https://www.bankless.com/schumer-calls-for-regulatory-action-at-crypto4harris-town-
+hall?ref=bankless.ghost.io  
+
+25 
+ 
+Cecchetti, Stephen G., Hans Genberg, and Sushil Wadhwani (2002): Asset prices in a flexible inflation 
+targeting framework, NBER working paper series, 22 April, 
+https://www.nber.org/system/files/working_papers/w8970/w8970.pdf 
+Chu, Jeffrey, Stephen Chan, Saralees Nadarajah, Jörg Osterrieder (2017): GARCH modelling of 
+cryptocurrencies, in: Journal of Risk and Financial Management, 10:4. 
+Claypool, Rick (2024): Big Crypto, Big Spending: Crypto Corporations Spend an Unprecedented $119 
+Million Influencing Elections, report by Public Citizen, 21 August, https://www.citizen.org/article/big-
+crypto-big-spending-2024/ 
+CNBC (2013): Ashton Kutcher Bites Into “Bitcoin Revolution”, by Cadie Thompson, published 1 May, 
+https://www.cnbc.com/id/100696230. 
+CNN (2024): RFK Jr. suspends presidential campaign and endorses Trump, 23 August, 
+https://edition.cnn.com/2024/08/23/politics/rfk-jr-suspends-campaign/index.html 
+Coindesk (2021): Tom Brady Says He’s a ‘Big Believer’ in Crypto, 28 May, 
+https://www.coindesk.com/video/tom-brady-says-hes-a-big-believer-in-crypto/ 
+Cooper, Daniel and Karen Dynan (2016): Wealth effects and macroeconomic dynamics, in: Journal of 
+Economic Surveys, 30:1), pp. 34-55. 
+Crosman, Penny (2024): Podcast 'Fraud is pervasive throughout the entire industry': Crypto insider, 
+in: AmericanBanker, 13 August, https://www.americanbanker.com/podcast/fraud-is-pervasive-
+throughout-the-entire-industry-crypto-insider 
+de Bondt, Gabe, Arne Gieseck, Pablo Herrero, and Zivile Zekaite (2019): Disaggregate income and 
+wealth effects in the largest euro area countries”, in: ECB Working Paper Series No 2343 / 
+December, https://www.ecb.europa.eu/pub/pdf/scpwps/ecb.wp2343~8a1d3cdd68.en.pdf 
+Faux, Zeke (2023): Number Go Up – Inside Crypto’s Wild Rise and Staggering Fall, Weidenfeld and 
+Nicholson.   
+Federal Reserve (2024): Economic Well-Being of U.S. Households in 2023, Board of Governors of the 
+Federal Reserve System, May, https://www.federalreserve.gov/publications/files/2023-report-
+economic-well-being-us-households-202405.pdf 
+Fernandez-Gallardo, Alvaro (2023): Preventing financial disasters: Macroprudential policy and 
+financial crises, in: European Economic Review, Vol. 151, January, 
+https://www.sciencedirect.com/science/article/pii/S0014292122002306?via%3Dihub 
+Galí, Jordi (2024): Monetary Policy and Rational Asset Price Bubbles, in: American Economic Review, 
+104: 3, March, pp. 721–52.  
+Ge Huang, Vicky and Caitlin Ostroff (2024): Want a Crypto-Friendly Congress? Run Ads That Don’t 
+Mention Crypto. A trio of crypto-funded super political-action committees spent $62 million on 
+video ads last month that never mentioned digital currencies, in: Wall Street Journal, 12 October. 
+https://www.wsj.com/finance/currencies/crypto-ads-super-political-action-committees-5ea618d3   
+Gerard, David (2024): Trump’s Crypto Turnaround Heralds an Economic Nightmare- The former 
+president is pitching a new grift, in: Foreign Policy, 30 July, 
+https://foreignpolicy.com/2024/07/30/trump-crypto-2024-election-economic-nightmare/  
+
+26 
+ 
+Glawe, Linda, and Helmut Wagner (2024): Inflation and inequality: new evidence from a dynamic 
+panel threshold analysis, in: International Economics and Economic Policy, 21:2, pp. 297–309, 
+https://doi.org/10.1007/s10368-023-00580-x 
+Gold Council (2024): Goldhub; accessed 19 August; https://www.gold.org/goldhub/data 
+Gosh, Suvashree (2024): Bitcoin Dips as Harris and Pro-Crypto Trump Clash in Debate, Bloomberg, 11 
+September, https://www.bloomberg.com/news/articles/2024-09-11/bitcoin-dips-as-harris-and-pro-
+crypto-trump-lock-horns-in-debate  
+Greenwood, Robin and Stefan Nagel (2009): Inexperienced investors and bubbles, in: Journal of 
+Financial Economics, 93: 2, pp. 239-258 
+Grimm, Veronika, Thilo Kroeger, and Christian Ochsner (2024): Wege aus der Wachstumsschwäche, 
+in:  Wirtschaftsdienst, 104: 3, pp. 180–186, 
+https://www.wirtschaftsdienst.eu/inhalt/jahr/2024/heft/3/beitrag/wege-aus-der-
+wachstumsschwaeche.html 
+Hennequin, Myrna and Cars Hommes (2024): Managing Bubbles in Experimental Asset Markets with 
+Monetary Policy, in Journal of Money, Credit and Banking, 56: 2-3, March-April, pp. 429-454, 
+https://onlinelibrary.wiley.com/doi/full/10.1111/jmcb.13050 
+Hoffman, Nik (2024): BlackRock CEO Larry Fink says Bitcoin "Is An Asset Class That Protects You", in: 
+Bitcoin Magazine, 12 January, https://www.nasdaq.com/articles/blackrock-ceo-larry-fink-says-
+bitcoin-is-an-asset-class-that-protects-you 
+Hoffman, Nik (2024a): BlackRock CEO Larry Fink Says He's “Very Bullish On The Long Term Viability of 
+Bitcoin” - BlackRock's Bitcoin ETF is the fastest growing ETF in history, Fink stated, in: Bitcoin 
+Magazine, 27 March, https://bitcoinmagazine.com/business/blackrock-ceo-larry-fink-says-hes-very-
+bullish-on-the-long-term-viability-of-bitcoin 
+Hope, C. (2024): Cathie Wood’s New Price Target for Bitcoin ‘Well Above’ $1M, Coinmarketcap 
+https://coinmarketcap.com/academy/article/cathie-woods-new-price-target-for-bitcoin-well-above-
+dollar1m 
+Hunt, James (2024): Bernstein predicts a bitcoin price of $80-90k if Trump wins presidential race, or 
+$30-40k if Harris is elected, in: The Block, 9 September, 
+https://www.theblock.co/post/315249/bernstein-bitcoin-price-trump-harris?ref=bankless.ghost.io  
+Kelleher, Dennis (2024): Kamala Harris should not cave to overtures from the crypto crowd, Financial 
+Times, 15 August, https://www.ft.com/content/40e4e7e8-35da-4df5-b021-12d1a439f46f 
+Kharif, Olga (2024): Kamala Harris’s Crypto Stance Is Still a Blank Page, in: Bloomberg Newsletter 
+Crypto, 27 August, https://www.bloomberg.com/news/newsletters/2024-08-27/kamala-harris-s-
+crypto-stance-is-still-a-blank-
+page?cmpid=BBD082724_crypto&utm_medium=email&utm_source=newsletter&utm_term=240827
+&utm_campaign=crypto 
+Kindleberger, Charles P. and Robert Z. Aliber (2011): Manias, Panics, and Crashes: A History of 
+Financial Crises, 3rd ed. New York: John Wiley. 
+Kolbert, Elizabeth (2021): Why Bitcoin Is Bad for the Environment, in: The New Yorker, published 22 
+April, https://www.newyorker.com/news/daily-comment/why-bitcoin-is-bad-for-the-environment. 
+
+27 
+ 
+Lukonga, Inutu (2023): Monetary Policy Implications of Central Bank Digital Currencies: Perspectives 
+on Jurisdictions with Conventional and Islamic Banking Systems, International Monetary Fund, IMF 
+Working Papers 2023: 060, https://www.elibrary.imf.org/view/journals/001/2023/060/article-A001-
+en.xml 
+Makarov, Igor and Antoinette Schoar (2021): Blockchain Analysis of the Bitcoin Market, 13 October, 
+https://ssrn.com/abstract=3942181  
+Malekan, Omid (2024):  Bitcoin Has Plenty of Utility: A Rebuttal to “The distributional consequences 
+of Bitcoin” by Bindseil & Schaaf https://omid-malekan.medium.com/bitcoin-has-plenty-of-utility-a-
+rebuttal-to-the-the-distributional-consequences-of-bitcoin-by-42b9672c7fa1 
+Miao, Jianjun and Pengfei Wang (2012): Bubbles and Total Factor Productivity, in: American 
+Economic Review, 102: 3, May, pp. 82–87, 
+https://pubs.aeaweb.org/doi/pdfplus/10.1257/aer.102.3.82 
+Minsky, Hyman P. (1993): The Financial Instability Hypothesis, in: Philip Arestis, Malcolm Sawyer 
+(edt.): Handbook of Radical Political Economy. 
+Mishkin, Frederic S. (2008): How Should We Respond to Asset Price Bubbles?, Speech at the 
+Wharton Financial Institutions Center and Oliver Wyman Institute's Annual Financial Risk 
+Roundtable, Philadelphia, Pennsylvania, 15 May. 
+Myftari, Entela and Sergio Rossi (2007): Asset prices and monetary policy: should central banks 
+adopt asset-based reserve requirements?, Paper for the Eleventh Berlin Conference of the Research 
+Network Macroeconomic Policies on “Finance-Led Capitalism? Macroeconomic Effects of Changes in 
+the Financial Sector” Berlin, Germany, 26–27 October, 
+https://www.boeckler.de/pdf/v_2007_10_26_Rossi-Myftari.pdf 
+Ngari, Brenda (2024), “Bitcoin is ‘Economic Immortality’, BTC price will hit $10 million a coin, Michael 
+Saylor”, in ZyCrypto.com news, 24 June 2024.  
+Nicolle, Emily (2024): Crypto and football, in: Bloomberg Crypto newsletter, 8 October. 
+Oordt, Maarten R.C. van (2024): On Bubbles in Cryptocurrency Prices, 1 August, https://elsevier-
+ssrn-document-store-prod.s3.amazonaws.com/2024/8/7/4913885.pdf 
+Oprysko, Caitlin (2024): Crypto interests drop $13M on lobbying in first half of 2024, in Politico, 31 
+July, https://www.politico.com/newsletters/politico-influence/2024/07/31/crypto-interests-drop-
+13m-on-lobbying-in-first-half-of-2024-00172177 
+Paterson, Cal (2022): There aren't that many uses for blockchains, August, 
+https://calpaterson.com/blockchain.html 
+Pereira, Ana Paula (2024): Coinbase leads crypto lobby surge with 3,475% spending jump since 2017, 
+in: Cointelegraph, 5 September, https://cointelegraph.com/news/coinbase-leads-crypto-lobby-
+surge-with-since-2017 
+Perez-Obregon, Leopoldo (2023): El Salvador’s Bitcoin policy: Regret or reward?, in: United Nations 
+University – Maastricht Economic and Social Research Institute on Innovation and Technology (UNU-
+MERIT), 21 August, https://www.merit.unu.edu/el-salvador-bitcoin-policy/ 
+Perrin, Andrew (2021): 16% of Americans say they have ever invested in, traded or used 
+cryptocurrency, in Pew Research Center, Short Reads, 11 November, 
+
+28 
+ 
+https://www.pewresearch.org/short-reads/2021/11/11/16-of-americans-say-they-have-ever-
+invested-in-traded-or-used-cryptocurrency/ 
+Rogoff, Kenneth (2017): Crypto-Fool’s Gold?, in: Project Syndicate,  9 October, https://www.project-
+syndicate.org/commentary/bitcoin-long-term-price-collapse-by-kenneth-rogoff-2017-10 
+Roubini, Nouriel (2018): Crypto is the Mother of All Scams and (Now Busted) Bubbles; Testimony for 
+the Hearing of the US Senate Committee on Banking, Housing and Community Affairs On “Exploring 
+the Cryptocurrency and Blockchain Ecosystem”; October. 
+Roubini, Nouriel (2021): Bitcoin is a self-fulfilling speculative bubble, in: the cryptonomist, 18 
+February,  https://en.cryptonomist.ch/2021/02/18/roubini-bitcoin-speculative-bubble/ 
+Rowe, Niamh (2024): Bitcoin will be ‘larger than gold’ thanks to baby boomers’ trillions, Galaxy CEO 
+Mike Novogratz says, in: Fortune Crypto, 29 February, 
+https://fortune.com/crypto/2024/02/29/bitcoin-etf-galaxy-mike-novogratz-gold-digital/ 
+Rustgi, Nivesh (2023): Bitcoin’s bullish hype fades, but analyst says PlanB’s stock-to-flow model is 
+still relevant - A popular Bitcoin price model returns to center stage as BTC’s next halving 
+approaches, Cointelegraph, 19 July, https://cointelegraph.com/news/bitcoin-s-bullish-hype-fades-
+but-analyst-says-planb-s-stock-to-flow-model-is-still-relevant 
+Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (Ed.); Conseil 
+d'Analyse Économique (Ed.) (2010): Wirtschaftsleistung, Lebensqualität und Nachhaltigkeit: Ein 
+umfassendes Indikatorensystem. Expertise im Auftrag des Deutsch-Französischen Ministerrates, 
+Expertisen, Sachverständigenrat zur Begutachtung der Gesamtwirtschaftlichen Entwicklung, 
+Wiesbaden, https://www.econstor.eu/bitstream/10419/75370/1/682962503.pdf 
+Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (2024): 
+Jahresgutachten 2023/24, Chapter 2, https://www.sachverstaendigenrat-
+wirtschaft.de/fileadmin/dateiablage/gutachten/jg202324/JG202324_Kapitel_2.pdf/   
+Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung (Ed.); Conseil 
+d'Analyse Économique (Ed.) (2010): Wirtschaftsleistung, Lebensqualität und Nachhaltigkeit: Ein 
+umfassendes Indikatorensystem. Expertise im Auftrag des Deutsch-Französischen Ministerrates, 
+Expertisen, Sachverständigenrat zur Begutachtung der Gesamtwirtschaftlichen Entwicklung, 
+Wiesbaden, https://www.econstor.eu/bitstream/10419/75370/1/682962503.pdf 
+Seater, Meagan (2024): How Will the US Election Affect the Crypto Industry? (Updated 2024), in 
+Investing News Network, 20 August //investingnews.com/us-election-crypto/ 
+Segnon, Mawuli and Stelios. D. Bekiros (2020): Forecasting volatility in bitcoin market, in: Annals of 
+Finance, 16:3, pp. 435-462, https://link.springer.com/article/10.1007/s10436-020-00368-y 
+Shi, Lisi and Suen and Richard M. H. (2014): The Macroeconomic Consequences of Asset Bubbles and 
+Crashes, MPRA Paper No. 57045, posted 01 July.   
+Sousa, Ricardo (2009): Wealth effects on consumption - evidence from the euro area, ECB Working 
+paper series No 1050, May,  https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp1050.pdf 
+Taleb, Nassim N. (2021): Bitcoin, currencies, and fragility, published online: 22 July: 
+https://www.tandfonline.com/doi/full/10.1080/14697688.2021.1952702?scroll=top&needAccess=tr
+ue 
+
+29 
+ 
+The conversation (2024): Where Harris and Trump stand on cryptocurrencies — and how it could sway 
+some American voters, 15 August, https://theconversation.com/where-harris-and-trump-stand-on-
+cryptocurrencies-and-how-it-could-sway-some-american-voters-236186 
+The Economist (2021): Crypto lobbying is going ballistic – As regulators toughen up, companies hope 
+to influence where the rules end up, 12 December; https://www.economist.com/finance-and-
+economics/crypto-lobbying-is-going-ballistic/21806674 
+Tirole, Jean (1985): Asset Bubbles and Overlapping Generations, in: Econometrica, 53:5, pp. 1071-
+1100. 
+Watts, Peter, and Kelvin Low (2024): The case for cryptoassets as property, in: Sinéad Agnew and 
+Marcus Smith (eds), Law at the Cutting Edge: Essays in Honour of Sarah Worthington, Hart 
+Publishing.  
+Weber, Michael, Bernardo Candia, Olivier Coibion, and Yuriy Gorodnichenko (2023): Do You Even 
+Crypto, Bro? Cryptocurrencies in Household Finance, NBER working paper No. 31284. 
+https://www.nber.org/papers/w31284 
+Wegner, Danilo L.B. (2024): Central bank intervention and financial bubbles, in: International Review 
+of Economics & Finance, Vol., April, pp. 1-19; 
+https://www.sciencedirect.com/science/article/pii/S1059056024000510  
+Welch, Ivo (2000): Herding among security analysts, in: Journal of Financial Economics, vol. 58, pp. 
+369-396. 
+White, Molly (2024): Cryptocurrency companies have raised over $135 million to influence US 
+elections this cycle, and they’re just getting started, in: “Citation Needed”, Newsletter, 30 May, 
+https://www.citationneeded.news/2024-cryptocurrency-election-spending/#reference-3 
+World Economic Forum (2024): The Macroeconomic Impact of Cryptocurrency and Stablecoins, 
+White Paper, July 2022, 
+https://www3.weforum.org/docs/WEF_The_Macroeconomic_Impact_of_Cryptocurrency_and_Stabl
+ecoins_2022.pdf 
+ 

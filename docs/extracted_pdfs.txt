@@ -1,0 +1,8 @@
+===== C:\Users\maxid\Documents\Inversiones\QuantOrchestrator\docs\DayTradingStrategyUS.pdf =====
+Error: 'charmap' codec can't encode character '\u2640' in position 597: character maps to <undefined>
+
+
+===== C:\Users\maxid\Documents\Inversiones\QuantOrchestrator\docs\VWAP-TheHolyGrailforDayTradingSystems.pdf =====
+Error: 'charmap' codec can't encode character '\u03b1' in position 22184: character maps to <undefined>
+
+
