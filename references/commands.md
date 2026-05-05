@@ -21,4 +21,4 @@
 - prediction → `prediction-market-quant`
 - risk → `risk-engineer`
 - judge → `judgment-day`
-- bot-new → usually `sdd-orchestrator` after initial framing
+- bot-new → usually `gentle-orchestrator` after initial framing

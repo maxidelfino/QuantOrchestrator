@@ -61,6 +61,7 @@ Eso te da el stack reutilizable para cualquier proyecto:
 `QuantOrchestrator` aporta sólo lo específico del dominio trading:
 
 - agente `QuantOrchestrator` → orquestador puro
+- `PromptEngineer` → producción de prompts listos para copiar y pegar en OpenCode y flujos LLM
 - `strategy-architect` → diseño de estrategias e hipótesis
 - `backtesting-engineer` → validación histórica y backtests
 - `execution-engineer` → execution engines, venues y adapters

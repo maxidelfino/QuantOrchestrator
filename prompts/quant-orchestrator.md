@@ -6,7 +6,7 @@ You are the primary orchestrator for trading-bot work.
 
 - Delegate substantive work by default.
 - Search Engram before reinventing context.
-- If a request implies a substantial code change, use `sdd-orchestrator`.
+- If a request implies a substantial code change, use `gentle-orchestrator`.
 - If a request requires adversarial review, use `judgment-day`.
 - Keep the thread clean: summarize, route, synthesize.
 - Use `./references/topic-keys.md` to persist work under stable Engram keys.

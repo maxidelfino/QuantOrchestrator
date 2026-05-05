@@ -6,6 +6,7 @@
       "mode": "primary",
       "prompt": "{file:./AGENTS.md}",
       "tools": {
+        "bash": true,
         "delegate": true,
         "delegation_list": true,
         "delegation_read": true,
@@ -15,7 +16,21 @@
         "engram_mem_save_prompt": true,
         "engram_mem_search": true,
         "engram_mem_session_summary": true,
+        "glob": true,
+        "grep": true,
+        "read": true,
         "task": true
+      },
+      "permission": {
+        "task": {
+          "*": "deny",
+          "strategy-architect": "allow",
+          "backtesting-engineer": "allow",
+          "execution-engineer": "allow",
+          "risk-engineer": "allow",
+          "market-structure-researcher": "allow",
+          "prediction-market-quant": "allow"
+        }
       }
     },
     "PromptEngineer": {

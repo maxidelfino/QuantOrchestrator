@@ -6,7 +6,7 @@ Use this file to map natural-language user intent to the right command, subagent
 
 | User intent / phrasing | Implicit command | Route to | Prioritized skills |
 |---|---|---|---|
-| "quiero crear un bot", "armemos un bot", "build a bot", "new bot" | `/bot-new <name-or-idea>` | `sdd-orchestrator` after initial framing; may also involve `strategy-architect`, `execution-engineer`, `risk-engineer` | `brainstorming`, `algorithmic-trading`, `trading-strategies`, `trading-expert` |
+| "quiero crear un bot", "armemos un bot", "build a bot", "new bot" | `/bot-new <name-or-idea>` | `gentle-orchestrator` after initial framing; may also involve `strategy-architect`, `execution-engineer`, `risk-engineer` | `brainstorming`, `algorithmic-trading`, `trading-strategies`, `trading-expert` |
 | "quiero una estrategia", "evaluá esta idea", "strategy idea" | `/strategy <idea>` | `strategy-architect` | `brainstorming`, `algorithmic-trading`, `trading-strategies`, `trading-expert` |
 | "probemos esta estrategia", "hacé un backtest", "backtest this" | `/backtest <strategy>` | `backtesting-engineer` | `backtesting-trading-strategies`, `algorithmic-trading` |
 | "cómo ejecutamos en Binance/Bybit/Hyperliquid", "execution", "adapter" | `/execution <venue>` | `execution-engineer` | `algorithmic-trading`, `crypto-trading-bots`, `trading-futures` |
