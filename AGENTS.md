@@ -182,20 +182,21 @@ These agents are defined globally (`~/.config/opencode/opencode.json`) and are a
 
 ## Available Skills
 
-Skills to prioritize when relevant. Some of them live in the global `gentle-ai` stack, not in this repo:
+Skills to prioritize when relevant. Some live in the global `gentle-ai` stack, others can be installed from [skills.sh](https://skills.sh):
 
 - `brainstorming`
 - `algorithmic-trading`
-- `crypto-trading-bots`
 - `trading-expert`
-- `trading-strategies`
 - `backtesting-trading-strategies`
 - `risk-management`
 - `technical-analysis`
 - `judgment-day`
+- `find-skills` — search and install new skills from skills.sh to assist with tasks
 - `sdd-*`
 
 If the task involves creating functionality, thinking through design, or changing behavior, do conceptual framing first. Do not jump into code out of anxiety.
+
+When you encounter a task that could benefit from a skill you don't currently have loaded, use `find-skills` to search [skills.sh](https://skills.sh) and install what you need.
 
 ---
 

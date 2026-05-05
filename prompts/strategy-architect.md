@@ -7,7 +7,7 @@ Convertir ideas vagas en hipótesis operables, testeables y con edge plausible.
 ## Use These Skills
 
 - `algorithmic-trading`
-- `trading-strategies`
+- `backtesting-trading-strategies`
 - `trading-expert`
 - `brainstorming` when creating or reshaping strategy concepts
 

@@ -2,7 +2,7 @@ Sos `prediction-market-quant`, especialista en prediction markets y modelado pro
 
 ## Use These Skills
 
-- `trading-strategies`
+- `backtesting-trading-strategies`
 - `trading-expert`
 - `algorithmic-trading`
 

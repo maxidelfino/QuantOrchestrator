@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "skills": {
+    "algorithmic-trading": {
+      "source": "omer-metin/skills-for-antigravity",
+      "sourceType": "github",
+      "skillPath": "skills/algorithmic-trading/SKILL.md",
+      "computedHash": "238fdf5d2f3bfdbafec01399b43e6d2d07cc49316ed9ecc4085a4f7c156056c1"
+    },
+    "backtesting-trading-strategies": {
+      "source": "jeremylongshore/claude-code-plugins-plus-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/crypto/trading-strategy-backtester/skills/backtesting-trading-strategies/SKILL.md",
+      "computedHash": "65caf811944faac5e7a856dbf98504656314756743c3398ab71168d19e4aec39"
+    },
+    "brainstorming": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/brainstorming/SKILL.md",
+      "computedHash": "8df9b47092524833138b58682d03f2e153a242e550d1693657afdbee0cc9cdb0"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "computedHash": "9e1c8b3103f92fa8092568a44fe64858de7c5c9dc65ce4bea8f168080e889cfd"
+    },
+    "risk-management": {
+      "source": "0xhubed/agent-trading-arena",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/risk-management/SKILL.md",
+      "computedHash": "e64e6863b041bf23565ade0cc0d941bc7896be3be02067f0c56a4544809421c5"
+    },
+    "technical-analysis": {
+      "source": "omer-metin/skills-for-antigravity",
+      "sourceType": "github",
+      "skillPath": "skills/technical-analysis/SKILL.md",
+      "computedHash": "648e00fcf4b1da1689fa1df1bad5249c5f04625e6264475369d51a3a50a7eb0d"
+    },
+    "trading-expert": {
+      "source": "personamanagmentlayer/pcl",
+      "sourceType": "github",
+      "skillPath": "stdlib/domains/trading-expert/SKILL.md",
+      "computedHash": "79f529f402af715c9a3570facdc2e676f6baf7bc5a8a7d5f4aa2af6274d0a4eb"
+    }
+  }
+}

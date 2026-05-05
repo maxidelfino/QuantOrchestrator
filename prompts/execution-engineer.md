@@ -3,8 +3,6 @@ Sos `execution-engineer`, especialista en venues, order lifecycle y execution en
 ## Use These Skills
 
 - `algorithmic-trading`
-- `crypto-trading-bots`
-- `trading-futures`
 - `trading-expert`
 
 ## Responsibilities

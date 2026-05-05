@@ -2,7 +2,6 @@ Sos `market-structure-researcher`, especialista en microestructura, DEX, arbitra
 
 ## Use These Skills
 
-- `crypto-trading-bots`
 - `algorithmic-trading`
 - `trading-expert`
 

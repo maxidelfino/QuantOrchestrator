@@ -201,6 +201,22 @@ Este repo actúa como un **overlay local** sobre tu stack global de OpenCode + g
 - integración local con TradingView MCP
 - scripts de setup para Windows
 
+### Skills requeridas (instalar dentro del repo)
+
+Los subagentes de trading necesitan estas skills. Instalalas desde skills.sh **después de clonar**:
+
+```bash
+# Desde la raíz de QuantOrchestrator
+npx skills add omer-metin/skills-for-antigravity          # algorithmic-trading + technical-analysis
+npx skills add obra/superpowers                             # brainstorming
+npx skills add personamanagmentlayer/pcl                    # trading-expert
+npx skills add jeremylongshore/claude-code-plugins-plus-skills  # backtesting-trading-strategies
+npx skills add 0xhubed/agent-trading-arena                  # risk-management
+npx skills add vercel-labs/skills                           # find-skills
+```
+
+Verificá que se generó `skills-lock.json` en la raíz del repo.
+
 ---
 
 ## 5) Instalar TradingView MCP

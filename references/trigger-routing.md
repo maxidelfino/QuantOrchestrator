@@ -6,13 +6,13 @@ Use this file to map natural-language user intent to the right command, subagent
 
 | User intent / phrasing | Implicit command | Route to | Prioritized skills |
 |---|---|---|---|
-| "quiero crear un bot", "armemos un bot", "build a bot", "new bot" | `/bot-new <name-or-idea>` | `gentle-orchestrator` after initial framing; may also involve `strategy-architect`, `execution-engineer`, `risk-engineer` | `brainstorming`, `algorithmic-trading`, `trading-strategies`, `trading-expert` |
-| "quiero una estrategia", "evaluá esta idea", "strategy idea" | `/strategy <idea>` | `strategy-architect` | `brainstorming`, `algorithmic-trading`, `trading-strategies`, `trading-expert` |
+| "quiero crear un bot", "armemos un bot", "build a bot", "new bot" | `/bot-new <name-or-idea>` | `gentle-orchestrator` after initial framing; may also involve `strategy-architect`, `execution-engineer`, `risk-engineer` | `brainstorming`, `algorithmic-trading`, `backtesting-trading-strategies`, `trading-expert` |
+| "quiero una estrategia", "evaluá esta idea", "strategy idea" | `/strategy <idea>` | `strategy-architect` | `brainstorming`, `algorithmic-trading`, `backtesting-trading-strategies`, `trading-expert` |
 | "probemos esta estrategia", "hacé un backtest", "backtest this" | `/backtest <strategy>` | `backtesting-engineer` | `backtesting-trading-strategies`, `algorithmic-trading` |
-| "cómo ejecutamos en Binance/Bybit/Hyperliquid", "execution", "adapter" | `/execution <venue>` | `execution-engineer` | `algorithmic-trading`, `crypto-trading-bots`, `trading-futures` |
-| "hay arbitraje?", "arb", "spread entre venues" | `/arb <pair/venue>` | `market-structure-researcher` | `crypto-trading-bots`, `algorithmic-trading`, `trading-expert` |
-| "quiero hacer MEV", "sniping", "sandwich protection" | `/mev <idea>` | `market-structure-researcher` | `crypto-trading-bots`, `algorithmic-trading`, `trading-expert` |
-| "Polymarket", "Kalshi", "prediction market" | `/prediction <market>` | `prediction-market-quant` | `algorithmic-trading`, `trading-strategies`, `trading-expert` |
+| "cómo ejecutamos en Binance/Bybit/Hyperliquid", "execution", "adapter" | `/execution <venue>` | `execution-engineer` | `algorithmic-trading`, `trading-expert` |
+| "hay arbitraje?", "arb", "spread entre venues" | `/arb <pair/venue>` | `market-structure-researcher` | `algorithmic-trading`, `trading-expert` |
+| "quiero hacer MEV", "sniping", "sandwich protection" | `/mev <idea>` | `market-structure-researcher` | `algorithmic-trading`, `trading-expert` |
+| "Polymarket", "Kalshi", "prediction market" | `/prediction <market>` | `prediction-market-quant` | `algorithmic-trading`, `backtesting-trading-strategies`, `trading-expert` |
 | "cómo manejamos el riesgo", "position sizing", "risk" | `/risk <strategy>` | `risk-engineer` | `risk-management`, `algorithmic-trading` |
 | "review", "juzgalo", "judgment day", "audit this code" | `/judge <scope>` | `judgment-day` | `judgment-day` |
 
