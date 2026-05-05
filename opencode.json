@@ -4,7 +4,7 @@
     "QuantOrchestrator": {
       "description": "Pure orchestrator for algorithmic trading and trading-bot design",
       "mode": "primary",
-      "prompt": "{file:./AGENTS.md}",
+      "prompt": "{file:./prompts/quantorchestrator.md}",
       "tools": {
         "bash": true,
         "delegate": true,
@@ -34,24 +34,12 @@
       }
     },
     "PromptEngineer": {
-      "description": "Production-grade prompt engineer that turns vague requests into copy-paste-ready prompts for OpenCode and LLM workflows",
+      "description": "Production-grade prompt engineer that turns vague requests into copy-paste-ready prompts for OpenCode and LLM workflows. NEVER executes tasks — only returns prompts.",
       "mode": "primary",
       "prompt": "{file:./prompts/prompt-engineer.md}",
       "tools": {
-        "delegate": true,
-        "delegation_list": true,
-        "delegation_read": true,
-        "engram_mem_context": true,
-        "engram_mem_get_observation": true,
         "engram_mem_save": true,
-        "engram_mem_save_prompt": true,
-        "engram_mem_search": true,
-        "engram_mem_session_summary": true,
-        "glob": true,
-        "grep": true,
-        "read": true,
-        "skill": true,
-        "task": true
+        "engram_mem_save_prompt": true
       }
     },
     "strategy-architect": {

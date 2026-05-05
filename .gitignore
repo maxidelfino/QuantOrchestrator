@@ -35,3 +35,6 @@ cache/
 # IDE/editor settings
 .vscode/
 .idea/
+
+# Agent-generated local artifacts
+.atl/
