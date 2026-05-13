@@ -18,7 +18,7 @@ from datetime import datetime
 from typing import Optional
 
 from bot.config import BotConfig
-from bot.exchange import BinanceFutures
+from bot.exchange import create_exchange
 from bot.risk import RiskManager
 from bot.state import BotState, StateManager
 from bot.strategy import Bar, Position, Signal, V40Strategy
@@ -31,7 +31,7 @@ class TradingBot:
 
     def __init__(self, config: BotConfig):
         self.config = config
-        self.exchange = BinanceFutures(config.exchange)
+        self.exchange = create_exchange(config.exchange)
         self.strategy = V40Strategy(
             ema_fast=config.strategy.ema_fast,
             ema_slow=config.strategy.ema_slow,
@@ -74,6 +74,9 @@ class TradingBot:
                 entry_time=datetime.fromisoformat(state.current_position["entry_time"]),
             )
             logger.info(f"Restored position: {self._position.side} @ {self._position.entry_price}")
+
+        # Reconcile venue state on startup (fail-safe: venue is source of truth)
+        await self._reconcile_startup_state(state)
 
         # Initialize risk manager
         balance = await self.exchange.fetch_balance()
@@ -147,6 +150,11 @@ class TradingBot:
 
         # Check if this is a new bar
         state = self.state_mgr.load()
+
+        # For venues without reliable native stop support, enforce local stop every poll.
+        if self._position is not None and not self.exchange.supports_native_stop:
+            await self._enforce_local_stop(symbol)
+
         if state.last_bar_time == bar.time.isoformat():
             logger.debug(f"Same bar, skipping: {bar.time}")
             return
@@ -269,7 +277,7 @@ class TradingBot:
             # Close position
             close_side = "sell" if self._position.side == "long" else "buy"
             order = await self.exchange.place_market_order(
-                symbol, close_side, self._position.quantity
+                symbol, close_side, self._position.quantity, reduce_only=True
             )
             exit_price = float(order.get("average", 0))
 
@@ -310,6 +318,57 @@ class TradingBot:
         except Exception as e:
             logger.error(f"Failed to close position: {e}")
             self.state_mgr.record_event("close_error", {"error": str(e)})
+
+    async def _enforce_local_stop(self, symbol: str) -> None:
+        """Close immediately if local stop has been breached."""
+        ticker = await self.exchange.fetch_ticker(symbol)
+        mark = ticker.get("last") or ticker.get("mark") or ticker.get("close")
+        if mark is None:
+            logger.warning("Local stop check skipped: ticker has no price field")
+            return
+
+        price = float(mark)
+        hit = (
+            self._position.side == "long" and price <= self._position.stop_price
+        ) or (
+            self._position.side == "short" and price >= self._position.stop_price
+        )
+        if hit:
+            logger.warning(
+                "Local stop triggered: side=%s mark=%.2f stop=%.2f",
+                self._position.side,
+                price,
+                self._position.stop_price,
+            )
+            await self._close_position(symbol, "local_stop_trigger")
+
+    async def _reconcile_startup_state(self, state: BotState) -> None:
+        """Reconcile persisted state with venue position/open orders."""
+        symbol = self.config.exchange.symbol
+        venue_position = await self.exchange.fetch_position(symbol)
+        open_orders = await self.exchange.fetch_open_orders(symbol)
+
+        if venue_position and self._position is None:
+            raise RuntimeError(
+                "Venue has open BTC position but local state is empty. "
+                "Failing closed for safety; reconcile manually before restart."
+            )
+
+        if not venue_position and self._position is not None:
+            logger.warning("Local state had position but venue has none; clearing local position.")
+            self._position = None
+            self._stop_order_id = None
+
+        # Track first known stop-like open order if present.
+        if open_orders and self._stop_order_id is None:
+            for order in open_orders:
+                info = str(order.get("type", "")).lower()
+                if "stop" in info:
+                    self._stop_order_id = str(order.get("id"))
+                    break
+
+        state.current_position = asdict(self._position) if self._position else None
+        self.state_mgr.save(state)
 
 
 def asdict(obj) -> dict:

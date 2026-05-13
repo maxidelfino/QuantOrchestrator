@@ -25,9 +25,13 @@ class StrategyConfig:
 
 @dataclass
 class ExchangeConfig:
-    """Binance Futures connection."""
+    """Exchange connection (Binance Futures or Hyperliquid)."""
+    exchange: str = "binance"
     api_key: str = ""
     api_secret: str = ""
+    wallet_address: str = ""
+    private_key: str = ""
+    base_url: str = ""
     symbol: str = "BTCUSDT"
     timeframe: str = "4h"
     testnet: bool = True  # Default to testnet for safety
@@ -63,8 +67,12 @@ class BotConfig:
                 stop_atr_mult=float(os.getenv("BOT_STOP_ATR_MULT", "3.0")),
             ),
             exchange=ExchangeConfig(
+                exchange=os.getenv("BOT_EXCHANGE", "binance").lower(),
                 api_key=os.getenv("BINANCE_API_KEY", ""),
                 api_secret=os.getenv("BINANCE_API_SECRET", ""),
+                wallet_address=os.getenv("HYPERLIQUID_WALLET_ADDRESS", ""),
+                private_key=os.getenv("HYPERLIQUID_PRIVATE_KEY", ""),
+                base_url=os.getenv("HYPERLIQUID_BASE_URL", ""),
                 symbol=os.getenv("BOT_SYMBOL", "BTCUSDT"),
                 testnet=os.getenv("BOT_TESTNET", "true").lower() == "true",
                 leverage=int(os.getenv("BOT_LEVERAGE", "1")),
@@ -80,10 +88,25 @@ class BotConfig:
     def validate(self) -> list[str]:
         """Return list of validation errors (empty = OK)."""
         errors = []
-        if not self.exchange.api_key:
-            errors.append("BINANCE_API_KEY not set")
-        if not self.exchange.api_secret:
-            errors.append("BINANCE_API_SECRET not set")
+        if self.exchange.exchange not in {"binance", "hyperliquid"}:
+            errors.append("BOT_EXCHANGE must be 'binance' or 'hyperliquid'")
+
+        if self.exchange.exchange == "binance":
+            if not self.exchange.api_key:
+                errors.append("BINANCE_API_KEY not set")
+            if not self.exchange.api_secret:
+                errors.append("BINANCE_API_SECRET not set")
+
+        if self.exchange.exchange == "hyperliquid":
+            if not self.exchange.wallet_address:
+                errors.append("HYPERLIQUID_WALLET_ADDRESS not set")
+            if not self.exchange.private_key:
+                errors.append("HYPERLIQUID_PRIVATE_KEY not set")
+
+            # v40 remains BTC-only; accept canonical Hyperliquid perp symbol.
+            if self.exchange.symbol not in {"BTC/USDC:USDC", "BTCUSDT"}:
+                errors.append("For Hyperliquid, BOT_SYMBOL must be BTC/USDC:USDC (preferred)")
+
         if self.strategy.risk_pct <= 0 or self.strategy.risk_pct > 0.10:
             errors.append("risk_pct must be between 0 and 0.10")
         if self.risk.max_drawdown_pct <= 0 or self.risk.max_drawdown_pct > 0.50:
