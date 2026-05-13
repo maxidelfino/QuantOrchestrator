@@ -15,8 +15,12 @@ import asyncio
 import logging
 import sys
 
+from dotenv import load_dotenv
+
 from bot.bot import TradingBot
 from bot.config import BotConfig
+
+load_dotenv()  # Load .env file before reading config
 
 
 def setup_logging(level: str = "INFO") -> None:
