@@ -173,10 +173,16 @@ class HyperliquidPerps:
 
         if self.config.testnet:
             self._exchange.set_sandbox_mode(True)
-            # Explicit fallback URL for environments where sandbox mode is ignored.
-            self._exchange.urls["api"] = self.config.base_url or "https://api.hyperliquid-testnet.xyz"
+            testnet_url = self.config.base_url or "https://api.hyperliquid-testnet.xyz"
+            self._exchange.urls["api"] = {
+                "public": testnet_url,
+                "private": testnet_url,
+            }
         elif self.config.base_url:
-            self._exchange.urls["api"] = self.config.base_url
+            self._exchange.urls["api"] = {
+                "public": self.config.base_url,
+                "private": self.config.base_url,
+            }
 
         await self._exchange.load_markets()
         logger.info("Connected to Hyperliquid (testnet=%s api=%s)", self.config.testnet, self._exchange.urls.get("api"))
