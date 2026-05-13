@@ -1,0 +1,2 @@
+variant,strategy,timeframe,return_pct,cagr,max_dd,pf,wr,trades,sharpe,sortino,avg_hold_hours,fees_total,funding_total,avg_win,avg_loss,long_trades,short_trades,stop_exits,signal_exits
+macd_ema50_1h,MACD + EMA50 1h,1h,-33.71,-52.99,-37.94,0.7,27.04,196,-1.064,-0.943,9.4,1650.39,22.87,149.48,-78.79,89,107,16,179

@@ -1,0 +1,62 @@
+{
+  "scenarios": [
+    {
+      "scenario": "optimistic_plausible",
+      "description": "Next-open execution, taker fees, light slippage, exact signed funding",
+      "return_pct": 4.02,
+      "cagr": 1.82,
+      "max_dd": -18.59,
+      "pf": 1.1,
+      "wr": 22.22,
+      "trades": 27,
+      "sharpe": 0.19,
+      "sortino": 0.229,
+      "fees_total": 113.56,
+      "funding_total": -856.4
+    },
+    {
+      "scenario": "baseline_realistic",
+      "description": "Next-open execution, taker fees, moderate slippage, exact signed funding",
+      "return_pct": 3.55,
+      "cagr": 1.61,
+      "max_dd": -18.7,
+      "pf": 1.08,
+      "wr": 22.22,
+      "trades": 27,
+      "sharpe": 0.179,
+      "sortino": 0.215,
+      "fees_total": 112.76,
+      "funding_total": -854.85
+    },
+    {
+      "scenario": "stressed_conservative",
+      "description": "Next-open execution, taker fees, heavy slippage, stop stress, only adverse funding counted and magnified",
+      "return_pct": -4.33,
+      "cagr": -2.01,
+      "max_dd": -20.31,
+      "pf": 0.9,
+      "wr": 22.22,
+      "trades": 27,
+      "sharpe": -0.014,
+      "sortino": -0.017,
+      "fees_total": 107.49,
+      "funding_total": -1509.84
+    }
+  ],
+  "buy_hold": {
+    "return_pct": 22.91,
+    "cagr": 9.47,
+    "max_dd": -49.89,
+    "funding_pnl": -6385.8
+  },
+  "legacy_overlap": {
+    "return_pct": 13.55,
+    "cagr": 6.0,
+    "max_dd": -16.84,
+    "pf": 1.33,
+    "wr": 22.22,
+    "trades": 27,
+    "sharpe": 0.412,
+    "sortino": 0.508
+  }
+}

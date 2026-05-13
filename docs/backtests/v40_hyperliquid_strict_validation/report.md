@@ -1,0 +1,229 @@
+# v40 Hyperliquid Strict Validation
+
+**Verdict:** NO-GO
+
+## Assumptions
+- Strategy logic unchanged: BTC only, 4h execution, daily EMA200 regime filter, EMA50/EMA200 trend logic, ATR(14) x 3 stop, 2% risk.
+- Reliable test window restricted to the longest continuous Hyperliquid 4h segment to avoid missing-bar fabrication.
+- Entries/exits triggered by bar-close signals execute on the next 4h open.
+- Stop losses use conservative stop-market handling: worse of stop vs bar open, plus adverse stop slippage.
+- Hyperliquid taker fees applied on every entry/exit.
+- Exact Hyperliquid historical hourly funding was fetched and applied; because full public 1h candle history is capped, funding notional is approximated with forward-filled 4h closes.
+- Stressed funding keeps only adverse funding and magnifies it.
+- Daily EMA200 regime uses the previous completed daily bar to avoid look-ahead leakage.
+
+## Scenario Table
+| scenario | return_pct | cagr | max_dd | pf | wr | trades | sharpe | sortino | fees_total | funding_total |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| optimistic_plausible | 4.02 | 1.82 | -18.59 | 1.1 | 22.22 | 27 | 0.19 | 0.229 | 113.56 | -856.4 |
+| baseline_realistic | 3.55 | 1.61 | -18.7 | 1.08 | 22.22 | 27 | 0.179 | 0.215 | 112.76 | -854.85 |
+| stressed_conservative | -4.33 | -2.01 | -20.31 | 0.9 | 22.22 | 27 | -0.014 | -0.017 | 107.49 | -1509.84 |
+
+## Baseline
+- Passive long buy-and-hold on the same overlap window: return 22.91%, CAGR 9.47%, max drawdown -49.89%, funding pnl -6385.8.
+
+## Recommendation
+The edge does not survive conservative execution stress cleanly enough for live deployment. Use this only for testnet validation of the plumbing, and do not move to live until the strategy is reworked or materially improved.
+
+## Diagnostics
+```json
+{
+  "generated_at_utc": "2026-05-13T14:26:36.686993+00:00",
+  "methodology": {
+    "execution": "next 4h bar open for signal-driven entries/exits; intrabar conservative stop-market fill",
+    "daily_regime_alignment": "previous completed daily EMA200 shifted by one day before 4h forward-fill",
+    "funding": "exact Hyperliquid hourly fundingHistory for BTC, notional approximated with forward-filled 4h closes",
+    "reliable_window_only": true
+  },
+  "data_integrity": {
+    "hyperliquid_4h_full": {
+      "bars": 5720,
+      "duplicates": 0,
+      "missing_bars": 1842,
+      "first": "2022-11-30T04:00:00+00:00",
+      "last": "2026-05-13T08:00:00+00:00",
+      "sample_missing": [
+        "2023-03-30T04:00:00+00:00",
+        "2023-03-30T08:00:00+00:00",
+        "2023-03-30T12:00:00+00:00",
+        "2023-03-30T16:00:00+00:00",
+        "2023-03-30T20:00:00+00:00",
+        "2023-03-31T00:00:00+00:00",
+        "2023-03-31T04:00:00+00:00",
+        "2023-03-31T08:00:00+00:00",
+        "2023-03-31T12:00:00+00:00",
+        "2023-03-31T16:00:00+00:00"
+      ]
+    },
+    "reliable_continuous_4h_segment": {
+      "start": "2024-01-31T04:00:00+00:00",
+      "end": "2026-05-13T08:00:00+00:00",
+      "bars": 5000
+    },
+    "strict_4h_window": {
+      "bars": 5000,
+      "duplicates": 0,
+      "missing_bars": 0,
+      "first": "2024-01-31T04:00:00+00:00",
+      "last": "2026-05-13T08:00:00+00:00",
+      "sample_missing": []
+    },
+    "strict_1d_window": {
+      "bars": 1959,
+      "duplicates": 0,
+      "missing_bars": 0,
+      "first": "2021-01-01T00:00:00+00:00",
+      "last": "2026-05-13T00:00:00+00:00",
+      "sample_missing": []
+    },
+    "funding_window": {
+      "bars": 19995,
+      "duplicates": 0,
+      "missing_bars": 1,
+      "first": "2024-01-31T04:00:00+00:00",
+      "last": "2026-05-13T07:00:00+00:00",
+      "sample_missing": [
+        "2024-08-15T13:00:00+00:00"
+      ]
+    }
+  },
+  "legacy_overlap_summary": {
+    "return_pct": 13.55,
+    "cagr": 6.0,
+    "max_dd": -16.84,
+    "pf": 1.33,
+    "wr": 22.22,
+    "trades": 27,
+    "sharpe": 0.412,
+    "sortino": 0.508
+  },
+  "buy_hold_overlap_same_window": {
+    "return_pct": 22.91,
+    "cagr": 9.47,
+    "max_dd": -49.89,
+    "funding_pnl": -6385.8
+  },
+  "scenario_details": {
+    "optimistic_plausible": {
+      "config": {
+        "name": "optimistic_plausible",
+        "fee_rate": 0.00045,
+        "entry_slippage_bps": 1.0,
+        "exit_slippage_bps": 1.0,
+        "stop_slippage_bps": 3.0,
+        "funding_mode": "actual_signed",
+        "funding_multiplier": 1.0,
+        "description": "Next-open execution, taker fees, light slippage, exact signed funding",
+        "initial_capital": 10000.0,
+        "risk_pct": 0.02,
+        "stop_atr_mult": 3.0,
+        "warmup_bars": 220
+      },
+      "summary": {
+        "return_pct": 4.02,
+        "cagr": 1.82,
+        "max_dd": -18.59,
+        "pf": 1.1,
+        "wr": 22.22,
+        "trades": 27,
+        "sharpe": 0.19,
+        "sortino": 0.229
+      },
+      "cost_breakdown": {
+        "fees_total": 113.56,
+        "funding_total": -856.4
+      },
+      "trade_distribution": {
+        "avg_trade_pnl": 14.89,
+        "median_trade_pnl": -187.37,
+        "avg_hold_hours": 527.7,
+        "median_hold_hours": 284.0
+      },
+      "liquidity": {
+        "max_qty_pct_of_bar_volume": 0.014202,
+        "p95_qty_pct_of_bar_volume": 0.010128
+      }
+    },
+    "baseline_realistic": {
+      "config": {
+        "name": "baseline_realistic",
+        "fee_rate": 0.00045,
+        "entry_slippage_bps": 3.0,
+        "exit_slippage_bps": 3.0,
+        "stop_slippage_bps": 8.0,
+        "funding_mode": "actual_signed",
+        "funding_multiplier": 1.0,
+        "description": "Next-open execution, taker fees, moderate slippage, exact signed funding",
+        "initial_capital": 10000.0,
+        "risk_pct": 0.02,
+        "stop_atr_mult": 3.0,
+        "warmup_bars": 220
+      },
+      "summary": {
+        "return_pct": 3.55,
+        "cagr": 1.61,
+        "max_dd": -18.7,
+        "pf": 1.08,
+        "wr": 22.22,
+        "trades": 27,
+        "sharpe": 0.179,
+        "sortino": 0.215
+      },
+      "cost_breakdown": {
+        "fees_total": 112.76,
+        "funding_total": -854.85
+      },
+      "trade_distribution": {
+        "avg_trade_pnl": 13.17,
+        "median_trade_pnl": -189.04,
+        "avg_hold_hours": 528.3,
+        "median_hold_hours": 284.0
+      },
+      "liquidity": {
+        "max_qty_pct_of_bar_volume": 0.014188,
+        "p95_qty_pct_of_bar_volume": 0.010123
+      }
+    },
+    "stressed_conservative": {
+      "config": {
+        "name": "stressed_conservative",
+        "fee_rate": 0.00045,
+        "entry_slippage_bps": 6.0,
+        "exit_slippage_bps": 6.0,
+        "stop_slippage_bps": 15.0,
+        "funding_mode": "adverse_only",
+        "funding_multiplier": 1.5,
+        "description": "Next-open execution, taker fees, heavy slippage, stop stress, only adverse funding counted and magnified",
+        "initial_capital": 10000.0,
+        "risk_pct": 0.02,
+        "stop_atr_mult": 3.0,
+        "warmup_bars": 220
+      },
+      "summary": {
+        "return_pct": -4.33,
+        "cagr": -2.01,
+        "max_dd": -20.31,
+        "pf": 0.9,
+        "wr": 22.22,
+        "trades": 27,
+        "sharpe": -0.014,
+        "sortino": -0.017
+      },
+      "cost_breakdown": {
+        "fees_total": 107.49,
+        "funding_total": -1509.84
+      },
+      "trade_distribution": {
+        "avg_trade_pnl": -16.02,
+        "median_trade_pnl": -192.4,
+        "avg_hold_hours": 528.0,
+        "median_hold_hours": 284.0
+      },
+      "liquidity": {
+        "max_qty_pct_of_bar_volume": 0.013958,
+        "p95_qty_pct_of_bar_volume": 0.010012
+      }
+    }
+  }
+}
+```

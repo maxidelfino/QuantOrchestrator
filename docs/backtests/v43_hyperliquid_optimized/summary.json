@@ -1,0 +1,54 @@
+{
+  "version": "v43",
+  "scenarios": [
+    {
+      "scenario": "optimistic_plausible",
+      "description": "Next-open execution, taker fees, light slippage, exact signed funding \u2014 v43 filters active",
+      "return_pct": -19.25,
+      "cagr": -9.34,
+      "max_dd": -22.0,
+      "pf": 0.78,
+      "wr": 41.23,
+      "trades": 114,
+      "sharpe": -0.626,
+      "sortino": -0.613,
+      "fees_total": 412.83,
+      "funding_total": -446.58
+    },
+    {
+      "scenario": "baseline_realistic",
+      "description": "Next-open execution, taker fees, moderate slippage, exact signed funding \u2014 v43 filters active",
+      "return_pct": -21.49,
+      "cagr": -10.5,
+      "max_dd": -23.67,
+      "pf": 0.76,
+      "wr": 40.35,
+      "trades": 114,
+      "sharpe": -0.714,
+      "sortino": -0.697,
+      "fees_total": 407.23,
+      "funding_total": -443.1
+    },
+    {
+      "scenario": "stressed_conservative",
+      "description": "Next-open execution, taker fees, heavy slippage, stop stress, only adverse funding counted and magnified \u2014 v43 filters active",
+      "return_pct": -27.62,
+      "cagr": -13.78,
+      "max_dd": -28.6,
+      "pf": 0.69,
+      "wr": 38.6,
+      "trades": 114,
+      "sharpe": -0.966,
+      "sortino": -0.932,
+      "fees_total": 390.62,
+      "funding_total": -781.31
+    }
+  ],
+  "buy_hold": {
+    "return_pct": 22.91,
+    "cagr": 9.47,
+    "max_dd": -49.89,
+    "funding_pnl": -6385.8
+  },
+  "v40_comparison_available": true
+}

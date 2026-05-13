@@ -1,0 +1,107 @@
+{
+  "generated_at_utc": "2026-05-13T13:43:05.346807+00:00",
+  "assumptions": {
+    "strategy": "v40 exact repo logic: 4h entries/exits on bar close, daily EMA200 regime filter, EMA50/EMA200 trend, ATR14x3 stop, 2% risk",
+    "fees": {
+      "hyperliquid_taker": 0.00045,
+      "binance_taker": 0.0004
+    },
+    "slippage": 0.0,
+    "funding": 0.0,
+    "borrow": 0.0
+  },
+  "date_ranges": {
+    "hyperliquid_4h": {
+      "bars": 5720,
+      "duplicates": 0,
+      "missing_bars": 1842,
+      "first": "2022-11-30T04:00:00+00:00",
+      "last": "2026-05-13T08:00:00+00:00",
+      "sample_missing": [
+        "2023-03-30T04:00:00+00:00",
+        "2023-03-30T08:00:00+00:00",
+        "2023-03-30T12:00:00+00:00",
+        "2023-03-30T16:00:00+00:00",
+        "2023-03-30T20:00:00+00:00",
+        "2023-03-31T00:00:00+00:00",
+        "2023-03-31T04:00:00+00:00",
+        "2023-03-31T08:00:00+00:00",
+        "2023-03-31T12:00:00+00:00",
+        "2023-03-31T16:00:00+00:00"
+      ]
+    },
+    "hyperliquid_1d": {
+      "bars": 1959,
+      "duplicates": 0,
+      "missing_bars": 0,
+      "first": "2021-01-01T00:00:00+00:00",
+      "last": "2026-05-13T00:00:00+00:00",
+      "sample_missing": []
+    },
+    "binance_4h_overlap": {
+      "bars": 5000,
+      "duplicates": 0,
+      "missing_bars": 0,
+      "first": "2024-01-31T04:00:00+00:00",
+      "last": "2026-05-13T08:00:00+00:00",
+      "sample_missing": []
+    },
+    "binance_1d_overlap": {
+      "bars": 1959,
+      "duplicates": 0,
+      "missing_bars": 0,
+      "first": "2021-01-01T00:00:00+00:00",
+      "last": "2026-05-13T00:00:00+00:00",
+      "sample_missing": []
+    },
+    "reliable_continuous_4h_segment": {
+      "start": "2024-01-31T04:00:00+00:00",
+      "end": "2026-05-13T08:00:00+00:00",
+      "bars": 5000
+    },
+    "overlap_start": "2024-01-31T04:00:00+00:00",
+    "overlap_end": "2026-05-13T08:00:00+00:00"
+  },
+  "buy_hold_overlap": {
+    "hyperliquid": {
+      "return_pct": 87.06,
+      "cagr": 31.59,
+      "max_dd": -49.89
+    },
+    "binance": {
+      "return_pct": 86.98,
+      "cagr": 31.57,
+      "max_dd": -49.85
+    }
+  },
+  "price_path_diff": {
+    "bars_compared": 4999,
+    "return_correlation": 0.999436,
+    "median_abs_close_spread_bps": 3.074,
+    "p95_abs_close_spread_bps": 11.742,
+    "median_abs_return_diff_bps": 1.735,
+    "p95_abs_return_diff_bps": 7.253
+  },
+  "fee_impact_on_hyperliquid_overlap": {
+    "hyperliquid_fee_45bps_per_side": {
+      "return_pct": 13.55,
+      "cagr": 6.0,
+      "max_dd": -16.84,
+      "pf": 1.33,
+      "wr": 22.22,
+      "trades": 27,
+      "sharpe": 0.412,
+      "sortino": 0.508
+    },
+    "binance_fee_40bps_per_side": {
+      "return_pct": 13.7,
+      "cagr": 6.06,
+      "max_dd": -16.82,
+      "pf": 1.33,
+      "wr": 22.22,
+      "trades": 27,
+      "sharpe": 0.415,
+      "sortino": 0.513
+    }
+  }
+}

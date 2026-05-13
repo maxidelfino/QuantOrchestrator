@@ -1,0 +1,44 @@
+{
+  "hyperliquid_full": {
+    "return_pct": 53.72,
+    "cagr": 13.7,
+    "max_dd": -16.21,
+    "pf": 2.0,
+    "wr": 27.59,
+    "trades": 29,
+    "sharpe": 0.949,
+    "sortino": 1.236
+  },
+  "hyperliquid_overlap": {
+    "return_pct": 13.55,
+    "cagr": 6.0,
+    "max_dd": -16.84,
+    "pf": 1.33,
+    "wr": 22.22,
+    "trades": 27,
+    "sharpe": 0.412,
+    "sortino": 0.508
+  },
+  "binance_overlap": {
+    "return_pct": 13.64,
+    "cagr": 6.04,
+    "max_dd": -16.68,
+    "pf": 1.33,
+    "wr": 22.22,
+    "trades": 27,
+    "sharpe": 0.416,
+    "sortino": 0.512
+  },
+  "buy_hold_overlap": {
+    "hyperliquid": {
+      "return_pct": 87.06,
+      "cagr": 31.59,
+      "max_dd": -49.89
+    },
+    "binance": {
+      "return_pct": 86.98,
+      "cagr": 31.57,
+      "max_dd": -49.85
+    }
+  }
+}

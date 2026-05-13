@@ -1,0 +1,2 @@
+variant,strategy,timeframe,return_pct,cagr,max_dd,pf,wr,trades,sharpe,sortino,avg_hold_hours,fees_total,funding_total,avg_win,avg_loss,long_trades,short_trades,stop_exits,signal_exits
+v40_4h,v40 (EMA50/200 + daily EMA200) 4h,4h,13.48,5.97,-16.99,1.32,22.22,27,0.41,0.507,528.1,120.41,76.74,917.26,-197.9,15,12,17,10
