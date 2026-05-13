@@ -31,6 +31,8 @@ dist/
 build/
 .cache/
 cache/
+__pycache__/
+*.pyc
 
 # IDE/editor settings
 .vscode/
