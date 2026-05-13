@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "v40-btc-bot"
+version = "1.0.0"
+description = "v40 BTC Trend-Following Bot — Binance + Hyperliquid"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+addopts = "-q"
