@@ -343,10 +343,24 @@ class TradingBot:
             await self._close_position(symbol, "local_stop_trigger")
 
     async def _reconcile_startup_state(self, state: BotState) -> None:
-        """Reconcile persisted state with venue position/open orders."""
+        """Reconcile persisted state with venue position/open orders.
+
+        Wrapped in try/except: Hyperliquid testnet has known ccxt issues
+        with fetch_positions (422 error). Bot continues with local state
+        and will reconcile on next successful poll.
+        """
         symbol = self.config.exchange.symbol
-        venue_position = await self.exchange.fetch_position(symbol)
-        open_orders = await self.exchange.fetch_open_orders(symbol)
+        try:
+            venue_position = await self.exchange.fetch_position(symbol)
+        except Exception as e:
+            logger.warning("Could not fetch venue position (will retry next poll): %s", e)
+            venue_position = None
+
+        try:
+            open_orders = await self.exchange.fetch_open_orders(symbol)
+        except Exception as e:
+            logger.warning("Could not fetch open orders (will retry next poll): %s", e)
+            open_orders = []
 
         if venue_position and self._position is None:
             raise RuntimeError(
