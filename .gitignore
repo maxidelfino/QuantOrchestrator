@@ -38,6 +38,9 @@ __pycache__/
 .vscode/
 .idea/
 
+# Archived artifacts (old backtests, superseded scripts)
+archive/
+
 # Agent-generated local artifacts
 .atl/
 bot/state/

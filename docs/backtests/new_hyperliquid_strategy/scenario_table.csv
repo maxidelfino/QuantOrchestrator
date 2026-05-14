@@ -1,0 +1,4 @@
+scenario,description,return_pct,cagr,max_dd,pf,wr,trades,sharpe,sortino,fees_total,funding_total
+optimistic_plausible,"Light slippage, exact funding",-3.16,-2.89,-5.91,0.7,45.0,20,-0.743,-0.212,98.75,9.65
+baseline_realistic,"Moderate slippage, exact funding",-3.72,-3.41,-6.11,0.66,45.0,20,-0.874,-0.248,98.48,9.63
+stressed_conservative,"Heavy slippage, adverse funding ×1.5",-4.99,-4.56,-6.7,0.57,40.0,20,-1.136,-0.309,97.77,-10.0

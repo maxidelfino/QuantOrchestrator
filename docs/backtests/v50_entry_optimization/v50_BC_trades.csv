@@ -1,0 +1,2 @@
+signal_time,entry_time,exit_time,dir,entry,exit,qty,gross_pnl,fees,funding,pnl,hold_hours,reason,coin
+2026-01-15 16:00:00+00:00,2026-01-15 17:00:00+00:00,2026-01-16 08:00:00+00:00,short,96718.9756,95698.701,0.07367836890724784,75.17216836549504,-6.37965925236464,0.0,68.7925091131304,15.0,max_hold,BTC

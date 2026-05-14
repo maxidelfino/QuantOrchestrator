@@ -4,8 +4,8 @@ from datetime import date, timedelta
 
 import pytest
 
-from bot.config import RiskConfig
-from bot.risk import RiskManager
+from bots.shared.config import RiskConfig
+from bots.shared.risk import RiskManager
 
 
 @pytest.fixture

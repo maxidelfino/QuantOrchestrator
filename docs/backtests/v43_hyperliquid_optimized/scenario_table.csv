@@ -1,4 +1,0 @@
-scenario,description,return_pct,cagr,max_dd,pf,wr,trades,sharpe,sortino,fees_total,funding_total
-optimistic_plausible,"Next-open execution, taker fees, light slippage, exact signed funding — v43 filters active",-19.25,-9.34,-22.0,0.78,41.23,114,-0.626,-0.613,412.83,-446.58
-baseline_realistic,"Next-open execution, taker fees, moderate slippage, exact signed funding — v43 filters active",-21.49,-10.5,-23.67,0.76,40.35,114,-0.714,-0.697,407.23,-443.1
-stressed_conservative,"Next-open execution, taker fees, heavy slippage, stop stress, only adverse funding counted and magnified — v43 filters active",-27.62,-13.78,-28.6,0.69,38.6,114,-0.966,-0.932,390.62,-781.31

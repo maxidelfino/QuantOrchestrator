@@ -1,14 +1,15 @@
-"""Tests for v40 strategy logic."""
+"""Tests for btc-trend-4h strategy logic (formerly v40)."""
 
 import pandas as pd
 import pytest
 
-from bot.strategy import Bar, Position, Signal, V40Strategy
+from bots.shared.strategy import Bar, Position, Signal
+from bots.btc_trend_4h.strategy import BTCTrend4hStrategy
 
 
 @pytest.fixture
 def strategy():
-    return V40Strategy()
+    return BTCTrend4hStrategy()
 
 
 @pytest.fixture

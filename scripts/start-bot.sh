@@ -1,9 +1,21 @@
 #!/usr/bin/env bash
-# Launch v40 bot in a persistent tmux session
+# Launch trading bots in a persistent tmux session
 # Survives terminal close and SSH disconnect
 # Does NOT survive reboot (needs systemd/launchd for that)
 
-SESSION="v40-hyperliquid"
+# ── Choose your bot ──────────────────────────────────────────
+# v40  — BTC trend-following 4h
+# BOT_MODULE="bots.btc_trend_4h"
+# SESSION="v40-btc-trend"
+
+# v48b — BTC momentum 1h
+BOT_MODULE="bots.btc_momentum_1h"
+SESSION="v48b-btc-momentum"
+
+# shared utilities (both bots)
+# BOT_MODULE="bots.shared"
+# SESSION="bots-shared"
+# ─────────────────────────────────────────────────────────────
 
 # Kill existing session if any (optional — comment out to keep)
 tmux kill-session -t "$SESSION" 2>/dev/null
@@ -13,7 +25,7 @@ tmux new-session -d -s "$SESSION" -n bot
 
 # Send commands to the session
 tmux send-keys -t "$SESSION" "cd $(pwd)" C-m
-tmux send-keys -t "$SESSION" "python3 -m bot.main --log-level INFO" C-m
+tmux send-keys -t "$SESSION" "python3 -m ${BOT_MODULE} --log-level INFO" C-m
 
 echo "Bot started in tmux session: $SESSION"
 echo ""

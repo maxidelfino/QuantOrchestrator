@@ -3,9 +3,9 @@ requires = ["setuptools>=68.0"]
 build-backend = "setuptools.backends._legacy:_Backend"
 
 [project]
-name = "v40-btc-bot"
-version = "1.0.0"
-description = "v40 BTC Trend-Following Bot — Binance + Hyperliquid"
+name = "quant-orchestrator"
+version = "2.0.0"
+description = "Multi-strategy BTC trading bot — trend-following + momentum"
 
 [tool.pytest.ini_options]
 pythonpath = ["."]

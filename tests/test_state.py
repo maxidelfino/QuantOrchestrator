@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from bot.state import BotState, StateManager
+from bots.shared.state import BotState, StateManager
 
 
 @pytest.fixture
@@ -27,7 +27,7 @@ class TestStateManager:
     def test_save_and_load(self, state_mgr):
         state = BotState(
             is_running=True,
-            last_bar_time="2024-01-01T00:00:00+00:00",
+            last_bar_time={"btc-trend-4h": "2024-01-01T00:00:00+00:00"},
             last_signal="long",
             error_count=2,
             last_error="test error",
@@ -36,7 +36,7 @@ class TestStateManager:
 
         loaded = state_mgr.load()
         assert loaded.is_running
-        assert loaded.last_bar_time == "2024-01-01T00:00:00+00:00"
+        assert loaded.last_bar_time == {"btc-trend-4h": "2024-01-01T00:00:00+00:00"}
         assert loaded.last_signal == "long"
         assert loaded.error_count == 2
         assert loaded.last_error == "test error"

@@ -1,2 +1,0 @@
-variant,strategy,timeframe,return_pct,cagr,max_dd,pf,wr,trades,sharpe,sortino,avg_hold_hours,fees_total,funding_total,avg_win,avg_loss,long_trades,short_trades,stop_exits,signal_exits
-macd_ema50_2h,MACD + EMA50 2h,2h,-22.66,-39.01,-23.79,0.63,28.42,95,-1.364,-1.175,19.2,559.75,16.53,144.1,-91.13,44,51,10,84

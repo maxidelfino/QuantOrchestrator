@@ -1,0 +1,140 @@
+# =============================================================================
+# BTC Trend-Following 4h — Bot Configuration
+# =============================================================================
+#
+# This file controls ALL bot-specific parameters for the btc-trend-4h strategy.
+# Secrets (API keys, private keys) are loaded from .env — NOT from this file.
+#
+# What the bot does:
+#   Long-short trend-following on BTC 4h candles using EMA crossovers,
+#   filtered by a daily EMA200 regime to avoid counter-trend trades.
+#
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# Exchange / Venue Configuration
+# ---------------------------------------------------------------------------
+exchange:
+  # Venue identifier. Supported: hyperliquid, binance.
+  # Future venues: extended, 01, risex, paradex, lighter.
+  # Risk implication: each venue has different margin mechanics and liquidation rules.
+  venue: hyperliquid
+
+  # Trading pair symbol.
+  # Hyperliquid: BTC/USDC:USDC (preferred for perps)
+  # Binance: BTC/USDT
+  symbol: BTC/USDC:USDC
+
+  # Run on testnet (true) or mainnet (false).
+  # WARNING: Set to false ONLY when you're ready to trade real money.
+  # Default: true
+  testnet: true
+
+  # Candle timeframe for strategy evaluation.
+  # Must match the strategy's expected timeframe.
+  # Valid: 1m, 5m, 15m, 1h, 4h, 1d, 1w
+  timeframe: 4h
+
+  # Leverage multiplier for the position.
+  # Range: 1-125 (venue-dependent).
+  # WARNING: Higher leverage = larger positions = faster liquidation.
+  # Risk implication: at 10x leverage, a 10% adverse move liquidates you.
+  # Default: 1 (no leverage, spot-equivalent risk)
+  leverage: 1
+
+# ---------------------------------------------------------------------------
+# Strategy Parameters
+# ---------------------------------------------------------------------------
+strategy:
+  # --- EMA Trend Parameters ---
+
+  # Fast EMA period for the 4h trend signal.
+  # Range: 10-100. Default: 50.
+  # Lower = more responsive, more false signals. Higher = smoother, slower entries.
+  ema_fast: 50
+
+  # Slow EMA period for the 4h trend signal.
+  # Range: 50-500. Default: 200.
+  # Lower = tighter trend definition. Higher = captures longer trends but enters later.
+  ema_slow: 200
+
+  # Daily EMA period used as regime filter.
+  # Range: 50-500. Default: 200.
+  # Only takes longs when price > daily EMA200 (bull regime),
+  # only takes shorts when price < daily EMA200 (bear regime).
+  # Higher = stricter regime filter, fewer trades.
+  ema_regime_daily: 200
+
+  # --- Risk / Exit Parameters ---
+
+  # ATR period for volatility measurement.
+  # Range: 5-30. Default: 14.
+  # Lower = more responsive to recent volatility. Higher = smoother stops.
+  atr_period: 14
+
+  # ATR multiplier for stop loss distance.
+  # Range: 1.0-10.0. Default: 3.0.
+  # Stop = entry +/- (ATR * mult).
+  # Lower = tighter stops, more whipsaws. Higher = wider stops, larger losses per trade.
+  # Risk implication: wider stops mean smaller position sizes for the same risk %.
+  stop_atr_mult: 3.0
+
+  # Risk per trade as fraction of equity.
+  # Range: 0.005-0.10 (0.5%-10%). Default: 0.02 (2%).
+  # Position size = (equity * risk_pct) / |entry - stop|.
+  # Risk implication: higher = larger positions, faster equity growth BUT larger drawdowns.
+  risk_pct: 0.02
+
+  # Enable/disable this strategy.
+  # Set to false to skip loading this bot in multi-strategy mode.
+  enabled: true
+
+# ---------------------------------------------------------------------------
+# Execution Configuration
+# ---------------------------------------------------------------------------
+execution:
+  # Entry order type: "limit" (maker, 1.0bps on Hyperliquid) or "market" (taker, 4.5bps).
+  # Limit orders are placed at the signal bar's close with a small offset for better pricing.
+  # If the limit doesn't fill within TTL bars, falls back to market order.
+  entry_order_type: limit
+
+  # Time-to-live for limit entry orders, in strategy bars.
+  # For 4h timeframe: 3 bars = 12 hours max wait.
+  entry_ttl_bars: 3
+
+  # Exit order type for stop-loss triggers. ALWAYS market — missing the exit is worse than slippage.
+  exit_stop_type: market
+
+  # Exit order type for planned exits (strategy reversal, trailing stop target).
+  # "limit" saves on fees but may not fill. "market" guarantees exit.
+  exit_planned_type: market
+
+  # Price offset for limit orders (fraction of close price).
+  # 0.0001 = 0.01% better than close. For BTC at $100k, that's $10 better.
+  limit_price_offset: 0.0001
+
+  # postOnly flag for limit orders. Ensures the order only posts (maker fee).
+  # If the limit price would cross the spread, the order is rejected instead of taking.
+  post_only: true
+
+# ---------------------------------------------------------------------------
+# Risk Limits (shared circuit breakers)
+# ---------------------------------------------------------------------------
+risk:
+  # Maximum daily loss as fraction of equity.
+  # Range: 0.01-0.50 (1%-50%). Default: 0.05 (5%).
+  # Trading halts when daily loss reaches this threshold.
+  # Risk implication: lower = more conservative, fewer trading days after losses.
+  max_daily_loss_pct: 0.05
+
+  # Maximum drawdown from peak equity.
+  # Range: 0.05-0.50 (5%-50%). Default: 0.25 (25%).
+  # Trading halts PERMANENTLY when drawdown reaches this threshold.
+  # Requires manual intervention to resume.
+  # Risk implication: this is your final safety net. Set it based on your max tolerable loss.
+  max_drawdown_pct: 0.25
+
+  # Minimum order size in USD.
+  # Default: 5.0.
+  # Orders below this size are rejected (venue minimums + dust prevention).
+  min_order_size_usd: 5.0

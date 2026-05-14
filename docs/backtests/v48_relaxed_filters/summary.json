@@ -1,0 +1,59 @@
+{
+  "v47_1h_baseline": {
+    "scenario": "baseline_realistic",
+    "return_pct": 8.26,
+    "cagr": 15.6,
+    "max_dd": -1.32,
+    "pf": 13.55,
+    "wr": 85.71,
+    "trades": 14,
+    "sharpe": 2.898,
+    "sortino": 1.077,
+    "fees_total": 96.61,
+    "funding_total": 0.85,
+    "trades_per_week": 0.47
+  },
+  "v48a": {
+    "scenario": "baseline_realistic",
+    "return_pct": 9.75,
+    "cagr": 18.53,
+    "max_dd": -5.71,
+    "pf": 2.02,
+    "wr": 55.17,
+    "trades": 29,
+    "sharpe": 1.654,
+    "sortino": 0.85,
+    "fees_total": 203.78,
+    "funding_total": 3.87,
+    "trades_per_week": 0.98
+  },
+  "v48b": {
+    "scenario": "baseline_realistic",
+    "return_pct": -17.17,
+    "cagr": -29.12,
+    "max_dd": -23.16,
+    "pf": 0.64,
+    "wr": 38.89,
+    "trades": 90,
+    "sharpe": -1.973,
+    "sortino": -1.401,
+    "fees_total": 596.83,
+    "funding_total": 7.2,
+    "trades_per_week": 3.03
+  },
+  "v48c": {
+    "scenario": "baseline_realistic",
+    "return_pct": -22.37,
+    "cagr": -37.03,
+    "max_dd": -26.76,
+    "pf": 0.6,
+    "wr": 36.27,
+    "trades": 102,
+    "sharpe": -2.521,
+    "sortino": -1.908,
+    "fees_total": 645.67,
+    "funding_total": 8.15,
+    "trades_per_week": 3.43
+  },
+  "best_variant": "v48a"
+}

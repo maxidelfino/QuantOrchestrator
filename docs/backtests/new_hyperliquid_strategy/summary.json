@@ -1,0 +1,56 @@
+{
+  "version": "v46",
+  "name": "RSI Momentum Pullback",
+  "timeframe": "2h",
+  "scenarios": [
+    {
+      "scenario": "optimistic_plausible",
+      "description": "Light slippage, exact funding",
+      "return_pct": -3.16,
+      "cagr": -2.89,
+      "max_dd": -5.91,
+      "pf": 0.7,
+      "wr": 45.0,
+      "trades": 20,
+      "sharpe": -0.743,
+      "sortino": -0.212,
+      "fees_total": 98.75,
+      "funding_total": 9.65
+    },
+    {
+      "scenario": "baseline_realistic",
+      "description": "Moderate slippage, exact funding",
+      "return_pct": -3.72,
+      "cagr": -3.41,
+      "max_dd": -6.11,
+      "pf": 0.66,
+      "wr": 45.0,
+      "trades": 20,
+      "sharpe": -0.874,
+      "sortino": -0.248,
+      "fees_total": 98.48,
+      "funding_total": 9.63
+    },
+    {
+      "scenario": "stressed_conservative",
+      "description": "Heavy slippage, adverse funding \u00d71.5",
+      "return_pct": -4.99,
+      "cagr": -4.56,
+      "max_dd": -6.7,
+      "pf": 0.57,
+      "wr": 40.0,
+      "trades": 20,
+      "sharpe": -1.136,
+      "sortino": -0.309,
+      "fees_total": 97.77,
+      "funding_total": -10.0
+    }
+  ],
+  "buy_hold": {
+    "return_pct": -9.18,
+    "cagr": -8.42,
+    "max_dd": -49.9,
+    "funding_pnl": -1227.93
+  },
+  "v40_available": true
+}
