@@ -19,9 +19,10 @@ Usage:
 from __future__ import annotations
 
 import os
+from importlib import import_module
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Type
 
 import yaml
 
@@ -62,6 +63,16 @@ class BTCMomentum1hConfig:
     max_hold: int = 16
     risk_pct: float = 0.02
     enabled: bool = True
+
+
+@dataclass
+class StrategyConfig:
+    """Dynamic strategy configuration.
+
+    strategy_class must be a dotted import path to the strategy engine class.
+    """
+
+    strategy_class: str = ""
 
 
 # ---------------------------------------------------------------------------
@@ -136,6 +147,7 @@ class BotConfig:
     exchange: ExchangeConfig = field(default_factory=ExchangeConfig)
     risk: RiskConfig = field(default_factory=RiskConfig)
     execution: ExecutionConfig = field(default_factory=ExecutionConfig)
+    strategy: StrategyConfig = field(default_factory=StrategyConfig)
     state_dir: str = "bot/state"
     log_level: str = "INFO"
 
@@ -207,12 +219,25 @@ class BotConfig:
             max_position_pct=float(risk_data.get("max_position_pct", 0.20)),
         )
 
-        # --- Strategy: populate based on bot_name ---
+        # --- Strategy: dynamic strategy class + params ---
         strat_data = data.get("strategy", {})
+        strategy_cfg = StrategyConfig(
+            strategy_class=str(strat_data.get("strategy_class", "")).strip(),
+        )
+
+        if not strategy_cfg.strategy_class:
+            # Backward-compatible fallback by bot name
+            fallback_map = {
+                "btc_trend_4h": "exchanges.hyperliquid.bots.btc_trend_4h.strategy.BTCTrend4hStrategy",
+                "btc_momentum_1h": "exchanges.hyperliquid.bots.btc_momentum_1h.strategy.BTCMomentum1hStrategy",
+            }
+            strategy_cfg.strategy_class = fallback_map.get(bot_name, "")
+
         trend_cfg: Optional[BTCTrend4hConfig] = None
         momentum_cfg: Optional[BTCMomentum1hConfig] = None
 
-        if bot_name == "btc_trend_4h":
+        strategy_type = cls._resolve_strategy_config_type(strategy_cfg.strategy_class)
+        if strategy_type is BTCTrend4hConfig:
             trend_cfg = BTCTrend4hConfig(
                 ema_fast=int(strat_data.get("ema_fast", 50)),
                 ema_slow=int(strat_data.get("ema_slow", 200)),
@@ -222,7 +247,7 @@ class BotConfig:
                 risk_pct=float(strat_data.get("risk_pct", 0.02)),
                 enabled=strat_data.get("enabled", True),
             )
-        elif bot_name == "btc_momentum_1h":
+        elif strategy_type is BTCMomentum1hConfig:
             momentum_cfg = BTCMomentum1hConfig(
                 rsi_period=int(strat_data.get("rsi_period", 14)),
                 adx_threshold=float(strat_data.get("adx_threshold", 20.0)),
@@ -241,47 +266,68 @@ class BotConfig:
             exchange=exchange,
             risk=risk,
             execution=execution,
+            strategy=strategy_cfg,
             log_level=os.getenv("BOT_LOG_LEVEL", "INFO"),
             btc_trend_4h=trend_cfg,
             btc_momentum_1h=momentum_cfg,
         )
 
-    # -----------------------------------------------------------------------
-    # Legacy compatibility — kept for any external callers
-    # -----------------------------------------------------------------------
+    @staticmethod
+    def _load_class(path: str) -> type:
+        """Load class from dotted path: package.module.ClassName."""
+        module_path, _, class_name = path.rpartition(".")
+        if not module_path or not class_name:
+            raise ValueError(f"Invalid strategy_class path: {path!r}")
+        module = import_module(module_path)
+        return getattr(module, class_name)
 
     @classmethod
-    def from_env(cls, bot_dir: Optional[str] = None) -> "BotConfig":
-        """Legacy loader. Delegates to from_yaml.
+    def _resolve_strategy_config_type(cls, strategy_class_path: str) -> Optional[Type[Any]]:
+        """Map strategy class path to known typed strategy config dataclass."""
+        if not strategy_class_path:
+            return None
 
-        Args:
-            bot_dir: Path to bot directory. If None, searches for
-                     config.yaml in the caller's bot directory.
-        """
-        if bot_dir is not None:
-            return cls.from_yaml(bot_dir)
-
-        # Fallback: try to discover the bot directory from the call stack
-        import inspect
-        frame = inspect.currentframe()
         try:
-            while frame:
-                fname = frame.f_globals.get("__file__", "")
-                if fname and "bots/" in fname:
-                    # Extract bot directory
-                    parts = Path(fname).parts
-                    for i, p in enumerate(parts):
-                        if p == "bots" and i + 1 < len(parts):
-                            bot_dir = str(Path(fname).parent)
-                            return cls.from_yaml(bot_dir)
-                frame = frame.f_back
-        finally:
-            del frame
+            strategy_cls = cls._load_class(strategy_class_path)
+        except (ImportError, AttributeError, ValueError):
+            return None
 
-        raise FileNotFoundError(
-            "Could not auto-discover bot directory. "
-            "Pass bot_dir explicitly: BotConfig.from_yaml('bots/btc_trend_4h')"
-        )
+        mapping = {
+            "BTCTrend4hStrategy": BTCTrend4hConfig,
+            "BTCMomentum1hStrategy": BTCMomentum1hConfig,
+        }
+        return mapping.get(getattr(strategy_cls, "__name__", ""))
+
+    def get_strategy_params(self) -> Dict[str, Any]:
+        """Return strategy kwargs from the typed strategy config."""
+        if self.btc_trend_4h:
+            return {
+                "ema_fast": self.btc_trend_4h.ema_fast,
+                "ema_slow": self.btc_trend_4h.ema_slow,
+                "ema_regime_daily": self.btc_trend_4h.ema_regime_daily,
+                "atr_period": self.btc_trend_4h.atr_period,
+                "stop_atr_mult": self.btc_trend_4h.stop_atr_mult,
+            }
+        if self.btc_momentum_1h:
+            return {
+                "rsi_period": self.btc_momentum_1h.rsi_period,
+                "adx_period": 14,
+                "adx_threshold": self.btc_momentum_1h.adx_threshold,
+                "rsi_long_min": self.btc_momentum_1h.rsi_long_min,
+                "rsi_long_max": self.btc_momentum_1h.rsi_long_max,
+                "rsi_short_min": self.btc_momentum_1h.rsi_short_min,
+                "rsi_short_max": self.btc_momentum_1h.rsi_short_max,
+                "atr_period": self.btc_momentum_1h.atr_period,
+                "stop_atr_mult": self.btc_momentum_1h.stop_atr_mult,
+                "max_hold_bars": self.btc_momentum_1h.max_hold,
+                "risk_pct": self.btc_momentum_1h.risk_pct,
+            }
+        return {}
+
+    def create_strategy_engine(self) -> Any:
+        """Instantiate configured strategy class with current config values."""
+        strategy_cls = self._load_class(self.strategy.strategy_class)
+        return strategy_cls(**self.get_strategy_params())
 
     # -----------------------------------------------------------------------
     # Validation
@@ -326,6 +372,9 @@ class BotConfig:
             errors.append("risk.max_daily_loss_pct must be between 0 and 0.50")
 
         # Strategy-specific validation
+        if (self.btc_trend_4h or self.btc_momentum_1h) and not self.strategy.strategy_class:
+            errors.append("strategy.strategy_class must be set in config.yaml")
+
         if self.btc_trend_4h:
             if self.btc_trend_4h.risk_pct <= 0 or self.btc_trend_4h.risk_pct > 0.10:
                 errors.append("btc_trend_4h strategy.risk_pct must be between 0 and 0.10")

@@ -71,26 +71,33 @@ class BTCTrend4hStrategy:
 
     def _entry_signal(self, bar: Bar) -> Signal:
         """Check for new entry signals."""
+        ema50 = bar.indicator("ema50")
+        ema200 = bar.indicator("ema200")
+        ema200_daily = bar.indicator("ema200_daily")
+
         # Long: close > EMA50 > EMA200 AND regime is bullish
-        if (bar.close > bar.ema50 > bar.ema200
-                and bar.close > bar.ema200_daily):
+        if (bar.close > ema50 > ema200
+                and bar.close > ema200_daily):
             return Signal.LONG
 
         # Short: close < EMA50 < EMA200 AND regime is bearish
-        if (bar.close < bar.ema50 < bar.ema200
-                and bar.close < bar.ema200_daily):
+        if (bar.close < ema50 < ema200
+                and bar.close < ema200_daily):
             return Signal.SHORT
 
         return Signal.NONE
 
     def _exit_signal(self, bar: Bar, position: Position) -> Signal:
         """Check for exit conditions."""
+        ema50 = bar.indicator("ema50")
+        ema200 = bar.indicator("ema200")
+
         if position.side == "long":
             # Stop loss hit
             if bar.low <= position.stop_price:
                 return Signal.CLOSE_LONG
             # Trend reversal: EMA50 crossed below EMA200
-            if bar.ema50 < bar.ema200:
+            if ema50 < ema200:
                 return Signal.CLOSE_LONG
 
         elif position.side == "short":
@@ -98,7 +105,7 @@ class BTCTrend4hStrategy:
             if bar.high >= position.stop_price:
                 return Signal.CLOSE_SHORT
             # Trend reversal: EMA50 crossed above EMA200
-            if bar.ema50 > bar.ema200:
+            if ema50 > ema200:
                 return Signal.CLOSE_SHORT
 
         return Signal.NONE

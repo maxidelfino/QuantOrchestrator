@@ -121,10 +121,10 @@ class BTCMomentum1hStrategy:
 
     def _entry_signal(self, bar: Bar) -> Signal:
         """Check for entry signals using RSI momentum pullback logic."""
-        adx = getattr(bar, "adx", 0.0)
-        rsi = getattr(bar, "rsi", 50.0)
-        plus_di = getattr(bar, "plus_di", 0.0)
-        minus_di = getattr(bar, "minus_di", 0.0)
+        adx = bar.indicator("adx", 0.0)
+        rsi = bar.indicator("rsi", 50.0)
+        plus_di = bar.indicator("plus_di", 0.0)
+        minus_di = bar.indicator("minus_di", 0.0)
         prev2_rsi = self._state.prev2_rsi
 
         # ADX must confirm trend

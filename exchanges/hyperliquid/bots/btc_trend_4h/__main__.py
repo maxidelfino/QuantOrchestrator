@@ -11,7 +11,6 @@ from dotenv import load_dotenv
 
 from shared.python.config import BotConfig
 from shared.python.bot import TradingBot
-from exchanges.hyperliquid.bots.btc_trend_4h.strategy import BTCTrend4hStrategy
 
 load_dotenv()
 
@@ -42,14 +41,8 @@ def main() -> None:
             logging.error(f"  - {e}")
         sys.exit(1)
 
-    # Build strategy engine
-    engine = BTCTrend4hStrategy(
-        ema_fast=config.btc_trend_4h.ema_fast,
-        ema_slow=config.btc_trend_4h.ema_slow,
-        ema_regime_daily=config.btc_trend_4h.ema_regime_daily,
-        atr_period=config.btc_trend_4h.atr_period,
-        stop_atr_mult=config.btc_trend_4h.stop_atr_mult,
-    )
+    # Build strategy engine (dynamic from config.strategy.strategy_class)
+    engine = config.create_strategy_engine()
 
     strategies = {
         "btc-trend-4h": (engine, config.exchange.timeframe),

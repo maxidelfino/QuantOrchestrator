@@ -61,19 +61,24 @@ class TemplateStrategy:
 
     def _entry_signal(self, bar: Bar) -> Signal:
         # TODO: Replace with your entry conditions.
-        if (bar.close > bar.ema50 > bar.ema200 and bar.close > bar.ema200_daily):
+        ema50 = bar.indicator("ema50")
+        ema200 = bar.indicator("ema200")
+        ema200_daily = bar.indicator("ema200_daily")
+        if (bar.close > ema50 > ema200 and bar.close > ema200_daily):
             return Signal.LONG
-        if (bar.close < bar.ema50 < bar.ema200 and bar.close < bar.ema200_daily):
+        if (bar.close < ema50 < ema200 and bar.close < ema200_daily):
             return Signal.SHORT
         return Signal.NONE
 
     def _exit_signal(self, bar: Bar, position: Position) -> Signal:
         # TODO: Replace with your exit logic.
+        ema50 = bar.indicator("ema50")
+        ema200 = bar.indicator("ema200")
         if position.side == "long":
-            if bar.low <= position.stop_price or bar.ema50 < bar.ema200:
+            if bar.low <= position.stop_price or ema50 < ema200:
                 return Signal.CLOSE_LONG
         elif position.side == "short":
-            if bar.high >= position.stop_price or bar.ema50 > bar.ema200:
+            if bar.high >= position.stop_price or ema50 > ema200:
                 return Signal.CLOSE_SHORT
         return Signal.NONE
 

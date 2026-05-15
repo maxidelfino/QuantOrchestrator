@@ -35,10 +35,6 @@ class BotState:
     error_count: int = 0
     last_error: str = ""
 
-    # Backward compat: legacy single-position field
-    current_position: Optional[Dict[str, Any]] = None
-
-
 class StateManager:
     """SQLite based state persistence."""
 
@@ -147,7 +143,6 @@ class StateManager:
             last_signal=row["last_signal"],
             error_count=row["error_count"],
             last_error=row["last_error"],
-            current_position=positions.get("btc-trend-4h"),  # Backward compat
         )
 
     def save(self, state: BotState) -> None:
@@ -161,11 +156,9 @@ class StateManager:
         positions_json = json.dumps(state.positions) if state.positions else None
         pending_orders_json = json.dumps(state.pending_orders) if state.pending_orders else None
 
-        # current_position: prefer from positions dict, fall back to legacy field
+        # Keep writing legacy current_position for migration compatibility
         if state.positions and "btc-trend-4h" in state.positions:
             cp_json = json.dumps(state.positions["btc-trend-4h"])
-        elif state.current_position:
-            cp_json = json.dumps(state.current_position)
         else:
             cp_json = None
 

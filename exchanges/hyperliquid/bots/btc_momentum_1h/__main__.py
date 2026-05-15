@@ -11,7 +11,6 @@ from dotenv import load_dotenv
 
 from shared.python.config import BotConfig
 from shared.python.bot import TradingBot
-from exchanges.hyperliquid.bots.btc_momentum_1h.strategy import BTCMomentum1hStrategy
 
 load_dotenv()
 
@@ -42,20 +41,8 @@ def main() -> None:
             logging.error(f"  - {e}")
         sys.exit(1)
 
-    # Build strategy engine
-    engine = BTCMomentum1hStrategy(
-        rsi_period=config.btc_momentum_1h.rsi_period,
-        adx_period=14,  # ADX period is fixed in the strategy
-        adx_threshold=config.btc_momentum_1h.adx_threshold,
-        rsi_long_min=config.btc_momentum_1h.rsi_long_min,
-        rsi_long_max=config.btc_momentum_1h.rsi_long_max,
-        rsi_short_min=config.btc_momentum_1h.rsi_short_min,
-        rsi_short_max=config.btc_momentum_1h.rsi_short_max,
-        atr_period=config.btc_momentum_1h.atr_period,
-        stop_atr_mult=config.btc_momentum_1h.stop_atr_mult,
-        max_hold_bars=config.btc_momentum_1h.max_hold,
-        risk_pct=config.btc_momentum_1h.risk_pct,
-    )
+    # Build strategy engine (dynamic from config.strategy.strategy_class)
+    engine = config.create_strategy_engine()
 
     strategies = {
         "btc-momentum-1h": (engine, config.exchange.timeframe),

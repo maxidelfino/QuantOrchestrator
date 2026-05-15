@@ -46,6 +46,7 @@ exchange:
 # Strategy Parameters
 # ---------------------------------------------------------------------------
 strategy:
+  strategy_class: exchanges.hyperliquid.bots.btc_momentum_1h.strategy.BTCMomentum1hStrategy
   # --- RSI Parameters ---
 
   # RSI period for momentum measurement.

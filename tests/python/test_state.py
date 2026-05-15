@@ -43,19 +43,21 @@ class TestStateManager:
 
     def test_save_position(self, state_mgr):
         state = BotState(
-            current_position={
-                "side": "long",
-                "entry_price": 42000,
-                "quantity": 0.1,
-                "stop_price": 40500,
-                "entry_time": "2024-01-01T00:00:00+00:00",
+            positions={
+                "btc-trend-4h": {
+                    "side": "long",
+                    "entry_price": 42000,
+                    "quantity": 0.1,
+                    "stop_price": 40500,
+                    "entry_time": "2024-01-01T00:00:00+00:00",
+                }
             }
         )
         state_mgr.save(state)
 
         loaded = state_mgr.load()
-        assert loaded.current_position["side"] == "long"
-        assert loaded.current_position["entry_price"] == 42000
+        assert loaded.positions["btc-trend-4h"]["side"] == "long"
+        assert loaded.positions["btc-trend-4h"]["entry_price"] == 42000
 
     def test_record_trade(self, state_mgr):
         state_mgr.record_trade(

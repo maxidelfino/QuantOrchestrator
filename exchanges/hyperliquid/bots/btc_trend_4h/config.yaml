@@ -46,6 +46,7 @@ exchange:
 # Strategy Parameters
 # ---------------------------------------------------------------------------
 strategy:
+  strategy_class: exchanges.hyperliquid.bots.btc_trend_4h.strategy.BTCTrend4hStrategy
   # --- EMA Trend Parameters ---
 
   # Fast EMA period for the 4h trend signal.

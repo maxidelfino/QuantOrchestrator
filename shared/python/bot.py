@@ -232,14 +232,16 @@ class TradingBot:
             low=current_bar["low"],
             close=current_bar["close"],
             volume=current_bar["volume"],
-            ema50=current_bar.get("ema50", 0.0),
-            ema200=current_bar.get("ema200", 0.0),
-            ema200_daily=current_bar.get("ema200_daily", 0.0),
-            atr=current_bar.get("atr", 0.0),
-            rsi=current_bar.get("rsi", 50.0),
-            adx=current_bar.get("adx", 0.0),
-            plus_di=current_bar.get("plus_di", 0.0),
-            minus_di=current_bar.get("minus_di", 0.0),
+            indicators={
+                "ema50": float(current_bar.get("ema50", 0.0)),
+                "ema200": float(current_bar.get("ema200", 0.0)),
+                "ema200_daily": float(current_bar.get("ema200_daily", 0.0)),
+                "atr": float(current_bar.get("atr", 0.0)),
+                "rsi": float(current_bar.get("rsi", 50.0)),
+                "adx": float(current_bar.get("adx", 0.0)),
+                "plus_di": float(current_bar.get("plus_di", 0.0)),
+                "minus_di": float(current_bar.get("minus_di", 0.0)),
+            },
         )
 
         # 5. Evaluate strategy
@@ -288,7 +290,7 @@ class TradingBot:
     ) -> None:
         """Open a new position for a strategy using limit or market order."""
         exec_cfg = self.config.execution
-        stop_price = engine.calc_stop_price(bar.close, bar.atr, side)
+        stop_price = engine.calc_stop_price(bar.close, bar.indicator("atr"), side)
         quantity = engine.calc_position_size(equity, bar.close, stop_price)
 
         valid, reason = self.risk.validate_order_size(quantity, bar.close)
