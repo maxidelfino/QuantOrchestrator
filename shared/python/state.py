@@ -14,7 +14,7 @@ import json
 import logging
 import sqlite3
 from dataclasses import asdict, dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -218,7 +218,7 @@ class StateManager:
         self._conn.execute("""
             INSERT INTO events (timestamp, event_type, data)
             VALUES (?, ?, ?)
-        """, (datetime.utcnow().isoformat(), event_type, json.dumps(data)))
+        """, (datetime.now(UTC).isoformat(), event_type, json.dumps(data)))
         self._conn.commit()
 
     def fetch_trades(self, limit: int = 100) -> List[Dict[str, Any]]:

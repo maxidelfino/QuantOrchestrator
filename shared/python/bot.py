@@ -15,7 +15,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from dataclasses import fields, is_dataclass
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any, Dict, Optional
 
 from shared.python.config import BotConfig
@@ -472,7 +472,7 @@ class TradingBot:
 
             self.state_mgr.record_trade(
                 entry_time=ctx.position.entry_time.isoformat(),
-                exit_time=datetime.utcnow().isoformat(),
+                exit_time=datetime.now(UTC).isoformat(),
                 symbol=symbol,
                 side=ctx.position.side,
                 entry_price=ctx.position.entry_price,

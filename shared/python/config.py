@@ -86,6 +86,11 @@ class ExchangeConfig:
     leverage: int = 1                 # From config.yaml
 
 
+# Venue lifecycle
+SUPPORTED_VENUES = {"hyperliquid", "binance"}
+PLANNED_VENUES = {"extended", "01", "risex", "paradex", "lighter"}
+
+
 # ---------------------------------------------------------------------------
 # Risk config
 # ---------------------------------------------------------------------------
@@ -287,10 +292,12 @@ class BotConfig:
         errors = []
 
         # Venue validation
-        valid_venues = {"hyperliquid", "binance", "extended", "01", "risex", "paradex", "lighter"}
-        if self.exchange.venue not in valid_venues:
+        if self.exchange.venue not in SUPPORTED_VENUES:
             errors.append(
-                f"exchange.venue must be one of: {', '.join(sorted(valid_venues))}"
+                "exchange.venue must be one of supported venues: "
+                f"{', '.join(sorted(SUPPORTED_VENUES))}. "
+                "Planned (not implemented yet): "
+                f"{', '.join(sorted(PLANNED_VENUES))}"
             )
 
         # Credential checks per venue
