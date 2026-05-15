@@ -3,8 +3,8 @@
 import pandas as pd
 import pytest
 
-from bots.python.core.strategy import Bar, Position, Signal
-from bots.python.btc_trend_4h.strategy import BTCTrend4hStrategy
+from shared.python.strategy import Bar, Position, Signal
+from exchanges.hyperliquid.bots.btc_trend_4h.strategy import BTCTrend4hStrategy
 
 
 @pytest.fixture

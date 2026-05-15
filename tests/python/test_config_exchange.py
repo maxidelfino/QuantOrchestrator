@@ -1,9 +1,9 @@
 """Tests for exchange selection/config validation."""
 
-from bots.python.core.config import BotConfig
-from exchanges.python.binance_futures import BinanceFutures
-from exchanges.python.hyperliquid_perps import HyperliquidPerps
-from exchanges.python.venue import create_exchange
+from shared.python.config import BotConfig
+from exchanges.binance.adapters.binance_futures import BinanceFutures
+from exchanges.hyperliquid.adapters.hyperliquid_perps import HyperliquidPerps
+from shared.python.exchange import create_exchange
 
 
 def test_create_exchange_binance_default():

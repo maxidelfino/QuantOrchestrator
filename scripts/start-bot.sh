@@ -5,15 +5,15 @@
 
 # ── Choose your bot ──────────────────────────────────────────
 # v40  — BTC trend-following 4h
-# BOT_MODULE="bots.python.btc_trend_4h"
+# BOT_MODULE="exchanges.hyperliquid.bots.btc_trend_4h"
 # SESSION="v40-btc-trend"
 
 # v48b — BTC momentum 1h
-BOT_MODULE="bots.python.btc_momentum_1h"
+BOT_MODULE="exchanges.hyperliquid.bots.btc_momentum_1h"
 SESSION="v48b-btc-momentum"
 
 # shared utilities (both bots)
-# BOT_MODULE="bots.python.core"
+# BOT_MODULE="shared.python"
 # SESSION="bots-shared"
 # ─────────────────────────────────────────────────────────────
 

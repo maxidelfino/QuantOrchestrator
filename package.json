@@ -2,6 +2,6 @@
   "name": "quantorchestrator-monorepo",
   "private": true,
   "workspaces": [
-    "bots/typescript/*"
+    "exchanges/01/bots/*"
   ]
 }

@@ -16,9 +16,9 @@ Este repo incluye dos estrategias Python para BTC perpetual futures y un bot MM 
 
 | Bot | Timeframe | Strategy | Status |
 |-----|-----------|----------|--------|
-| [`bots/python/btc_trend_4h/`](bots/python/btc_trend_4h/) | 4h + daily | EMA trend-following with regime filter | Active |
-| [`bots/python/btc_momentum_1h/`](bots/python/btc_momentum_1h/) | 1h | RSI momentum pullback with ADX filter | Active |
-| [`bots/typescript/mm_bot_01/`](bots/typescript/mm_bot_01/) | Multi-timeframe | Market making + signal overlays | Active |
+| [`exchanges/hyperliquid/bots/btc_trend_4h/`](exchanges/hyperliquid/bots/btc_trend_4h/) | 4h + daily | EMA trend-following with regime filter | Active |
+| [`exchanges/hyperliquid/bots/btc_momentum_1h/`](exchanges/hyperliquid/bots/btc_momentum_1h/) | 1h | RSI momentum pullback with ADX filter | Active |
+| [`exchanges/01/bots/mm_bot_01/`](exchanges/01/bots/mm_bot_01/) | Multi-timeframe | Market making + signal overlays | Active |
 
 ### Quick Start
 
@@ -31,30 +31,29 @@ cp .env.example .env
 # Edit .env with your API keys
 
 # 3. Run Python bots
-python -m bots.python.btc_trend_4h
-python -m bots.python.btc_momentum_1h
+python -m exchanges.hyperliquid.bots.btc_trend_4h
+python -m exchanges.hyperliquid.bots.btc_momentum_1h
 
 # 4. TypeScript compile check
-cd bots/typescript/mm_bot_01 && npx tsc --noEmit
+cd exchanges/01/bots/mm_bot_01 && npx tsc --noEmit
 ```
 
 ### Architecture
 
 ```
 exchanges/
-├── python/                    # Hyperliquid + Binance Python adapters
-└── typescript/                # Zerone SDK + Binance feed adapters
+├── hyperliquid/
+│   ├── adapters/
+│   └── bots/
+├── 01/
+│   ├── adapters/
+│   └── bots/
+└── binance/
+    └── adapters/
 
-bots/
-├── python/
-│   ├── core/                  # Shared Python bot framework
-│   ├── btc_trend_4h/
-│   ├── btc_momentum_1h/
-│   └── template/
-└── typescript/
-    ├── core/                  # Shared TS types/logger
-    ├── mm_bot_01/
-    └── template/
+shared/
+├── python/                    # Shared Python bot framework
+└── typescript/                # Shared TS types/logger
 
 backtest-results/
 └── hyperliquid/               # Consolidated active backtest artifacts
@@ -63,7 +62,7 @@ backtest-results/
 ### Configuration
 
 - **`.env`** — Secrets only (API keys, wallet addresses, private keys)
-- **`bots/python/*/config.yaml`** — Strategy-specific parameters with full documentation
+- **`exchanges/hyperliquid/bots/*/config.yaml`** — Strategy-specific parameters with full documentation
 - Environment variables override YAML defaults
 
 See `.env.example` for all available environment variables.
@@ -118,7 +117,7 @@ Eso te da el stack reutilizable para cualquier proyecto:
 - `prediction-market-quant` → estrategias para prediction markets
 - Integración local con TradingView MCP
 - Scripts de setup para Windows (`scripts/`)
-- Trading bots (`bots/`)
+- Trading bots (`exchanges/*/bots/`)
 
 Si abrís OpenCode fuera de este repo, **no** vas a tener el agente `QuantOrchestrator`.
 Si lo abrís dentro de este repo, **sí**.

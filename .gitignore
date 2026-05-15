@@ -34,6 +34,7 @@ build/
 cache/
 __pycache__/
 *.pyc
+.pytest_cache/
 
 # IDE/editor settings
 .vscode/
@@ -45,4 +46,8 @@ backtest-results/
 
 # Agent-generated local artifacts
 .atl/
+
+# State databases (SQLite)
+*.db
+*.sqlite
 bot/state/

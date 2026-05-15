@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from bots.python.core.state import BotState, StateManager
+from shared.python.state import BotState, StateManager
 
 
 @pytest.fixture
