@@ -1,2 +1,0 @@
-return_pct,cagr,max_dd,pf,wr,trades,sharpe,sortino,fees_total,funding_total,avg_trade_pnl,median_trade_pnl,avg_hold_hours,median_hold_hours,p95_hold_hours,max_qty_pct_of_bar_volume,p95_qty_pct_of_bar_volume,total_funding,funding_per_trade,funding_per_hour_held,total_hold_hours
--3.72,-3.41,-6.11,0.66,45.0,20,-0.874,-0.248,98.48,9.63,-18.62,-36.05,20.1,24.0,24.0,0.015036,0.011241,9.63,0.48,0.024,402.0

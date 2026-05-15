@@ -3,6 +3,7 @@ tradingview-mcp/
 
 # Dependencies
 node_modules/
+**/node_modules/
 
 # Environment files
 .env
@@ -40,6 +41,7 @@ __pycache__/
 
 # Archived artifacts (old backtests, superseded scripts)
 archive/
+backtest-results/
 
 # Agent-generated local artifacts
 .atl/

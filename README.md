@@ -12,12 +12,13 @@ Su trabajo no es ejecutar todo inline, sino **orquestar** el flujo correcto: acl
 
 ## Trading Bots
 
-Este repo incluye dos estrategias de trading para BTC perpetual futures:
+Este repo incluye dos estrategias Python para BTC perpetual futures y un bot MM en TypeScript:
 
 | Bot | Timeframe | Strategy | Status |
 |-----|-----------|----------|--------|
-| [`bots/btc_trend_4h/`](bots/btc_trend_4h/) | 4h + daily | EMA trend-following with regime filter | Active |
-| [`bots/btc_momentum_1h/`](bots/btc_momentum_1h/) | 1h | RSI momentum pullback with ADX filter | Active |
+| [`bots/python/btc_trend_4h/`](bots/python/btc_trend_4h/) | 4h + daily | EMA trend-following with regime filter | Active |
+| [`bots/python/btc_momentum_1h/`](bots/python/btc_momentum_1h/) | 1h | RSI momentum pullback with ADX filter | Active |
+| [`bots/typescript/mm_bot_01/`](bots/typescript/mm_bot_01/) | Multi-timeframe | Market making + signal overlays | Active |
 
 ### Quick Start
 
@@ -29,44 +30,40 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env with your API keys
 
-# 3. Run both bots (testnet by default)
-python -m bots.shared
+# 3. Run Python bots
+python -m bots.python.btc_trend_4h
+python -m bots.python.btc_momentum_1h
 
-# 4. Run a single bot
-python -m bots.btc_trend_4h      # 4h trend-following only
-python -m bots.btc_momentum_1h   # 1h momentum only
-
-# 5. Check status
-python -m bots.shared --status
+# 4. TypeScript compile check
+cd bots/typescript/mm_bot_01 && npx tsc --noEmit
 ```
 
 ### Architecture
 
 ```
+exchanges/
+├── python/                    # Hyperliquid + Binance Python adapters
+└── typescript/                # Zerone SDK + Binance feed adapters
+
 bots/
-├── shared/                    # Common infrastructure
-│   ├── bot.py                 # Multi-strategy orchestrator
-│   ├── config.py              # Config loader (env + yaml)
-│   ├── exchange.py            # Hyperliquid/Binance adapters
-│   ├── risk.py                # RiskManager
-│   ├── state.py               # StateManager (SQLite)
-│   └── strategy.py            # Signal, Bar, Position types
-│
-├── btc_trend_4h/              # 4h EMA trend-following
-│   ├── strategy.py            # BTCTrend4hStrategy
-│   ├── config.yaml            # Strategy parameters
-│   └── README.md              # Full documentation
-│
-└── btc_momentum_1h/           # 1h RSI momentum pullback
-    ├── strategy.py            # BTCMomentum1hStrategy
-    ├── config.yaml            # Strategy parameters
-    └── README.md              # Full documentation
+├── python/
+│   ├── core/                  # Shared Python bot framework
+│   ├── btc_trend_4h/
+│   ├── btc_momentum_1h/
+│   └── template/
+└── typescript/
+    ├── core/                  # Shared TS types/logger
+    ├── mm_bot_01/
+    └── template/
+
+backtest-results/
+└── hyperliquid/               # Consolidated active backtest artifacts
 ```
 
 ### Configuration
 
 - **`.env`** — Secrets only (API keys, wallet addresses, private keys)
-- **`bots/*/config.yaml`** — Strategy-specific parameters with full documentation
+- **`bots/python/*/config.yaml`** — Strategy-specific parameters with full documentation
 - Environment variables override YAML defaults
 
 See `.env.example` for all available environment variables.
