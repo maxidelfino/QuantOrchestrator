@@ -78,8 +78,8 @@ class BTCMomentum1hStrategy:
 
         # RSI
         delta = out["close"].diff()
-        gain = delta.where(delta > 0, 0.0)
-        loss = (-delta).where(delta < 0, 0.0)
+        gain = delta.clip(lower=0)
+        loss = (-delta).clip(lower=0)
         avg_gain = gain.ewm(alpha=1.0 / self.rsi_period, adjust=False).mean()
         avg_loss = loss.ewm(alpha=1.0 / self.rsi_period, adjust=False).mean()
         rs = avg_gain / avg_loss.replace(0, np.nan)

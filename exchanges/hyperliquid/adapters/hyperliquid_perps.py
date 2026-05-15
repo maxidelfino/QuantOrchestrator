@@ -31,6 +31,9 @@ class HyperliquidPerps:
             "enableRateLimit": True,
             "walletAddress": self.config.wallet_address,
             "privateKey": self.config.private_key,
+            "options": {
+                "defaultSlippage": 0.05,
+            },
         }
         self._exchange = ccxt_async.hyperliquid(opts)
 
@@ -43,6 +46,17 @@ class HyperliquidPerps:
             }
 
         await self._exchange.load_markets()
+        try:
+            # Lightweight authenticated ping to fail fast on invalid credentials.
+            await self._exchange.fetch_balance()
+        except Exception as exc:
+            status = getattr(exc, "status", None)
+            message = str(exc)
+            if status == 422 or "422" in message:
+                raise RuntimeError(
+                    "Hyperliquid authentication failed: invalid wallet/private key credentials."
+                ) from exc
+            raise
         logger.info("Connected to Hyperliquid (testnet=%s)", self.config.testnet)
 
     async def close(self) -> None:
@@ -77,11 +91,19 @@ class HyperliquidPerps:
         symbol: str,
         side: str,
         amount: float,
+        price: Optional[float] = None,
         reduce_only: bool = False,
     ) -> Dict[str, Any]:
         params: Dict[str, Any] = {"reduceOnly": reduce_only}
-        order = await self._exchange.create_market_order(symbol, side, amount, params=params)
-        logger.info("Hyperliquid market order: %s %.6f %s reduceOnly=%s", side, amount, symbol, reduce_only)
+        order = await self._exchange.create_market_order(symbol, side, amount, price, params)
+        logger.info(
+            "Hyperliquid market order: %s %.6f %s price=%s reduceOnly=%s",
+            side,
+            amount,
+            symbol,
+            f"{price:.2f}" if price is not None else "defaultSlippage",
+            reduce_only,
+        )
         return order
 
     async def place_limit_order(
@@ -125,7 +147,9 @@ class HyperliquidPerps:
 
     def get_equity(self, balance: Dict[str, Any]) -> float:
         total = balance.get("total", {})
-        for key in ("USDC", "USD", "USDT"):
+        if "USDC" in total and total["USDC"] is not None:
+            return float(total["USDC"])
+        for key in ("USD", "USDT"):
             if key in total and total[key] is not None:
                 return float(total[key])
         info = balance.get("info", {})
