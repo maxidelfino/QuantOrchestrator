@@ -1,0 +1,7 @@
+{
+  "name": "quantorchestrator-monorepo",
+  "private": true,
+  "workspaces": [
+    "exchanges/01/bots/*"
+  ]
+}

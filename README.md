@@ -70,6 +70,7 @@ Eso te da el stack reutilizable para cualquier proyecto:
 - `prediction-market-quant` → estrategias para prediction markets
 - Integración local con TradingView MCP
 - Scripts de setup para Windows (`scripts/`)
+- Trading bots (`exchanges/*/bots/`)
 
 Si abrís OpenCode fuera de este repo, **no** vas a tener el agente `QuantOrchestrator`.
 Si lo abrís dentro de este repo, **sí**.
@@ -86,6 +87,65 @@ Este repo **no redefine** localmente:
 - judgment-day
 
 Se asume que eso ya viene de tu instalación global de **gentle-ai**.
+
+---
+
+## Trading Bots
+
+Este repo incluye estrategias y bots para que tomes como referencia:
+
+| Bot | Timeframe | Strategy | Status |
+|-----|-----------|----------|--------|
+| [`exchanges/hyperliquid/bots/btc_trend_4h/`](exchanges/hyperliquid/bots/btc_trend_4h/) | 4h + daily | EMA trend-following with regime filter | Active |
+| [`exchanges/hyperliquid/bots/btc_momentum_1h/`](exchanges/hyperliquid/bots/btc_momentum_1h/) | 1h | RSI momentum pullback with ADX filter | Active |
+| [`exchanges/01/bots/mm_bot_01/`](exchanges/01/bots/mm_bot_01/) | Multi-timeframe | Market making + signal overlays | Active |
+
+### Quick Start
+
+```bash
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Configure
+cp .env.example .env
+# Edit .env with your API keys
+
+# 3. Run Python bots
+python -m exchanges.hyperliquid.bots.btc_trend_4h
+python -m exchanges.hyperliquid.bots.btc_momentum_1h
+
+# 4. TypeScript compile check
+cd exchanges/01/bots/mm_bot_01 && npx tsc --noEmit
+```
+
+### Architecture
+
+```
+exchanges/
+├── hyperliquid/
+│   ├── adapters/
+│   └── bots/
+├── 01/
+│   ├── adapters/
+│   └── bots/
+└── binance/
+    └── adapters/
+
+shared/
+├── python/                    # Shared Python bot framework
+└── typescript/                # Shared TS types/logger
+
+backtest-results/
+└── hyperliquid/               # Consolidated active backtest artifacts
+```
+
+### Configuration
+
+- **`.env`** — Secrets only (API keys, wallet addresses, private keys)
+- **`exchanges/hyperliquid/bots/*/config.yaml`** — Strategy-specific parameters with full documentation
+- Environment variables override YAML defaults
+
+See `.env.example` for all available environment variables.
 
 ---
 
@@ -114,7 +174,20 @@ git clone https://github.com/maxidelfino/QuantOrchestrator.git
 cd QuantOrchestrator
 ```
 
-### Paso 4: instalar TradingView MCP
+### Paso 4: instalar dependencias Python
+
+```bash
+pip install -r requirements.txt
+```
+
+### Paso 5: configurar el bot
+
+```bash
+cp .env.example .env
+# Edit .env with your API keys
+```
+
+### Paso 6: instalar TradingView MCP
 
 La configuración local apunta a:
 
@@ -142,7 +215,7 @@ cd ..
 
 Si querés tener `tradingview-mcp` en otra ruta, podés hacerlo, pero vas a tener que editar `opencode.json`.
 
-### Paso 5: levantar TradingView Desktop con debug port
+### Paso 7: levantar TradingView Desktop con debug port
 
 TradingView Desktop o Chrome debe correr con CDP habilitado.
 
@@ -160,12 +233,12 @@ Eso abre Chrome con TradingView web y el puerto 9222. Logueate (solo la primera 
 ```bash
 # macOS
 /Applications/TradingView.app/Contents/MacOS/TradingView --remote-debugging-port=9222
+```
 
 # Linux
 ./scripts/launch_tv_debug_linux.sh
-```
 
-### Paso 6: abrir OpenCode dentro de este repo
+### Paso 8: abrir OpenCode dentro de este repo
 
 ```bash
 cd QuantOrchestrator
@@ -176,7 +249,7 @@ Ahí vas a tener disponible el agente:
 
 - `QuantOrchestrator`
 
-### Paso 7: verificar conexión
+### Paso 9: verificar conexión
 
 En OpenCode, escribí:
 
@@ -287,13 +360,6 @@ Si tu instalación global de `gentle-ai` está sana, podés usar SDD desde este 
 
 ---
 
-## Créditos
-
-- **TradingView MCP**: [LewisWJackson/tradingview-mcp-jackson](https://github.com/LewisWJackson/tradingview-mcp-jackson) — fork con mejoras del original de [@tradesdontlie](https://github.com/tradesdontlie/tradingview-mcp).
-- **Setup Windows**: Adaptado de [kmanus88/tradingview-claude-code-windows](https://github.com/kmanus88/tradingview-claude-code-windows).
-
----
-
 ## Próximo paso recomendado
 
 1. Instalar OpenCode globalmente
@@ -303,3 +369,10 @@ Si tu instalación global de `gentle-ai` está sana, podés usar SDD desde este 
 5. Levantar TradingView Desktop / Chrome con debug port
 6. Hacer un health check del MCP
 7. Recién ahí usar `QuantOrchestrator`
+
+---
+
+## Créditos
+
+- **TradingView MCP**: [LewisWJackson/tradingview-mcp-jackson](https://github.com/LewisWJackson/tradingview-mcp-jackson) — fork con mejoras del original de [@tradesdontlie](https://github.com/tradesdontlie/tradingview-mcp).
+- **Setup Windows**: Adaptado de [kmanus88/tradingview-claude-code-windows](https://github.com/kmanus88/tradingview-claude-code-windows).

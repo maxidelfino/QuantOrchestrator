@@ -1,0 +1,157 @@
+# =============================================================================
+# BTC Momentum 1h — Bot Configuration
+# =============================================================================
+#
+# This file controls ALL bot-specific parameters for the btc-momentum-1h strategy.
+# Secrets (API keys, private keys) are loaded from .env — NOT from this file.
+#
+# What the bot does:
+#   Enters trending markets on RSI pullbacks in the direction of the trend.
+#   ADX confirms trend strength, DMI confirms direction, RSI times the entry.
+#
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# Exchange / Venue Configuration
+# ---------------------------------------------------------------------------
+exchange:
+  # Venue identifier. Supported: hyperliquid, binance.
+  # Future venues: extended, 01, risex, paradex, lighter.
+  # Risk implication: each venue has different margin mechanics and liquidation rules.
+  venue: hyperliquid
+
+  # Trading pair symbol.
+  # Hyperliquid: BTC/USDC:USDC (preferred for perps)
+  # Binance: BTC/USDT
+  symbol: BTC/USDC:USDC
+
+  # Run on testnet (true) or mainnet (false).
+  # WARNING: Set to false ONLY when you're ready to trade real money.
+  # Default: true
+  testnet: true
+
+  # Candle timeframe for strategy evaluation.
+  # Must match the strategy's expected timeframe.
+  # Valid: 1m, 5m, 15m, 1h, 4h, 1d, 1w
+  timeframe: 1h
+
+  # Leverage multiplier for the position.
+  # Range: 1-125 (venue-dependent).
+  # WARNING: Higher leverage = larger positions = faster liquidation.
+  # Risk implication: at 10x leverage, a 10% adverse move liquidates you.
+  # Default: 1 (no leverage, spot-equivalent risk)
+  leverage: 1
+
+# ---------------------------------------------------------------------------
+# Strategy Parameters
+# ---------------------------------------------------------------------------
+strategy:
+  strategy_class: exchanges.hyperliquid.bots.btc_momentum_1h.strategy.BTCMomentum1hStrategy
+  # --- RSI Parameters ---
+
+  # RSI period for momentum measurement.
+  # Range: 5-30. Default: 14.
+  # Lower = more sensitive, more signals. Higher = smoother, fewer signals.
+  rsi_period: 14
+
+  # --- ADX/DMI Parameters ---
+
+  # Minimum ADX value to confirm a trend exists.
+  # Range: 10-40. Default: 20.
+  # Below this = ranging market, no trades.
+  # Higher = only trades strong trends, fewer entries but higher quality.
+  # Lower = trades weaker trends, more entries but more whipsaws.
+  adx_threshold: 20.0
+
+  # RSI range for LONG entries (pullback in uptrend).
+  # Default: 35-50.
+  # The bot buys when RSI dips into this range during an uptrend.
+  # Lower min = deeper pullbacks required. Higher max = earlier entries.
+  rsi_long_min: 35.0
+  rsi_long_max: 50.0
+
+  # RSI range for SHORT entries (pullback in downtrend).
+  # Default: 50-65.
+  # The bot sells when RSI rallies into this range during a downtrend.
+  # Lower min = earlier short entries. Higher max = stronger pullbacks required.
+  rsi_short_min: 50.0
+  rsi_short_max: 65.0
+
+  # --- Risk / Exit Parameters ---
+
+  # ATR period for volatility measurement.
+  # Range: 5-30. Default: 14.
+  # Lower = more responsive to recent volatility. Higher = smoother stops.
+  atr_period: 14
+
+  # ATR multiplier for trailing stop loss distance.
+  # Range: 1.0-10.0. Default: 3.0.
+  # Stop = entry +/- (ATR * mult).
+  # Lower = tighter stops, more exits. Higher = wider stops, larger losses per trade.
+  stop_atr_mult: 3.0
+
+  # Maximum number of 1h bars to hold a position.
+  # Range: 4-48. Default: 16 (16 hours).
+  # Prevents stale positions in choppy markets.
+  # Lower = faster turnover. Higher = lets winners run longer.
+  max_hold: 16
+
+  # Risk per trade as fraction of equity.
+  # Range: 0.005-0.10 (0.5%-10%). Default: 0.02 (2%).
+  # Position size = (equity * risk_pct) / |entry - stop|.
+  # Risk implication: higher = larger positions, faster equity growth BUT larger drawdowns.
+  risk_pct: 0.02
+
+  # Enable/disable this strategy.
+  # Set to false to skip loading this bot in multi-strategy mode.
+  enabled: true
+
+# ---------------------------------------------------------------------------
+# Execution Configuration
+# ---------------------------------------------------------------------------
+execution:
+  # Entry order type: "limit" (maker, 1.0bps on Hyperliquid) or "market" (taker, 4.5bps).
+  # Limit orders are placed at the signal bar's close with a small offset for better pricing.
+  # If the limit doesn't fill within TTL bars, falls back to market order.
+  entry_order_type: limit
+
+  # Time-to-live for limit entry orders, in strategy bars.
+  # For 1h timeframe: 3 bars = 3 hours max wait.
+  entry_ttl_bars: 3
+
+  # Exit order type for stop-loss triggers. ALWAYS market — missing the exit is worse than slippage.
+  exit_stop_type: market
+
+  # Exit order type for planned exits (strategy reversal, trailing stop target).
+  # "limit" saves on fees but may not fill. "market" guarantees exit.
+  exit_planned_type: market
+
+  # Price offset for limit orders (fraction of close price).
+  # 0.0001 = 0.01% better than close. For BTC at $100k, that's $10 better.
+  limit_price_offset: 0.0001
+
+  # postOnly flag for limit orders. Ensures the order only posts (maker fee).
+  # If the limit price would cross the spread, the order is rejected instead of taking.
+  post_only: true
+
+# ---------------------------------------------------------------------------
+# Risk Limits (shared circuit breakers)
+# ---------------------------------------------------------------------------
+risk:
+  # Maximum daily loss as fraction of equity.
+  # Range: 0.01-0.50 (1%-50%). Default: 0.05 (5%).
+  # Trading halts when daily loss reaches this threshold.
+  # Risk implication: lower = more conservative, fewer trading days after losses.
+  max_daily_loss_pct: 0.05
+
+  # Maximum drawdown from peak equity.
+  # Range: 0.05-0.50 (5%-50%). Default: 0.25 (25%).
+  # Trading halts PERMANENTLY when drawdown reaches this threshold.
+  # Requires manual intervention to resume.
+  # Risk implication: this is your final safety net. Set it based on your max tolerable loss.
+  max_drawdown_pct: 0.25
+
+  # Minimum order size in USD.
+  # Default: 5.0.
+  # Orders below this size are rejected (venue minimums + dust prevention).
+  min_order_size_usd: 5.0

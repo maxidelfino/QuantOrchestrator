@@ -3,6 +3,7 @@ tradingview-mcp/
 
 # Dependencies
 node_modules/
+**/node_modules/
 
 # Environment files
 .env
@@ -31,10 +32,22 @@ dist/
 build/
 .cache/
 cache/
+__pycache__/
+*.pyc
+.pytest_cache/
 
 # IDE/editor settings
 .vscode/
 .idea/
 
+# Archived artifacts (old backtests, superseded scripts)
+archive/
+backtest-results/
+
 # Agent-generated local artifacts
 .atl/
+
+# State databases (SQLite)
+*.db
+*.sqlite
+bot/state/

@@ -1,0 +1,63 @@
+//@version=6
+strategy("BTC Perp Long-Short Trend 4h v40", overlay=true, pyramiding=0, initial_capital=10000, commission_type=strategy.commission.percent, commission_value=0.04, calc_on_order_fills=true)
+
+// --- Inputs ---
+atrLength = input.int(14, "ATR Length")
+atrMult = input.float(3.0, "ATR Multiplier for Stop Loss")
+emaFastLen = input.int(50, "Fast EMA Length")
+emaSlowLen = input.int(200, "Slow EMA Length")
+dailyEmaLen = input.int(200, "Daily EMA Length (Regime Filter)")
+riskPct = input.float(2.0, "Risk per Trade (%)") / 100
+
+// --- Indicators ---
+atr = ta.atr(atrLength)
+emaFast = ta.ema(close, emaFastLen)
+emaSlow = ta.ema(close, emaSlowLen)
+
+// Daily Regime Filter
+// Usamos lookahead_off para evitar repainting y asegurar datos confirmados
+dailyClose = request.security(syminfo.tickerid, "D", close, lookahead=barmerge.lookahead_off)
+dailyEma200 = request.security(syminfo.tickerid, "D", ta.ema(close, dailyEmaLen), lookahead=barmerge.lookahead_off)
+
+isBullMarket = dailyClose > dailyEma200
+isBearMarket = dailyClose < dailyEma200
+
+// --- Logic ---
+// Long Signal: Tendencia 4h Alcista + Régimen Diario Bull
+longCondition = close > emaFast and emaFast > emaSlow and isBullMarket
+
+// Short Signal: Tendencia 4h Bajista + Régimen Diario Bear
+shortCondition = close < emaFast and emaFast < emaSlow and isBearMarket
+
+// --- Execution ---
+// Cálculo de Stop Loss (Estático basado en la entrada)
+longStopPrice = close - (atr * atrMult)
+shortStopPrice = close + (atr * atrMult)
+
+// Posicionamiento (Riesgo 2%)
+if longCondition and strategy.position_size == 0
+    float stopDist = close - longStopPrice
+    float riskUsd = strategy.equity * riskPct
+    float qty = stopDist > 0 ? riskUsd / stopDist : 0
+    strategy.entry("Long", strategy.long, qty=qty)
+    strategy.exit("LongExit", from_entry="Long", stop=longStopPrice)
+
+if shortCondition and strategy.position_size == 0
+    float stopDist = shortStopPrice - close
+    float riskUsd = strategy.equity * riskPct
+    float qty = stopDist > 0 ? riskUsd / stopDist : 0
+    strategy.entry("Short", strategy.short, qty=qty)
+    strategy.exit("ShortExit", from_entry="Short", stop=shortStopPrice)
+
+// Salida por Reversión de Tendencia (Cruce Inverso)
+// Si estamos Long y la condición deja de cumplirse -> Cerramos
+if strategy.position_size > 0 and not longCondition
+    strategy.close("Long", comment="Trend Reversal")
+
+// Si estamos Short y la condición deja de cumplirse -> Cerramos
+if strategy.position_size < 0 and not shortCondition
+    strategy.close("Short", comment="Trend Reversal")
+
+// --- Plots ---
+plot(emaFast, color=color.blue, title="EMA 50")
+plot(emaSlow, color=color.orange, title="EMA 200")
