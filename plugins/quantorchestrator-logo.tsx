@@ -3,11 +3,14 @@
 import { TextAttributes } from "@opentui/core"
 import type { TuiPlugin } from "@opencode-ai/plugin/tui"
 import { useTerminalDimensions } from "@opentui/solid"
-import { For, type JSX } from "solid-js"
+import { createSignal, For, onCleanup, type JSX } from "solid-js"
 
 const id = "quantorchestrator-logo"
 
-const logo = {
+const TYPE_SPEED_MS = 18
+const LOOP_DELAY_MS = 2000
+
+const rawLogo = {
   // Quant
   left: [
     "                         ",
@@ -25,11 +28,30 @@ const logo = {
   ],
 }
 
+const maxLen = (lines: string[]) => Math.max(...lines.map((line) => line.length))
+const pad = (line: string, width: number) => line.padEnd(width, " ")
+
+const leftWidth = maxLen(rawLogo.left)
+const rightWidth = maxLen(rawLogo.right)
+
+const logo = {
+  left: rawLogo.left.map((line) => pad(line, leftWidth)),
+  right: rawLogo.right.map((line) => pad(line, rightWidth)),
+}
+
+const totalWidth = leftWidth + 1 + rightWidth
+
 const colors = {
   left: "#8B95C7",
   right: "#ECEFF4",
   leftShadow: "#34384D",
   rightShadow: "#474C5F",
+}
+
+const maskLine = (line: string, visibleChars: number) => {
+  return Array.from(line)
+    .map((char, index) => (index < visibleChars ? char : " "))
+    .join("")
 }
 
 const renderLine = (line: string, fg: string, shadow: string, bold: boolean): JSX.Element[] => {
@@ -78,18 +100,70 @@ const renderLine = (line: string, fg: string, shadow: string, bold: boolean): JS
 
 const Logo = () => {
   const dim = useTerminalDimensions()
+  const [visible, setVisible] = createSignal(0)
+
+  let typingTimer: ReturnType<typeof setTimeout> | undefined
+  let pauseTimer: ReturnType<typeof setTimeout> | undefined
+
+  const clearTimers = () => {
+    if (typingTimer) clearTimeout(typingTimer)
+    if (pauseTimer) clearTimeout(pauseTimer)
+  }
+
+  const startTyping = () => {
+    clearTimers()
+    setVisible(0)
+
+    const step = () => {
+      setVisible((current) => {
+        const next = current + 1
+
+        if (next >= totalWidth) {
+          pauseTimer = setTimeout(() => {
+            startTyping()
+          }, LOOP_DELAY_MS)
+
+          return totalWidth
+        }
+
+        typingTimer = setTimeout(step, TYPE_SPEED_MS)
+        return next
+      })
+    }
+
+    typingTimer = setTimeout(step, TYPE_SPEED_MS)
+  }
+
+  startTyping()
+
+  onCleanup(() => {
+    clearTimers()
+  })
 
   return (
     <box width={dim().width} flexDirection="column" alignItems="center">
       <For each={logo.left}>
-        {(line, index) => (
-          <box flexDirection="row" gap={1}>
-            <box flexDirection="row">{renderLine(line, colors.left, colors.leftShadow, false)}</box>
-            <box flexDirection="row">
-              {renderLine(logo.right[index()], colors.right, colors.rightShadow, true)}
+        {(line, index) => {
+          const leftVisible = () => Math.min(visible(), leftWidth)
+          const rightVisible = () => Math.max(0, visible() - leftWidth - 1)
+
+          return (
+            <box flexDirection="row" gap={1}>
+              <box flexDirection="row">
+                {renderLine(maskLine(line, leftVisible()), colors.left, colors.leftShadow, false)}
+              </box>
+
+              <box flexDirection="row">
+                {renderLine(
+                  maskLine(logo.right[index()], rightVisible()),
+                  colors.right,
+                  colors.rightShadow,
+                  true,
+                )}
+              </box>
             </box>
-          </box>
-        )}
+          )
+        }}
       </For>
     </box>
   )
